@@ -1,57 +1,45 @@
-const CACHE_NAME = 'angielski-pwa-v4-0-0';
-const FILES = [
+const CACHE_NAME = 'angielski-daily-trainer-v5.0.0';
+const ASSETS = [
   './',
-  './index.html',
-  './style.css',
-  './app.js',
-  './words.json',
-  './manifest.json',
-  './icon-192.png',
-  './icon-512.png'
+  './index.html?v=5.0.0',
+  './style.css?v=5.0.0',
+  './app.js?v=5.0.0',
+  './words.json?v=5.0.0',
+  './manifest.json?v=5.0.0',
+  './icon-192.png?v=5.0.0',
+  './icon-512.png?v=5.0.0'
 ];
-
 self.addEventListener('install', event => {
-  event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(FILES)));
   self.skipWaiting();
+  event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS)));
 });
-
 self.addEventListener('activate', event => {
-  event.waitUntil(
-    caches.keys().then(keys => Promise.all(keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))))
-  );
-  self.clients.claim();
+  event.waitUntil((async () => {
+    const names = await caches.keys();
+    await Promise.all(names.filter(name => name !== CACHE_NAME).map(name => caches.delete(name)));
+    await self.clients.claim();
+  })());
 });
-
 self.addEventListener('message', event => {
+  if (event.data && event.data.type === 'SKIP_WAITING') self.skipWaiting();
   if (event.data && event.data.type === 'CLEAR_CACHE') {
-    event.waitUntil(
-      caches.keys()
-        .then(keys => Promise.all(keys.map(key => caches.delete(key))))
-        .then(() => self.clients.matchAll({ type: 'window', includeUncontrolled: true }))
-        .then(clients => clients.forEach(client => client.postMessage({ type: 'CACHE_CLEARED' })))
-    );
-  }
-  if (event.data && event.data.type === 'SKIP_WAITING') {
-    self.skipWaiting();
+    event.waitUntil(caches.keys().then(keys => Promise.all(keys.map(k => caches.delete(k)))));
   }
 });
-
 self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
-
   const url = new URL(event.request.url);
-  const isAppShell = FILES.some(file => new URL(file, self.location).pathname === url.pathname);
-  if (!isAppShell) return;
-
-  event.respondWith(
-    fetch(event.request, { cache: 'no-store' })
-      .then(response => {
-        if (response && response.status === 200) {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
-        }
-        return response;
-      })
-      .catch(() => caches.match(event.request).then(cached => cached || caches.match('./index.html')))
+  const isAppFile = url.pathname.endsWith('.html') || url.pathname.endsWith('.js') || url.pathname.endsWith('.css') || url.pathname.endsWith('.json');
+  if (isAppFile) {
+    event.respondWith(fetch(event.request, {cache:'no-store'}).then(response => {
+      const copy = response.clone();
+      caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy));
+      return response;
+    }).catch(() => caches.match(event.request)));
+    return;
+  }
+  event.respondWith(caches.match(event.request).then(cached => cached || fetch(event.request)));
+});
+ .catch(() => caches.match(event.request).then(cached => cached || caches.match('./index.html')))
   );
 });

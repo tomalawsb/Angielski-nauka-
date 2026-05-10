@@ -1,24 +1,26 @@
 <!doctype html>
 <html lang="pl">
-<head><meta charset="utf-8"><title>Testy Angielski PWA v4.0</title><style>body{font-family:system-ui;padding:20px} .ok{color:green}.bad{color:#b91c1c}</style></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Testy Angielski v5.0</title><style>body{font-family:system-ui;margin:24px;background:#f8fafc;color:#111827}.ok{color:#15803d}.bad{color:#b91c1c}pre{background:white;border:1px solid #e5e7eb;padding:16px;border-radius:12px}</style></head>
 <body>
-<h1>Testy logiki Angielski PWA v4.0</h1>
-<pre id="out"></pre>
-<script src="app.js?v=4.0.0"></script>
+<h1>Testy logiki v5.0</h1>
+<pre id="out">Uruchamianie...</pre>
+<script src="app.js?v=5.0.0"></script>
 <script>
-const out = document.getElementById('out');
-const results = [];
-function test(name, fn) {
-  try { fn(); results.push(['ok', name]); }
-  catch (e) { results.push(['bad', name + ' — ' + e.message]); }
-}
-function assert(condition, message) { if (!condition) throw new Error(message || 'błąd'); }
-
-test('normalize usuwa wielkość liter i interpunkcję', () => assert(normalize(' The HOUSE! ') === 'house'));
-test('isCloseEnough akceptuje identyczną odpowiedź', () => assert(isCloseEnough('charger', 'charger')));
-test('isCloseEnough odrzuca pustą odpowiedź', () => assert(!isCloseEnough('', 'charger')));
-test('difficulty domyślnie easy dla podstawowych', () => assert(getDifficulty({english:'house', category:'podstawowe'}) === 'easy'));
-test('difficulty medium dla kategorii techniczne', () => assert(getDifficulty({english:'router', category:'techniczne'}) === 'medium'));
+setTimeout(() => {
+  const out = document.getElementById('out');
+  const t = window.__trainerTests;
+  const tests = [
+    ['normalizacja polskich znaków', t.normalize(' ŻÓŁĆ! ') === 'zołc' || t.normalize(' ŻÓŁĆ! ') === 'zolc'],
+    ['identyczna odpowiedź', t.isCloseEnough('charger', 'charger') === true],
+    ['mała literówka', t.isCloseEnough('chargre', 'charger') === true],
+    ['inna odpowiedź', t.isCloseEnough('battery', 'router') === false],
+    ['domyślny stan ma ustawienia', !!t.defaultState().settings.dailyNew]
+  ];
+  out.innerHTML = tests.map(([name, ok]) => `${ok ? '✅' : '❌'} ${name}`).join('\n');
+}, 600);
+</script>
+</body></html>
+category:'techniczne'}) === 'medium'));
 test('difficulty hard dla zdań technicznych', () => assert(getDifficulty({english:'The cable goes through the wall.', category:'zdania techniczne'}) === 'hard'));
 test('normalizeProgress zachowuje perWord', () => {
   const p = normalizeProgress({ done: 1, good: 1, perWord: { a: { done: 1 } } });

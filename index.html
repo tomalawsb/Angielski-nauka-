@@ -1,202 +1,169 @@
 <!doctype html>
 <html lang="pl">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f4f7fb">
-  <title>Angielski PWA v4.0</title>
-  <link rel="manifest" href="manifest.json?v=4.0.0">
-  <link rel="stylesheet" href="style.css?v=4.0.0">
-  <link rel="icon" href="icon-192.png">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#2563eb" />
+  <meta name="description" content="Angielski Daily Trainer — PWA do codziennej nauki słówek, zdań i mówienia." />
+  <link rel="manifest" href="manifest.json?v=5.0.0" />
+  <link rel="apple-touch-icon" href="icon-192.png?v=5.0.0" />
+  <link rel="stylesheet" href="style.css?v=5.0.0" />
+  <title>Angielski Daily Trainer v5.0</title>
 </head>
 <body>
-  <header class="app-header">
-    <div class="brand">
-      <div class="logo">EN</div>
+  <div id="appShell" class="app-shell">
+    <header class="topbar">
       <div>
-        <h1>Angielski PWA</h1>
-        <p>Nauka słówek, zdań, wymowy i powtórek</p>
+        <p class="eyebrow">Angielski Daily Trainer</p>
+        <h1 id="screenTitle">Dzisiaj</h1>
       </div>
-    </div>
-    <div class="header-actions">
-      <span class="version">v4.0</span>
-      <button id="clearCacheBtn" class="secondary small-btn">Odśwież wersję</button>
-    </div>
-  </header>
+      <button id="refreshAppBtn" class="icon-button" title="Wyczyść cache i pobierz najnowszą wersję">↻</button>
+    </header>
 
-  <nav class="bottom-nav" aria-label="Główna nawigacja">
-    <button class="active" data-tab-target="learn">Nauka</button>
-    <button data-tab-target="progress">Postępy</button>
-    <button data-tab-target="words">Słówka</button>
-    <button data-tab-target="settings">Ustawienia</button>
-  </nav>
-
-  <main class="app-shell">
-    <section class="view active-view" data-tab="learn">
-      <section class="hero panel">
-        <div>
-          <span class="eyebrow">Aktualna lekcja</span>
-          <h2 id="lessonFilterSummary">Fiszki · Wszystkie · Wszystkie</h2>
-          <p>Materiał w filtrze: <strong id="bankCount">0</strong>. Wybierz kategorię, poziom i tryb, potem kliknij Start.</p>
-        </div>
-        <div class="hero-stat">
-          <strong id="todayCount">0</strong>
-          <span>dzisiaj</span>
-        </div>
-      </section>
-
-      <section class="panel controls-card">
-        <div class="controls">
-          <label>
-            Kategoria
-            <select id="categorySelect"></select>
-          </label>
-
-          <label>
-            Poziom
-            <select id="difficultySelect">
-              <option value="all">Wszystkie</option>
-              <option value="easy">Łatwy</option>
-              <option value="medium">Średni</option>
-              <option value="hard">Trudny</option>
-            </select>
-          </label>
-
-          <label>
-            Tryb nauki
-            <select id="modeSelect">
-              <option value="flashcards">Fiszki</option>
-              <option value="choice">Test wyboru</option>
-              <option value="typing">Wpisywanie odpowiedzi</option>
-              <option value="sentence">Całe zdania</option>
-              <option value="voice">Odpowiedź głosowa</option>
-              <option value="listen">Lektor pyta</option>
-              <option value="dictation">Dyktando</option>
-              <option value="mistakes">Powtórka błędów</option>
-              <option value="hard">Trudne słówka</option>
-            </select>
-          </label>
-
-          <label>
-            Kierunek
-            <select id="directionSelect">
-              <option value="en-pl">EN → PL</option>
-              <option value="pl-en">PL → EN</option>
-            </select>
-          </label>
-
-          <label>
-            Cel dzienny
-            <input id="dailyGoalInput" type="number" min="1" max="999" value="20">
-          </label>
-
-          <div class="button-row control-buttons">
-            <button id="startBtn">Start</button>
-            <button id="resetBtn" class="danger">Reset</button>
-          </div>
-        </div>
-      </section>
-
-      <section class="panel lesson-card">
-        <div class="lesson-top">
-          <span id="modeBadge" class="badge">Fiszki</span>
-          <span id="progressInfo" class="progress-info">0 / 0</span>
-        </div>
-
-        <div class="card">
+    <main class="content">
+      <section id="screenToday" class="screen active" data-title="Dzisiaj">
+        <div class="hero-card">
           <div>
-            <div id="questionLabel" class="question-label">—</div>
-            <div id="question" class="question">Kliknij Start</div>
-            <div id="answer" class="answer hidden">—</div>
-            <div id="example" class="example hidden">—</div>
+            <p class="eyebrow">Plan dzienny</p>
+            <h2 id="todayHeadline">Ładowanie planu...</h2>
+            <p id="todaySubline" class="muted">Aplikacja dobierze powtórki, nowe słówka i zdania.</p>
+          </div>
+          <button id="startSessionBtn" class="primary big">Start nauki</button>
+        </div>
+
+        <div class="stats-grid compact">
+          <article class="stat-card"><span>XP</span><strong id="statXp">0</strong></article>
+          <article class="stat-card"><span>Poziom</span><strong id="statUserLevel">1</strong></article>
+          <article class="stat-card"><span>Passa</span><strong id="statStreak">0 dni</strong></article>
+          <article class="stat-card"><span>Skuteczność</span><strong id="statAccuracy">0%</strong></article>
+        </div>
+
+        <div class="section-card">
+          <div class="section-head">
+            <h3>Dzisiejsza kolejka</h3>
+            <span id="queueBadge" class="badge">0 zadań</span>
+          </div>
+          <div id="todayQueuePreview" class="queue-list"></div>
+        </div>
+      </section>
+
+      <section id="screenLearn" class="screen" data-title="Nauka">
+        <div id="lessonEmpty" class="empty-card">
+          <h2>Brak aktywnej sesji</h2>
+          <p>Uruchom sesję z ekranu „Dzisiaj”.</p>
+          <button class="primary" data-nav="today">Przejdź do planu</button>
+        </div>
+
+        <div id="lessonCard" class="lesson-card hidden">
+          <div class="lesson-top">
+            <span id="lessonMode" class="badge">Tryb</span>
+            <span id="lessonProgress" class="muted">0 / 0</span>
+          </div>
+          <div class="progress-line"><span id="lessonBar"></span></div>
+          <p id="lessonPromptLabel" class="eyebrow">Przetłumacz</p>
+          <h2 id="lessonPrompt">...</h2>
+          <p id="lessonHint" class="muted"></p>
+
+          <div id="answerArea" class="answer-area"></div>
+
+          <div id="feedback" class="feedback hidden"></div>
+
+          <div class="lesson-actions">
+            <button id="speakBtn" class="secondary">Odsłuchaj</button>
+            <button id="dontKnowBtn" class="secondary danger-lite">Nie wiem</button>
+            <button id="checkBtn" class="primary">Sprawdź</button>
+            <button id="nextBtn" class="primary hidden">Dalej</button>
           </div>
         </div>
 
-        <div id="choiceBox" class="choice-box hidden"></div>
-
-        <div id="typingBox" class="typing-box hidden">
-          <input id="typingInput" type="text" placeholder="Wpisz odpowiedź">
-          <button id="checkTypingBtn">Sprawdź</button>
-        </div>
-
-        <div id="sentenceBox" class="sentence-box hidden">
-          <textarea id="sentenceInput" rows="3" placeholder="Napisz całe zdanie po angielsku"></textarea>
-          <button id="checkSentenceBtn">Sprawdź zdanie</button>
-        </div>
-
-        <div id="voiceBox" class="voice-box hidden">
-          <button id="listenBtn" class="voice-main">🎙️ Odpowiedz głosem</button>
-          <div>
-            <strong>Rozpoznano:</strong>
-            <p id="voiceTranscript">—</p>
+        <div id="summaryCard" class="section-card hidden">
+          <h2>Sesja zakończona</h2>
+          <div class="stats-grid compact">
+            <article class="stat-card"><span>Poprawne</span><strong id="sumCorrect">0</strong></article>
+            <article class="stat-card"><span>Błędy</span><strong id="sumWrong">0</strong></article>
+            <article class="stat-card"><span>XP</span><strong id="sumXp">0</strong></article>
+            <article class="stat-card"><span>Skuteczność</span><strong id="sumAccuracy">0%</strong></article>
           </div>
-        </div>
-
-        <p id="feedback" class="feedback"></p>
-
-        <div class="button-row lesson-buttons">
-          <button id="speakBtn" class="secondary">Czytaj</button>
-          <button id="readAnswerBtn" class="secondary">Czytaj odp.</button>
-          <button id="showAnswerBtn" class="secondary">Pokaż</button>
-          <button id="wrongBtn" class="danger">Źle</button>
-          <button id="rightBtn" class="success">Dobrze</button>
-          <button id="hardBtn" class="warning">Trudne</button>
-          <button id="nextBtn">Dalej</button>
+          <button class="primary" data-nav="today">Wróć do planu</button>
         </div>
       </section>
 
-      <section class="panel phrase-panel">
-        <div class="section-head">
-          <div>
-            <span class="eyebrow">Trening zdań</span>
-            <h2>Losowe zdanie</h2>
+      <section id="screenReviews" class="screen" data-title="Powtórki">
+        <div class="section-card">
+          <div class="section-head">
+            <h3>Do powtórki</h3>
+            <button id="startReviewsBtn" class="primary small">Powtarzaj</button>
           </div>
-          <button id="randomSentenceBtn" class="secondary">Losuj</button>
-        </div>
-        <div class="phrase-grid">
-          <div><strong>PL:</strong> <span id="phrasePl">—</span></div>
-          <div><strong>EN:</strong> <span id="phraseEn">—</span></div>
-        </div>
-      </section>
-    </section>
-
-    <section class="view" data-tab="progress">
-      <section class="panel progress-hero">
-        <div>
-          <span class="eyebrow">Postępy użytkownika</span>
-          <h2>Poziom <span id="progressLevel">1</span></h2>
-          <p><span id="progressXp">0 XP</span> · passa: <strong id="progressStreak">0</strong> dni</p>
-          <div class="progress-track big"><div id="levelProgressBar" class="progress-bar"></div></div>
+          <div id="reviewsList" class="word-list"></div>
         </div>
       </section>
 
-      <section class="stats-grid">
-        <div class="stat-card"><strong id="doneCount">0</strong><span>wszystkie odpowiedzi</span></div>
-        <div class="stat-card"><strong id="goodCount">0</strong><span>dobrze</span></div>
-        <div class="stat-card"><strong id="badCount">0</strong><span>źle</span></div>
-        <div class="stat-card"><strong id="accuracyCount">0%</strong><span>skuteczność ogólna</span></div>
-        <div class="stat-card"><strong id="progressLearned">0 / 0</strong><span>ruszone słówka</span></div>
-        <div class="stat-card"><strong id="progressMastered">0</strong><span>opanowane</span></div>
-        <div class="stat-card"><strong id="progressHard">0</strong><span>oznaczone trudne</span></div>
-        <div class="stat-card"><strong id="progressMistakes">0</strong><span>aktywne błędy</span></div>
+      <section id="screenProgress" class="screen" data-title="Postępy">
+        <div class="stats-grid">
+          <article class="stat-card"><span>Opanowane</span><strong id="masteredCount">0</strong></article>
+          <article class="stat-card"><span>W nauce</span><strong id="learningCount">0</strong></article>
+          <article class="stat-card"><span>Słabe</span><strong id="weakCount">0</strong></article>
+          <article class="stat-card"><span>Seria odpowiedzi</span><strong id="bestStreak">0</strong></article>
+        </div>
+        <div class="section-card">
+          <div class="section-head"><h3>Ostatnie 7 dni</h3><span id="weekTotal" class="badge">0 odpowiedzi</span></div>
+          <div id="weekChart" class="week-chart"></div>
+        </div>
+        <div class="section-card">
+          <h3>Najczęstsze błędy</h3>
+          <div id="mistakesList" class="word-list"></div>
+        </div>
       </section>
 
-      <section class="panel daily-card">
-        <div class="daily-head">
-          <strong>Cel dzienny</strong>
-          <span id="dailyGoalText">0 / 20</span>
+      <section id="screenBase" class="screen" data-title="Baza">
+        <div class="filters-card">
+          <input id="searchInput" type="search" placeholder="Szukaj słowa lub zdania..." />
+          <select id="levelFilter"><option value="all">Wszystkie poziomy</option></select>
+          <select id="trackFilter"><option value="all">Wszystkie ścieżki</option></select>
         </div>
-        <div class="progress-track"><div id="dailyProgressBar" class="progress-bar"></div></div>
+        <div class="section-card">
+          <div class="section-head"><h3>Baza słówek</h3><span id="baseCount" class="badge">0</span></div>
+          <div id="baseList" class="word-list"></div>
+        </div>
       </section>
 
-      <section class="progress-columns">
-        <div class="panel">
-          <div class="section-head compact"><h2>Ostatnie 7 dni</h2></div>
-          <div id="weeklyProgress" class="weekly-grid"></div>
+      <section id="screenSettings" class="screen" data-title="Ustawienia">
+        <div class="section-card settings-grid">
+          <label>Nowe elementy dziennie <input id="dailyNewInput" type="number" min="1" max="30" /></label>
+          <label>Powtórki dziennie <input id="dailyReviewInput" type="number" min="1" max="80" /></label>
+          <label>Domyślny poziom
+            <select id="defaultLevelInput"></select>
+          </label>
+          <label>Ścieżka
+            <select id="defaultTrackInput"></select>
+          </label>
+          <label class="check-row"><input id="voiceEnabledInput" type="checkbox" /> Używaj lektora, gdy dostępny</label>
         </div>
-        <div class="panel">
-          <div class="section-head compact"><h2>Najczęstsze błędy</h2></div>
-          <ul id="topMistakes" class="mistake-list"></ul>
+        <div class="section-card danger-zone">
+          <h3>Dane</h3>
+          <div class="button-row">
+            <button id="exportBtn" class="secondary">Eksport postępów</button>
+            <button id="importBtn" class="secondary">Import postępów</button>
+            <button id="resetProgressBtn" class="secondary danger-lite">Reset postępów</button>
+          </div>
+          <textarea id="importExportBox" placeholder="Tu pojawi się eksport lub wklej tu dane importu"></textarea>
+        </div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Główna nawigacja">
+      <button class="nav-btn active" data-nav="today"><span>⌂</span>Dzisiaj</button>
+      <button class="nav-btn" data-nav="learn"><span>▶</span>Nauka</button>
+      <button class="nav-btn" data-nav="reviews"><span>↺</span>Powtórki</button>
+      <button class="nav-btn" data-nav="progress"><span>◷</span>Postępy</button>
+      <button class="nav-btn" data-nav="base"><span>▤</span>Baza</button>
+      <button class="nav-btn" data-nav="settings"><span>⚙</span>Ustaw.</button>
+    </nav>
+  </div>
+  <script src="app.js?v=5.0.0" defer></script>
+</body>
+</html>
+st"></ul>
         </div>
       </section>
     </section>
