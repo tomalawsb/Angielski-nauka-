@@ -1,7 +1,7 @@
 {
   "name": "Angielski PWA",
   "short_name": "Angielski",
-  "description": "Aplikacja PWA do nauki angielskiego: fiszki, testy, powtórki i własne słówka.",
+  "description": "Aplikacja PWA do nauki angielskiego: fiszki, zdania, lektor, mikrofon i powtórki.",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#f4f7fb",
@@ -11,5 +11,5 @@
     { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
   ]
 }
-  ]
+ ]
 }
