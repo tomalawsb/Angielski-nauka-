@@ -1,4 +1,4 @@
-const CACHE_NAME = 'angielski-pwa-v1';
+const CACHE_NAME = 'angielski-pwa-v2';
 const FILES = [
   './',
   './index.html',
@@ -17,9 +17,7 @@ self.addEventListener('install', event => {
 
 self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then(keys => Promise.all(
-      keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
-    ))
+    caches.keys().then(keys => Promise.all(keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))))
   );
   self.clients.claim();
 });
@@ -30,5 +28,8 @@ self.addEventListener('fetch', event => {
       if (cached) return cached;
       return fetch(event.request).catch(() => caches.match('./index.html'));
     })
+  );
+});
+})
   );
 });
