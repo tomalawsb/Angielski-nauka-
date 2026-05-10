@@ -1,0 +1,20 @@
+[
+  { "english": "house", "polish": "dom", "category": "podstawowe" },
+  { "english": "car", "polish": "samochód", "category": "podstawowe" },
+  { "english": "water", "polish": "woda", "category": "podstawowe" },
+  { "english": "food", "polish": "jedzenie", "category": "podstawowe" },
+  { "english": "work", "polish": "praca", "category": "podstawowe" },
+  { "english": "time", "polish": "czas", "category": "podstawowe" },
+  { "english": "camera", "polish": "kamera", "category": "techniczne" },
+  { "english": "cable", "polish": "kabel", "category": "techniczne" },
+  { "english": "router", "polish": "router", "category": "techniczne" },
+  { "english": "password", "polish": "hasło", "category": "techniczne" },
+  { "english": "battery", "polish": "bateria", "category": "techniczne" },
+  { "english": "screen", "polish": "ekran", "category": "techniczne" },
+  { "english": "invoice", "polish": "faktura", "category": "praca" },
+  { "english": "customer", "polish": "klient", "category": "praca" },
+  { "english": "appointment", "polish": "spotkanie", "category": "praca" },
+  { "english": "price", "polish": "cena", "category": "praca" },
+  { "english": "repair", "polish": "naprawa", "category": "praca" },
+  { "english": "installation", "polish": "montaż", "category": "praca" }
+]

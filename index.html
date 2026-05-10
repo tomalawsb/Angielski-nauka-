@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f7fb">
+  <title>Angielski PWA v1</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="icon-192.png">
+</head>
+<body>
+  <header class="app-header">
+    <div>
+      <h1>Angielski PWA</h1>
+      <p>Fiszki, testy i powtórki</p>
+    </div>
+    <span class="version">v1.0</span>
+  </header>
+
+  <main class="app">
+    <section class="panel controls">
+      <label>
+        Kategoria
+        <select id="categorySelect"></select>
+      </label>
+
+      <label>
+        Tryb nauki
+        <select id="modeSelect">
+          <option value="flashcards">Fiszki</option>
+          <option value="choice">Test wyboru</option>
+          <option value="typing">Wpisywanie odpowiedzi</option>
+          <option value="mistakes">Powtórka błędów</option>
+        </select>
+      </label>
+
+      <div class="button-row">
+        <button id="startBtn">Start</button>
+        <button id="resetBtn" class="secondary">Reset postępów</button>
+      </div>
+    </section>
+
+    <section class="panel stats">
+      <div><strong id="doneCount">0</strong><span>wykonane</span></div>
+      <div><strong id="goodCount">0</strong><span>dobrze</span></div>
+      <div><strong id="badCount">0</strong><span>błędy</span></div>
+      <div><strong id="accuracyCount">0%</strong><span>skuteczność</span></div>
+    </section>
+
+    <section class="panel lesson">
+      <div class="lesson-top">
+        <span id="modeBadge" class="badge">Fiszki</span>
+        <span id="progressInfo">0 / 0</span>
+      </div>
+
+      <div id="card" class="card">
+        <div id="question" class="question">Kliknij Start</div>
+        <div id="answer" class="answer hidden"></div>
+      </div>
+
+      <div id="choiceBox" class="choice-box hidden"></div>
+
+      <div id="typingBox" class="typing-box hidden">
+        <input id="typingInput" type="text" placeholder="Wpisz tłumaczenie po polsku">
+        <button id="checkTypingBtn">Sprawdź</button>
+      </div>
+
+      <p id="feedback" class="feedback"></p>
+
+      <div class="button-row lesson-buttons">
+        <button id="showAnswerBtn" class="secondary">Pokaż odpowiedź</button>
+        <button id="wrongBtn" class="danger">Źle</button>
+        <button id="rightBtn" class="success">Dobrze</button>
+        <button id="nextBtn">Dalej</button>
+      </div>
+    </section>
+
+    <section class="panel add-word">
+      <h2>Dodaj własne słówko</h2>
+      <div class="grid">
+        <input id="newEnglish" type="text" placeholder="angielski, np. screwdriver">
+        <input id="newPolish" type="text" placeholder="polski, np. śrubokręt">
+        <input id="newCategory" type="text" placeholder="kategoria, np. narzędzia">
+        <button id="addWordBtn">Dodaj</button>
+      </div>
+      <p class="hint">Własne słówka zapisują się lokalnie w przeglądarce.</p>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
