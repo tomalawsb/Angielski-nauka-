@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pl">
+<head><meta charset="utf-8"><title>Testy Angielski PWA v4.0</title><style>body{font-family:system-ui;padding:20px} .ok{color:green}.bad{color:#b91c1c}</style></head>
+<body>
+<h1>Testy logiki Angielski PWA v4.0</h1>
+<pre id="out"></pre>
+<script src="app.js?v=4.0.0"></script>
+<script>
+const out = document.getElementById('out');
+const results = [];
+function test(name, fn) {
+  try { fn(); results.push(['ok', name]); }
+  catch (e) { results.push(['bad', name + ' — ' + e.message]); }
+}
+function assert(condition, message) { if (!condition) throw new Error(message || 'błąd'); }
+
+test('normalize usuwa wielkość liter i interpunkcję', () => assert(normalize(' The HOUSE! ') === 'house'));
+test('isCloseEnough akceptuje identyczną odpowiedź', () => assert(isCloseEnough('charger', 'charger')));
+test('isCloseEnough odrzuca pustą odpowiedź', () => assert(!isCloseEnough('', 'charger')));
+test('difficulty domyślnie easy dla podstawowych', () => assert(getDifficulty({english:'house', category:'podstawowe'}) === 'easy'));
+test('difficulty medium dla kategorii techniczne', () => assert(getDifficulty({english:'router', category:'techniczne'}) === 'medium'));
+test('difficulty hard dla zdań technicznych', () => assert(getDifficulty({english:'The cable goes through the wall.', category:'zdania techniczne'}) === 'hard'));
+test('normalizeProgress zachowuje perWord', () => {
+  const p = normalizeProgress({ done: 1, good: 1, perWord: { a: { done: 1 } } });
+  assert(p.perWord.a.done === 1);
+});
+test('calculateDayStreak liczy dzisiejszy dzień', () => {
+  const key = new Date().toISOString().slice(0, 10);
+  assert(calculateDayStreak({ [key]: { done: 2 } }) === 1);
+});
+
+out.innerHTML = results.map(([status, text]) => `${status === 'ok' ? '✅' : '❌'} ${text}`).join('\n');
+</script>
+</body>
+</html>

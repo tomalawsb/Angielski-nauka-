@@ -1,0 +1,35 @@
+Angielski PWA v4.0.0 — raport zmian
+
+Zrobione:
+1. Przebudowano UI na układ z dolną nawigacją: Nauka, Postępy, Słówka, Ustawienia.
+2. Główna karta nauki została przeniesiona na osobny ekran, bez długiej strony z wszystkimi panelami naraz.
+3. Dodano panel postępów użytkownika:
+   - poziom użytkownika,
+   - XP,
+   - passa dni nauki,
+   - skuteczność,
+   - liczba ruszonych słówek,
+   - liczba opanowanych słówek,
+   - liczba trudnych słówek,
+   - aktywne błędy,
+   - wykres ostatnich 7 dni,
+   - lista najczęstszych błędów.
+4. Dodano zapis postępu osobno dla każdego słówka:
+   - liczba prób,
+   - dobre odpowiedzi,
+   - błędne odpowiedzi,
+   - seria dobrych odpowiedzi,
+   - status opanowania po minimum 3 dobrych odpowiedziach z rzędu.
+5. Powiększono bazę słówek do 304 pozycji.
+6. Dodano nowe kategorie, m.in. podstawowe, dom, ludzie, praca, techniczne, podróż, jedzenie, czasowniki, przymiotniki, pogoda, zdrowie, liczby, czas, komputer, wyrażenia i zdania.
+7. Zmieniono wersję aplikacji na 4.0.0.
+8. Zmieniono cache service workera na angielski-pwa-v4-0-0.
+9. Linki do CSS, JS i manifestu mają parametr wersji v=4.0.0.
+10. Dodano migrację danych z v3 i v2 do v4.
+11. Zaktualizowano tests.html do wersji v4.0.
+
+Czego nie udało się w pełni zrobić:
+1. Nie testowano mikrofonu i lektora na prawdziwym telefonie.
+2. Nie dodano profesjonalnych testów w Jest/Vitest, tylko prosty test HTML.
+3. Nie dodano synchronizacji postępów między telefonem i komputerem przez chmurę.
+4. Nie dodano kont użytkowników — postępy są lokalne w przeglądarce.

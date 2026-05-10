@@ -4,187 +4,268 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f4f7fb">
-  <title>Angielski PWA v3.0</title>
-  <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="style.css">
+  <title>Angielski PWA v4.0</title>
+  <link rel="manifest" href="manifest.json?v=4.0.0">
+  <link rel="stylesheet" href="style.css?v=4.0.0">
   <link rel="icon" href="icon-192.png">
 </head>
 <body>
   <header class="app-header">
-    <div>
-      <h1>Angielski PWA</h1>
-      <p>Fiszki, zdania, lektor, odpowiedzi głosowe i powtórki</p>
+    <div class="brand">
+      <div class="logo">EN</div>
+      <div>
+        <h1>Angielski PWA</h1>
+        <p>Nauka słówek, zdań, wymowy i powtórek</p>
+      </div>
     </div>
-    <span class="version">v3.0</span>
+    <div class="header-actions">
+      <span class="version">v4.0</span>
+      <button id="clearCacheBtn" class="secondary small-btn">Odśwież wersję</button>
+    </div>
   </header>
 
-  <main class="app">
-    <section class="panel controls">
-      <label>
-        Kategoria
-        <select id="categorySelect"></select>
-      </label>
+  <nav class="bottom-nav" aria-label="Główna nawigacja">
+    <button class="active" data-tab-target="learn">Nauka</button>
+    <button data-tab-target="progress">Postępy</button>
+    <button data-tab-target="words">Słówka</button>
+    <button data-tab-target="settings">Ustawienia</button>
+  </nav>
 
-      <label>
-        Tryb nauki
-        <select id="modeSelect">
-          <option value="flashcards">Fiszki</option>
-          <option value="choice">Test wyboru</option>
-          <option value="typing">Wpisywanie odpowiedzi</option>
-          <option value="sentence">Całe zdania</option>
-          <option value="voice">Odpowiedź głosowa</option>
-          <option value="listen">Lektor pyta</option>
-          <option value="dictation">Dyktando</option>
-          <option value="mistakes">Powtórka błędów</option>
-          <option value="hard">Trudne słówka</option>
-        </select>
-      </label>
-
-      <label>
-        Kierunek
-        <select id="directionSelect">
-          <option value="en-pl">Angielski → Polski</option>
-          <option value="pl-en">Polski → Angielski</option>
-        </select>
-      </label>
-
-      <label>
-        Cel dzienny
-        <input id="dailyGoalInput" type="number" min="1" max="999" value="20">
-      </label>
-
-      <div class="button-row control-buttons">
-        <button id="startBtn">Start</button>
-        <button id="resetBtn" class="secondary">Reset</button>
-      </div>
-    </section>
-
-    <section class="panel voice-settings">
-      <label>
-        Lektor
-        <select id="voiceSelect"></select>
-      </label>
-      <label>
-        Szybkość
-        <input id="rateInput" type="range" min="0.6" max="1.3" step="0.05" value="0.9">
-      </label>
-      <label>
-        Akcent rozpoznawania
-        <select id="recognitionLangSelect">
-          <option value="en-US">Angielski US</option>
-          <option value="en-GB">Angielski UK</option>
-          <option value="pl-PL">Polski</option>
-        </select>
-      </label>
-      <label class="check-label">
-        <input id="autoSpeakInput" type="checkbox" checked>
-        <span>Automatycznie czytaj pytanie</span>
-      </label>
-    </section>
-
-    <section class="panel stats">
-      <div><strong id="doneCount">0</strong><span>łącznie</span></div>
-      <div><strong id="todayCount">0</strong><span>dzisiaj</span></div>
-      <div><strong id="goodCount">0</strong><span>dobrze</span></div>
-      <div><strong id="badCount">0</strong><span>błędy</span></div>
-      <div><strong id="accuracyCount">0%</strong><span>skuteczność</span></div>
-    </section>
-
-    <section class="panel daily-panel">
-      <div class="daily-head">
-        <strong>Cel dzienny</strong>
-        <span id="dailyGoalText">0 / 20</span>
-      </div>
-      <div class="progress-track"><div id="dailyProgressBar" class="progress-bar"></div></div>
-    </section>
-
-    <section class="panel lesson">
-      <div class="lesson-top">
-        <span id="modeBadge" class="badge">Fiszki</span>
-        <span id="progressInfo">0 / 0</span>
-      </div>
-
-      <div id="card" class="card">
+  <main class="app-shell">
+    <section class="view active-view" data-tab="learn">
+      <section class="hero panel">
         <div>
-          <div id="questionLabel" class="question-label"></div>
-          <div id="question" class="question">Kliknij Start</div>
-          <div id="answer" class="answer hidden"></div>
-          <div id="example" class="example hidden"></div>
+          <span class="eyebrow">Aktualna lekcja</span>
+          <h2 id="lessonFilterSummary">Fiszki · Wszystkie · Wszystkie</h2>
+          <p>Materiał w filtrze: <strong id="bankCount">0</strong>. Wybierz kategorię, poziom i tryb, potem kliknij Start.</p>
         </div>
-      </div>
+        <div class="hero-stat">
+          <strong id="todayCount">0</strong>
+          <span>dzisiaj</span>
+        </div>
+      </section>
 
-      <div id="choiceBox" class="choice-box hidden"></div>
+      <section class="panel controls-card">
+        <div class="controls">
+          <label>
+            Kategoria
+            <select id="categorySelect"></select>
+          </label>
 
-      <div id="typingBox" class="typing-box hidden">
-        <input id="typingInput" type="text" placeholder="Wpisz odpowiedź">
-        <button id="checkTypingBtn">Sprawdź</button>
-      </div>
+          <label>
+            Poziom
+            <select id="difficultySelect">
+              <option value="all">Wszystkie</option>
+              <option value="easy">Łatwy</option>
+              <option value="medium">Średni</option>
+              <option value="hard">Trudny</option>
+            </select>
+          </label>
 
-      <div id="sentenceBox" class="sentence-box hidden">
-        <textarea id="sentenceInput" rows="3" placeholder="Napisz całe zdanie po angielsku"></textarea>
-        <button id="checkSentenceBtn">Sprawdź zdanie</button>
-      </div>
+          <label>
+            Tryb nauki
+            <select id="modeSelect">
+              <option value="flashcards">Fiszki</option>
+              <option value="choice">Test wyboru</option>
+              <option value="typing">Wpisywanie odpowiedzi</option>
+              <option value="sentence">Całe zdania</option>
+              <option value="voice">Odpowiedź głosowa</option>
+              <option value="listen">Lektor pyta</option>
+              <option value="dictation">Dyktando</option>
+              <option value="mistakes">Powtórka błędów</option>
+              <option value="hard">Trudne słówka</option>
+            </select>
+          </label>
 
-      <div id="voiceBox" class="voice-box hidden">
-        <button id="listenBtn" class="voice-main">🎙️ Odpowiedz głosem</button>
+          <label>
+            Kierunek
+            <select id="directionSelect">
+              <option value="en-pl">EN → PL</option>
+              <option value="pl-en">PL → EN</option>
+            </select>
+          </label>
+
+          <label>
+            Cel dzienny
+            <input id="dailyGoalInput" type="number" min="1" max="999" value="20">
+          </label>
+
+          <div class="button-row control-buttons">
+            <button id="startBtn">Start</button>
+            <button id="resetBtn" class="danger">Reset</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel lesson-card">
+        <div class="lesson-top">
+          <span id="modeBadge" class="badge">Fiszki</span>
+          <span id="progressInfo" class="progress-info">0 / 0</span>
+        </div>
+
+        <div class="card">
+          <div>
+            <div id="questionLabel" class="question-label">—</div>
+            <div id="question" class="question">Kliknij Start</div>
+            <div id="answer" class="answer hidden">—</div>
+            <div id="example" class="example hidden">—</div>
+          </div>
+        </div>
+
+        <div id="choiceBox" class="choice-box hidden"></div>
+
+        <div id="typingBox" class="typing-box hidden">
+          <input id="typingInput" type="text" placeholder="Wpisz odpowiedź">
+          <button id="checkTypingBtn">Sprawdź</button>
+        </div>
+
+        <div id="sentenceBox" class="sentence-box hidden">
+          <textarea id="sentenceInput" rows="3" placeholder="Napisz całe zdanie po angielsku"></textarea>
+          <button id="checkSentenceBtn">Sprawdź zdanie</button>
+        </div>
+
+        <div id="voiceBox" class="voice-box hidden">
+          <button id="listenBtn" class="voice-main">🎙️ Odpowiedz głosem</button>
+          <div>
+            <strong>Rozpoznano:</strong>
+            <p id="voiceTranscript">—</p>
+          </div>
+        </div>
+
+        <p id="feedback" class="feedback"></p>
+
+        <div class="button-row lesson-buttons">
+          <button id="speakBtn" class="secondary">Czytaj</button>
+          <button id="readAnswerBtn" class="secondary">Czytaj odp.</button>
+          <button id="showAnswerBtn" class="secondary">Pokaż</button>
+          <button id="wrongBtn" class="danger">Źle</button>
+          <button id="rightBtn" class="success">Dobrze</button>
+          <button id="hardBtn" class="warning">Trudne</button>
+          <button id="nextBtn">Dalej</button>
+        </div>
+      </section>
+
+      <section class="panel phrase-panel">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Trening zdań</span>
+            <h2>Losowe zdanie</h2>
+          </div>
+          <button id="randomSentenceBtn" class="secondary">Losuj</button>
+        </div>
+        <div class="phrase-grid">
+          <div><strong>PL:</strong> <span id="phrasePl">—</span></div>
+          <div><strong>EN:</strong> <span id="phraseEn">—</span></div>
+        </div>
+      </section>
+    </section>
+
+    <section class="view" data-tab="progress">
+      <section class="panel progress-hero">
         <div>
-          <strong>Rozpoznano:</strong>
-          <p id="voiceTranscript">—</p>
+          <span class="eyebrow">Postępy użytkownika</span>
+          <h2>Poziom <span id="progressLevel">1</span></h2>
+          <p><span id="progressXp">0 XP</span> · passa: <strong id="progressStreak">0</strong> dni</p>
+          <div class="progress-track big"><div id="levelProgressBar" class="progress-bar"></div></div>
         </div>
-      </div>
+      </section>
 
-      <p id="feedback" class="feedback"></p>
+      <section class="stats-grid">
+        <div class="stat-card"><strong id="doneCount">0</strong><span>wszystkie odpowiedzi</span></div>
+        <div class="stat-card"><strong id="goodCount">0</strong><span>dobrze</span></div>
+        <div class="stat-card"><strong id="badCount">0</strong><span>źle</span></div>
+        <div class="stat-card"><strong id="accuracyCount">0%</strong><span>skuteczność ogólna</span></div>
+        <div class="stat-card"><strong id="progressLearned">0 / 0</strong><span>ruszone słówka</span></div>
+        <div class="stat-card"><strong id="progressMastered">0</strong><span>opanowane</span></div>
+        <div class="stat-card"><strong id="progressHard">0</strong><span>oznaczone trudne</span></div>
+        <div class="stat-card"><strong id="progressMistakes">0</strong><span>aktywne błędy</span></div>
+      </section>
 
-      <div class="button-row lesson-buttons">
-        <button id="speakBtn" class="secondary">Czytaj</button>
-        <button id="readAnswerBtn" class="secondary">Czytaj odp.</button>
-        <button id="showAnswerBtn" class="secondary">Pokaż</button>
-        <button id="wrongBtn" class="danger">Źle</button>
-        <button id="rightBtn" class="success">Dobrze</button>
-        <button id="hardBtn" class="warning">Trudne</button>
-        <button id="nextBtn">Dalej</button>
-      </div>
+      <section class="panel daily-card">
+        <div class="daily-head">
+          <strong>Cel dzienny</strong>
+          <span id="dailyGoalText">0 / 20</span>
+        </div>
+        <div class="progress-track"><div id="dailyProgressBar" class="progress-bar"></div></div>
+      </section>
+
+      <section class="progress-columns">
+        <div class="panel">
+          <div class="section-head compact"><h2>Ostatnie 7 dni</h2></div>
+          <div id="weeklyProgress" class="weekly-grid"></div>
+        </div>
+        <div class="panel">
+          <div class="section-head compact"><h2>Najczęstsze błędy</h2></div>
+          <ul id="topMistakes" class="mistake-list"></ul>
+        </div>
+      </section>
     </section>
 
-    <section class="panel phrase-panel">
-      <div class="word-list-head">
-        <h2>Trening zdań</h2>
-        <button id="randomSentenceBtn" class="secondary">Losowe zdanie</button>
-      </div>
-      <div class="phrase-grid">
-        <div><strong>PL:</strong> <span id="phrasePl">—</span></div>
-        <div><strong>EN:</strong> <span id="phraseEn">—</span></div>
-      </div>
-      <p class="hint">Tryby „Całe zdania”, „Odpowiedź głosowa”, „Lektor pyta” i „Dyktando” korzystają z tych samych zdań oraz przykładowych zdań ze słówek.</p>
+    <section class="view" data-tab="words">
+      <section class="panel add-word">
+        <div class="section-head compact"><h2>Własne słówka i zdania</h2></div>
+        <div class="grid">
+          <input id="newEnglish" type="text" placeholder="angielski, np. screwdriver">
+          <input id="newPolish" type="text" placeholder="polski, np. śrubokręt">
+          <input id="newCategory" type="text" placeholder="kategoria, np. narzędzia">
+          <select id="newDifficulty" title="Poziom trudności">
+            <option value="easy">Łatwy</option>
+            <option value="medium">Średni</option>
+            <option value="hard">Trudny</option>
+          </select>
+          <input id="newExample" type="text" placeholder="przykład/zdanie po angielsku">
+          <button id="addWordBtn">Dodaj</button>
+        </div>
+        <div class="button-row data-buttons">
+          <button id="exportBtn" class="secondary">Eksport danych</button>
+          <button id="importBtn" class="secondary">Import danych</button>
+          <button id="clearCustomBtn" class="danger">Usuń własne</button>
+          <input id="importFile" type="file" accept="application/json" class="hidden">
+        </div>
+      </section>
+
+      <section class="panel word-list-panel">
+        <div class="word-list-head">
+          <h2>Lista słówek</h2>
+          <input id="searchInput" type="search" placeholder="Szukaj słówka, kategorii albo zdania">
+        </div>
+        <div id="wordList" class="word-list"></div>
+      </section>
     </section>
 
-    <section class="panel add-word">
-      <h2>Własne słówka i zdania</h2>
-      <div class="grid">
-        <input id="newEnglish" type="text" placeholder="angielski, np. screwdriver">
-        <input id="newPolish" type="text" placeholder="polski, np. śrubokręt">
-        <input id="newCategory" type="text" placeholder="kategoria, np. narzędzia">
-        <input id="newExample" type="text" placeholder="przykład/zdanie po angielsku">
-        <button id="addWordBtn">Dodaj</button>
-      </div>
-      <div class="button-row data-buttons">
-        <button id="exportBtn" class="secondary">Eksport danych</button>
-        <button id="importBtn" class="secondary">Import danych</button>
-        <button id="clearCustomBtn" class="danger">Usuń własne</button>
-        <input id="importFile" type="file" accept="application/json" class="hidden">
-      </div>
-      <p class="hint">Dane zapisują się lokalnie w przeglądarce. Mikrofon działa tylko tam, gdzie przeglądarka obsługuje Web Speech API.</p>
-    </section>
+    <section class="view" data-tab="settings">
+      <section class="panel settings-panel">
+        <div class="section-head compact"><h2>Głos i mikrofon</h2></div>
+        <div class="voice-settings">
+          <label>
+            Głos lektora
+            <select id="voiceSelect"></select>
+          </label>
 
-    <section class="panel word-list-panel">
-      <div class="word-list-head">
-        <h2>Lista słówek</h2>
-        <input id="searchInput" type="search" placeholder="Szukaj słówka">
-      </div>
-      <div id="wordList" class="word-list"></div>
+          <label>
+            Szybkość
+            <input id="rateInput" type="range" min="0.6" max="1.3" step="0.1" value="0.9">
+          </label>
+
+          <label>
+            Język rozpoznawania
+            <select id="recognitionLangSelect">
+              <option value="en-US">English US</option>
+              <option value="en-GB">English UK</option>
+              <option value="pl-PL">Polski</option>
+            </select>
+          </label>
+
+          <label class="check-label">
+            <input id="autoSpeakInput" type="checkbox" checked>
+            Lektor czyta automatycznie
+          </label>
+        </div>
+        <p class="hint">Mikrofon działa tylko w przeglądarkach obsługujących Web Speech API oraz po uruchomieniu przez HTTPS albo localhost.</p>
+      </section>
     </section>
   </main>
 
-  <script src="app.js"></script>
+  <script src="app.js?v=4.0.0"></script>
 </body>
 </html>

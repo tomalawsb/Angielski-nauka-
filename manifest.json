@@ -1,15 +1,22 @@
 {
   "name": "Angielski PWA",
   "short_name": "Angielski",
-  "description": "Aplikacja PWA do nauki angielskiego: fiszki, zdania, lektor, mikrofon i powtórki.",
-  "start_url": "./index.html",
+  "description": "Aplikacja PWA do nauki angielskiego: fiszki, zdania, lektor, mikrofon, poziomy trudności i postępy użytkownika.",
+  "start_url": "./index.html?v=4.0.0",
   "display": "standalone",
   "background_color": "#f4f7fb",
   "theme_color": "#f4f7fb",
   "icons": [
-    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
-  ]
-}
- ]
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "version": "4.0.0"
 }

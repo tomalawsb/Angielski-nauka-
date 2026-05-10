@@ -1,52 +1,2434 @@
 [
-  { "english": "house", "polish": "dom", "category": "podstawowe", "example": "This is my house.", "sentencePl": "To jest mój dom." },
-  { "english": "car", "polish": "samochód", "category": "podstawowe", "example": "I have a car.", "sentencePl": "Mam samochód." },
-  { "english": "water", "polish": "woda", "category": "podstawowe", "example": "I drink water every day.", "sentencePl": "Codziennie piję wodę." },
-  { "english": "food", "polish": "jedzenie", "category": "podstawowe", "example": "The food is good.", "sentencePl": "Jedzenie jest dobre." },
-  { "english": "work", "polish": "praca", "category": "podstawowe", "example": "I go to work at eight.", "sentencePl": "Idę do pracy o ósmej." },
-  { "english": "time", "polish": "czas", "category": "podstawowe", "example": "I need more time.", "sentencePl": "Potrzebuję więcej czasu." },
-  { "english": "money", "polish": "pieniądze", "category": "podstawowe", "example": "I need money for this repair.", "sentencePl": "Potrzebuję pieniędzy na tę naprawę." },
-  { "english": "phone", "polish": "telefon", "category": "podstawowe", "example": "My phone is new.", "sentencePl": "Mój telefon jest nowy." },
-  { "english": "street", "polish": "ulica", "category": "podstawowe", "example": "The street is very long.", "sentencePl": "Ta ulica jest bardzo długa." },
-  { "english": "city", "polish": "miasto", "category": "podstawowe", "example": "This city is small.", "sentencePl": "To miasto jest małe." },
-
-  { "english": "camera", "polish": "kamera", "category": "techniczne", "example": "The camera is working.", "sentencePl": "Kamera działa." },
-  { "english": "cable", "polish": "kabel", "category": "techniczne", "example": "The cable is too short.", "sentencePl": "Kabel jest za krótki." },
-  { "english": "router", "polish": "router", "category": "techniczne", "example": "Restart the router.", "sentencePl": "Zrestartuj router." },
-  { "english": "password", "polish": "hasło", "category": "techniczne", "example": "Enter the password.", "sentencePl": "Wpisz hasło." },
-  { "english": "battery", "polish": "bateria", "category": "techniczne", "example": "The battery is low.", "sentencePl": "Bateria jest słaba." },
-  { "english": "screen", "polish": "ekran", "category": "techniczne", "example": "The screen is bright.", "sentencePl": "Ekran jest jasny." },
-  { "english": "charger", "polish": "ładowarka", "category": "techniczne", "example": "Where is the charger?", "sentencePl": "Gdzie jest ładowarka?" },
-  { "english": "socket", "polish": "gniazdo", "category": "techniczne", "example": "Plug it into the socket.", "sentencePl": "Podłącz to do gniazda." },
-  { "english": "wire", "polish": "przewód", "category": "techniczne", "example": "Check the wire.", "sentencePl": "Sprawdź przewód." },
-  { "english": "connection", "polish": "połączenie", "category": "techniczne", "example": "The connection is weak.", "sentencePl": "Połączenie jest słabe." },
-  { "english": "signal", "polish": "sygnał", "category": "techniczne", "example": "The signal is strong.", "sentencePl": "Sygnał jest mocny." },
-  { "english": "device", "polish": "urządzenie", "category": "techniczne", "example": "This device is offline.", "sentencePl": "To urządzenie jest offline." },
-
-  { "english": "invoice", "polish": "faktura", "category": "praca", "example": "Send me the invoice.", "sentencePl": "Wyślij mi fakturę." },
-  { "english": "customer", "polish": "klient", "category": "praca", "example": "The customer is waiting.", "sentencePl": "Klient czeka." },
-  { "english": "appointment", "polish": "spotkanie", "category": "praca", "example": "I have an appointment tomorrow.", "sentencePl": "Mam jutro spotkanie." },
-  { "english": "price", "polish": "cena", "category": "praca", "example": "What is the price?", "sentencePl": "Jaka jest cena?" },
-  { "english": "repair", "polish": "naprawa", "category": "praca", "example": "The repair is finished.", "sentencePl": "Naprawa jest zakończona." },
-  { "english": "installation", "polish": "montaż", "category": "praca", "example": "The installation takes two hours.", "sentencePl": "Montaż zajmuje dwie godziny." },
-  { "english": "cost", "polish": "koszt", "category": "praca", "example": "The cost is high.", "sentencePl": "Koszt jest wysoki." },
-  { "english": "payment", "polish": "płatność", "category": "praca", "example": "Payment is due today.", "sentencePl": "Płatność jest dzisiaj wymagana." },
-  { "english": "service", "polish": "usługa", "category": "praca", "example": "We offer this service.", "sentencePl": "Oferujemy tę usługę." },
-  { "english": "address", "polish": "adres", "category": "praca", "example": "Send me the address.", "sentencePl": "Wyślij mi adres." },
-
-  { "english": "I would like some coffee.", "polish": "Chciałbym kawę.", "category": "zdania", "example": "I would like some coffee.", "sentencePl": "Chciałbym kawę." },
-  { "english": "How much does it cost?", "polish": "Ile to kosztuje?", "category": "zdania", "example": "How much does it cost?", "sentencePl": "Ile to kosztuje?" },
-  { "english": "Can you help me with this?", "polish": "Czy możesz mi z tym pomóc?", "category": "zdania", "example": "Can you help me with this?", "sentencePl": "Czy możesz mi z tym pomóc?" },
-  { "english": "I do not understand this sentence.", "polish": "Nie rozumiem tego zdania.", "category": "zdania", "example": "I do not understand this sentence.", "sentencePl": "Nie rozumiem tego zdania." },
-  { "english": "Please repeat the question.", "polish": "Proszę powtórzyć pytanie.", "category": "zdania", "example": "Please repeat the question.", "sentencePl": "Proszę powtórzyć pytanie." },
-  { "english": "Where is the station?", "polish": "Gdzie jest stacja?", "category": "zdania", "example": "Where is the station?", "sentencePl": "Gdzie jest stacja?" },
-  { "english": "I need a charger.", "polish": "Potrzebuję ładowarki.", "category": "zdania", "example": "I need a charger.", "sentencePl": "Potrzebuję ładowarki." },
-  { "english": "It works very well.", "polish": "To działa bardzo dobrze.", "category": "zdania", "example": "It works very well.", "sentencePl": "To działa bardzo dobrze." },
-  { "english": "It does not work now.", "polish": "To teraz nie działa.", "category": "zdania", "example": "It does not work now.", "sentencePl": "To teraz nie działa." },
-  { "english": "See you tomorrow at eight.", "polish": "Do zobaczenia jutro o ósmej.", "category": "zdania", "example": "See you tomorrow at eight.", "sentencePl": "Do zobaczenia jutro o ósmej." },
-  { "english": "The camera should be installed outside.", "polish": "Kamera powinna być zamontowana na zewnątrz.", "category": "zdania techniczne", "example": "The camera should be installed outside.", "sentencePl": "Kamera powinna być zamontowana na zewnątrz." },
-  { "english": "The cable goes through the wall.", "polish": "Kabel przechodzi przez ścianę.", "category": "zdania techniczne", "example": "The cable goes through the wall.", "sentencePl": "Kabel przechodzi przez ścianę." },
-  { "english": "The router needs to be restarted.", "polish": "Router trzeba zrestartować.", "category": "zdania techniczne", "example": "The router needs to be restarted.", "sentencePl": "Router trzeba zrestartować." },
-  { "english": "The customer wants two cameras.", "polish": "Klient chce dwie kamery.", "category": "zdania praca", "example": "The customer wants two cameras.", "sentencePl": "Klient chce dwie kamery." },
-  { "english": "I can come tomorrow morning.", "polish": "Mogę przyjechać jutro rano.", "category": "zdania praca", "example": "I can come tomorrow morning.", "sentencePl": "Mogę przyjechać jutro rano." }
+  {
+    "english": "hello",
+    "polish": "cześć",
+    "category": "podstawowe",
+    "difficulty": "easy",
+    "example": "Hello, my name is Tom.",
+    "sentencePl": "Cześć, mam na imię Tomek."
+  },
+  {
+    "english": "good morning",
+    "polish": "dzień dobry",
+    "category": "podstawowe",
+    "difficulty": "easy",
+    "example": "Good morning, how are you?",
+    "sentencePl": "Dzień dobry, jak się masz?"
+  },
+  {
+    "english": "good evening",
+    "polish": "dobry wieczór",
+    "category": "podstawowe",
+    "difficulty": "easy",
+    "example": "Good evening, welcome home.",
+    "sentencePl": "Dobry wieczór, witaj w domu."
+  },
+  {
+    "english": "goodbye",
+    "polish": "do widzenia",
+    "category": "podstawowe",
+    "difficulty": "easy",
+    "example": "Goodbye, see you tomorrow.",
+    "sentencePl": "Do widzenia, do zobaczenia jutro."
+  },
+  {
+    "english": "please",
+    "polish": "proszę",
+    "category": "podstawowe",
+    "difficulty": "easy",
+    "example": "Please open the door.",
+    "sentencePl": "Proszę otwórz drzwi."
+  },
+  {
+    "english": "thank you",
+    "polish": "dziękuję",
+    "category": "podstawowe",
+    "difficulty": "easy",
+    "example": "Thank you for your help.",
+    "sentencePl": "Dziękuję za pomoc."
+  },
+  {
+    "english": "sorry",
+    "polish": "przepraszam",
+    "category": "podstawowe",
+    "difficulty": "easy",
+    "example": "Sorry, I am late.",
+    "sentencePl": "Przepraszam, spóźniłem się."
+  },
+  {
+    "english": "yes",
+    "polish": "tak",
+    "category": "podstawowe",
+    "difficulty": "easy",
+    "example": "Yes, I understand.",
+    "sentencePl": "Tak, rozumiem."
+  },
+  {
+    "english": "no",
+    "polish": "nie",
+    "category": "podstawowe",
+    "difficulty": "easy",
+    "example": "No, I do not agree.",
+    "sentencePl": "Nie, nie zgadzam się."
+  },
+  {
+    "english": "maybe",
+    "polish": "może",
+    "category": "podstawowe",
+    "difficulty": "easy",
+    "example": "Maybe we can try again.",
+    "sentencePl": "Może możemy spróbować jeszcze raz."
+  },
+  {
+    "english": "today",
+    "polish": "dzisiaj",
+    "category": "podstawowe",
+    "difficulty": "easy",
+    "example": "Today is a good day.",
+    "sentencePl": "Dzisiaj jest dobry dzień."
+  },
+  {
+    "english": "tomorrow",
+    "polish": "jutro",
+    "category": "podstawowe",
+    "difficulty": "easy",
+    "example": "Tomorrow I will call you.",
+    "sentencePl": "Jutro do ciebie zadzwonię."
+  },
+  {
+    "english": "yesterday",
+    "polish": "wczoraj",
+    "category": "podstawowe",
+    "difficulty": "easy",
+    "example": "Yesterday I was at work.",
+    "sentencePl": "Wczoraj byłem w pracy."
+  },
+  {
+    "english": "now",
+    "polish": "teraz",
+    "category": "podstawowe",
+    "difficulty": "easy",
+    "example": "I need it now.",
+    "sentencePl": "Potrzebuję tego teraz."
+  },
+  {
+    "english": "later",
+    "polish": "później",
+    "category": "podstawowe",
+    "difficulty": "easy",
+    "example": "We can do it later.",
+    "sentencePl": "Możemy zrobić to później."
+  },
+  {
+    "english": "always",
+    "polish": "zawsze",
+    "category": "podstawowe",
+    "difficulty": "easy",
+    "example": "I always check the list.",
+    "sentencePl": "Zawsze sprawdzam listę."
+  },
+  {
+    "english": "never",
+    "polish": "nigdy",
+    "category": "podstawowe",
+    "difficulty": "easy",
+    "example": "I never forget my keys.",
+    "sentencePl": "Nigdy nie zapominam kluczy."
+  },
+  {
+    "english": "often",
+    "polish": "często",
+    "category": "podstawowe",
+    "difficulty": "easy",
+    "example": "I often drink coffee.",
+    "sentencePl": "Często piję kawę."
+  },
+  {
+    "english": "sometimes",
+    "polish": "czasami",
+    "category": "podstawowe",
+    "difficulty": "easy",
+    "example": "Sometimes I walk to work.",
+    "sentencePl": "Czasami chodzę pieszo do pracy."
+  },
+  {
+    "english": "quickly",
+    "polish": "szybko",
+    "category": "podstawowe",
+    "difficulty": "easy",
+    "example": "Please answer quickly.",
+    "sentencePl": "Proszę odpowiedz szybko."
+  },
+  {
+    "english": "house",
+    "polish": "dom",
+    "category": "dom",
+    "difficulty": "easy",
+    "example": "This house is very old.",
+    "sentencePl": "Ten dom jest bardzo stary."
+  },
+  {
+    "english": "flat",
+    "polish": "mieszkanie",
+    "category": "dom",
+    "difficulty": "easy",
+    "example": "My flat is on the second floor.",
+    "sentencePl": "Moje mieszkanie jest na drugim piętrze."
+  },
+  {
+    "english": "room",
+    "polish": "pokój",
+    "category": "dom",
+    "difficulty": "easy",
+    "example": "This room is clean.",
+    "sentencePl": "Ten pokój jest czysty."
+  },
+  {
+    "english": "kitchen",
+    "polish": "kuchnia",
+    "category": "dom",
+    "difficulty": "easy",
+    "example": "The kitchen is small but nice.",
+    "sentencePl": "Kuchnia jest mała, ale ładna."
+  },
+  {
+    "english": "bathroom",
+    "polish": "łazienka",
+    "category": "dom",
+    "difficulty": "easy",
+    "example": "The bathroom is next to the bedroom.",
+    "sentencePl": "Łazienka jest obok sypialni."
+  },
+  {
+    "english": "bedroom",
+    "polish": "sypialnia",
+    "category": "dom",
+    "difficulty": "easy",
+    "example": "The bedroom has one window.",
+    "sentencePl": "Sypialnia ma jedno okno."
+  },
+  {
+    "english": "door",
+    "polish": "drzwi",
+    "category": "dom",
+    "difficulty": "easy",
+    "example": "Close the door, please.",
+    "sentencePl": "Zamknij drzwi, proszę."
+  },
+  {
+    "english": "window",
+    "polish": "okno",
+    "category": "dom",
+    "difficulty": "easy",
+    "example": "Open the window.",
+    "sentencePl": "Otwórz okno."
+  },
+  {
+    "english": "table",
+    "polish": "stół",
+    "category": "dom",
+    "difficulty": "easy",
+    "example": "The keys are on the table.",
+    "sentencePl": "Klucze są na stole."
+  },
+  {
+    "english": "chair",
+    "polish": "krzesło",
+    "category": "dom",
+    "difficulty": "easy",
+    "example": "This chair is broken.",
+    "sentencePl": "To krzesło jest zepsute."
+  },
+  {
+    "english": "bed",
+    "polish": "łóżko",
+    "category": "dom",
+    "difficulty": "easy",
+    "example": "The bed is comfortable.",
+    "sentencePl": "Łóżko jest wygodne."
+  },
+  {
+    "english": "lamp",
+    "polish": "lampa",
+    "category": "dom",
+    "difficulty": "easy",
+    "example": "Turn on the lamp.",
+    "sentencePl": "Włącz lampę."
+  },
+  {
+    "english": "floor",
+    "polish": "podłoga",
+    "category": "dom",
+    "difficulty": "easy",
+    "example": "The floor is wet.",
+    "sentencePl": "Podłoga jest mokra."
+  },
+  {
+    "english": "wall",
+    "polish": "ściana",
+    "category": "dom",
+    "difficulty": "easy",
+    "example": "There is a picture on the wall.",
+    "sentencePl": "Na ścianie jest obraz."
+  },
+  {
+    "english": "roof",
+    "polish": "dach",
+    "category": "dom",
+    "difficulty": "easy",
+    "example": "The roof needs repair.",
+    "sentencePl": "Dach wymaga naprawy."
+  },
+  {
+    "english": "garden",
+    "polish": "ogród",
+    "category": "dom",
+    "difficulty": "easy",
+    "example": "The children are in the garden.",
+    "sentencePl": "Dzieci są w ogrodzie."
+  },
+  {
+    "english": "garage",
+    "polish": "garaż",
+    "category": "dom",
+    "difficulty": "easy",
+    "example": "The car is in the garage.",
+    "sentencePl": "Samochód jest w garażu."
+  },
+  {
+    "english": "stairs",
+    "polish": "schody",
+    "category": "dom",
+    "difficulty": "easy",
+    "example": "Be careful on the stairs.",
+    "sentencePl": "Uważaj na schodach."
+  },
+  {
+    "english": "key",
+    "polish": "klucz",
+    "category": "dom",
+    "difficulty": "easy",
+    "example": "I lost my key.",
+    "sentencePl": "Zgubiłem klucz."
+  },
+  {
+    "english": "lock",
+    "polish": "zamek",
+    "category": "dom",
+    "difficulty": "easy",
+    "example": "The lock does not work.",
+    "sentencePl": "Zamek nie działa."
+  },
+  {
+    "english": "mother",
+    "polish": "matka",
+    "category": "ludzie",
+    "difficulty": "easy",
+    "example": "My mother works in a school.",
+    "sentencePl": "Moja mama pracuje w szkole."
+  },
+  {
+    "english": "father",
+    "polish": "ojciec",
+    "category": "ludzie",
+    "difficulty": "easy",
+    "example": "His father drives a bus.",
+    "sentencePl": "Jego ojciec prowadzi autobus."
+  },
+  {
+    "english": "son",
+    "polish": "syn",
+    "category": "ludzie",
+    "difficulty": "easy",
+    "example": "Their son is eight years old.",
+    "sentencePl": "Ich syn ma osiem lat."
+  },
+  {
+    "english": "daughter",
+    "polish": "córka",
+    "category": "ludzie",
+    "difficulty": "easy",
+    "example": "My daughter likes music.",
+    "sentencePl": "Moja córka lubi muzykę."
+  },
+  {
+    "english": "brother",
+    "polish": "brat",
+    "category": "ludzie",
+    "difficulty": "easy",
+    "example": "My brother lives in London.",
+    "sentencePl": "Mój brat mieszka w Londynie."
+  },
+  {
+    "english": "sister",
+    "polish": "siostra",
+    "category": "ludzie",
+    "difficulty": "easy",
+    "example": "Her sister is a nurse.",
+    "sentencePl": "Jej siostra jest pielęgniarką."
+  },
+  {
+    "english": "friend",
+    "polish": "przyjaciel",
+    "category": "ludzie",
+    "difficulty": "easy",
+    "example": "My friend helps me every week.",
+    "sentencePl": "Mój przyjaciel pomaga mi co tydzień."
+  },
+  {
+    "english": "neighbour",
+    "polish": "sąsiad",
+    "category": "ludzie",
+    "difficulty": "easy",
+    "example": "Our neighbour has a dog.",
+    "sentencePl": "Nasz sąsiad ma psa."
+  },
+  {
+    "english": "customer",
+    "polish": "klient",
+    "category": "ludzie",
+    "difficulty": "easy",
+    "example": "The customer is waiting outside.",
+    "sentencePl": "Klient czeka na zewnątrz."
+  },
+  {
+    "english": "teacher",
+    "polish": "nauczyciel",
+    "category": "ludzie",
+    "difficulty": "easy",
+    "example": "The teacher explains the lesson.",
+    "sentencePl": "Nauczyciel wyjaśnia lekcję."
+  },
+  {
+    "english": "student",
+    "polish": "uczeń",
+    "category": "ludzie",
+    "difficulty": "easy",
+    "example": "The student asks a question.",
+    "sentencePl": "Uczeń zadaje pytanie."
+  },
+  {
+    "english": "doctor",
+    "polish": "lekarz",
+    "category": "ludzie",
+    "difficulty": "easy",
+    "example": "The doctor checks my temperature.",
+    "sentencePl": "Lekarz sprawdza moją temperaturę."
+  },
+  {
+    "english": "driver",
+    "polish": "kierowca",
+    "category": "ludzie",
+    "difficulty": "easy",
+    "example": "The driver stopped the car.",
+    "sentencePl": "Kierowca zatrzymał samochód."
+  },
+  {
+    "english": "worker",
+    "polish": "pracownik",
+    "category": "ludzie",
+    "difficulty": "easy",
+    "example": "The worker repairs the cable.",
+    "sentencePl": "Pracownik naprawia kabel."
+  },
+  {
+    "english": "manager",
+    "polish": "kierownik",
+    "category": "ludzie",
+    "difficulty": "easy",
+    "example": "The manager sent an email.",
+    "sentencePl": "Kierownik wysłał e-mail."
+  },
+  {
+    "english": "child",
+    "polish": "dziecko",
+    "category": "ludzie",
+    "difficulty": "easy",
+    "example": "The child is sleeping.",
+    "sentencePl": "Dziecko śpi."
+  },
+  {
+    "english": "adult",
+    "polish": "dorosły",
+    "category": "ludzie",
+    "difficulty": "easy",
+    "example": "An adult must sign the form.",
+    "sentencePl": "Dorosły musi podpisać formularz."
+  },
+  {
+    "english": "guest",
+    "polish": "gość",
+    "category": "ludzie",
+    "difficulty": "easy",
+    "example": "The guest arrived early.",
+    "sentencePl": "Gość przyjechał wcześnie."
+  },
+  {
+    "english": "owner",
+    "polish": "właściciel",
+    "category": "ludzie",
+    "difficulty": "easy",
+    "example": "The owner opened the gate.",
+    "sentencePl": "Właściciel otworzył bramę."
+  },
+  {
+    "english": "installer",
+    "polish": "instalator",
+    "category": "ludzie",
+    "difficulty": "easy",
+    "example": "The installer mounted the camera.",
+    "sentencePl": "Instalator zamontował kamerę."
+  },
+  {
+    "english": "work",
+    "polish": "praca",
+    "category": "praca",
+    "difficulty": "medium",
+    "example": "I start work at eight.",
+    "sentencePl": "Zaczynam pracę o ósmej."
+  },
+  {
+    "english": "job",
+    "polish": "zajęcie / praca",
+    "category": "praca",
+    "difficulty": "medium",
+    "example": "This job is important.",
+    "sentencePl": "Ta praca jest ważna."
+  },
+  {
+    "english": "task",
+    "polish": "zadanie",
+    "category": "praca",
+    "difficulty": "medium",
+    "example": "This task is simple.",
+    "sentencePl": "To zadanie jest proste."
+  },
+  {
+    "english": "meeting",
+    "polish": "spotkanie",
+    "category": "praca",
+    "difficulty": "medium",
+    "example": "We have a meeting at noon.",
+    "sentencePl": "Mamy spotkanie w południe."
+  },
+  {
+    "english": "invoice",
+    "polish": "faktura",
+    "category": "praca",
+    "difficulty": "medium",
+    "example": "Please send the invoice today.",
+    "sentencePl": "Proszę wyślij fakturę dzisiaj."
+  },
+  {
+    "english": "price",
+    "polish": "cena",
+    "category": "praca",
+    "difficulty": "medium",
+    "example": "The price is too high.",
+    "sentencePl": "Cena jest za wysoka."
+  },
+  {
+    "english": "cost",
+    "polish": "koszt",
+    "category": "praca",
+    "difficulty": "medium",
+    "example": "The total cost is clear.",
+    "sentencePl": "Całkowity koszt jest jasny."
+  },
+  {
+    "english": "payment",
+    "polish": "płatność",
+    "category": "praca",
+    "difficulty": "medium",
+    "example": "The payment is late.",
+    "sentencePl": "Płatność jest opóźniona."
+  },
+  {
+    "english": "deadline",
+    "polish": "termin",
+    "category": "praca",
+    "difficulty": "medium",
+    "example": "The deadline is Friday.",
+    "sentencePl": "Termin jest w piątek."
+  },
+  {
+    "english": "schedule",
+    "polish": "harmonogram",
+    "category": "praca",
+    "difficulty": "medium",
+    "example": "The schedule changed yesterday.",
+    "sentencePl": "Harmonogram zmienił się wczoraj."
+  },
+  {
+    "english": "report",
+    "polish": "raport",
+    "category": "praca",
+    "difficulty": "medium",
+    "example": "I wrote a short report.",
+    "sentencePl": "Napisałem krótki raport."
+  },
+  {
+    "english": "contract",
+    "polish": "umowa",
+    "category": "praca",
+    "difficulty": "medium",
+    "example": "Read the contract carefully.",
+    "sentencePl": "Przeczytaj umowę uważnie."
+  },
+  {
+    "english": "order",
+    "polish": "zamówienie",
+    "category": "praca",
+    "difficulty": "medium",
+    "example": "The order is ready.",
+    "sentencePl": "Zamówienie jest gotowe."
+  },
+  {
+    "english": "service",
+    "polish": "usługa",
+    "category": "praca",
+    "difficulty": "medium",
+    "example": "This service includes installation.",
+    "sentencePl": "Ta usługa obejmuje montaż."
+  },
+  {
+    "english": "support",
+    "polish": "wsparcie",
+    "category": "praca",
+    "difficulty": "medium",
+    "example": "Technical support is available.",
+    "sentencePl": "Wsparcie techniczne jest dostępne."
+  },
+  {
+    "english": "tool",
+    "polish": "narzędzie",
+    "category": "praca",
+    "difficulty": "medium",
+    "example": "Use the right tool.",
+    "sentencePl": "Użyj właściwego narzędzia."
+  },
+  {
+    "english": "equipment",
+    "polish": "sprzęt",
+    "category": "praca",
+    "difficulty": "medium",
+    "example": "The equipment is new.",
+    "sentencePl": "Sprzęt jest nowy."
+  },
+  {
+    "english": "warehouse",
+    "polish": "magazyn",
+    "category": "praca",
+    "difficulty": "medium",
+    "example": "The parts are in the warehouse.",
+    "sentencePl": "Części są w magazynie."
+  },
+  {
+    "english": "client",
+    "polish": "klient",
+    "category": "praca",
+    "difficulty": "medium",
+    "example": "The client accepted the offer.",
+    "sentencePl": "Klient zaakceptował ofertę."
+  },
+  {
+    "english": "offer",
+    "polish": "oferta",
+    "category": "praca",
+    "difficulty": "medium",
+    "example": "I prepared an offer.",
+    "sentencePl": "Przygotowałem ofertę."
+  },
+  {
+    "english": "camera",
+    "polish": "kamera",
+    "category": "techniczne",
+    "difficulty": "medium",
+    "example": "The camera is connected to Wi-Fi.",
+    "sentencePl": "Kamera jest podłączona do Wi-Fi."
+  },
+  {
+    "english": "router",
+    "polish": "router",
+    "category": "techniczne",
+    "difficulty": "medium",
+    "example": "The router needs a restart.",
+    "sentencePl": "Router wymaga restartu."
+  },
+  {
+    "english": "cable",
+    "polish": "kabel",
+    "category": "techniczne",
+    "difficulty": "medium",
+    "example": "The cable is too short.",
+    "sentencePl": "Kabel jest za krótki."
+  },
+  {
+    "english": "connector",
+    "polish": "złącze",
+    "category": "techniczne",
+    "difficulty": "medium",
+    "example": "The connector is damaged.",
+    "sentencePl": "Złącze jest uszkodzone."
+  },
+  {
+    "english": "power supply",
+    "polish": "zasilacz",
+    "category": "techniczne",
+    "difficulty": "medium",
+    "example": "The power supply is hot.",
+    "sentencePl": "Zasilacz jest gorący."
+  },
+  {
+    "english": "battery",
+    "polish": "bateria",
+    "category": "techniczne",
+    "difficulty": "medium",
+    "example": "The battery is almost empty.",
+    "sentencePl": "Bateria jest prawie rozładowana."
+  },
+  {
+    "english": "charger",
+    "polish": "ładowarka",
+    "category": "techniczne",
+    "difficulty": "medium",
+    "example": "The charger is plugged in.",
+    "sentencePl": "Ładowarka jest podłączona."
+  },
+  {
+    "english": "voltage",
+    "polish": "napięcie",
+    "category": "techniczne",
+    "difficulty": "medium",
+    "example": "The voltage is too low.",
+    "sentencePl": "Napięcie jest za niskie."
+  },
+  {
+    "english": "current",
+    "polish": "prąd",
+    "category": "techniczne",
+    "difficulty": "medium",
+    "example": "The current is stable.",
+    "sentencePl": "Prąd jest stabilny."
+  },
+  {
+    "english": "signal",
+    "polish": "sygnał",
+    "category": "techniczne",
+    "difficulty": "medium",
+    "example": "The signal is weak.",
+    "sentencePl": "Sygnał jest słaby."
+  },
+  {
+    "english": "network",
+    "polish": "sieć",
+    "category": "techniczne",
+    "difficulty": "medium",
+    "example": "The network is not available.",
+    "sentencePl": "Sieć jest niedostępna."
+  },
+  {
+    "english": "password",
+    "polish": "hasło",
+    "category": "techniczne",
+    "difficulty": "medium",
+    "example": "Enter the password carefully.",
+    "sentencePl": "Wpisz hasło uważnie."
+  },
+  {
+    "english": "settings",
+    "polish": "ustawienia",
+    "category": "techniczne",
+    "difficulty": "medium",
+    "example": "Open the settings menu.",
+    "sentencePl": "Otwórz menu ustawień."
+  },
+  {
+    "english": "device",
+    "polish": "urządzenie",
+    "category": "techniczne",
+    "difficulty": "medium",
+    "example": "The device is offline.",
+    "sentencePl": "Urządzenie jest offline."
+  },
+  {
+    "english": "display",
+    "polish": "wyświetlacz",
+    "category": "techniczne",
+    "difficulty": "medium",
+    "example": "The display is too dark.",
+    "sentencePl": "Wyświetlacz jest za ciemny."
+  },
+  {
+    "english": "sensor",
+    "polish": "czujnik",
+    "category": "techniczne",
+    "difficulty": "medium",
+    "example": "The sensor detects movement.",
+    "sentencePl": "Czujnik wykrywa ruch."
+  },
+  {
+    "english": "motion detection",
+    "polish": "wykrywanie ruchu",
+    "category": "techniczne",
+    "difficulty": "medium",
+    "example": "Motion detection is enabled.",
+    "sentencePl": "Wykrywanie ruchu jest włączone."
+  },
+  {
+    "english": "recording",
+    "polish": "nagrywanie",
+    "category": "techniczne",
+    "difficulty": "medium",
+    "example": "Recording starts automatically.",
+    "sentencePl": "Nagrywanie zaczyna się automatycznie."
+  },
+  {
+    "english": "memory card",
+    "polish": "karta pamięci",
+    "category": "techniczne",
+    "difficulty": "medium",
+    "example": "The memory card is full.",
+    "sentencePl": "Karta pamięci jest pełna."
+  },
+  {
+    "english": "firmware",
+    "polish": "oprogramowanie urządzenia",
+    "category": "techniczne",
+    "difficulty": "medium",
+    "example": "The firmware update failed.",
+    "sentencePl": "Aktualizacja oprogramowania urządzenia nie powiodła się."
+  },
+  {
+    "english": "reset button",
+    "polish": "przycisk resetu",
+    "category": "techniczne",
+    "difficulty": "medium",
+    "example": "Hold the reset button for ten seconds.",
+    "sentencePl": "Przytrzymaj przycisk resetu przez dziesięć sekund."
+  },
+  {
+    "english": "factory settings",
+    "polish": "ustawienia fabryczne",
+    "category": "techniczne",
+    "difficulty": "medium",
+    "example": "Restore factory settings.",
+    "sentencePl": "Przywróć ustawienia fabryczne."
+  },
+  {
+    "english": "installation",
+    "polish": "montaż",
+    "category": "techniczne",
+    "difficulty": "medium",
+    "example": "The installation took two hours.",
+    "sentencePl": "Montaż trwał dwie godziny."
+  },
+  {
+    "english": "ladder",
+    "polish": "drabina",
+    "category": "techniczne",
+    "difficulty": "medium",
+    "example": "Put the ladder on flat ground.",
+    "sentencePl": "Postaw drabinę na równym podłożu."
+  },
+  {
+    "english": "drill",
+    "polish": "wiertarka",
+    "category": "techniczne",
+    "difficulty": "medium",
+    "example": "The drill battery is charged.",
+    "sentencePl": "Bateria wiertarki jest naładowana."
+  },
+  {
+    "english": "screw",
+    "polish": "śruba",
+    "category": "techniczne",
+    "difficulty": "medium",
+    "example": "Tighten the screw.",
+    "sentencePl": "Dokręć śrubę."
+  },
+  {
+    "english": "screwdriver",
+    "polish": "śrubokręt",
+    "category": "techniczne",
+    "difficulty": "medium",
+    "example": "I need a screwdriver.",
+    "sentencePl": "Potrzebuję śrubokręta."
+  },
+  {
+    "english": "wall plug",
+    "polish": "kołek rozporowy",
+    "category": "techniczne",
+    "difficulty": "medium",
+    "example": "Use a wall plug in concrete.",
+    "sentencePl": "Użyj kołka rozporowego w betonie."
+  },
+  {
+    "english": "bracket",
+    "polish": "uchwyt",
+    "category": "techniczne",
+    "difficulty": "medium",
+    "example": "The bracket holds the camera.",
+    "sentencePl": "Uchwyt trzyma kamerę."
+  },
+  {
+    "english": "angle",
+    "polish": "kąt",
+    "category": "techniczne",
+    "difficulty": "medium",
+    "example": "Change the camera angle.",
+    "sentencePl": "Zmień kąt kamery."
+  },
+  {
+    "english": "street",
+    "polish": "ulica",
+    "category": "podróż",
+    "difficulty": "easy",
+    "example": "This street is closed.",
+    "sentencePl": "Ta ulica jest zamknięta."
+  },
+  {
+    "english": "road",
+    "polish": "droga",
+    "category": "podróż",
+    "difficulty": "easy",
+    "example": "The road is slippery.",
+    "sentencePl": "Droga jest śliska."
+  },
+  {
+    "english": "car",
+    "polish": "samochód",
+    "category": "podróż",
+    "difficulty": "easy",
+    "example": "My car is in the garage.",
+    "sentencePl": "Mój samochód jest w garażu."
+  },
+  {
+    "english": "bus",
+    "polish": "autobus",
+    "category": "podróż",
+    "difficulty": "easy",
+    "example": "The bus is late.",
+    "sentencePl": "Autobus jest spóźniony."
+  },
+  {
+    "english": "train",
+    "polish": "pociąg",
+    "category": "podróż",
+    "difficulty": "easy",
+    "example": "The train leaves at six.",
+    "sentencePl": "Pociąg odjeżdża o szóstej."
+  },
+  {
+    "english": "ticket",
+    "polish": "bilet",
+    "category": "podróż",
+    "difficulty": "easy",
+    "example": "Buy a ticket online.",
+    "sentencePl": "Kup bilet online."
+  },
+  {
+    "english": "station",
+    "polish": "stacja",
+    "category": "podróż",
+    "difficulty": "easy",
+    "example": "Meet me at the station.",
+    "sentencePl": "Spotkajmy się na stacji."
+  },
+  {
+    "english": "airport",
+    "polish": "lotnisko",
+    "category": "podróż",
+    "difficulty": "easy",
+    "example": "The airport is far away.",
+    "sentencePl": "Lotnisko jest daleko."
+  },
+  {
+    "english": "hotel",
+    "polish": "hotel",
+    "category": "podróż",
+    "difficulty": "easy",
+    "example": "The hotel room is ready.",
+    "sentencePl": "Pokój hotelowy jest gotowy."
+  },
+  {
+    "english": "map",
+    "polish": "mapa",
+    "category": "podróż",
+    "difficulty": "easy",
+    "example": "Open the map on your phone.",
+    "sentencePl": "Otwórz mapę w telefonie."
+  },
+  {
+    "english": "address",
+    "polish": "adres",
+    "category": "podróż",
+    "difficulty": "easy",
+    "example": "Write down the address.",
+    "sentencePl": "Zapisz adres."
+  },
+  {
+    "english": "left",
+    "polish": "lewo",
+    "category": "podróż",
+    "difficulty": "easy",
+    "example": "Turn left after the shop.",
+    "sentencePl": "Skręć w lewo za sklepem."
+  },
+  {
+    "english": "right",
+    "polish": "prawo",
+    "category": "podróż",
+    "difficulty": "easy",
+    "example": "Turn right at the traffic lights.",
+    "sentencePl": "Skręć w prawo na światłach."
+  },
+  {
+    "english": "straight ahead",
+    "polish": "prosto",
+    "category": "podróż",
+    "difficulty": "easy",
+    "example": "Go straight ahead.",
+    "sentencePl": "Idź prosto."
+  },
+  {
+    "english": "near",
+    "polish": "blisko",
+    "category": "podróż",
+    "difficulty": "easy",
+    "example": "The shop is near the school.",
+    "sentencePl": "Sklep jest blisko szkoły."
+  },
+  {
+    "english": "far",
+    "polish": "daleko",
+    "category": "podróż",
+    "difficulty": "easy",
+    "example": "The city centre is far.",
+    "sentencePl": "Centrum miasta jest daleko."
+  },
+  {
+    "english": "parking",
+    "polish": "parking",
+    "category": "podróż",
+    "difficulty": "easy",
+    "example": "There is no parking here.",
+    "sentencePl": "Tutaj nie ma parkingu."
+  },
+  {
+    "english": "fuel",
+    "polish": "paliwo",
+    "category": "podróż",
+    "difficulty": "easy",
+    "example": "The car needs fuel.",
+    "sentencePl": "Samochód potrzebuje paliwa."
+  },
+  {
+    "english": "journey",
+    "polish": "podróż",
+    "category": "podróż",
+    "difficulty": "easy",
+    "example": "The journey was long.",
+    "sentencePl": "Podróż była długa."
+  },
+  {
+    "english": "traffic jam",
+    "polish": "korek uliczny",
+    "category": "podróż",
+    "difficulty": "easy",
+    "example": "We are stuck in a traffic jam.",
+    "sentencePl": "Stojemy w korku ulicznym."
+  },
+  {
+    "english": "water",
+    "polish": "woda",
+    "category": "jedzenie",
+    "difficulty": "easy",
+    "example": "I drink water every day.",
+    "sentencePl": "Piję wodę każdego dnia."
+  },
+  {
+    "english": "coffee",
+    "polish": "kawa",
+    "category": "jedzenie",
+    "difficulty": "easy",
+    "example": "This coffee is strong.",
+    "sentencePl": "Ta kawa jest mocna."
+  },
+  {
+    "english": "tea",
+    "polish": "herbata",
+    "category": "jedzenie",
+    "difficulty": "easy",
+    "example": "Would you like tea?",
+    "sentencePl": "Czy chcesz herbatę?"
+  },
+  {
+    "english": "bread",
+    "polish": "chleb",
+    "category": "jedzenie",
+    "difficulty": "easy",
+    "example": "The bread is fresh.",
+    "sentencePl": "Chleb jest świeży."
+  },
+  {
+    "english": "butter",
+    "polish": "masło",
+    "category": "jedzenie",
+    "difficulty": "easy",
+    "example": "Put butter on the bread.",
+    "sentencePl": "Połóż masło na chlebie."
+  },
+  {
+    "english": "cheese",
+    "polish": "ser",
+    "category": "jedzenie",
+    "difficulty": "easy",
+    "example": "I like cheese.",
+    "sentencePl": "Lubię ser."
+  },
+  {
+    "english": "meat",
+    "polish": "mięso",
+    "category": "jedzenie",
+    "difficulty": "easy",
+    "example": "The meat is hot.",
+    "sentencePl": "Mięso jest gorące."
+  },
+  {
+    "english": "fish",
+    "polish": "ryba",
+    "category": "jedzenie",
+    "difficulty": "easy",
+    "example": "Fish is on the plate.",
+    "sentencePl": "Ryba jest na talerzu."
+  },
+  {
+    "english": "egg",
+    "polish": "jajko",
+    "category": "jedzenie",
+    "difficulty": "easy",
+    "example": "Boil one egg.",
+    "sentencePl": "Ugotuj jedno jajko."
+  },
+  {
+    "english": "apple",
+    "polish": "jabłko",
+    "category": "jedzenie",
+    "difficulty": "easy",
+    "example": "This apple is sweet.",
+    "sentencePl": "To jabłko jest słodkie."
+  },
+  {
+    "english": "banana",
+    "polish": "banan",
+    "category": "jedzenie",
+    "difficulty": "easy",
+    "example": "The banana is yellow.",
+    "sentencePl": "Banan jest żółty."
+  },
+  {
+    "english": "potato",
+    "polish": "ziemniak",
+    "category": "jedzenie",
+    "difficulty": "easy",
+    "example": "Potatoes are cheap.",
+    "sentencePl": "Ziemniaki są tanie."
+  },
+  {
+    "english": "soup",
+    "polish": "zupa",
+    "category": "jedzenie",
+    "difficulty": "easy",
+    "example": "The soup is warm.",
+    "sentencePl": "Zupa jest ciepła."
+  },
+  {
+    "english": "breakfast",
+    "polish": "śniadanie",
+    "category": "jedzenie",
+    "difficulty": "easy",
+    "example": "Breakfast is ready.",
+    "sentencePl": "Śniadanie jest gotowe."
+  },
+  {
+    "english": "dinner",
+    "polish": "obiad / kolacja",
+    "category": "jedzenie",
+    "difficulty": "easy",
+    "example": "Dinner is at six.",
+    "sentencePl": "Kolacja jest o szóstej."
+  },
+  {
+    "english": "hungry",
+    "polish": "głodny",
+    "category": "jedzenie",
+    "difficulty": "easy",
+    "example": "I am hungry.",
+    "sentencePl": "Jestem głodny."
+  },
+  {
+    "english": "thirsty",
+    "polish": "spragniony",
+    "category": "jedzenie",
+    "difficulty": "easy",
+    "example": "She is thirsty.",
+    "sentencePl": "Ona jest spragniona."
+  },
+  {
+    "english": "plate",
+    "polish": "talerz",
+    "category": "jedzenie",
+    "difficulty": "easy",
+    "example": "The plate is clean.",
+    "sentencePl": "Talerz jest czysty."
+  },
+  {
+    "english": "spoon",
+    "polish": "łyżka",
+    "category": "jedzenie",
+    "difficulty": "easy",
+    "example": "Use a spoon for soup.",
+    "sentencePl": "Użyj łyżki do zupy."
+  },
+  {
+    "english": "fork",
+    "polish": "widelec",
+    "category": "jedzenie",
+    "difficulty": "easy",
+    "example": "The fork is on the table.",
+    "sentencePl": "Widelec jest na stole."
+  },
+  {
+    "english": "open",
+    "polish": "otworzyć",
+    "category": "czasowniki",
+    "difficulty": "medium",
+    "example": "Open the file.",
+    "sentencePl": "Otwórz plik."
+  },
+  {
+    "english": "close",
+    "polish": "zamknąć",
+    "category": "czasowniki",
+    "difficulty": "medium",
+    "example": "Close the window.",
+    "sentencePl": "Zamknij okno."
+  },
+  {
+    "english": "start",
+    "polish": "zacząć",
+    "category": "czasowniki",
+    "difficulty": "medium",
+    "example": "Start the program.",
+    "sentencePl": "Uruchom program."
+  },
+  {
+    "english": "stop",
+    "polish": "zatrzymać",
+    "category": "czasowniki",
+    "difficulty": "medium",
+    "example": "Stop the car.",
+    "sentencePl": "Zatrzymaj samochód."
+  },
+  {
+    "english": "wait",
+    "polish": "czekać",
+    "category": "czasowniki",
+    "difficulty": "medium",
+    "example": "Wait for me here.",
+    "sentencePl": "Poczekaj na mnie tutaj."
+  },
+  {
+    "english": "call",
+    "polish": "dzwonić",
+    "category": "czasowniki",
+    "difficulty": "medium",
+    "example": "Call me after work.",
+    "sentencePl": "Zadzwoń do mnie po pracy."
+  },
+  {
+    "english": "send",
+    "polish": "wysłać",
+    "category": "czasowniki",
+    "difficulty": "medium",
+    "example": "Send me the photo.",
+    "sentencePl": "Wyślij mi zdjęcie."
+  },
+  {
+    "english": "receive",
+    "polish": "otrzymać",
+    "category": "czasowniki",
+    "difficulty": "medium",
+    "example": "I received your message.",
+    "sentencePl": "Otrzymałem twoją wiadomość."
+  },
+  {
+    "english": "check",
+    "polish": "sprawdzić",
+    "category": "czasowniki",
+    "difficulty": "medium",
+    "example": "Check the connection.",
+    "sentencePl": "Sprawdź połączenie."
+  },
+  {
+    "english": "repair",
+    "polish": "naprawić",
+    "category": "czasowniki",
+    "difficulty": "medium",
+    "example": "Repair the broken cable.",
+    "sentencePl": "Napraw uszkodzony kabel."
+  },
+  {
+    "english": "install",
+    "polish": "zainstalować",
+    "category": "czasowniki",
+    "difficulty": "medium",
+    "example": "Install the application.",
+    "sentencePl": "Zainstaluj aplikację."
+  },
+  {
+    "english": "remove",
+    "polish": "usunąć",
+    "category": "czasowniki",
+    "difficulty": "medium",
+    "example": "Remove the old file.",
+    "sentencePl": "Usuń stary plik."
+  },
+  {
+    "english": "change",
+    "polish": "zmienić",
+    "category": "czasowniki",
+    "difficulty": "medium",
+    "example": "Change the password.",
+    "sentencePl": "Zmień hasło."
+  },
+  {
+    "english": "choose",
+    "polish": "wybrać",
+    "category": "czasowniki",
+    "difficulty": "medium",
+    "example": "Choose the correct answer.",
+    "sentencePl": "Wybierz poprawną odpowiedź."
+  },
+  {
+    "english": "learn",
+    "polish": "uczyć się",
+    "category": "czasowniki",
+    "difficulty": "medium",
+    "example": "I learn English every day.",
+    "sentencePl": "Uczę się angielskiego każdego dnia."
+  },
+  {
+    "english": "repeat",
+    "polish": "powtarzać",
+    "category": "czasowniki",
+    "difficulty": "medium",
+    "example": "Repeat the sentence slowly.",
+    "sentencePl": "Powtórz zdanie powoli."
+  },
+  {
+    "english": "understand",
+    "polish": "rozumieć",
+    "category": "czasowniki",
+    "difficulty": "medium",
+    "example": "I understand the problem.",
+    "sentencePl": "Rozumiem problem."
+  },
+  {
+    "english": "forget",
+    "polish": "zapomnieć",
+    "category": "czasowniki",
+    "difficulty": "medium",
+    "example": "Do not forget your charger.",
+    "sentencePl": "Nie zapomnij ładowarki."
+  },
+  {
+    "english": "remember",
+    "polish": "pamiętać",
+    "category": "czasowniki",
+    "difficulty": "medium",
+    "example": "Remember this word.",
+    "sentencePl": "Zapamiętaj to słowo."
+  },
+  {
+    "english": "explain",
+    "polish": "wyjaśnić",
+    "category": "czasowniki",
+    "difficulty": "medium",
+    "example": "Explain it again, please.",
+    "sentencePl": "Wyjaśnij to jeszcze raz, proszę."
+  },
+  {
+    "english": "small",
+    "polish": "mały",
+    "category": "przymiotniki",
+    "difficulty": "easy",
+    "example": "This room is small.",
+    "sentencePl": "Ten pokój jest mały."
+  },
+  {
+    "english": "big",
+    "polish": "duży",
+    "category": "przymiotniki",
+    "difficulty": "easy",
+    "example": "The box is big.",
+    "sentencePl": "Pudełko jest duże."
+  },
+  {
+    "english": "new",
+    "polish": "nowy",
+    "category": "przymiotniki",
+    "difficulty": "easy",
+    "example": "This is a new phone.",
+    "sentencePl": "To jest nowy telefon."
+  },
+  {
+    "english": "old",
+    "polish": "stary",
+    "category": "przymiotniki",
+    "difficulty": "easy",
+    "example": "The old cable is broken.",
+    "sentencePl": "Stary kabel jest uszkodzony."
+  },
+  {
+    "english": "good",
+    "polish": "dobry",
+    "category": "przymiotniki",
+    "difficulty": "easy",
+    "example": "This is a good idea.",
+    "sentencePl": "To jest dobry pomysł."
+  },
+  {
+    "english": "bad",
+    "polish": "zły",
+    "category": "przymiotniki",
+    "difficulty": "easy",
+    "example": "The weather is bad.",
+    "sentencePl": "Pogoda jest zła."
+  },
+  {
+    "english": "easy",
+    "polish": "łatwy",
+    "category": "przymiotniki",
+    "difficulty": "easy",
+    "example": "This exercise is easy.",
+    "sentencePl": "To ćwiczenie jest łatwe."
+  },
+  {
+    "english": "difficult",
+    "polish": "trudny",
+    "category": "przymiotniki",
+    "difficulty": "easy",
+    "example": "English pronunciation can be difficult.",
+    "sentencePl": "Angielska wymowa może być trudna."
+  },
+  {
+    "english": "cheap",
+    "polish": "tani",
+    "category": "przymiotniki",
+    "difficulty": "easy",
+    "example": "This part is cheap.",
+    "sentencePl": "Ta część jest tania."
+  },
+  {
+    "english": "expensive",
+    "polish": "drogi",
+    "category": "przymiotniki",
+    "difficulty": "easy",
+    "example": "The repair is expensive.",
+    "sentencePl": "Naprawa jest droga."
+  },
+  {
+    "english": "fast",
+    "polish": "szybki",
+    "category": "przymiotniki",
+    "difficulty": "easy",
+    "example": "The internet is fast.",
+    "sentencePl": "Internet jest szybki."
+  },
+  {
+    "english": "slow",
+    "polish": "wolny",
+    "category": "przymiotniki",
+    "difficulty": "easy",
+    "example": "This computer is slow.",
+    "sentencePl": "Ten komputer jest wolny."
+  },
+  {
+    "english": "clean",
+    "polish": "czysty",
+    "category": "przymiotniki",
+    "difficulty": "easy",
+    "example": "The screen is clean.",
+    "sentencePl": "Ekran jest czysty."
+  },
+  {
+    "english": "dirty",
+    "polish": "brudny",
+    "category": "przymiotniki",
+    "difficulty": "easy",
+    "example": "The floor is dirty.",
+    "sentencePl": "Podłoga jest brudna."
+  },
+  {
+    "english": "safe",
+    "polish": "bezpieczny",
+    "category": "przymiotniki",
+    "difficulty": "easy",
+    "example": "This place is safe.",
+    "sentencePl": "To miejsce jest bezpieczne."
+  },
+  {
+    "english": "dangerous",
+    "polish": "niebezpieczny",
+    "category": "przymiotniki",
+    "difficulty": "easy",
+    "example": "This road is dangerous.",
+    "sentencePl": "Ta droga jest niebezpieczna."
+  },
+  {
+    "english": "ready",
+    "polish": "gotowy",
+    "category": "przymiotniki",
+    "difficulty": "easy",
+    "example": "The report is ready.",
+    "sentencePl": "Raport jest gotowy."
+  },
+  {
+    "english": "busy",
+    "polish": "zajęty",
+    "category": "przymiotniki",
+    "difficulty": "easy",
+    "example": "I am busy now.",
+    "sentencePl": "Jestem teraz zajęty."
+  },
+  {
+    "english": "free",
+    "polish": "wolny / darmowy",
+    "category": "przymiotniki",
+    "difficulty": "easy",
+    "example": "The app is free.",
+    "sentencePl": "Aplikacja jest darmowa."
+  },
+  {
+    "english": "important",
+    "polish": "ważny",
+    "category": "przymiotniki",
+    "difficulty": "easy",
+    "example": "This message is important.",
+    "sentencePl": "Ta wiadomość jest ważna."
+  },
+  {
+    "english": "Could you repeat that, please?",
+    "polish": "Czy możesz to powtórzyć?",
+    "category": "zdania codzienne",
+    "difficulty": "medium",
+    "example": "Could you repeat that, please?",
+    "sentencePl": "Czy możesz to powtórzyć?"
+  },
+  {
+    "english": "I do not understand this sentence.",
+    "polish": "Nie rozumiem tego zdania.",
+    "category": "zdania codzienne",
+    "difficulty": "medium",
+    "example": "I do not understand this sentence.",
+    "sentencePl": "Nie rozumiem tego zdania."
+  },
+  {
+    "english": "Can you speak more slowly?",
+    "polish": "Czy możesz mówić wolniej?",
+    "category": "zdania codzienne",
+    "difficulty": "medium",
+    "example": "Can you speak more slowly?",
+    "sentencePl": "Czy możesz mówić wolniej?"
+  },
+  {
+    "english": "I need to check the connection first.",
+    "polish": "Najpierw muszę sprawdzić połączenie.",
+    "category": "zdania techniczne",
+    "difficulty": "hard",
+    "example": "I need to check the connection first.",
+    "sentencePl": "Najpierw muszę sprawdzić połączenie."
+  },
+  {
+    "english": "The camera does not record at night.",
+    "polish": "Kamera nie nagrywa w nocy.",
+    "category": "zdania techniczne",
+    "difficulty": "hard",
+    "example": "The camera does not record at night.",
+    "sentencePl": "Kamera nie nagrywa w nocy."
+  },
+  {
+    "english": "The router should be restarted after the update.",
+    "polish": "Router powinien zostać zrestartowany po aktualizacji.",
+    "category": "zdania techniczne",
+    "difficulty": "hard",
+    "example": "The router should be restarted after the update.",
+    "sentencePl": "Router powinien zostać zrestartowany po aktualizacji."
+  },
+  {
+    "english": "The customer wants the camera above the entrance.",
+    "polish": "Klient chce kamerę nad wejściem.",
+    "category": "zdania praca",
+    "difficulty": "hard",
+    "example": "The customer wants the camera above the entrance.",
+    "sentencePl": "Klient chce kamerę nad wejściem."
+  },
+  {
+    "english": "I will prepare the final price today.",
+    "polish": "Przygotuję końcową cenę dzisiaj.",
+    "category": "zdania praca",
+    "difficulty": "medium",
+    "example": "I will prepare the final price today.",
+    "sentencePl": "Przygotuję końcową cenę dzisiaj."
+  },
+  {
+    "english": "Please send me the address by text message.",
+    "polish": "Proszę wyślij mi adres SMS-em.",
+    "category": "zdania codzienne",
+    "difficulty": "medium",
+    "example": "Please send me the address by text message.",
+    "sentencePl": "Proszę wyślij mi adres SMS-em."
+  },
+  {
+    "english": "I have to buy a longer cable.",
+    "polish": "Muszę kupić dłuższy kabel.",
+    "category": "zdania techniczne",
+    "difficulty": "medium",
+    "example": "I have to buy a longer cable.",
+    "sentencePl": "Muszę kupić dłuższy kabel."
+  },
+  {
+    "english": "The battery is charged but the device does not start.",
+    "polish": "Bateria jest naładowana, ale urządzenie nie startuje.",
+    "category": "zdania techniczne",
+    "difficulty": "hard",
+    "example": "The battery is charged but the device does not start.",
+    "sentencePl": "Bateria jest naładowana, ale urządzenie nie startuje."
+  },
+  {
+    "english": "The screen is too dark in bright sunlight.",
+    "polish": "Ekran jest za ciemny w jasnym słońcu.",
+    "category": "zdania techniczne",
+    "difficulty": "hard",
+    "example": "The screen is too dark in bright sunlight.",
+    "sentencePl": "Ekran jest za ciemny w jasnym słońcu."
+  },
+  {
+    "english": "We can install it tomorrow morning.",
+    "polish": "Możemy zamontować to jutro rano.",
+    "category": "zdania praca",
+    "difficulty": "medium",
+    "example": "We can install it tomorrow morning.",
+    "sentencePl": "Możemy zamontować to jutro rano."
+  },
+  {
+    "english": "I need access to the Wi-Fi password.",
+    "polish": "Potrzebuję dostępu do hasła Wi-Fi.",
+    "category": "zdania techniczne",
+    "difficulty": "hard",
+    "example": "I need access to the Wi-Fi password.",
+    "sentencePl": "Potrzebuję dostępu do hasła Wi-Fi."
+  },
+  {
+    "english": "The invoice will be sent after the service.",
+    "polish": "Faktura zostanie wysłana po usłudze.",
+    "category": "zdania praca",
+    "difficulty": "hard",
+    "example": "The invoice will be sent after the service.",
+    "sentencePl": "Faktura zostanie wysłana po usłudze."
+  },
+  {
+    "english": "This option is available in the settings menu.",
+    "polish": "Ta opcja jest dostępna w menu ustawień.",
+    "category": "zdania techniczne",
+    "difficulty": "hard",
+    "example": "This option is available in the settings menu.",
+    "sentencePl": "Ta opcja jest dostępna w menu ustawień."
+  },
+  {
+    "english": "I marked this word as difficult.",
+    "polish": "Oznaczyłem to słowo jako trudne.",
+    "category": "zdania nauka",
+    "difficulty": "medium",
+    "example": "I marked this word as difficult.",
+    "sentencePl": "Oznaczyłem to słowo jako trudne."
+  },
+  {
+    "english": "My daily goal is twenty answers.",
+    "polish": "Mój dzienny cel to dwadzieścia odpowiedzi.",
+    "category": "zdania nauka",
+    "difficulty": "medium",
+    "example": "My daily goal is twenty answers.",
+    "sentencePl": "Mój dzienny cel to dwadzieścia odpowiedzi."
+  },
+  {
+    "english": "I want to improve my pronunciation.",
+    "polish": "Chcę poprawić swoją wymowę.",
+    "category": "zdania nauka",
+    "difficulty": "medium",
+    "example": "I want to improve my pronunciation.",
+    "sentencePl": "Chcę poprawić swoją wymowę."
+  },
+  {
+    "english": "The application saves my progress automatically.",
+    "polish": "Aplikacja automatycznie zapisuje moje postępy.",
+    "category": "zdania nauka",
+    "difficulty": "hard",
+    "example": "The application saves my progress automatically.",
+    "sentencePl": "Aplikacja automatycznie zapisuje moje postępy."
+  },
+  {
+    "english": "turn on",
+    "polish": "włączyć",
+    "category": "wyrażenia",
+    "difficulty": "medium",
+    "example": "Turn on the light.",
+    "sentencePl": "Włącz światło."
+  },
+  {
+    "english": "turn off",
+    "polish": "wyłączyć",
+    "category": "wyrażenia",
+    "difficulty": "medium",
+    "example": "Turn off the device.",
+    "sentencePl": "Wyłącz urządzenie."
+  },
+  {
+    "english": "set up",
+    "polish": "skonfigurować",
+    "category": "wyrażenia",
+    "difficulty": "medium",
+    "example": "Set up the new router.",
+    "sentencePl": "Skonfiguruj nowy router."
+  },
+  {
+    "english": "look for",
+    "polish": "szukać",
+    "category": "wyrażenia",
+    "difficulty": "medium",
+    "example": "I am looking for my keys.",
+    "sentencePl": "Szukam moich kluczy."
+  },
+  {
+    "english": "find out",
+    "polish": "dowiedzieć się",
+    "category": "wyrażenia",
+    "difficulty": "medium",
+    "example": "Find out what happened.",
+    "sentencePl": "Dowiedz się, co się stało."
+  },
+  {
+    "english": "write down",
+    "polish": "zapisać",
+    "category": "wyrażenia",
+    "difficulty": "medium",
+    "example": "Write down the number.",
+    "sentencePl": "Zapisz numer."
+  },
+  {
+    "english": "pick up",
+    "polish": "odebrać",
+    "category": "wyrażenia",
+    "difficulty": "medium",
+    "example": "Pick up the phone.",
+    "sentencePl": "Odbierz telefon."
+  },
+  {
+    "english": "give back",
+    "polish": "oddać",
+    "category": "wyrażenia",
+    "difficulty": "medium",
+    "example": "Give back the tool.",
+    "sentencePl": "Oddaj narzędzie."
+  },
+  {
+    "english": "come back",
+    "polish": "wrócić",
+    "category": "wyrażenia",
+    "difficulty": "medium",
+    "example": "Come back later.",
+    "sentencePl": "Wróć później."
+  },
+  {
+    "english": "go out",
+    "polish": "wyjść",
+    "category": "wyrażenia",
+    "difficulty": "medium",
+    "example": "Do not go out now.",
+    "sentencePl": "Nie wychodź teraz."
+  },
+  {
+    "english": "log in",
+    "polish": "zalogować się",
+    "category": "wyrażenia",
+    "difficulty": "medium",
+    "example": "Log in to your account.",
+    "sentencePl": "Zaloguj się na konto."
+  },
+  {
+    "english": "log out",
+    "polish": "wylogować się",
+    "category": "wyrażenia",
+    "difficulty": "medium",
+    "example": "Log out after work.",
+    "sentencePl": "Wyloguj się po pracy."
+  },
+  {
+    "english": "back up",
+    "polish": "wykonać kopię zapasową",
+    "category": "wyrażenia",
+    "difficulty": "medium",
+    "example": "Back up your files.",
+    "sentencePl": "Wykonaj kopię zapasową plików."
+  },
+  {
+    "english": "fill in",
+    "polish": "wypełnić",
+    "category": "wyrażenia",
+    "difficulty": "medium",
+    "example": "Fill in this form.",
+    "sentencePl": "Wypełnij ten formularz."
+  },
+  {
+    "english": "carry on",
+    "polish": "kontynuować",
+    "category": "wyrażenia",
+    "difficulty": "medium",
+    "example": "Carry on with the lesson.",
+    "sentencePl": "Kontynuuj lekcję."
+  },
+  {
+    "english": "give up",
+    "polish": "poddać się",
+    "category": "wyrażenia",
+    "difficulty": "medium",
+    "example": "Do not give up.",
+    "sentencePl": "Nie poddawaj się."
+  },
+  {
+    "english": "check in",
+    "polish": "zameldować się",
+    "category": "wyrażenia",
+    "difficulty": "medium",
+    "example": "Check in at the hotel.",
+    "sentencePl": "Zamelduj się w hotelu."
+  },
+  {
+    "english": "check out",
+    "polish": "wymeldować się",
+    "category": "wyrażenia",
+    "difficulty": "medium",
+    "example": "Check out before noon.",
+    "sentencePl": "Wymelduj się przed południem."
+  },
+  {
+    "english": "take off",
+    "polish": "zdjąć / wystartować",
+    "category": "wyrażenia",
+    "difficulty": "medium",
+    "example": "Take off your shoes.",
+    "sentencePl": "Zdejmij buty."
+  },
+  {
+    "english": "put on",
+    "polish": "założyć",
+    "category": "wyrażenia",
+    "difficulty": "medium",
+    "example": "Put on your jacket.",
+    "sentencePl": "Załóż kurtkę."
+  },
+  {
+    "english": "weather",
+    "polish": "pogoda",
+    "category": "pogoda",
+    "difficulty": "easy",
+    "example": "The weather is changing.",
+    "sentencePl": "Pogoda się zmienia."
+  },
+  {
+    "english": "rain",
+    "polish": "deszcz",
+    "category": "pogoda",
+    "difficulty": "easy",
+    "example": "Rain is falling now.",
+    "sentencePl": "Teraz pada deszcz."
+  },
+  {
+    "english": "snow",
+    "polish": "śnieg",
+    "category": "pogoda",
+    "difficulty": "easy",
+    "example": "Snow covers the road.",
+    "sentencePl": "Śnieg pokrywa drogę."
+  },
+  {
+    "english": "wind",
+    "polish": "wiatr",
+    "category": "pogoda",
+    "difficulty": "easy",
+    "example": "The wind is strong today.",
+    "sentencePl": "Wiatr jest dziś silny."
+  },
+  {
+    "english": "storm",
+    "polish": "burza",
+    "category": "pogoda",
+    "difficulty": "easy",
+    "example": "A storm is coming.",
+    "sentencePl": "Nadchodzi burza."
+  },
+  {
+    "english": "sun",
+    "polish": "słońce",
+    "category": "pogoda",
+    "difficulty": "easy",
+    "example": "The sun is very bright.",
+    "sentencePl": "Słońce jest bardzo jasne."
+  },
+  {
+    "english": "cloud",
+    "polish": "chmura",
+    "category": "pogoda",
+    "difficulty": "easy",
+    "example": "There is one cloud in the sky.",
+    "sentencePl": "Na niebie jest jedna chmura."
+  },
+  {
+    "english": "temperature",
+    "polish": "temperatura",
+    "category": "pogoda",
+    "difficulty": "easy",
+    "example": "The temperature is low.",
+    "sentencePl": "Temperatura jest niska."
+  },
+  {
+    "english": "cold",
+    "polish": "zimno",
+    "category": "pogoda",
+    "difficulty": "easy",
+    "example": "It is cold outside.",
+    "sentencePl": "Na zewnątrz jest zimno."
+  },
+  {
+    "english": "hot",
+    "polish": "gorąco",
+    "category": "pogoda",
+    "difficulty": "easy",
+    "example": "It is hot in the room.",
+    "sentencePl": "W pokoju jest gorąco."
+  },
+  {
+    "english": "warm",
+    "polish": "ciepło",
+    "category": "pogoda",
+    "difficulty": "easy",
+    "example": "The water is warm.",
+    "sentencePl": "Woda jest ciepła."
+  },
+  {
+    "english": "dry",
+    "polish": "suchy",
+    "category": "pogoda",
+    "difficulty": "easy",
+    "example": "The floor is dry.",
+    "sentencePl": "Podłoga jest sucha."
+  },
+  {
+    "english": "wet",
+    "polish": "mokry",
+    "category": "pogoda",
+    "difficulty": "easy",
+    "example": "My shoes are wet.",
+    "sentencePl": "Moje buty są mokre."
+  },
+  {
+    "english": "fog",
+    "polish": "mgła",
+    "category": "pogoda",
+    "difficulty": "easy",
+    "example": "Fog makes driving difficult.",
+    "sentencePl": "Mgła utrudnia jazdę."
+  },
+  {
+    "english": "ice",
+    "polish": "lód",
+    "category": "pogoda",
+    "difficulty": "easy",
+    "example": "There is ice on the road.",
+    "sentencePl": "Na drodze jest lód."
+  },
+  {
+    "english": "headache",
+    "polish": "ból głowy",
+    "category": "zdrowie",
+    "difficulty": "medium",
+    "example": "I have a headache.",
+    "sentencePl": "Boli mnie głowa."
+  },
+  {
+    "english": "fever",
+    "polish": "gorączka",
+    "category": "zdrowie",
+    "difficulty": "medium",
+    "example": "He has a fever.",
+    "sentencePl": "On ma gorączkę."
+  },
+  {
+    "english": "pain",
+    "polish": "ból",
+    "category": "zdrowie",
+    "difficulty": "medium",
+    "example": "The pain is strong.",
+    "sentencePl": "Ból jest silny."
+  },
+  {
+    "english": "medicine",
+    "polish": "lekarstwo",
+    "category": "zdrowie",
+    "difficulty": "medium",
+    "example": "Take this medicine after food.",
+    "sentencePl": "Weź to lekarstwo po jedzeniu."
+  },
+  {
+    "english": "appointment",
+    "polish": "wizyta",
+    "category": "zdrowie",
+    "difficulty": "medium",
+    "example": "I have a doctor appointment.",
+    "sentencePl": "Mam wizytę u lekarza."
+  },
+  {
+    "english": "hospital",
+    "polish": "szpital",
+    "category": "zdrowie",
+    "difficulty": "medium",
+    "example": "The hospital is near here.",
+    "sentencePl": "Szpital jest niedaleko."
+  },
+  {
+    "english": "pharmacy",
+    "polish": "apteka",
+    "category": "zdrowie",
+    "difficulty": "medium",
+    "example": "The pharmacy is open.",
+    "sentencePl": "Apteka jest otwarta."
+  },
+  {
+    "english": "tired",
+    "polish": "zmęczony",
+    "category": "zdrowie",
+    "difficulty": "medium",
+    "example": "I am tired after work.",
+    "sentencePl": "Jestem zmęczony po pracy."
+  },
+  {
+    "english": "healthy",
+    "polish": "zdrowy",
+    "category": "zdrowie",
+    "difficulty": "medium",
+    "example": "A healthy diet is important.",
+    "sentencePl": "Zdrowa dieta jest ważna."
+  },
+  {
+    "english": "sick",
+    "polish": "chory",
+    "category": "zdrowie",
+    "difficulty": "medium",
+    "example": "My son is sick today.",
+    "sentencePl": "Mój syn jest dziś chory."
+  },
+  {
+    "english": "hurt",
+    "polish": "zranić / boleć",
+    "category": "zdrowie",
+    "difficulty": "medium",
+    "example": "My hand hurts.",
+    "sentencePl": "Boli mnie ręka."
+  },
+  {
+    "english": "blood",
+    "polish": "krew",
+    "category": "zdrowie",
+    "difficulty": "medium",
+    "example": "There is blood on the bandage.",
+    "sentencePl": "Na bandażu jest krew."
+  },
+  {
+    "english": "bandage",
+    "polish": "bandaż",
+    "category": "zdrowie",
+    "difficulty": "medium",
+    "example": "Put a bandage on the wound.",
+    "sentencePl": "Załóż bandaż na ranę."
+  },
+  {
+    "english": "cough",
+    "polish": "kaszel",
+    "category": "zdrowie",
+    "difficulty": "medium",
+    "example": "This cough is annoying.",
+    "sentencePl": "Ten kaszel jest irytujący."
+  },
+  {
+    "english": "rest",
+    "polish": "odpoczynek",
+    "category": "zdrowie",
+    "difficulty": "medium",
+    "example": "You need some rest.",
+    "sentencePl": "Potrzebujesz odpoczynku."
+  },
+  {
+    "english": "one",
+    "polish": "jeden",
+    "category": "liczby",
+    "difficulty": "easy",
+    "example": "I need one ticket.",
+    "sentencePl": "Potrzebuję jednego biletu."
+  },
+  {
+    "english": "two",
+    "polish": "dwa",
+    "category": "liczby",
+    "difficulty": "easy",
+    "example": "There are two cameras.",
+    "sentencePl": "Są dwie kamery."
+  },
+  {
+    "english": "three",
+    "polish": "trzy",
+    "category": "liczby",
+    "difficulty": "easy",
+    "example": "Three people are waiting.",
+    "sentencePl": "Trzy osoby czekają."
+  },
+  {
+    "english": "four",
+    "polish": "cztery",
+    "category": "liczby",
+    "difficulty": "easy",
+    "example": "The meeting starts at four.",
+    "sentencePl": "Spotkanie zaczyna się o czwartej."
+  },
+  {
+    "english": "five",
+    "polish": "pięć",
+    "category": "liczby",
+    "difficulty": "easy",
+    "example": "I have five minutes.",
+    "sentencePl": "Mam pięć minut."
+  },
+  {
+    "english": "six",
+    "polish": "sześć",
+    "category": "liczby",
+    "difficulty": "easy",
+    "example": "The train leaves at six.",
+    "sentencePl": "Pociąg odjeżdża o szóstej."
+  },
+  {
+    "english": "seven",
+    "polish": "siedem",
+    "category": "liczby",
+    "difficulty": "easy",
+    "example": "Seven days make a week.",
+    "sentencePl": "Siedem dni tworzy tydzień."
+  },
+  {
+    "english": "eight",
+    "polish": "osiem",
+    "category": "liczby",
+    "difficulty": "easy",
+    "example": "I start at eight.",
+    "sentencePl": "Zaczynam o ósmej."
+  },
+  {
+    "english": "nine",
+    "polish": "dziewięć",
+    "category": "liczby",
+    "difficulty": "easy",
+    "example": "Nine files are missing.",
+    "sentencePl": "Brakuje dziewięciu plików."
+  },
+  {
+    "english": "ten",
+    "polish": "dziesięć",
+    "category": "liczby",
+    "difficulty": "easy",
+    "example": "Wait ten seconds.",
+    "sentencePl": "Poczekaj dziesięć sekund."
+  },
+  {
+    "english": "twenty",
+    "polish": "dwadzieścia",
+    "category": "liczby",
+    "difficulty": "easy",
+    "example": "My daily goal is twenty.",
+    "sentencePl": "Mój dzienny cel to dwadzieścia."
+  },
+  {
+    "english": "hundred",
+    "polish": "sto",
+    "category": "liczby",
+    "difficulty": "easy",
+    "example": "It costs one hundred zloty.",
+    "sentencePl": "To kosztuje sto złotych."
+  },
+  {
+    "english": "minute",
+    "polish": "minuta",
+    "category": "czas",
+    "difficulty": "easy",
+    "example": "Wait one minute.",
+    "sentencePl": "Poczekaj jedną minutę."
+  },
+  {
+    "english": "hour",
+    "polish": "godzina",
+    "category": "czas",
+    "difficulty": "easy",
+    "example": "The job took one hour.",
+    "sentencePl": "Praca trwała godzinę."
+  },
+  {
+    "english": "day",
+    "polish": "dzień",
+    "category": "czas",
+    "difficulty": "easy",
+    "example": "Have a nice day.",
+    "sentencePl": "Miłego dnia."
+  },
+  {
+    "english": "week",
+    "polish": "tydzień",
+    "category": "czas",
+    "difficulty": "easy",
+    "example": "I will call next week.",
+    "sentencePl": "Zadzwonię w przyszłym tygodniu."
+  },
+  {
+    "english": "month",
+    "polish": "miesiąc",
+    "category": "czas",
+    "difficulty": "easy",
+    "example": "This month is busy.",
+    "sentencePl": "Ten miesiąc jest pracowity."
+  },
+  {
+    "english": "year",
+    "polish": "rok",
+    "category": "czas",
+    "difficulty": "easy",
+    "example": "This year is important.",
+    "sentencePl": "Ten rok jest ważny."
+  },
+  {
+    "english": "morning",
+    "polish": "rano",
+    "category": "czas",
+    "difficulty": "easy",
+    "example": "I work in the morning.",
+    "sentencePl": "Pracuję rano."
+  },
+  {
+    "english": "evening",
+    "polish": "wieczór",
+    "category": "czas",
+    "difficulty": "easy",
+    "example": "I study in the evening.",
+    "sentencePl": "Uczę się wieczorem."
+  },
+  {
+    "english": "night",
+    "polish": "noc",
+    "category": "czas",
+    "difficulty": "easy",
+    "example": "The camera works at night.",
+    "sentencePl": "Kamera działa w nocy."
+  },
+  {
+    "english": "early",
+    "polish": "wcześnie",
+    "category": "czas",
+    "difficulty": "easy",
+    "example": "I arrived early.",
+    "sentencePl": "Przyjechałem wcześnie."
+  },
+  {
+    "english": "late",
+    "polish": "późno / spóźniony",
+    "category": "czas",
+    "difficulty": "easy",
+    "example": "The bus is late.",
+    "sentencePl": "Autobus jest spóźniony."
+  },
+  {
+    "english": "soon",
+    "polish": "wkrótce",
+    "category": "czas",
+    "difficulty": "easy",
+    "example": "I will be there soon.",
+    "sentencePl": "Wkrótce tam będę."
+  },
+  {
+    "english": "file",
+    "polish": "plik",
+    "category": "komputer",
+    "difficulty": "medium",
+    "example": "The file is too large.",
+    "sentencePl": "Plik jest za duży."
+  },
+  {
+    "english": "folder",
+    "polish": "folder",
+    "category": "komputer",
+    "difficulty": "medium",
+    "example": "Create a new folder.",
+    "sentencePl": "Utwórz nowy folder."
+  },
+  {
+    "english": "download",
+    "polish": "pobrać",
+    "category": "komputer",
+    "difficulty": "medium",
+    "example": "Download the latest version.",
+    "sentencePl": "Pobierz najnowszą wersję."
+  },
+  {
+    "english": "upload",
+    "polish": "wysłać na serwer",
+    "category": "komputer",
+    "difficulty": "medium",
+    "example": "Upload the file to Dropbox.",
+    "sentencePl": "Wyślij plik do Dropboxa."
+  },
+  {
+    "english": "browser",
+    "polish": "przeglądarka",
+    "category": "komputer",
+    "difficulty": "medium",
+    "example": "Open the app in a browser.",
+    "sentencePl": "Otwórz aplikację w przeglądarce."
+  },
+  {
+    "english": "cache",
+    "polish": "pamięć podręczna",
+    "category": "komputer",
+    "difficulty": "medium",
+    "example": "Clear the browser cache.",
+    "sentencePl": "Wyczyść pamięć podręczną przeglądarki."
+  },
+  {
+    "english": "update",
+    "polish": "aktualizacja",
+    "category": "komputer",
+    "difficulty": "medium",
+    "example": "The update is ready.",
+    "sentencePl": "Aktualizacja jest gotowa."
+  },
+  {
+    "english": "version",
+    "polish": "wersja",
+    "category": "komputer",
+    "difficulty": "medium",
+    "example": "This is the latest version.",
+    "sentencePl": "To jest najnowsza wersja."
+  },
+  {
+    "english": "backup",
+    "polish": "kopia zapasowa",
+    "category": "komputer",
+    "difficulty": "medium",
+    "example": "Create a backup before changes.",
+    "sentencePl": "Utwórz kopię zapasową przed zmianami."
+  },
+  {
+    "english": "error",
+    "polish": "błąd",
+    "category": "komputer",
+    "difficulty": "medium",
+    "example": "The error appears again.",
+    "sentencePl": "Błąd pojawia się ponownie."
+  },
+  {
+    "english": "warning",
+    "polish": "ostrzeżenie",
+    "category": "komputer",
+    "difficulty": "medium",
+    "example": "This warning is important.",
+    "sentencePl": "To ostrzeżenie jest ważne."
+  },
+  {
+    "english": "button",
+    "polish": "przycisk",
+    "category": "komputer",
+    "difficulty": "medium",
+    "example": "Click the blue button.",
+    "sentencePl": "Kliknij niebieski przycisk."
+  },
+  {
+    "english": "screen",
+    "polish": "ekran",
+    "category": "komputer",
+    "difficulty": "medium",
+    "example": "The screen is locked.",
+    "sentencePl": "Ekran jest zablokowany."
+  },
+  {
+    "english": "keyboard",
+    "polish": "klawiatura",
+    "category": "komputer",
+    "difficulty": "medium",
+    "example": "The keyboard does not work.",
+    "sentencePl": "Klawiatura nie działa."
+  },
+  {
+    "english": "mouse",
+    "polish": "mysz",
+    "category": "komputer",
+    "difficulty": "medium",
+    "example": "Move the mouse slowly.",
+    "sentencePl": "Porusz myszą powoli."
+  },
+  {
+    "english": "printer",
+    "polish": "drukarka",
+    "category": "komputer",
+    "difficulty": "medium",
+    "example": "The printer is offline.",
+    "sentencePl": "Drukarka jest offline."
+  },
+  {
+    "english": "scanner",
+    "polish": "skaner",
+    "category": "komputer",
+    "difficulty": "medium",
+    "example": "The scanner is connected.",
+    "sentencePl": "Skaner jest podłączony."
+  },
+  {
+    "english": "application",
+    "polish": "aplikacja",
+    "category": "komputer",
+    "difficulty": "medium",
+    "example": "The application saves progress.",
+    "sentencePl": "Aplikacja zapisuje postępy."
+  },
+  {
+    "english": "account",
+    "polish": "konto",
+    "category": "komputer",
+    "difficulty": "medium",
+    "example": "Create a new account.",
+    "sentencePl": "Utwórz nowe konto."
+  },
+  {
+    "english": "permission",
+    "polish": "uprawnienie",
+    "category": "komputer",
+    "difficulty": "medium",
+    "example": "The app needs permission.",
+    "sentencePl": "Aplikacja potrzebuje uprawnienia."
+  }
 ]
