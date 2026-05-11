@@ -1,4 +1,4 @@
-Angielski Daily Trainer v5.0.0
+Angielski Daily Trainer v5.1.0
 
 Zakres zmian:
 1. Przebudowano aplikację z fiszkowni na dzienny trener nauki.
@@ -12,7 +12,7 @@ Zakres zmian:
 9. Dodano ekran powtórek, postępów, bazy i ustawień.
 10. Dodano eksport/import postępów przez pole tekstowe.
 11. Dodano twarde odświeżenie cache: wyrejestrowanie service workera, czyszczenie cache i przeładowanie z parametrem wersji.
-12. Service worker v5.0.0 pobiera HTML/JS/CSS/JSON z sieci z cache:no-store i usuwa stare cache.
+12. Service worker v5.1.0 pobiera HTML/JS/CSS/JSON z sieci z cache:no-store i usuwa stare cache.
 13. Dodano podstawowe testy w tests.html.
 
 Czego nie udało się w pełni zrobić:

@@ -1,13 +1,24 @@
 'use strict';
 
-const APP_VERSION = '5.0.0';
+const APP_VERSION = '5.2.0';
+const BUILD_KEY = 'angielski_daily_trainer_build';
+const DISABLE_SERVICE_WORKER = true;
 const STORAGE_KEY = 'angielski_daily_trainer_state_v5';
 const OLD_KEYS = ['englishPwaProgressV4', 'angielski-pwa-progress-v4', 'angielskiPwaProgress'];
 const DAY = 24 * 60 * 60 * 1000;
 
 const $ = (id) => document.getElementById(id);
-const todayKey = (date = new Date()) => date.toISOString().slice(0, 10);
-const addDays = (days) => todayKey(new Date(Date.now() + days * DAY));
+function todayKey(date = new Date()) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+function addDays(days, baseDate = new Date()) {
+  const d = new Date(baseDate);
+  d.setDate(d.getDate() + days);
+  return todayKey(d);
+}
 const normalize = (text) => String(text || '').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9ąćęłńóśźż\s]/gi, '').replace(/\s+/g, ' ');
 
 let WORDS = [];
@@ -57,7 +68,45 @@ function migrateState(src) {
 
 function saveState() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
 
+function requireEl(id) {
+  const el = $(id);
+  if (!el) throw new Error(`Brak wymaganego elementu interfejsu: #${id}`);
+  return el;
+}
+function on(id, eventName, handler) {
+  const el = $(id);
+  if (el) el.addEventListener(eventName, handler);
+}
+async function clearBrowserCaches() {
+  try {
+    if ('serviceWorker' in navigator) {
+      const regs = await navigator.serviceWorker.getRegistrations();
+      await Promise.all(regs.map(r => r.unregister()));
+    }
+  } catch (_) {}
+  try {
+    if ('caches' in window) {
+      const keys = await caches.keys();
+      await Promise.all(keys.map(k => caches.delete(k)));
+    }
+  } catch (_) {}
+}
+async function enforceFreshBuild() {
+  const previous = localStorage.getItem(BUILD_KEY);
+  if (previous === APP_VERSION) return false;
+  await clearBrowserCaches();
+  localStorage.setItem(BUILD_KEY, APP_VERSION);
+  const url = new URL(location.href);
+  if (!url.searchParams.get('fresh')) {
+    url.searchParams.set('fresh', Date.now().toString());
+    location.replace(url.toString());
+    return true;
+  }
+  return false;
+}
+
 async function boot() {
+  if (await enforceFreshBuild()) return;
   bindUi();
   state = loadState();
   await loadWords();
@@ -81,20 +130,20 @@ async function loadWords() {
 
 function bindUi() {
   document.querySelectorAll('[data-nav]').forEach(btn => btn.addEventListener('click', () => showScreen(btn.dataset.nav)));
-  $('startSessionBtn').addEventListener('click', () => startSmartSession());
-  $('startReviewsBtn').addEventListener('click', () => startReviewOnlySession());
-  $('checkBtn').addEventListener('click', checkAnswer);
-  $('nextBtn').addEventListener('click', nextCard);
-  $('dontKnowBtn').addEventListener('click', () => markAnswer(false, 'Nie wiem'));
-  $('speakBtn').addEventListener('click', speakCurrent);
-  $('refreshAppBtn').addEventListener('click', hardRefresh);
-  $('searchInput').addEventListener('input', renderBase);
-  $('levelFilter').addEventListener('change', renderBase);
-  $('trackFilter').addEventListener('change', renderBase);
-  ['dailyNewInput','dailyReviewInput','defaultLevelInput','defaultTrackInput','voiceEnabledInput'].forEach(id => $(id).addEventListener('change', saveSettingsFromUi));
-  $('exportBtn').addEventListener('click', exportProgress);
-  $('importBtn').addEventListener('click', importProgress);
-  $('resetProgressBtn').addEventListener('click', resetProgress);
+  on('startSessionBtn', 'click', () => startSmartSession());
+  on('startReviewsBtn', 'click', () => startReviewOnlySession());
+  on('checkBtn', 'click', checkAnswer);
+  on('nextBtn', 'click', nextCard);
+  on('dontKnowBtn', 'click', () => markAnswer(false, 'Nie wiem'));
+  on('speakBtn', 'click', speakCurrent);
+  on('refreshAppBtn', 'click', hardRefresh);
+  on('searchInput', 'input', renderBase);
+  on('levelFilter', 'change', renderBase);
+  on('trackFilter', 'change', renderBase);
+  ['dailyNewInput','dailyReviewInput','defaultLevelInput','defaultTrackInput','voiceEnabledInput'].forEach(id => on(id, 'change', saveSettingsFromUi));
+  on('exportBtn', 'click', exportProgress);
+  on('importBtn', 'click', importProgress);
+  on('resetProgressBtn', 'click', resetProgress);
 }
 
 function showScreen(name) {
@@ -245,9 +294,15 @@ document.addEventListener('click', (e) => {
   selectedChoice = choice.dataset.choice;
 });
 document.addEventListener('keydown', (e) => {
-  if (!session) return;
-  if (e.key === 'Enter' && !$('nextBtn').classList.contains('hidden')) nextCard();
-  else if (e.key === 'Enter' && !$('checkBtn').classList.contains('hidden')) checkAnswer();
+  if (!session || e.key !== 'Enter') return;
+  const learnScreen = $('screenLearn');
+  const lessonCard = $('lessonCard');
+  if (!learnScreen?.classList.contains('active') || lessonCard?.classList.contains('hidden')) return;
+  const tag = e.target?.tagName?.toLowerCase();
+  if (tag === 'textarea' || e.target?.isContentEditable) return;
+  e.preventDefault();
+  if (!$('nextBtn').classList.contains('hidden')) nextCard();
+  else if (!$('checkBtn').classList.contains('hidden')) checkAnswer();
 });
 
 function checkAnswer() {
@@ -354,7 +409,7 @@ function renderProgress() {
   $('learningCount').textContent = progresses.filter(p=>p.seen>0 && p.status!=='mastered' && p.status!=='weak').length;
   $('weakCount').textContent = progresses.filter(p=>p.status==='weak').length;
   $('bestStreak').textContent = state.user.bestAnswerStreak;
-  const days = [...Array(7)].map((_,i)=>todayKey(new Date(Date.now()-(6-i)*DAY)));
+  const days = [...Array(7)].map((_,i)=>addDays(-(6-i)));
   const max = Math.max(1, ...days.map(d => ((state.days[d]?.correct||0)+(state.days[d]?.wrong||0))));
   let total = 0;
   $('weekChart').innerHTML = days.map(d => { const val=(state.days[d]?.correct||0)+(state.days[d]?.wrong||0); total+=val; return `<div class="day-bar"><span style="height:${Math.max(8,Math.round(val/max*94))}px"></span><small>${d.slice(5)}</small></div>`; }).join('');
@@ -372,14 +427,43 @@ function renderWordItem(w) { const p=getProgress(w.id); const cls=p.status==='ma
 function statusLabel(s){ return ({new:'nowe',review:'powtórka',weak:'słabe',mastered:'opanowane',learning:'w nauce'}[s] || s); }
 
 function isCloseEnough(answer, expected) {
-  const a=normalize(answer), e=normalize(expected);
+  const a = normalize(answer);
+  const e = normalize(expected);
   if (!a || !e) return false;
   if (a === e) return true;
+
+  if (e.includes(' ')) {
+    const dist = damerauLevenshtein(a, e);
+    return dist <= Math.max(2, Math.floor(e.length * 0.12));
+  }
+
+  if (e.length <= 4) return false;
   if (e.length > 8 && (a.includes(e) || e.includes(a))) return true;
-  const dist = levenshtein(a,e); const limit = e.length < 8 ? 1 : Math.max(2, Math.floor(e.length * 0.18));
+
+  const dist = damerauLevenshtein(a, e);
+  const limit = e.length < 8 ? 1 : Math.max(2, Math.floor(e.length * 0.18));
   return dist <= limit;
 }
-function levenshtein(a,b){ const dp=Array.from({length:a.length+1},()=>Array(b.length+1).fill(0)); for(let i=0;i<=a.length;i++)dp[i][0]=i; for(let j=0;j<=b.length;j++)dp[0][j]=j; for(let i=1;i<=a.length;i++)for(let j=1;j<=b.length;j++)dp[i][j]=Math.min(dp[i-1][j]+1,dp[i][j-1]+1,dp[i-1][j-1]+(a[i-1]===b[j-1]?0:1)); return dp[a.length][b.length]; }
+function damerauLevenshtein(a, b) {
+  const dp = Array.from({ length: a.length + 1 }, () => Array(b.length + 1).fill(0));
+  for (let i = 0; i <= a.length; i++) dp[i][0] = i;
+  for (let j = 0; j <= b.length; j++) dp[0][j] = j;
+  for (let i = 1; i <= a.length; i++) {
+    for (let j = 1; j <= b.length; j++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      dp[i][j] = Math.min(
+        dp[i - 1][j] + 1,
+        dp[i][j - 1] + 1,
+        dp[i - 1][j - 1] + cost
+      );
+      if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) {
+        dp[i][j] = Math.min(dp[i][j], dp[i - 2][j - 2] + 1);
+      }
+    }
+  }
+  return dp[a.length][b.length];
+}
+const levenshtein = damerauLevenshtein;
 
 function speakCurrent() {
   const word = currentWord(); if (!word || !('speechSynthesis' in window)) return;
@@ -388,71 +472,41 @@ function speakCurrent() {
 }
 async function hardRefresh() {
   try {
-    if ('serviceWorker' in navigator) {
-      const regs = await navigator.serviceWorker.getRegistrations();
-      await Promise.all(regs.map(r => { r.active?.postMessage({type:'CLEAR_CACHE'}); return r.unregister(); }));
-    }
-    if ('caches' in window) { const keys=await caches.keys(); await Promise.all(keys.map(k=>caches.delete(k))); }
-  } finally { location.replace(`index.html?v=${APP_VERSION}&reload=${Date.now()}`); }
+    await clearBrowserCaches();
+    localStorage.setItem(BUILD_KEY, APP_VERSION);
+  } finally {
+    const url = new URL(location.href);
+    url.searchParams.set('v', APP_VERSION);
+    url.searchParams.set('reload', Date.now().toString());
+    location.replace(url.toString());
+  }
 }
 function exportProgress() { $('importExportBox').value = JSON.stringify(state, null, 2); }
 function importProgress() { try { const data=JSON.parse($('importExportBox').value); state=migrateState(data); saveState(); syncSettingsUi(); renderAll(); alert('Import zakończony.'); } catch(_) { alert('Nieprawidłowe dane importu.'); } }
 function resetProgress() { if(!confirm('Usunąć wszystkie postępy?')) return; state=defaultState(); saveState(); syncSettingsUi(); renderAll(); }
-async function registerServiceWorker() { if (!('serviceWorker' in navigator)) return; try { const reg = await navigator.serviceWorker.register(`service-worker.js?v=${APP_VERSION}`); if (reg.waiting) reg.waiting.postMessage({type:'SKIP_WAITING'}); } catch(e) { console.warn('SW error', e); } }
+async function registerServiceWorker() {
+  if (DISABLE_SERVICE_WORKER) return;
+  if (!('serviceWorker' in navigator)) return;
+  try {
+    const reg = await navigator.serviceWorker.register(`service-worker.js?v=${APP_VERSION}`, { updateViaCache: 'none' });
+    if (reg.waiting) reg.waiting.postMessage({type:'SKIP_WAITING'});
+  } catch(e) {
+    console.warn('SW error', e);
+  }
+}
 function percent(a,b){ return b ? `${Math.round(a/b*100)}%` : '0%'; }
 function clamp(v,min,max){ return Math.min(max, Math.max(min, v)); }
 function shuffle(arr){ return [...arr].sort(()=>Math.random()-.5); }
 function escapeHtml(s){ return String(s ?? '').replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])); }
 
-window.__trainerTests = { normalize, isCloseEnough, levenshtein, defaultState };
-boot();
-stomWord() {
-  const english = el('newEnglish').value.trim();
-  const polish = el('newPolish').value.trim();
-  const category = el('newCategory').value.trim() || 'własne';
-  const difficulty = el('newDifficulty').value || 'easy';
-  const example = el('newExample').value.trim();
-
-  if (!english || !polish) {
-    setFeedback('Wpisz tekst angielski i polskie tłumaczenie.', false);
-    return;
-  }
-
-  state.customWords.push(normalizeWordItem({ english, polish, category, difficulty, example, sentencePl: polish }));
-  saveCustomWords();
-  fillCategories();
-  renderWordList();
-  renderRandomSentence();
-
-  ['newEnglish', 'newPolish', 'newCategory', 'newExample'].forEach(id => el(id).value = '');
-  el('newDifficulty').value = 'easy';
-  setFeedback('Dodano własny materiał.', true);
+window.__trainerTests = { normalize, todayKey, addDays, isCloseEnough, levenshtein, damerauLevenshtein, defaultState };
+if (document.getElementById('appShell')) {
+  boot().catch(error => {
+    console.error(error);
+    alert('Aplikacja nie uruchomiła się poprawnie. Szczegóły są w konsoli przeglądarki.');
+  });
 }
-
-function clearCustomWords() {
-  if (!confirm('Usunąć wszystkie własne słówka i zdania?')) return;
-  state.customWords = [];
-  saveCustomWords();
-  fillCategories();
-  renderWordList();
-  renderRandomSentence();
-  setFeedback('Usunięto własne materiały.', true);
-}
-
-function renderWordList() {
-  const query = normalize(el('searchInput')?.value || '');
-  const rows = allWords().filter(w => !query || normalize(`${w.english} ${w.polish} ${w.category} ${w.example || ''}`).includes(query)).slice(0, 400);
-  el('wordList').innerHTML = rows.map(w => {
-    const customIndex = state.customWords.findIndex(c => wordKey(c) === wordKey(w));
-    const hard = state.progress.hard && state.progress.hard[wordKey(w)];
-    const level = difficultyName(getDifficulty(w));
-    const progress = state.progress.perWord?.[wordKey(w)] || { done: 0, good: 0, bad: 0, streak: 0, mastered: false };
-    const progressText = progress.done ? `${progress.good}/${progress.done}${progress.mastered ? ' · opanowane' : ''}` : 'brak';
-    const removeBtn = customIndex >= 0 ? `<button class="danger" data-remove="${customIndex}">Usuń</button>` : '<small>systemowe</small>';
-    return `<div class="word-row">
-      <div><strong>${escapeHtml(w.english)}</strong><br><small>${escapeHtml(w.example || '')}</small></div>
-      <div>${escapeHtml(w.polish)}</div>
-      <span class="tag">${escapeHtml(w.category || 'inne')}${hard ? ' · trudne' : ''}</span>
+{hard ? ' · trudne' : ''}</span>
       <span class="level">${escapeHtml(level)}</span>
       <span class="progress-pill">${escapeHtml(progressText)}</span>
       ${removeBtn}

@@ -1,34 +1,41 @@
 <!doctype html>
 <html lang="pl">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Testy Angielski v5.0</title><style>body{font-family:system-ui;margin:24px;background:#f8fafc;color:#111827}.ok{color:#15803d}.bad{color:#b91c1c}pre{background:white;border:1px solid #e5e7eb;padding:16px;border-radius:12px}</style></head>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Testy Angielski v5.2</title>
+  <style>
+    body{font-family:system-ui;margin:24px;background:#f8fafc;color:#111827}
+    .ok{color:#15803d}.bad{color:#b91c1c}
+    pre{background:white;border:1px solid #e5e7eb;padding:16px;border-radius:12px;white-space:pre-wrap}
+  </style>
+</head>
 <body>
-<h1>Testy logiki v5.0</h1>
+<h1>Testy logiki v5.2</h1>
+<p>Ten plik testuje tylko funkcje logiczne. Nie uruchamia pełnego interfejsu aplikacji.</p>
 <pre id="out">Uruchamianie...</pre>
-<script src="app.js?v=5.0.0"></script>
+<script src="app.js?v=5.2.0"></script>
 <script>
-setTimeout(() => {
+(() => {
   const out = document.getElementById('out');
   const t = window.__trainerTests;
   const tests = [
     ['normalizacja polskich znaków', t.normalize(' ŻÓŁĆ! ') === 'zołc' || t.normalize(' ŻÓŁĆ! ') === 'zolc'],
     ['identyczna odpowiedź', t.isCloseEnough('charger', 'charger') === true],
-    ['mała literówka', t.isCloseEnough('chargre', 'charger') === true],
-    ['inna odpowiedź', t.isCloseEnough('battery', 'router') === false],
+    ['literówka z przestawieniem liter', t.isCloseEnough('chargre', 'charger') === true],
+    ['krótkie inne słowo nie przechodzi', t.isCloseEnough('dog', 'dig') === false],
+    ['inna odpowiedź nie przechodzi', t.isCloseEnough('battery', 'router') === false],
+    ['data lokalna ma format YYYY-MM-DD', /^\d{4}-\d{2}-\d{2}$/.test(t.todayKey(new Date()))],
     ['domyślny stan ma ustawienia', !!t.defaultState().settings.dailyNew]
   ];
-  out.innerHTML = tests.map(([name, ok]) => `${ok ? '✅' : '❌'} ${name}`).join('\n');
-}, 600);
+  const failed = tests.filter(([, ok]) => !ok).length;
+  out.innerHTML = tests.map(([name, ok]) => `${ok ? '✅' : '❌'} ${name}`).join('\n') + `\n\nWynik: ${tests.length - failed}/${tests.length} OK`;
+  out.className = failed ? 'bad' : 'ok';
+})();
 </script>
-</body></html>
-category:'techniczne'}) === 'medium'));
-test('difficulty hard dla zdań technicznych', () => assert(getDifficulty({english:'The cable goes through the wall.', category:'zdania techniczne'}) === 'hard'));
-test('normalizeProgress zachowuje perWord', () => {
-  const p = normalizeProgress({ done: 1, good: 1, perWord: { a: { done: 1 } } });
-  assert(p.perWord.a.done === 1);
-});
-test('calculateDayStreak liczy dzisiejszy dzień', () => {
-  const key = new Date().toISOString().slice(0, 10);
-  assert(calculateDayStreak({ [key]: { done: 2 } }) === 1);
+</body>
+</html>
+ulateDayStreak({ [key]: { done: 2 } }) === 1);
 });
 
 out.innerHTML = results.map(([status, text]) => `${status === 'ok' ? '✅' : '❌'} ${text}`).join('\n');

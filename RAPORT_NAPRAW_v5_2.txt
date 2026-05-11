@@ -1,0 +1,13 @@
+Angielski Daily Trainer v5.2.0
+
+Naprawy:
+- wyłączono normalne użycie service workera, aby usunąć problem mieszania starych i nowych plików
+- dodano automatyczne czyszczenie cache i rejestracji service workerów przy zmianie wersji
+- dodano twarde odświeżenie wersji po aktualizacji
+- aplikacja nie wywala się już tak łatwo przy brakujących elementach DOM
+- podbito wersję wszystkich plików do 5.2.0
+
+Ważne przy wdrożeniu na GitHub Pages:
+1. Usuń stare pliki z repo i wgraj całą nową paczkę.
+2. Na telefonie otwórz stronę i zrób jedno odświeżenie.
+3. Jeżeli wcześniej aplikacja była zainstalowana jako PWA, usuń starą ikonę aplikacji i dodaj ją ponownie dopiero po wejściu na nową wersję.
