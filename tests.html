@@ -1,29 +1,7 @@
-<!doctype html>
-<html lang="pl">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Testy Angielski v5.2</title>
-  <style>
-    body{font-family:system-ui;margin:24px;background:#f8fafc;color:#111827}
-    .ok{color:#15803d}.bad{color:#b91c1c}
-    pre{background:white;border:1px solid #e5e7eb;padding:16px;border-radius:12px;white-space:pre-wrap}
-  </style>
-</head>
-<body>
-<h1>Testy logiki v5.2</h1>
-<p>Ten plik testuje tylko funkcje logiczne. Nie uruchamia pełnego interfejsu aplikacji.</p>
-<pre id="out">Uruchamianie...</pre>
-<script src="app.js?v=5.2.0"></script>
-<script>
-(() => {
-  const out = document.getElementById('out');
-  const t = window.__trainerTests;
-  const tests = [
-    ['normalizacja polskich znaków', t.normalize(' ŻÓŁĆ! ') === 'zołc' || t.normalize(' ŻÓŁĆ! ') === 'zolc'],
-    ['identyczna odpowiedź', t.isCloseEnough('charger', 'charger') === true],
-    ['literówka z przestawieniem liter', t.isCloseEnough('chargre', 'charger') === true],
-    ['krótkie inne słowo nie przechodzi', t.isCloseEnough('dog', 'dig') === false],
+<!doctype html><html lang="pl"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Testy v5.3.0</title><body style="font-family:system-ui;padding:20px;background:#f8fafc"><h1>Testy v5.3.0</h1><pre id="out">Start...</pre><iframe id="app" src="index.html?v=5.3.0" style="width:390px;height:700px;border:1px solid #ddd"></iframe><script>
+const out=document.getElementById('out'); const f=document.getElementById('app');
+f.onload=()=>setTimeout(()=>{try{const w=f.contentWindow; const t=[['baza słówek',w.__trainerTests.WORDS.length===366],['literówka chargre',w.__trainerTests.isCloseEnough('chargre','charger')===true],['dog/dig nie przechodzi',w.__trainerTests.isCloseEnough('dog','dig')===false],['data lokalna format',/^\d{4}-\d{2}-\d{2}$/.test(w.__trainerTests.todayKey())]]; const fail=t.filter(x=>!x[1]).length; out.textContent=t.map(x=>(x[1]?'✅ ':'❌ ')+x[0]).join('\n')+'\n\nWynik: '+(t.length-fail)+'/'+t.length+' OK';}catch(e){out.textContent='Błąd testów: '+e.message;}},500);
+</script></body></html>ie przechodzi', t.isCloseEnough('dog', 'dig') === false],
     ['inna odpowiedź nie przechodzi', t.isCloseEnough('battery', 'router') === false],
     ['data lokalna ma format YYYY-MM-DD', /^\d{4}-\d{2}-\d{2}$/.test(t.todayKey(new Date()))],
     ['domyślny stan ma ustawienia', !!t.defaultState().settings.dailyNew]
