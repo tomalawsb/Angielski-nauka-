@@ -1,0 +1,28 @@
+Angielski Daily Trainer v5.4.0 — zmiany
+
+Wprowadzono pierwsze trzy etapy rozbudowy:
+
+1. Ekran wyboru nauki
+- Dodano panel „Co chcesz dzisiaj ćwiczyć?” na ekranie Dzisiaj.
+- Dodano kafelki: Słówka, Zdania, Pisanie, Słuchanie, Z lektorem, Test dnia.
+- Przycisk Start nauki zmieniono na Start mieszany.
+
+2. Tryby ćwiczeń
+- Dodano osobne tryby: wybór słówka, pisanie słówka, tłumaczenie zdań, słuchanie i wpisywanie, tryb z lektorem, test mieszany.
+- Kolejka sesji nadal korzysta z istniejącej logiki powtórek, słabych pozycji i nowych słówek.
+- Program dobiera treści według ustawionego poziomu i ścieżki.
+
+3. Rozbudowany lektor
+- Dodano wybór akcentu: USA, UK, Australia, Kanada.
+- Dodano wybór dostępnego głosu z przeglądarki.
+- Dodano regulację prędkości lektora.
+- Dodano liczbę powtórzeń wypowiedzi.
+- Dodano automatyczne czytanie w trybach audio.
+- Dodano opcję czytania przykładu zdania w trybie lektora.
+
+Testy techniczne:
+- Sprawdzono składnię JavaScript poleceniem node --check.
+- Zaktualizowano wersję aplikacji i manifest do v5.4.0.
+
+Ograniczenie:
+- Nie dodano jeszcze prawdziwego rozpoznawania mowy przez mikrofon. To powinien być następny etap.
