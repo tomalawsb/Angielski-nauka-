@@ -1,0 +1,14 @@
+Angielski Daily Trainer v5.6.2 — poprawka logiki trybu samochodowego
+
+Naprawiono:
+1. Jeden wypowiedziany wyraz z pełnego zdania nie jest już uznawany za poprawną odpowiedź.
+2. Dodano ocenę procentowej zgodności odpowiedzi z oczekiwanym zdaniem.
+3. Dodano stan „Prawie dobrze” dla odpowiedzi częściowo zgodnych.
+4. W trybie samochodowym aplikacja po częściowo dobrej odpowiedzi mówi poprawne zdanie i przechodzi dalej.
+5. Kolejka trybu samochodowego usuwa powtórzenia tych samych zdań, nawet jeżeli pochodzą z różnych wpisów.
+6. Przycisk „Dalej” czyści mikrofon i timer przed przejściem do następnego zadania.
+7. Zaktualizowano wersję do 5.6.2 w index.html i manifest.json.
+
+Sprawdzenie:
+- node --check: OK
+- manifest.json: OK
