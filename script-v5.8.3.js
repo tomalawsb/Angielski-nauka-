@@ -1,6 +1,6 @@
 'use strict';
 
-const APP_VERSION='5.8.2';
+const APP_VERSION='5.8.3';
 const WORDS=window.TRAINER_WORDS||[];
 const DIALOGUE_SCENES=window.DIALOGUE_SCENES||{};
 const WORD_ALIASES=window.TRAINER_WORD_ALIASES||{};
@@ -8,8 +8,8 @@ const Core=window.LearningCore;
 if(!Core)throw new Error('Brak modułu learning-core.js');
 const {normalize,wordsOf,dl,answerScore,bestAnswerScore,migrateProgress,advanceProgress}=Core;
 
-const STORAGE_KEY='angielski_daily_trainer_state_v582';
-const OLD_KEYS=['angielski_daily_trainer_state_v581','angielski_daily_trainer_state_v58','angielski_daily_trainer_state_v53','angielski_daily_trainer_state_v5','englishPwaProgressV4','angielski-pwa-progress-v4','angielskiPwaProgress'];
+const STORAGE_KEY='angielski_daily_trainer_state_v583';
+const OLD_KEYS=['angielski_daily_trainer_state_v582','angielski_daily_trainer_state_v581','angielski_daily_trainer_state_v58','angielski_daily_trainer_state_v53','angielski_daily_trainer_state_v5','englishPwaProgressV4','angielski-pwa-progress-v4','angielskiPwaProgress'];
 const MAX_IMPORT_SIZE=1024*1024;
 const DATE_RE=/^\d{4}-\d{2}-\d{2}$/;
 let state=null;
@@ -31,6 +31,7 @@ const clamp=(value,min,max)=>Math.min(max,Math.max(min,value));
 const percent=(a,b)=>b?Math.round(a/b*100)+'%':'0%';
 const esc=value=>String(value??'').replace(/[&<>'"]/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
 const deepClone=value=>JSON.parse(JSON.stringify(value));
+const setText=(id,value)=>{const element=$(id);if(element)element.textContent=String(value??'');return element;};
 
 function err(message){const box=$('errorBox');if(box){box.style.display='block';box.textContent=String(message);}}
 window.addEventListener('error',event=>err('Błąd JS: '+(event.message||event.error||event)));
@@ -184,7 +185,21 @@ async function clearAppCaches(){
 }
 async function registerServiceWorker(){
   if(!('serviceWorker'in navigator)||!/^https?:$/.test(location.protocol))return null;
-  try{return await navigator.serviceWorker.register('./service-worker.js?v='+APP_VERSION,{scope:'./'});}catch(error){console.warn('Service Worker:',error);return null;}
+  try{
+    let reloading=false;
+    navigator.serviceWorker.addEventListener('controllerchange',()=>{
+      if(reloading)return;
+      const key='adt-sw-reload-'+APP_VERSION;
+      if(sessionStorage.getItem(key))return;
+      sessionStorage.setItem(key,'1');
+      reloading=true;
+      location.reload();
+    });
+    const registration=await navigator.serviceWorker.register('./service-worker-v5.8.3.js',{scope:'./',updateViaCache:'none'});
+    await registration.update();
+    if(registration.waiting)registration.waiting.postMessage({type:'SKIP_WAITING'});
+    return registration;
+  }catch(error){console.warn('Service Worker:',error);return null;}
 }
 async function configureReminders(askPermission=false){
   if(!state.settings.reminderEnabled||!('Notification'in window))return;
@@ -479,19 +494,19 @@ function handleCarCommand(command){if(command==='listen'){setCarStatus('Mów ter
 async function carAfterMark(ok,word,answer,result=null){stopCarRecognition();clearCarTimer();result=result||scoreTaskAnswer(answer,word,'car_voice');const partial=result.status==='partial';setCarStatus(ok?'Dobrze':partial?'Prawie dobrze':'Do poprawy');const expectedAnswer=result.expected||expected(word,'car_voice');await speak(ok?'Dobrze.':partial?'Prawie dobrze. Posłuchaj poprawnej odpowiedzi.':'Do poprawy. Posłuchaj poprawnej odpowiedzi.',{lang:'pl-PL',repeat:1,rate:.95,force:true});await speak(expectedAnswer,{lang:state.settings.voiceLang||'en-US',repeat:1,rate:Math.max(.65,(parseFloat(state.settings.voiceRate)||.9)-.05),force:true});if(!session||curTask()?.mode!=='car_voice'||!checked||!$('learnScreen')?.classList.contains('active'))return;if(state.settings.carAutoNext!==false){const pause=clamp(parseInt(state.settings.carPause)||3,1,8)*1000;carAutoTimer=setTimeout(()=>{if(session&&checked&&$('learnScreen')?.classList.contains('active'))nextCard();},pause);}}
 
 async function hardRefresh(){if(!await askConfirm('Odświeżyć pliki aplikacji?','Postęp pozostanie zachowany. Program usunie wyłącznie pliki z pamięci podręcznej i pobierze aktualną wersję.','Odśwież'))return;const cleared=await clearAppCaches();if(!cleared)return;try{if('serviceWorker'in navigator){const registration=await navigator.serviceWorker.getRegistration();if(registration)await registration.update();}}catch(error){console.warn('Aktualizacja Service Workera:',error);}location.replace(location.pathname+'?v='+APP_VERSION+'&reload='+Date.now());}
-function exportData(){const box=$('dataBox');if(!box)return;box.value=JSON.stringify(state,null,2);$('dataStatus').textContent='Kopia jest gotowa. Zapisz zawartość pola w bezpiecznym miejscu.';box.focus();box.select?.();notify('Dane eksportu zostały przygotowane.','success');}
-function importData(){const previous=state;try{const imported=validateImportedState($('dataBox')?.value||'');state=imported;if(!save()){state=previous;return;}syncSettings();renderAll();$('dataStatus').textContent='Import zakończony poprawnie.';notify('Import zakończony.','success');}catch(error){console.error('Import:',error);$('dataStatus').textContent=error.message;notify(error.message,'error');}}
+function exportData(){const box=$('dataBox');if(!box)return;box.value=JSON.stringify(state,null,2);setText('dataStatus','Kopia jest gotowa. Zapisz zawartość pola w bezpiecznym miejscu.');box.focus();box.select?.();notify('Dane eksportu zostały przygotowane.','success');}
+function importData(){const previous=state;try{const imported=validateImportedState($('dataBox')?.value||'');state=imported;if(!save()){state=previous;return;}syncSettings();renderAll();setText('dataStatus','Import zakończony poprawnie.');notify('Import zakończony.','success');}catch(error){console.error('Import:',error);setText('dataStatus',error.message);notify(error.message,'error');}}
 async function resetProgress(){const confirmed=await askConfirm('Usunąć cały postęp?','Zostaną usunięte: postęp, statystyki, ustawienia, historia sesji i dane starszych wersji. Operacji nie można cofnąć.','Usuń wszystko');if(!confirmed)return;for(const key of [STORAGE_KEY,...OLD_KEYS])safeRemove(key);try{for(let index=localStorage.length-1;index>=0;index--){const key=localStorage.key(index);if(key&&(/angielski|english.*trainer/i.test(key)))safeRemove(key);}}catch(error){console.warn('Czyszczenie starszych kluczy:',error);}state=defState();session=null;save({silent:true});syncSettings();renderAll();show('today');notify('Cały postęp został usunięty.','success');setTimeout(openOnboarding,250);}
 
 function askConfirm(title,message,confirmLabel='Potwierdź'){
   const dialog=$('confirmDialog');if(!dialog||typeof dialog.showModal!=='function')return Promise.resolve(true);
-  $('confirmTitle').textContent=title;$('confirmMessage').textContent=message;$('confirmOk').textContent=confirmLabel;
+  setText('confirmTitle',title);setText('confirmMessage',message);setText('confirmOk',confirmLabel);
   return new Promise(resolve=>{const close=()=>{dialog.removeEventListener('close',close);resolve(dialog.returnValue==='ok');};dialog.addEventListener('close',close);dialog.showModal();});
 }
 function showCarWarning(){
   const dialog=$('carWarningDialog');if(!dialog||typeof dialog.showModal!=='function')return Promise.resolve(true);
-  $('carWarningDismiss').checked=false;
-  return new Promise(resolve=>{const close=()=>{dialog.removeEventListener('close',close);const allowed=dialog.returnValue==='ok';if(allowed&&$('carWarningDismiss').checked){state.settings.carWarningDismissed=true;save();}resolve(allowed);};dialog.addEventListener('close',close);dialog.showModal();});
+  if($('carWarningDismiss'))$('carWarningDismiss').checked=false;
+  return new Promise(resolve=>{const close=()=>{dialog.removeEventListener('close',close);const allowed=dialog.returnValue==='ok';if(allowed&&$('carWarningDismiss')?.checked){state.settings.carWarningDismissed=true;save();}resolve(allowed);};dialog.addEventListener('close',close);dialog.showModal();});
 }
 function openOnboarding(){onboardingStep=1;fillOnboardingValues();renderOnboarding();const dialog=$('onboardingDialog');if(dialog&&typeof dialog.showModal==='function'&&!dialog.open)dialog.showModal();}
 function fillOnboardingValues(){setValue('onboardingLevel',state.settings.defaultLevel==='all'?(levels()[0]||'A1'):state.settings.defaultLevel);setValue('onboardingTrack',state.settings.defaultTrack||'all');setValue('onboardingGoal',state.settings.dailyGoal||20);}

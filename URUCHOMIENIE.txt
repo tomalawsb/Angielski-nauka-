@@ -1,4 +1,7 @@
-URUCHOMIENIE ANGIELSKI DAILY TRAINER v5.8.2
+URUCHOMIENIE ANGIELSKI DAILY TRAINER v5.8.3
 
-Uruchom index.html przez lokalny serwer HTTP, aby Service Worker i funkcje PWA działały poprawnie.
-Do kontroli dołączono tests.html oraz node-tests.js.
+Aktualizacja GitHub w PowerShell:
+.\AKTUALIZUJ_GITHUB.ps1
+
+Gdy system blokuje skrypt:
+powershell.exe -ExecutionPolicy Bypass -File ".\AKTUALIZUJ_GITHUB.ps1"

@@ -54,7 +54,7 @@ if ($LASTEXITCODE -eq 0) {
     exit 0
 }
 
-$CommitMessage = "Aktualizacja aplikacji v5.7.4 - $(Get-Date -Format 'yyyy-MM-dd HH:mm')"
+$CommitMessage = "Aktualizacja aplikacji v5.8.3 - $(Get-Date -Format 'yyyy-MM-dd HH:mm')"
 git commit -m $CommitMessage
 if ($LASTEXITCODE -ne 0) {
     throw "Nie udało się utworzyć commita."

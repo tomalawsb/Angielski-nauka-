@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Testy Angielski Daily Trainer 5.8.2</title>
+  <title>Testy Angielski Daily Trainer 5.8.3</title>
   <style>
     body{font-family:system-ui,sans-serif;margin:20px;background:#f4f7fb;color:#172033}main{max-width:980px;margin:auto}.grid{display:grid;grid-template-columns:minmax(320px,390px) 1fr;gap:20px}iframe{width:100%;height:760px;border:1px solid #ccd5e2;border-radius:18px;background:#fff}.result{padding:9px 12px;margin:7px 0;border-radius:10px;background:#fff}.pass{border-left:5px solid #16a34a}.fail{border-left:5px solid #dc2626}@media(max-width:780px){.grid{grid-template-columns:1fr}}
   </style>
 </head>
 <body><main>
-  <h1>Testy przeglądarkowe v5.8.2</h1>
+  <h1>Testy przeglądarkowe v5.8.3</h1>
   <p id="summary">Uruchamianie testów…</p>
-  <div class="grid"><iframe id="app" src="index.html?v=5.8.2"></iframe><section id="results"></section></div>
+  <div class="grid"><iframe id="app" src="index.html?app=5.8.3&test=1"></iframe><section id="results"></section></div>
 </main>
 <script>
 'use strict';
@@ -22,7 +22,7 @@ frame.addEventListener('load',()=>setTimeout(()=>{
   const test=(name,condition,detail='')=>{total++;if(add(name,!!condition,detail))passed++;};
   try{
     test('aplikacja uruchamia się bez błędu',!!T&&!d.getElementById('errorBox').textContent);
-    test('wersja programu',d.body.textContent.includes('5.8.2'));
+    test('wersja programu',d.body.textContent.includes('5.8.3'));
     test('dolne menu ma cztery pozycje',d.querySelectorAll('.bottomnav .nav').length===4);
     test('główny przycisk jest widoczny',d.getElementById('startBtn').textContent.includes('Rozpocznij dzisiejszą naukę'));
     test('onboarding ma pięć kroków',d.querySelectorAll('.onboarding-step').length===5);
@@ -37,7 +37,7 @@ frame.addEventListener('load',()=>setTimeout(()=>{
     test('polecenia dialogów są po polsku',Object.values(T.DIALOGUE_SCENES).every(x=>!/^Client:/i.test(x.promptPl||'')));
     test('dialogi zawierają wypowiedź klienta',Object.values(T.DIALOGUE_SCENES).every(x=>/^Client:/i.test(x.prompt||'')));
     test('wszystkie wpisy mają konkretną część mowy',T.WORDS.every(x=>x.grammar?.partOfSpeech&&x.grammar.partOfSpeech!=='słowo'));
-    test('import odrzuca tekst zamiast liczby',(()=>{try{T.validateImportedState(JSON.stringify({version:'5.8.2',user:{xp:'10'}}));return false}catch(e){return true}})());
+    test('import odrzuca tekst zamiast liczby',(()=>{try{T.validateImportedState(JSON.stringify({version:'5.8.3',user:{xp:'10'}}));return false}catch(e){return true}})());
     test('jest natychmiastowa powtórka błędu',!!d.getElementById('retryBtn'));
     test('błędne fragmenty są podświetlane',T.diffMarkup('I go','I went').answer.includes('<mark>'));
     test('brak sztucznych przykładów',!T.WORDS.some(x=>(x.examples||[]).some(e=>/this word is useful/i.test(e.en))));
@@ -45,11 +45,11 @@ frame.addEventListener('load',()=>setTimeout(()=>{
     test('dialogi tworzą kolejkę',T.practiceQueue('dialogues').length>0);
     test('tryb samochodowy tworzy kolejkę',T.practiceQueue('car').length>0);
     test('zły szyk nie jest zaliczany',T.answerScore('router the restart I','I restart the router').status==='wrong');
-    test('import odrzuca ujemne XP',(()=>{try{T.validateImportedState(JSON.stringify({version:'5.8.2',user:{xp:-1}}));return false}catch(e){return true}})());
+    test('import odrzuca ujemne XP',(()=>{try{T.validateImportedState(JSON.stringify({version:'5.8.3',user:{xp:-1}}));return false}catch(e){return true}})());
     test('daty są liczone kalendarzowo',T.addDays(1,'2026-12-31')==='2027-01-01');
     test('import odrzuca nowszą poprawkę wersji',(()=>{try{T.validateImportedState(JSON.stringify({version:'5.8.99'}));return false}catch(e){return true}})());
-    test('import odrzuca datę zapisaną słownie',(()=>{try{T.validateImportedState(JSON.stringify({version:'5.8.2',createdAt:'July 29, 2026'}));return false}catch(e){return true}})());
-    test('import odrzuca niemożliwą datę',(()=>{try{T.validateImportedState(JSON.stringify({version:'5.8.2',createdAt:'2026-02-30T12:00:00Z'}));return false}catch(e){return true}})());
+    test('import odrzuca datę zapisaną słownie',(()=>{try{T.validateImportedState(JSON.stringify({version:'5.8.3',createdAt:'July 29, 2026'}));return false}catch(e){return true}})());
+    test('import odrzuca niemożliwą datę',(()=>{try{T.validateImportedState(JSON.stringify({version:'5.8.3',createdAt:'2026-02-30T12:00:00Z'}));return false}catch(e){return true}})());
     const badFragments=['good morning how','the battery is','the wireless network is','the firmware update may','final price depends','needs permission to','is diagnosis','use payment'];
     const collocations=T.WORDS.flatMap(x=>x.collocations||[]).map(x=>T.normalize(x));
     test('kolokacje nie są uciętymi zdaniami',badFragments.every(x=>!collocations.includes(T.normalize(x))));

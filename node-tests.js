@@ -57,7 +57,7 @@ const context={
 context.window=context;
 context.globalThis=context;
 vm.createContext(context);
-for(const file of ['learning-core.js','data.js','dialogues.js','script.js']){
+for(const file of ['learning-core-v5.8.3.js','data-v5.8.3.js','dialogues-v5.8.3.js','script-v5.8.3.js']){
   vm.runInContext(fs.readFileSync(path.join(root,file),'utf8'),context,{filename:file});
 }
 for(const fn of domListeners.DOMContentLoaded||[])fn();
@@ -86,8 +86,8 @@ const same=T.advanceProgress(p,true,'2026-07-01');
 test('drugi sukces tego samego dnia nie zwiększa etapu',same.intervalIndex===p.intervalIndex);
 for(const day of ['2026-07-02','2026-07-05','2026-07-12','2026-07-26'])p=T.advanceProgress(p,true,day);
 test('opanowanie wymaga pięciu dni',p.status==='mastered'&&p.successDays.length===5);
-test('wersja interfejsu 5.8.2',html.includes('>5.8.2<')&&fs.readFileSync(path.join(root,'script.js'),'utf8').includes("APP_VERSION='5.8.2'"));
-test('każdy wpis ma naturalny przykład',T.sentenceEn(T.WORDS.find(w=>w.english==='person')).includes('waiting outside')&&!fs.readFileSync(path.join(root,'data.js'),'utf8').includes('This word is useful'));
+test('wersja interfejsu 5.8.3',html.includes('>5.8.3<')&&fs.readFileSync(path.join(root,'script-v5.8.3.js'),'utf8').includes("APP_VERSION='5.8.3'"));
+test('każdy wpis ma naturalny przykład',T.sentenceEn(T.WORDS.find(w=>w.english==='person')).includes('waiting outside')&&!fs.readFileSync(path.join(root,'data-v5.8.3.js'),'utf8').includes('This word is useful'));
 test('użyteczny dłuższy przykład pozostaje',T.sentenceEn(T.WORDS.find(w=>w.id==='praca_a1_0003_i_need_to_check_the_cable')).includes('before I begin the repair'));
 const carTasks=T.practiceQueue('car');
 const carKeys=carTasks.map(t=>{const w=T.WORDS.find(x=>x.id===t.wordId);return T.normalize(w.english+'|'+w.polish);});
@@ -115,11 +115,11 @@ for(let first=0;first<confusionSample.length;first++)for(let second=first+1;seco
 test('różne hasła z bazy nie są zaliczane jako to samo',confusedTargets===0);
 test('brak rodzajnika jest wyjaśniony',T.answerScore('I restart router','I restart the router').issues.some(i=>i.code==='article'));
 test('ustawienia zawierają przypomnienia',html.includes('id="reminderEnabled"')&&html.includes('id="reminderTime"'));
-const manifest=JSON.parse(fs.readFileSync(path.join(root,'manifest.json'),'utf8'));
+const manifest=JSON.parse(fs.readFileSync(path.join(root,'manifest-v5.8.3.json'),'utf8'));
 test('PWA pozwala na obrót ekranu',manifest.orientation==='any');
-const serviceWorker=fs.readFileSync(path.join(root,'service-worker.js'),'utf8');
-test('Service Worker ma wersjonowany cache offline',serviceWorker.includes('english-trainer-v5.8.2')&&serviceWorker.includes('cache.addAll')&&serviceWorker.includes('safeCachePut'));
-test('Service Worker nie udaje dokładnego budzika',!serviceWorker.includes('periodicsync')&&fs.readFileSync(path.join(root,'script.js'),'utf8').includes('checkReminderTime'));
+const serviceWorker=fs.readFileSync(path.join(root,'service-worker-v5.8.3.js'),'utf8');
+test('Service Worker ma wersjonowany cache offline',serviceWorker.includes('english-trainer-v5.8.3')&&serviceWorker.includes("cache:'no-store'")&&serviceWorker.includes("isCode"));
+test('Service Worker nie udaje dokładnego budzika',!serviceWorker.includes('periodicsync')&&fs.readFileSync(path.join(root,'script-v5.8.3.js'),'utf8').includes('checkReminderTime'));
 
 
 const state=T.getState();
@@ -136,8 +136,8 @@ test('tryb słówek nie zawiera pełnych zdań',b1Vocab.every(task=>T.isVocabula
 test('krótkie zdania nie są słówkami',[
   'I suggest','I recommend','I noticed','it depends','let me check','before we start'
 ].every(english=>!T.isVocabularyItem({id:'test_'+english,english,polish:'test'})));
-test('filtr słówek używa prawidłowych granic wyrazów',!fs.readFileSync(path.join(root,'script.js')).includes(Buffer.from([8])));
-const css=fs.readFileSync(path.join(root,'styles.css'),'utf8');
+test('filtr słówek używa prawidłowych granic wyrazów',!fs.readFileSync(path.join(root,'script-v5.8.3.js')).includes(Buffer.from([8])));
+const css=fs.readFileSync(path.join(root,'styles-v5.8.3.css'),'utf8');
 test('ciemny motyw ma komplet zmiennych kolorów',css.includes('html[data-theme="dark"]')&&css.includes('--surface:#111827')&&css.includes('--text:#f8fafc')&&css.includes('--border:#334155'));
 
 test('usunięto zbędne opisy trybów',!html.includes('wybór tłumaczenia i krótkie odpowiedzi')&&!html.includes('tryby nauki'));
@@ -153,35 +153,35 @@ test('każde zadanie Zdania ma pełne zdanie',sentenceTasks.length>0&&sentenceTa
 const writingTasks=T.practiceQueue('writing');
 test('Pisanie słówek nie pobiera zdań',writingTasks.length>0&&writingTasks.every(task=>T.wordsOf(T.WORDS.find(w=>w.id===task.wordId)?.english).length===1));
 test('ustawienia są podzielone na sekcje', ['Nauka','Powiadomienia','Wygląd','Dźwięk i mowa','Tryb samochodowy','Dane','Zaawansowane'].every(label=>html.includes('<h2>'+label+'</h2>')));
-test('dolna nawigacja chowa się przy klawiaturze',css.includes('body.keyboard-open .bottomnav')&&css.includes('body:has(input:focus,textarea:focus) .bottomnav')&&fs.readFileSync(path.join(root,'script.js'),'utf8').includes('setupKeyboardHandling'));
+test('dolna nawigacja chowa się przy klawiaturze',css.includes('body.keyboard-open .bottomnav')&&css.includes('body:has(input:focus,textarea:focus) .bottomnav')&&fs.readFileSync(path.join(root,'script-v5.8.3.js'),'utf8').includes('setupKeyboardHandling'));
 test('tryb Pisanie ma jednoznaczny opis',html.includes('<strong>Pisanie</strong><span>Przetłumacz słowo i wpisz odpowiedź.</span>'));
 
 state.settings.defaultLevel='A1';state.settings.defaultTrack='all';
 
 
-const script=fs.readFileSync(path.join(root,'script.js'),'utf8');
+const script=fs.readFileSync(path.join(root,'script-v5.8.3.js'),'utf8');
 test('dolne menu ma dokładnie cztery zakładki',navs.length===4&&['today','study','progress','more'].every(id=>navs.some(n=>n.dataset.nav===id)));
 test('ekran główny ma jeden dominujący start',html.includes('Rozpocznij dzisiejszą naukę')&&html.includes('class="primary primary-hero"'));
 test('onboarding ma pięć kroków',(html.match(/class="onboarding-step/g)||[]).length===5);
 test('funkcje techniczne są tylko w ustawieniach',html.includes('<h2>Zaawansowane</h2>')&&html.includes('Odśwież pliki aplikacji')&&!html.match(/<header[\s\S]*Odśwież pliki aplikacji[\s\S]*<\/header>/));
 test('brak systemowych alertów i confirmów',!(/\balert\s*\(/.test(script))&&!(/\bconfirm\s*\(/.test(script)));
-test('import odrzuca ujemne XP',(()=>{try{T.validateImportedState(JSON.stringify({version:'5.8.2',user:{xp:-1}}));return false}catch(e){return /user\.xp/.test(e.message)}})());
-test('import odrzuca nieznane pola',(()=>{try{T.validateImportedState(JSON.stringify({version:'5.8.2',hacker:true}));return false}catch(e){return /Nieznane pola/.test(e.message)}})());
-test('import akceptuje poprawny stan',(()=>{try{return T.validateImportedState(JSON.stringify({version:'5.8.2',settings:{dailyGoal:20},user:{xp:10}})).user.xp===10}catch(e){return false}})());
+test('import odrzuca ujemne XP',(()=>{try{T.validateImportedState(JSON.stringify({version:'5.8.3',user:{xp:-1}}));return false}catch(e){return /user\.xp/.test(e.message)}})());
+test('import odrzuca nieznane pola',(()=>{try{T.validateImportedState(JSON.stringify({version:'5.8.3',hacker:true}));return false}catch(e){return /Nieznane pola/.test(e.message)}})());
+test('import akceptuje poprawny stan',(()=>{try{return T.validateImportedState(JSON.stringify({version:'5.8.3',settings:{dailyGoal:20},user:{xp:10}})).user.xp===10}catch(e){return false}})());
 test('losowanie używa Fishera-Yatesa',script.includes('for(let index=result.length-1;index>0;index--)')&&!script.includes('.sort(()=>Math.random'));
 test('pasek i licznik sesji są stale dostępne',['lessonProgress','lessonRemaining','lessonCorrect','lessonMode'].every(id=>html.includes('id="'+id+'"')));
 test('podsumowanie sesji pokazuje wynik i XP',['sumAccuracy','sumCorrect','sumWrong','sumXp','sumStreak','nextReviewInfo'].every(id=>html.includes('id="'+id+'"')));
 test('baza zawiera rzeczywisty materiał B2',T.WORDS.filter(w=>w.level==='B2').length>=30);
 test('materiały zawierają informacje gramatyczne',T.WORDS.filter(w=>w.grammar&&w.grammar.partOfSpeech).length>=400);
-test('CSP i zewnętrzny CSS są włączone',html.includes('Content-Security-Policy')&&html.includes('href="styles.css?v=5.8.2"')&&!html.includes('<style>'));
+test('CSP i zewnętrzny CSS są włączone',html.includes('Content-Security-Policy')&&html.includes('href="styles-v5.8.3.css"')&&!html.includes('<style>'));
 test('responsywność ma układ tabletowy',css.includes('@media(min-width:700px)')&&css.includes('@media(min-width:940px)'));
 
 
-test('import odrzuca XP zapisane jako tekst',(()=>{try{T.validateImportedState(JSON.stringify({version:'5.8.2',user:{xp:'10'}}));return false;}catch(_){return true;}})());
+test('import odrzuca XP zapisane jako tekst',(()=>{try{T.validateImportedState(JSON.stringify({version:'5.8.3',user:{xp:'10'}}));return false;}catch(_){return true;}})());
 test('import odrzuca przyszłą wersję',(()=>{try{T.validateImportedState(JSON.stringify({version:'5.999.999'}));return false;}catch(_){return true;}})());
-test('import odrzuca nieznane pole postępu',(()=>{try{T.validateImportedState(JSON.stringify({version:'5.8.2',items:{[T.WORDS[0].id]:{seen:1,hack:true}}}));return false;}catch(_){return true;}})());
-test('import odrzuca błędne statystyki trybu',(()=>{try{T.validateImportedState(JSON.stringify({version:'5.8.2',modeStats:{word_write:{correct:'1',wrong:0,xp:0}}}));return false;}catch(_){return true;}})());
-test('import odrzuca uszkodzoną aktywną sesję',(()=>{try{T.validateImportedState(JSON.stringify({version:'5.8.2',activeSession:{queue:[{wordId:'brak',kind:'new',mode:'word_write'}],index:0,correct:0,wrong:0,xp:0,practice:'writing',startedAt:new Date().toISOString()}}));return false;}catch(_){return true;}})());
+test('import odrzuca nieznane pole postępu',(()=>{try{T.validateImportedState(JSON.stringify({version:'5.8.3',items:{[T.WORDS[0].id]:{seen:1,hack:true}}}));return false;}catch(_){return true;}})());
+test('import odrzuca błędne statystyki trybu',(()=>{try{T.validateImportedState(JSON.stringify({version:'5.8.3',modeStats:{word_write:{correct:'1',wrong:0,xp:0}}}));return false;}catch(_){return true;}})());
+test('import odrzuca uszkodzoną aktywną sesję',(()=>{try{T.validateImportedState(JSON.stringify({version:'5.8.3',activeSession:{queue:[{wordId:'brak',kind:'new',mode:'word_write'}],index:0,correct:0,wrong:0,xp:0,practice:'writing',startedAt:new Date().toISOString()}}));return false;}catch(_){return true;}})());
 const levelCounts=T.WORDS.reduce((out,word)=>(out[word.level]=(out[word.level]||0)+1,out),{});
 test('każdy poziom ma co najmniej 45 materiałów',['A1','A2','B1','B2'].every(level=>(levelCounts[level]||0)>=45));
 test('żaden poziom nie zawiera ponad połowy bazy',Object.values(levelCounts).every(count=>count/T.WORDS.length<.5));
@@ -191,7 +191,7 @@ test('baza pokazuje poziom specjalistyczności',T.WORDS.every(word=>['ogólne','
 test('co najmniej 150 wpisów ma kolokacje',T.WORDS.filter(word=>word.collocations?.length).length>=150);
 test('co najmniej 50 wpisów ma typowe przyimki',T.WORDS.filter(word=>word.grammar?.typicalPrepositions).length>=50);
 test('co najmniej 40 wpisów opisuje częste błędy',T.WORDS.filter(word=>word.commonMistakes?.length).length>=40);
-test('baza nie zawiera szablonu końcowej kontroli',!fs.readFileSync(path.join(root,'data.js'),'utf8').includes('During the final check'));
+test('baza nie zawiera szablonu końcowej kontroli',!fs.readFileSync(path.join(root,'data-v5.8.3.js'),'utf8').includes('During the final check'));
 const dialogueGroups=Object.values(T.DIALOGUE_SCENES).reduce((map,scene)=>{(map[scene.conversation]??=[]).push(scene);return map;},{});
 test('dialogi zawierają co najmniej 8 pełnych rozmów',Object.keys(dialogueGroups).length>=8);
 test('każda rozmowa ma komplet kolejnych kroków',Object.values(dialogueGroups).every(group=>{const total=group[0].total,turns=group.map(scene=>scene.turn).sort((a,b)=>a-b);return group.length===total&&turns.join(',')===Array.from({length:total},(_,i)=>i+1).join(',');}));
@@ -217,11 +217,16 @@ test('nieudany zapis faktycznie wycofuje naliczenie wyniku',JSON.stringify(rollb
 
 
 
-// Regresje v5.8.2: ponowienia, wersje, daty i jakość materiału.
+
+test('zasoby uruchomieniowe mają unikalne nazwy wersji',html.includes('bootstrap-v5.8.3.js')&&html.includes('script-v5.8.3.js')&&html.includes('styles-v5.8.3.css'));
+test('Service Worker pobiera kod network-first bez cache HTTP',serviceWorker.includes("cache:'no-store'")&&serviceWorker.includes("isDocument||isCode"));
+test('aktualizacja Service Workera wymusza jedno przeładowanie',fs.readFileSync(path.join(root,'bootstrap-v5.8.3.js'),'utf8').includes('controllerchange')&&fs.readFileSync(path.join(root,'script-v5.8.3.js'),'utf8').includes('controllerchange'));
+
+// Regresje v5.8.3: ponowienia, wersje, daty i jakość materiału.
 test('import odrzuca nowszą poprawkę tej samej wersji',(()=>{try{T.validateImportedState(JSON.stringify({version:'5.8.99'}));return false;}catch(_){return true;}})());
-test('import odrzuca datę zapisaną słownie',(()=>{try{T.validateImportedState(JSON.stringify({version:'5.8.2',createdAt:'July 29, 2026'}));return false;}catch(_){return true;}})());
-test('import odrzuca niemożliwą datę kalendarzową',(()=>{try{T.validateImportedState(JSON.stringify({version:'5.8.2',createdAt:'2026-02-30T12:00:00Z'}));return false;}catch(_){return true;}})());
-test('import akceptuje poprawną datę ISO',(()=>{try{return !!T.validateImportedState(JSON.stringify({version:'5.8.2',createdAt:'2026-07-29T12:00:00.000Z'}));}catch(_){return false;}})());
+test('import odrzuca datę zapisaną słownie',(()=>{try{T.validateImportedState(JSON.stringify({version:'5.8.3',createdAt:'July 29, 2026'}));return false;}catch(_){return true;}})());
+test('import odrzuca niemożliwą datę kalendarzową',(()=>{try{T.validateImportedState(JSON.stringify({version:'5.8.3',createdAt:'2026-02-30T12:00:00Z'}));return false;}catch(_){return true;}})());
+test('import akceptuje poprawną datę ISO',(()=>{try{return !!T.validateImportedState(JSON.stringify({version:'5.8.3',createdAt:'2026-07-29T12:00:00.000Z'}));}catch(_){return false;}})());
 
 const retryWord=T.WORDS.find(word=>T.isVocabularyItem(word));
 T.startSession([{wordId:retryWord.id,kind:'new',mode:'word_write'}],'writing');
