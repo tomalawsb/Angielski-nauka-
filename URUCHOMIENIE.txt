@@ -1,0 +1,16 @@
+URUCHOMIENIE ANGIELSKI DAILY TRAINER v5.7.1
+
+1. Wgraj wszystkie pliki z paczki do jednego katalogu na serwerze HTTPS.
+2. Otwórz index.html w Chrome lub Edge.
+3. Zainstaluj aplikację z menu przeglądarki.
+4. Po pierwszym pełnym uruchomieniu aplikacja może działać offline.
+5. Dane postępu pozostają w pamięci przeglądarki. Aktualizacja zachowuje dotychczasowy klucz danych.
+
+Test lokalny na komputerze:
+- otwórz terminal w katalogu aplikacji,
+- uruchom: python -m http.server 8080
+- wejdź na: http://localhost:8080
+
+Testy automatyczne:
+- uruchom: node node-tests.js
+- oczekiwany wynik: 24/24.

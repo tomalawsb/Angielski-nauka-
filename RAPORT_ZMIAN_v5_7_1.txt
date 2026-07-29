@@ -1,0 +1,13 @@
+ANGIELSKI DAILY TRAINER v5.7.1
+
+POPRAWKI
+- Zaostrzono ocenianie podobnych słów. Typowa literówka może przejść, ale inne prawidłowe słowo nie jest zaliczane.
+- Dodano ochronę znaczenia dla par here/there oraz tutaj/tam.
+- Dialogi są grupowane rozmowami i odtwarzane kolejno: krok 1, 2, 3.
+- Stary postęp jest migrowany do zasady pięciu różnych dni. Fałszywie opanowane pozycje wracają do powtórek.
+- Tryb samochodowy mówi niezależnie od ustawienia zwykłego lektora.
+- Usunięto z aktywnej bazy powtórzone hasła i 20 zdublowanych przykładów, zachowując aliasy starego postępu.
+- Rozbudowano testy regresji.
+
+OGRANICZENIE
+Rozpoznawanie mowy nadal ocenia tekst zwrócony przez przeglądarkę, a nie fonetykę i akcent.

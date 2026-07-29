@@ -1,4 +1,61 @@
-<!doctype html><html lang="pl"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Testy v5.5.0</title><body style="font-family:system-ui;padding:20px;background:#f8fafc"><h1>Testy v5.5.0</h1><pre id="out">Start...</pre><iframe id="app" src="index.html?v=5.5.0" style="width:390px;height:700px;border:1px solid #ddd"></iframe><script>
-const out=document.getElementById('out'); const f=document.getElementById('app');
-f.onload=()=>setTimeout(()=>{try{const w=f.contentWindow; const T=w.__trainerTests; const tests=[['baza rozszerzona',T.WORDS.length>=420],['jest tryb mówienia',typeof T.modeLabel==='function'&&T.modeLabel('speaking')==='mówienie'],['jest tryb dialog',typeof T.modeLabel==='function'&&T.modeLabel('dialogue')==='dialog'],['literówka chargre',T.isCloseEnough('chargre','charger')===true],['dog/dig nie przechodzi',T.isCloseEnough('dog','dig')===false],['data lokalna format',/^\d{4}-\d{2}-\d{2}$/.test(T.todayKey())]]; const fail=tests.filter(x=>!x[1]).length; out.textContent=tests.map(x=>(x[1]?'✅ ':'❌ ')+x[0]).join('\n')+'\n\nWynik: '+(tests.length-fail)+'/'+tests.length+' OK';}catch(e){out.textContent='Błąd testów: '+e.message;}},500);
-</script></body></html>
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Testy v5.7.1</title>
+  <style>body{font-family:system-ui;padding:20px;background:#f8fafc}pre{background:#fff;border:1px solid #ddd;padding:16px;border-radius:12px;white-space:pre-wrap}</style>
+</head>
+<body>
+<h1>Testy v5.7.1</h1>
+<pre id="out">Start...</pre>
+<iframe id="app" src="index.html?v=5.7.1" style="width:390px;height:700px;border:1px solid #ddd"></iframe>
+<script>
+const out=document.getElementById('out');
+const frame=document.getElementById('app');
+frame.onload=()=>setTimeout(()=>{
+  try{
+    const T=frame.contentWindow.__trainerTests;
+    let p={};
+    p=T.advanceProgress(p,true,'2026-07-01');
+    const sameDay=T.advanceProgress(p,true,'2026-07-01');
+    let mastered=sameDay;
+    for(const day of ['2026-07-02','2026-07-05','2026-07-12','2026-07-26']) mastered=T.advanceProgress(mastered,true,day);
+    const tests=[
+      ['aplikacja udostępnia testy',!!T],
+      ['baza ma co najmniej 390 unikalnych wpisów',T.WORDS.length>=390],
+      ['są scenki dialogowe',Object.keys(T.DIALOGUE_SCENES).length>=10],
+      ['jest tryb samochodowy',T.modeLabel('car_voice')==='samochód'],
+      ['literówka chargre jest akceptowana',T.answerScore('chargre','charger').status==='correct'],
+      ['dog/dig nie jest poprawne',T.answerScore('dog','dig').status!=='correct'],
+      ['table/cable nie jest poprawne',T.answerScore('table','cable').status!=='correct'],
+      ['tower/power nie jest poprawne',T.answerScore('tower','power').status!=='correct'],
+      ['drive/driver nie jest poprawne',T.answerScore('drive','driver').status!=='correct'],
+      ['here/there zmienia znaczenie',T.answerScore('The signal is better there','The signal is better here').status==='wrong'],
+      ['zły szyk nie przechodzi',T.answerScore('router the restart I','I restart the router').status==='wrong'],
+      ['zmiana przeczenia jest błędem',T.answerScore('I cannot come tomorrow','I can come tomorrow').status==='wrong'],
+      ['zmiana today/tomorrow jest błędem',T.answerScore('I will send it tomorrow','I will send it today').status==='wrong'],
+      ['poprawny skrót jest akceptowany',T.answerScore("I'm calling",'I am calling').status==='correct'],
+      ['przesunięty okolicznik czasu jest akceptowany',T.answerScore('Today I will send the invoice','I will send the invoice today').status==='correct'],
+      ['brak rodzajnika nie jest pełnym sukcesem',T.answerScore('I restart router','I restart the router').status!=='correct'],
+      ['alternatywna odpowiedź dialogowa przechodzi',T.bestAnswerScore('Could we move the appointment to Friday?',T.DIALOGUE_SCENES.scene_b1_001.accepted).status==='correct'],
+      ['druga odpowiedź tego samego dnia nie zwiększa etapu',sameDay.intervalIndex===p.intervalIndex],
+      ['opanowanie wymaga pięciu różnych dni',mastered.status==='mastered'&&mastered.successDays.length>=5],
+      ['data ma poprawny format',/^\d{4}-\d{2}-\d{2}$/.test(T.todayKey())],
+      ['ekran startowy się wyrenderował',frame.contentDocument.getElementById('headline').textContent!=='Ładowanie...'],
+      ['licznik bazy się wyrenderował',frame.contentDocument.getElementById('baseCount').textContent.includes('/')],
+      ['brak widocznego błędu JS',getComputedStyle(frame.contentDocument.getElementById('errorBox')).display==='none'],
+      ['dialog A1 idzie kolejno 1-2-3',T.practiceQueue('dialogues').map(task=>T.DIALOGUE_SCENES[task.wordId]?.turn).filter(Boolean).join(',')==='1,2,3'],
+      ['stary status opanowane jest przeliczany',T.migrate({items:{legacy:{seen:10,correct:10,status:'mastered',intervalIndex:6}}}).items.legacy.status==='review'],
+      ['tryb samochodowy wymusza lektora',T.isVoiceAllowed(false,true)],
+      ['baza nie ma powtórzonych haseł',new Set(T.WORDS.map(word=>T.normalize(word.english+'|'+word.polish))).size===T.WORDS.length],
+      ['wersja interfejsu to 5.7.1',frame.contentDocument.body.textContent.includes('v5.7.1')]
+    ];
+    const failed=tests.filter(test=>!test[1]);
+    out.textContent=tests.map(test=>(test[1]?'✅ ':'❌ ')+test[0]).join('\n')+`\n\nWynik: ${tests.length-failed.length}/${tests.length} OK`;
+    document.title=failed.length?'FAIL':'PASS';
+  }catch(error){out.textContent='Błąd testów: '+error.stack;document.title='FAIL';}
+},700);
+</script>
+</body>
+</html>
