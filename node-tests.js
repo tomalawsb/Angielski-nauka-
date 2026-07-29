@@ -86,7 +86,7 @@ const same=T.advanceProgress(p,true,'2026-07-01');
 test('drugi sukces tego samego dnia nie zwiększa etapu',same.intervalIndex===p.intervalIndex);
 for(const day of ['2026-07-02','2026-07-05','2026-07-12','2026-07-26'])p=T.advanceProgress(p,true,day);
 test('opanowanie wymaga pięciu dni',p.status==='mastered'&&p.successDays.length===5);
-test('wersja interfejsu 5.7.1',html.includes('v5.7.1'));
+test('wersja interfejsu 5.7.3',html.includes('v5.7.3'));
 test('sztuczny przykład nie trafia do ćwiczeń zdań',T.sentenceEn(T.WORDS.find(w=>w.english==='person'))==='person');
 test('użyteczny dłuższy przykład pozostaje',T.sentenceEn(T.WORDS.find(w=>w.id==='praca_a1_0003_i_need_to_check_the_cable')).includes('before installation'));
 const carTasks=T.practiceQueue('car');
@@ -117,8 +117,32 @@ test('ustawienia zawierają przypomnienia',html.includes('id="reminderEnabled"')
 const manifest=JSON.parse(fs.readFileSync(path.join(root,'manifest.json'),'utf8'));
 test('PWA pozwala na obrót ekranu',manifest.orientation==='any');
 const serviceWorker=fs.readFileSync(path.join(root,'service-worker.js'),'utf8');
-test('Service Worker ma cache offline',serviceWorker.includes('english-trainer-v5.7.1')&&serviceWorker.includes('cache.addAll'));
+test('Service Worker ma cache offline',serviceWorker.includes('english-trainer-v5.7.3')&&serviceWorker.includes('cache.addAll'));
 test('Service Worker obsługuje przypomnienia okresowe',serviceWorker.includes('periodicsync'));
+
+
+const state=T.getState();
+state.settings.defaultLevel='B1';state.settings.defaultTrack='all';
+const a1Word=T.WORDS.find(w=>w.level==='A1');
+const b1Word=T.WORDS.find(w=>w.level==='B1');
+state.items[a1Word.id]={seen:3,correct:1,wrong:2,status:'weak',nextReview:T.todayKey(),successDays:[]};
+state.items[b1Word.id]={seen:3,correct:1,wrong:2,status:'weak',nextReview:T.todayKey(),successDays:[]};
+const b1Due=T.due();
+test('B1 nie pobiera zaległych A1',b1Due.every(w=>w.level==='B1')&&b1Due.some(w=>w.id===b1Word.id)&&!b1Due.some(w=>w.id===a1Word.id));
+const b1Vocab=T.practiceQueue('vocab');
+test('tryb słówek respektuje B1',b1Vocab.length>0&&b1Vocab.every(task=>T.WORDS.find(w=>w.id===task.wordId)?.level==='B1'));
+test('tryb słówek nie zawiera pełnych zdań',b1Vocab.every(task=>T.isVocabularyItem(T.WORDS.find(w=>w.id===task.wordId))));
+test('krótkie zdania nie są słówkami',[
+  'I suggest','I recommend','I noticed','it depends','let me check','before we start'
+].every(english=>!T.isVocabularyItem({id:'test_'+english,english,polish:'test'})));
+test('filtr słówek używa prawidłowych granic wyrazów',!fs.readFileSync(path.join(root,'script.js')).includes(Buffer.from([8])));
+test('ciemny motyw ma kontrast przycisków',html.includes('html[data-theme="dark"] .secondary')&&html.includes('color:#f8fafc')&&html.includes('html[data-theme="dark"] .danger'));
+test('usunięto zbędne opisy trybów',!html.includes('wybór tłumaczenia i krótkie odpowiedzi')&&!html.includes('tryby nauki'));
+
+test('ustawienia zawierają motyw i wielkość czcionki',html.includes('id="themeMode"')&&html.includes('id="fontSize"'));
+state.settings.themeMode='dark';state.settings.fontSize='large';T.applyAppearance();
+test('motyw i rozmiar czcionki są stosowane',elements.get('appRoot').dataset.theme==='dark'&&elements.get('appRoot').dataset.fontSize==='large');
+state.settings.defaultLevel='A1';state.settings.defaultTrack='all';
 
 const failed=tests.filter(([,ok])=>!ok);
 console.log(tests.map(([name,ok])=>(ok?'PASS ':'FAIL ')+name).join('\n'));

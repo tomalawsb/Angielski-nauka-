@@ -1,4 +1,4 @@
-URUCHOMIENIE ANGIELSKI DAILY TRAINER v5.7.1
+URUCHOMIENIE ANGIELSKI DAILY TRAINER v5.7.3
 
 1. Wgraj wszystkie pliki z paczki do jednego katalogu na serwerze HTTPS.
 2. Otwórz index.html w Chrome lub Edge.
@@ -13,4 +13,7 @@ Test lokalny na komputerze:
 
 Testy automatyczne:
 - uruchom: node node-tests.js
-- oczekiwany wynik: 24/24.
+- oczekiwany wynik: wszystkie testy zaliczone.
+
+Aktualizacja GitHub:
+- uruchom plik AKTUALIZUJ_GITHUB.ps1; skrypt nie zadaje pytań i wysyła bieżącą wersję na gałąź main.
