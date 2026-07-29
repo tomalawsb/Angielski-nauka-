@@ -1,146 +1,266 @@
 <!doctype html>
-<html id="appRoot" lang="pl" data-theme="system" data-font-size="normal">
+<html id="appRoot" lang="pl" data-theme="system" data-font-size="normal" data-animations="on">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta id="themeColorMeta" name="theme-color" content="#2563eb">
-<link rel="manifest" href="manifest.json?v=5.7.4">
-<link rel="apple-touch-icon" href="icon-192.png?v=5.7.4">
-<title>Angielski Daily Trainer v5.7.4</title>
-<style>
-:root{
-  color-scheme:light;
-  --app-bg:#f3f6fb;--surface:#ffffff;--surface-soft:#f6f8fc;--surface-strong:#eaf1fb;
-  --text:#111827;--muted:#64748b;--border:#dbe3ee;--primary:#2563eb;--primary-strong:#1d4ed8;
-  --success:#15803d;--success-bg:#ecfdf3;--danger:#b91c1c;--danger-bg:#fff1f2;--warning:#b45309;--warning-bg:#fff7ed;
-  --shadow:0 10px 30px rgba(15,23,42,.08);--shadow-soft:0 4px 14px rgba(15,23,42,.06);
-  --radius:18px;--navh:72px;--font-scale:1;--topbar:rgba(243,246,251,.94);--input:#ffffff;
-}
-html[data-theme="dark"]{
-  color-scheme:dark;
-  --app-bg:#0b1220;--surface:#111827;--surface-soft:#172033;--surface-strong:#1e293b;
-  --text:#f8fafc;--muted:#a8b3c7;--border:#334155;--primary:#60a5fa;--primary-strong:#3b82f6;
-  --success:#86efac;--success-bg:#123524;--danger:#fda4af;--danger-bg:#4c0519;--warning:#fdba74;--warning-bg:#431407;
-  --shadow:0 14px 36px rgba(0,0,0,.30);--shadow-soft:0 4px 18px rgba(0,0,0,.22);--topbar:rgba(11,18,32,.94);--input:#0f172a;
-}
-@media(prefers-color-scheme:dark){
-  html[data-theme="system"]{
-    color-scheme:dark;
-    --app-bg:#0b1220;--surface:#111827;--surface-soft:#172033;--surface-strong:#1e293b;
-    --text:#f8fafc;--muted:#a8b3c7;--border:#334155;--primary:#60a5fa;--primary-strong:#3b82f6;
-    --success:#86efac;--success-bg:#123524;--danger:#fda4af;--danger-bg:#4c0519;--warning:#fdba74;--warning-bg:#431407;
-    --shadow:0 14px 36px rgba(0,0,0,.30);--shadow-soft:0 4px 18px rgba(0,0,0,.22);--topbar:rgba(11,18,32,.94);--input:#0f172a;
-  }
-}
-html[data-font-size="small"]{--font-scale:.9}html[data-font-size="normal"]{--font-scale:1}html[data-font-size="large"]{--font-scale:1.14}html[data-font-size="xlarge"]{--font-scale:1.28}
-*{box-sizing:border-box}
-html,body{margin:0;width:100%;min-height:100%;overflow-x:hidden;background:var(--app-bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-size:calc(16px * var(--font-scale))}
-body{background:linear-gradient(180deg,color-mix(in srgb,var(--primary) 7%,var(--app-bg)) 0,var(--app-bg) 260px);transition:background-color .18s,color .18s}
-button,input,select,textarea{font:inherit;color:inherit}button{border:0;cursor:pointer}button:disabled{opacity:.55;cursor:not-allowed}
-input,select,textarea{width:100%;min-height:46px;border:1px solid var(--border);border-radius:13px;background:var(--input);padding:11px 12px;outline:none;transition:border-color .15s,box-shadow .15s,background-color .15s}
-input:focus,select:focus,textarea:focus{border-color:var(--primary);box-shadow:0 0 0 4px color-mix(in srgb,var(--primary) 18%,transparent)}
-textarea{min-height:150px;resize:vertical}.hidden{display:none!important}
-.app{min-height:100dvh;max-width:900px;margin:0 auto;padding-bottom:calc(var(--navh) + 18px + env(safe-area-inset-bottom,0px))}
-.topbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px 12px;background:var(--topbar);backdrop-filter:blur(14px);border-bottom:1px solid color-mix(in srgb,var(--border) 82%,transparent)}
-.eyebrow{margin:0 0 4px;color:var(--primary);font-size:calc(11px * var(--font-scale));font-weight:900;text-transform:uppercase;letter-spacing:.13em}.topbar h1{margin:0;font-size:calc(27px * var(--font-scale));line-height:1.05;letter-spacing:-.035em}.ver{margin-top:3px;color:var(--muted);font-size:calc(11px * var(--font-scale));font-weight:800}
-.content{padding:14px}.screen{display:none}.screen.active{display:block}
-.card{margin-bottom:12px;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
-.card h2,.card h3{margin-top:0}.hero{display:grid;gap:14px;background:linear-gradient(135deg,var(--surface),color-mix(in srgb,var(--primary) 8%,var(--surface)))}.hero h2,.lesson h2{margin:0 0 8px;font-size:calc(25px * var(--font-scale));line-height:1.14;letter-spacing:-.03em}
-.muted{color:var(--muted);line-height:1.45}.row{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.between{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.primary,.secondary,.danger{min-height:46px;padding:11px 15px;border-radius:13px;font-weight:850;transition:transform .12s,filter .12s,box-shadow .12s}.primary:active,.secondary:active,.danger:active,.practice:active,.nav:active{transform:scale(.98)}
-.primary{background:linear-gradient(135deg,#2563eb,#4f46e5);color:#fff;box-shadow:0 8px 18px rgba(37,99,235,.22)}.secondary{background:var(--surface-soft);color:var(--text);border:1px solid var(--border)}.danger{background:var(--danger-bg);color:var(--danger);border:1px solid color-mix(in srgb,var(--danger) 35%,var(--border))}.big{width:100%;font-size:calc(18px * var(--font-scale));padding:14px 18px}
-.iconbtn{width:48px;height:48px;flex:0 0 48px;border-radius:15px;background:var(--surface);color:var(--text);border:1px solid var(--border);box-shadow:var(--shadow-soft);font-size:calc(20px * var(--font-scale))}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.practice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.practice{min-height:64px;padding:14px 10px;border:1px solid var(--border);border-radius:15px;background:var(--surface-soft);color:var(--text);box-shadow:var(--shadow-soft);font-weight:850;text-align:center}.practice:focus-visible{outline:3px solid color-mix(in srgb,var(--primary) 28%,transparent);outline-offset:2px}.practice strong{display:block;font-size:calc(16px * var(--font-scale))}
-.stat{min-width:0;padding:13px;background:var(--surface);border:1px solid var(--border);border-radius:15px;box-shadow:var(--shadow-soft)}.stat span{display:block;color:var(--muted);font-size:calc(11px * var(--font-scale));font-weight:850;text-transform:uppercase;letter-spacing:.07em}.stat strong{display:block;margin-top:5px;font-size:calc(23px * var(--font-scale));overflow-wrap:anywhere}
-.badge{display:inline-flex;align-items:center;max-width:100%;padding:6px 10px;border-radius:999px;background:color-mix(in srgb,var(--primary) 13%,var(--surface));color:var(--primary-strong);font-size:calc(12px * var(--font-scale));font-weight:850;overflow-wrap:anywhere}.list{display:grid;gap:9px}.item{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;padding:12px;border:1px solid var(--border);border-radius:14px;background:var(--surface-soft)}.item strong,.item div{min-width:0;overflow-wrap:anywhere}.minirow{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}.mini{padding:4px 7px;border-radius:999px;background:var(--surface-strong);color:var(--muted);font-size:calc(11px * var(--font-scale));font-weight:800}.green{background:var(--success-bg)!important;color:var(--success)!important}.red{background:var(--danger-bg)!important;color:var(--danger)!important}.amber{background:var(--warning-bg)!important;color:var(--warning)!important}
-.progress{height:9px;margin:12px 0 18px;overflow:hidden;border-radius:999px;background:var(--surface-strong)}.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,#2563eb,#22c55e);transition:width .2s}.answer{width:100%;min-height:54px;font-size:calc(18px * var(--font-scale));scroll-margin:150px}.choices{display:grid;gap:9px}.choice{min-height:50px;padding:12px;border:1px solid var(--border);border-radius:13px;background:var(--surface-soft);color:var(--text);font-weight:750;text-align:left}.choice.selected{border-color:var(--primary);background:color-mix(in srgb,var(--primary) 14%,var(--surface));box-shadow:0 0 0 3px color-mix(in srgb,var(--primary) 14%,transparent)}
-.feedback{margin-top:12px;padding:13px;border-radius:13px;border:1px solid}.feedback.ok{background:var(--success-bg);color:var(--success);border-color:color-mix(in srgb,var(--success) 35%,var(--border))}.feedback.bad{background:var(--danger-bg);color:var(--danger);border-color:color-mix(in srgb,var(--danger) 35%,var(--border))}.feedback-partial{background:var(--warning-bg);color:var(--warning);border-color:color-mix(in srgb,var(--warning) 35%,var(--border))}.feedback-details{margin:8px 0 0;padding-left:20px;line-height:1.45}.feedback-details li{margin:3px 0}.lesson-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:13px}.lesson-actions button{width:100%;min-width:0;padding-inline:8px}
-.filters{display:grid;grid-template-columns:1fr;gap:10px}.mode-stats{display:grid;gap:9px}.barline{display:grid;grid-template-columns:minmax(90px,120px) 1fr auto;gap:8px;align-items:center}.bartrack{height:10px;overflow:hidden;border-radius:999px;background:var(--surface-strong)}.barfill{height:100%;border-radius:999px;background:linear-gradient(90deg,#2563eb,#22c55e)}.history-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}.daybox{min-width:0;padding:7px 4px;border:1px solid var(--border);border-radius:11px;background:var(--surface-soft);text-align:center}.daybox strong,.daybox span{display:block;font-size:calc(10px * var(--font-scale));overflow-wrap:anywhere}.daybox span{color:var(--muted)}
-.micline{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px}.micnote{margin-top:8px;color:var(--muted);font-size:calc(12px * var(--font-scale))}.transcript{margin-top:8px;padding:10px;border:1px dashed var(--primary);border-radius:12px;background:var(--surface-soft);font-weight:750}#errorBox{display:none;margin:10px 12px 0;padding:10px;border:1px solid color-mix(in srgb,var(--danger) 35%,var(--border));border-radius:12px;background:var(--danger-bg);color:var(--danger);font-size:calc(13px * var(--font-scale));font-weight:700;white-space:pre-wrap}
-.car-panel{margin-top:10px;padding:16px;border:1px solid color-mix(in srgb,var(--primary) 45%,var(--border));border-radius:18px;background:color-mix(in srgb,var(--primary) 7%,var(--surface))}.car-status{margin-bottom:8px;font-size:calc(23px * var(--font-scale));font-weight:900;letter-spacing:-.025em}.car-prompt{margin:10px 0;font-size:calc(21px * var(--font-scale));line-height:1.28;font-weight:850}.car-command-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:12px}.car-command{min-height:60px;border:1px solid var(--border);border-radius:14px;background:var(--surface-soft);color:var(--text);font-weight:850}.primary-car{background:linear-gradient(135deg,#2563eb,#4f46e5);color:#fff;border:0}.stop-car{background:var(--danger-bg);color:var(--danger)}.car-tip{margin-top:10px;color:var(--muted);font-size:calc(12px * var(--font-scale));line-height:1.4}.car-active .lesson-actions,.car-active #checkBtn,.car-active #dontKnowBtn,.car-active #speakBtn{display:none!important}.car-active #nextBtn{width:100%;min-height:58px}.car-active #prompt{font-size:calc(23px * var(--font-scale))}
-.settings-page{display:grid;gap:12px}.settings-section{margin:0}.settings-section h3{margin:0 0 14px;font-size:calc(18px * var(--font-scale));letter-spacing:-.015em}.settings-grid{display:grid;grid-template-columns:1fr;gap:12px}.setting-field{display:grid;gap:7px;color:var(--text);font-weight:750}.setting-field>span{font-size:calc(13px * var(--font-scale));color:var(--muted);font-weight:800}.switch-row{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:50px;padding:11px 12px;border:1px solid var(--border);border-radius:13px;background:var(--surface-soft);font-weight:750}.switch-row input[type="checkbox"]{width:22px;height:22px;min-height:22px;flex:0 0 22px;accent-color:#2563eb}.settings-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.settings-actions button{width:100%;padding-inline:8px}.settings-data textarea{margin-top:10px}
-.bottomnav{position:fixed;z-index:30;left:50%;bottom:0;transform:translateX(-50%);display:grid;grid-template-columns:repeat(6,minmax(0,1fr));width:min(900px,100%);min-height:var(--navh);padding:7px 5px calc(7px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--border);background:color-mix(in srgb,var(--surface) 94%,transparent);backdrop-filter:blur(16px);box-shadow:0 -8px 26px rgba(15,23,42,.09);transition:transform .2s,opacity .2s}.nav{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-width:0;padding:6px 1px;border-radius:12px;background:transparent;color:var(--muted);font-size:calc(9px * var(--font-scale));font-weight:850;white-space:nowrap}.nav span{font-size:calc(17px * var(--font-scale));line-height:1}.nav.active{background:color-mix(in srgb,var(--primary) 12%,var(--surface));color:var(--primary-strong)}
-body.keyboard-open .bottomnav,body.input-active .bottomnav,body:has(input:focus,textarea:focus) .bottomnav{transform:translate(-50%,120%);opacity:0;pointer-events:none}body.keyboard-open .app,body.input-active .app,body:has(input:focus,textarea:focus) .app{padding-bottom:14px}body.keyboard-open .topbar{position:relative}
-@media(max-width:520px){.content{padding:12px}.card{padding:14px}.lesson-actions{grid-template-columns:repeat(2,minmax(0,1fr))}.lesson-actions .primary{grid-column:auto}.car-command-grid{grid-template-columns:1fr}.settings-actions{grid-template-columns:1fr}.bottomnav{min-height:68px}.nav{font-size:calc(8.5px * var(--font-scale))}.history-grid{grid-template-columns:repeat(7,minmax(42px,1fr));overflow-x:auto;padding-bottom:4px}}
-@media(min-width:720px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}.practice-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.hero{grid-template-columns:1fr auto;align-items:center}.big{width:auto}.filters{grid-template-columns:2fr 1fr 1fr}.settings-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.settings-page{grid-template-columns:repeat(2,minmax(0,1fr))}.settings-section.wide{grid-column:1/-1}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; font-src 'self'; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self'">
+  <meta id="themeColorMeta" name="theme-color" content="#2563eb">
+  <link rel="manifest" href="manifest.json?v=5.8.2">
+  <link rel="apple-touch-icon" href="icon-192.png?v=5.8.2">
+  <link rel="stylesheet" href="styles.css?v=5.8.2">
+  <title>Angielski Daily Trainer</title>
 </head>
 <body>
-<div id="errorBox"></div>
+<svg class="svg-sprite" aria-hidden="true">
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.8 12 3l9 7.8v9.7a.5.5 0 0 1-.5.5H15v-6H9v6H3.5a.5.5 0 0 1-.5-.5z"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H11v17H6.5A2.5 2.5 0 0 0 4 21.5zm16 0A2.5 2.5 0 0 0 17.5 2H13v17h4.5a2.5 2.5 0 0 1 2.5 2.5z"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10h4v10zm6 0V4h4v16zm6 0v-7h4v7z"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></symbol>
+  <symbol id="i-settings" viewBox="0 0 24 24"><path d="M9.7 2h4.6l.6 2.3 1.6.9 2.3-.7 2.3 4-1.8 1.6v1.8l1.8 1.6-2.3 4-2.3-.7-1.6.9-.6 2.3H9.7l-.6-2.3-1.6-.9-2.3.7-2.3-4 1.8-1.6v-1.8L2.9 8.5l2.3-4 2.3.7 1.6-.9zm2.3 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></symbol>
+  <symbol id="i-flame" viewBox="0 0 24 24"><path d="M13.8 2.5c.5 3.8-2.3 5.1-3.4 7.2-.7-1.4-.5-2.9-.1-4.2C6.2 8.4 4 11.2 4 14.5a8 8 0 0 0 16 0c0-4.8-3.2-8.9-6.2-12M12 20a4 4 0 0 1-4-4c0-1.7 1-3.1 2.4-4.4.1 1.8.9 2.6 1.6 3.4.8-1.2 1.4-2.5 1.3-4.2 1.7 1.6 2.7 3.2 2.7 5.2a4 4 0 0 1-4 4"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2.5 3 6 6.6 1-4.8 4.6 1.1 6.5-5.9-3.1-5.9 3.1 1.1-6.5-4.8-4.6 6.6-1z"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M11 3h2v10l3.5-3.5 1.4 1.4-5.9 5.9-5.9-5.9 1.4-1.4L11 13zM4 19h16v2H4z"/></symbol>
+  <symbol id="i-upload" viewBox="0 0 24 24"><path d="M11 21h2V11l3.5 3.5 1.4-1.4L12 7.2l-5.9 5.9 1.4 1.4L11 11zM4 3h16v2H4z"/></symbol>
+  <symbol id="i-help" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20m0 17a1.2 1.2 0 1 1 0-2.4A1.2 1.2 0 0 1 12 19m1.1-5.1v.7h-2.2v-1.2c0-1.5.8-2.3 1.8-3.1.7-.6 1.2-1 1.2-1.8 0-1-.7-1.6-1.8-1.6-1.2 0-2 .7-2.4 1.8l-2-.9C8.4 4.9 9.9 3.8 12.2 3.8c2.5 0 4.1 1.5 4.1 3.7 0 1.8-1 2.7-2.1 3.6-.7.6-1.1 1.1-1.1 2.8"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20m1 16h-2v-7h2zm-1-9.2a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6"/></symbol>
+  <symbol id="i-database" viewBox="0 0 24 24"><path d="M12 2c5 0 9 1.6 9 3.5S17 9 12 9 3 7.4 3 5.5 7 2 12 2m9 6v4c0 1.9-4 3.5-9 3.5S3 13.9 3 12V8c1.9 1.6 5.3 2.5 9 2.5S19.1 9.6 21 8m0 6.5v4c0 1.9-4 3.5-9 3.5s-9-1.6-9-3.5v-4c1.9 1.6 5.3 2.5 9 2.5s7.1-.9 9-2.5"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="m6.3 4.9 5.7 5.7 5.7-5.7 1.4 1.4-5.7 5.7 5.7 5.7-1.4 1.4-5.7-5.7-5.7 5.7-1.4-1.4 5.7-5.7-5.7-5.7z"/></symbol>
+</svg>
+
+<div id="errorBox" role="alert"></div>
 <div class="app">
-<header class="topbar"><div><p class="eyebrow">Angielski Daily Trainer</p><h1 id="title">Dzisiaj</h1><div class="ver">v5.7.4</div></div><button id="refreshBtn" class="iconbtn" title="Wyczyść cache">↻</button></header>
-<main class="content">
-<section id="todayScreen" class="screen" data-title="Dzisiaj">
-<div class="card hero"><div><p class="eyebrow">Plan dzienny</p><h2 id="headline">Ładowanie...</h2><p id="subline" class="muted"></p></div><button id="startBtn" class="primary big">Start mieszany</button></div>
-<div class="card"><h3>Wybierz ćwiczenie</h3><div class="practice-grid"><button class="practice" data-practice="vocab"><strong>Słówka</strong></button><button class="practice" data-practice="sentences"><strong>Zdania</strong></button><button class="practice" data-practice="writing"><strong>Pisanie słówek</strong></button><button class="practice" data-practice="listening"><strong>Słuchanie</strong></button><button class="practice" data-practice="lector"><strong>Z lektorem</strong></button><button class="practice" data-practice="speaking"><strong>Mówienie</strong></button><button class="practice" data-practice="car"><strong>Samochód</strong></button><button class="practice" data-practice="dialogues"><strong>Dialogi</strong></button><button class="practice" data-practice="test"><strong>Test dnia</strong></button></div></div>
-<div class="grid"><div class="stat"><span>XP</span><strong id="statXp">0</strong></div><div class="stat"><span>Poziom</span><strong id="statLevel">1</strong></div><div class="stat"><span>Passa</span><strong id="statStreak">0 dni</strong></div><div class="stat"><span>Skuteczność</span><strong id="statAcc">0%</strong></div></div>
-<div class="card"><div class="between"><h3>Dzisiejsza kolejka</h3><span id="queueBadge" class="badge">0 zadań</span></div><div id="queueList" class="list"></div></div>
-</section>
-<section id="learnScreen" class="screen" data-title="Nauka">
-<div id="emptyLesson" class="card"><h2>Brak aktywnej sesji</h2><p class="muted">Uruchom sesję z ekranu „Dzisiaj”.</p><button class="primary" data-nav="today">Przejdź do planu</button></div>
-<div id="lessonCard" class="card lesson hidden"><div class="between"><span id="lessonMode" class="badge">Tryb</span><span id="lessonProgress" class="muted">0 / 0</span></div><div class="progress"><span id="bar"></span></div><p id="promptLabel" class="eyebrow">Przetłumacz</p><h2 id="prompt">...</h2><p id="hint" class="muted"></p><div id="answerArea"></div><div id="feedback" class="feedback hidden"></div><div class="lesson-actions"><button id="speakBtn" class="secondary">Odsłuchaj</button><button id="micBtn" class="secondary hidden">Mów</button><button id="dontKnowBtn" class="danger">Nie wiem</button><button id="checkBtn" class="primary">Sprawdź</button><button id="nextBtn" class="primary hidden">Dalej</button></div><div id="micStatus" class="micnote hidden"></div></div>
-<div id="summary" class="card hidden"><h2>Sesja zakończona</h2><div class="grid"><div class="stat"><span>Poprawne</span><strong id="sumCorrect">0</strong></div><div class="stat"><span>Błędy</span><strong id="sumWrong">0</strong></div><div class="stat"><span>XP</span><strong id="sumXp">0</strong></div><div class="stat"><span>Skuteczność</span><strong id="sumAccuracy">0%</strong></div></div><button class="primary" data-nav="today">Wróć</button></div>
-</section>
-<section id="reviewsScreen" class="screen" data-title="Powtórki"><div class="card"><div class="between"><h3>Do powtórki</h3><button id="reviewBtn" class="primary">Powtarzaj</button></div><div id="reviewsList" class="list"></div></div></section>
-<section id="progressScreen" class="screen" data-title="Postępy"><div class="grid"><div class="stat"><span>Opanowane</span><strong id="mastered">0</strong></div><div class="stat"><span>W nauce</span><strong id="learning">0</strong></div><div class="stat"><span>Słabe</span><strong id="weak">0</strong></div><div class="stat"><span>Najlepsza seria</span><strong id="bestStreak">0</strong></div></div><div class="card"><h3>Postęp według trybu</h3><div id="modeStats" class="mode-stats"></div></div><div class="card"><h3>Aktywność z 14 dni</h3><div id="history14" class="history-grid"></div></div><div class="card"><h3>Najczęstsze błędy</h3><div id="mistakes" class="list"></div></div></section>
-<section id="baseScreen" class="screen" data-title="Baza"><div class="card filters"><input id="searchInput" type="search" placeholder="Szukaj słówka, kategorii albo zdania"><select id="levelFilter"></select><select id="trackFilter"></select></div><div class="card"><div class="between"><h3>Lista słówek</h3><span id="baseCount" class="badge">0</span></div><div id="baseList" class="list"></div></div></section>
-<section id="settingsScreen" class="screen" data-title="Ustawienia">
-<div class="settings-page">
-  <div class="card settings-section">
-    <h3>Nauka</h3>
-    <div class="settings-grid">
-      <label class="setting-field"><span>Poziom</span><select id="defaultLevel"></select></label>
-      <label class="setting-field"><span>Ścieżka</span><select id="defaultTrack"></select></label>
-      <label class="setting-field"><span>Nowe zadania dziennie</span><input id="dailyNew" type="number" min="1" max="50"></label>
-      <label class="setting-field"><span>Powtórki dziennie</span><input id="dailyReview" type="number" min="1" max="100"></label>
+  <header class="topbar">
+    <div class="brand"><strong>Angielski</strong><span>Daily Trainer</span></div>
+    <div class="top-metrics" aria-label="Najważniejsze statystyki">
+      <span class="metric"><svg class="icon"><use href="#i-flame"/></svg><b id="topStreak">0</b><small>dni</small></span>
+      <span class="metric"><svg class="icon"><use href="#i-star"/></svg><b id="topXp">0</b><small>XP</small></span>
+      <button class="iconbtn" data-nav="settings" aria-label="Ustawienia"><svg class="icon"><use href="#i-settings"/></svg></button>
     </div>
-  </div>
-  <div class="card settings-section">
-    <h3>Wygląd</h3>
-    <div class="settings-grid">
-      <label class="setting-field"><span>Motyw</span><select id="themeMode"><option value="system">Zgodny z telefonem</option><option value="light">Jasny</option><option value="dark">Ciemny</option></select></label>
-      <label class="setting-field"><span>Wielkość czcionki</span><select id="fontSize"><option value="small">Mała</option><option value="normal">Normalna</option><option value="large">Duża</option><option value="xlarge">Bardzo duża</option></select></label>
-    </div>
-  </div>
-  <div class="card settings-section">
-    <h3>Dźwięk i mowa</h3>
-    <div class="settings-grid">
-      <label class="switch-row"><span>Lektor</span><input id="voiceEnabled" type="checkbox"></label>
-      <label class="switch-row"><span>Automatyczne odtwarzanie</span><input id="autoSpeak" type="checkbox"></label>
-      <label class="switch-row"><span>Czytaj przykład zdania</span><input id="preferExample" type="checkbox"></label>
-      <label class="setting-field"><span>Akcent</span><select id="voiceLang"></select></label>
-      <label class="setting-field"><span>Głos</span><select id="voiceName"></select></label>
-      <label class="setting-field"><span>Prędkość</span><input id="voiceRate" type="number" min="0.5" max="1.4" step="0.05"></label>
-      <label class="setting-field"><span>Liczba powtórzeń</span><input id="voiceRepeat" type="number" min="1" max="4"></label>
-    </div>
-  </div>
-  <div class="card settings-section">
-    <h3>Tryb samochodowy</h3>
-    <div class="settings-grid">
-      <label class="setting-field"><span>Pauza po odpowiedzi</span><input id="carPause" type="number" min="1" max="8" step="1"></label>
-      <label class="switch-row"><span>Automatycznie przechodź dalej</span><input id="carAutoNext" type="checkbox"></label>
-    </div>
-  </div>
-  <div class="card settings-section">
-    <h3>Przypomnienia</h3>
-    <div class="settings-grid">
-      <label class="switch-row"><span>Codzienne przypomnienie</span><input id="reminderEnabled" type="checkbox"></label>
-      <label class="setting-field"><span>Godzina</span><input id="reminderTime" type="time"></label>
-    </div>
-  </div>
-  <div class="card settings-section settings-data">
-    <h3>Dane</h3>
-    <div class="settings-actions"><button id="exportBtn" class="secondary">Eksport</button><button id="importBtn" class="secondary">Import</button><button id="resetBtn" class="danger">Reset</button></div>
-    <textarea id="dataBox" placeholder="Dane eksportu lub importu"></textarea>
-  </div>
+  </header>
+
+  <main class="content">
+    <section id="todayScreen" class="screen" data-title="Dzisiaj">
+      <div id="resumeCard" class="resume-card hidden">
+        <div><strong>Niedokończona lekcja</strong><span id="resumeInfo">Możesz wrócić do ostatniego zadania.</span></div>
+        <div class="row"><button id="resumeSessionBtn" class="secondary">Wznów</button><button id="discardSessionBtn" class="text-btn">Usuń</button></div>
+      </div>
+
+      <section class="hero-card" aria-labelledby="headline">
+        <p class="eyebrow">Dzisiejsza nauka</p>
+        <h1 id="headline">Gotowy na krótką lekcję?</h1>
+        <p id="subline" class="muted">Program dobierze zadania do poziomu, zaległych powtórek i ustawionego celu.</p>
+        <button id="startBtn" class="primary primary-hero"><svg class="icon"><use href="#i-play"/></svg><span>Rozpocznij dzisiejszą naukę</span></button>
+        <div class="daily-goal">
+          <div class="between"><strong id="goalLabel">Dzisiejszy cel</strong><span id="goalText">0 z 20 zadań</span></div>
+          <div class="progress large"><span id="goalBar"></span></div>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="section-heading"><div><p class="eyebrow">Dodatkowe opcje</p><h2>Pozostałe tryby</h2></div></div>
+        <div class="mode-grid compact">
+          <button class="mode-card" data-practice="vocab"><strong>Nauka słówek</strong><span>Pojedyncze słowa, znaczenia i powtórki.</span></button>
+          <button class="mode-card" data-practice="writing"><strong>Pisanie</strong><span>Przetłumacz słowo i wpisz odpowiedź.</span></button>
+          <button class="mode-card" data-practice="speaking"><strong>Mówienie</strong><span>Powiedz zdanie po angielsku. Mowa jest zamieniana na tekst.</span></button>
+          <button class="mode-card" data-practice="dialogues"><strong>Dialogi</strong><span>Ćwicz pełne rozmowy z klientem.</span></button>
+          <button class="mode-card" data-practice="test"><strong>Test</strong><span>Sprawdź materiał w kilku rodzajach zadań.</span></button>
+          <button class="mode-card" data-practice="car"><strong>Samochód</strong><span>Nauka głosowa bez konieczności patrzenia na ekran.</span></button>
+        </div>
+      </section>
+    </section>
+
+    <section id="studyScreen" class="screen" data-title="Nauka">
+      <div class="page-heading"><p class="eyebrow">Wybierz sposób nauki</p><h1>Nauka</h1><p class="muted">Główna lekcja dobiera materiał automatycznie. Tutaj możesz świadomie wybrać konkretny rodzaj ćwiczenia.</p></div>
+      <div class="mode-grid">
+        <button class="mode-card featured" data-action="smart"><strong>Rozpocznij naukę</strong><span>Mieszana lekcja dopasowana do dzisiejszego planu.</span></button>
+        <button class="mode-card" data-practice="vocab"><strong>Nauka słówek</strong><span>Wybieraj znaczenie i zapisuj pojedyncze słowa.</span></button>
+        <button class="mode-card" data-practice="sentences"><strong>Zdania</strong><span>Przetłumacz pełne zdania w naturalnym kontekście.</span></button>
+        <button class="mode-card" data-practice="writing"><strong>Pisanie</strong><span>Wpisuj odpowiedzi bez podpowiedzi.</span></button>
+        <button class="mode-card" data-practice="listening"><strong>Słuchanie</strong><span>Odsłuchaj zdanie i zapisz to, co usłyszysz.</span></button>
+        <button class="mode-card" data-practice="lector"><strong>Słuchaj i powtarzaj</strong><span>Posłuchaj wzorca i powtórz zdanie na głos.</span></button>
+        <button class="mode-card" data-practice="speaking"><strong>Mówienie</strong><span>Przeglądarka zamieni mowę na tekst. Aplikacja nie ocenia akcentu.</span></button>
+        <button class="mode-card" data-practice="dialogues"><strong>Dialogi</strong><span>Ćwicz kolejne wypowiedzi w realistycznych scenkach.</span></button>
+        <button class="mode-card" data-practice="test"><strong>Test</strong><span>Połącz wybór, pisanie, słuchanie i mówienie.</span></button>
+        <button class="mode-card" data-practice="car"><strong>Samochód</strong><span>Pełna obsługa głosowa. Skonfiguruj tryb przed jazdą.</span></button>
+      </div>
+      <div class="card"><div class="between"><div><p class="eyebrow">Dzisiejszy plan</p><h2>Materiał do wykonania</h2></div><span id="queueBadge" class="badge">0 zadań</span></div><div id="queueList" class="list"></div></div>
+      <div class="card"><div class="between"><div><p class="eyebrow">Powtórki</p><h2>Wymagają powtórki</h2></div><button id="reviewBtn" class="secondary">Rozpocznij</button></div><div id="reviewsList" class="list"></div></div>
+    </section>
+
+    <section id="learnScreen" class="screen session-screen" data-title="Lekcja">
+      <div id="emptyLesson" class="card"><h1>Brak aktywnej sesji</h1><p class="muted">Uruchom naukę z zakładki „Dzisiaj” lub „Nauka”.</p><button class="primary" data-nav="today">Wróć do dzisiejszego planu</button></div>
+      <div id="lessonCard" class="lesson-card hidden">
+        <div class="session-topline">
+          <span id="lessonMode" class="badge">Tryb</span>
+          <button id="endSessionBtn" class="text-btn">Zakończ</button>
+        </div>
+        <div class="session-stats">
+          <span><small>Zadanie</small><b id="lessonProgress">0 / 0</b></span>
+          <span><small>Pozostało</small><b id="lessonRemaining">0</b></span>
+          <span><small>Poprawne</small><b id="lessonCorrect">0</b></span>
+        </div>
+        <div class="progress"><span id="bar"></span></div>
+        <div class="question-enter" id="questionWrap">
+          <p id="promptLabel" class="eyebrow">Przetłumacz</p>
+          <h1 id="prompt">...</h1>
+          <p id="hint" class="muted"></p>
+          <div id="answerArea"></div>
+          <div id="feedback" class="feedback hidden"></div>
+        </div>
+        <div class="lesson-actions">
+          <button id="speakBtn" class="secondary">Odsłuchaj</button>
+          <button id="micBtn" class="secondary hidden">Mów</button>
+          <button id="dontKnowBtn" class="danger">Nie wiem</button>
+          <button id="checkBtn" class="primary">Sprawdź</button>
+          <button id="retryBtn" class="secondary hidden">Spróbuj ponownie</button>
+          <button id="nextBtn" class="primary hidden">Dalej</button>
+        </div>
+        <div id="micStatus" class="micnote hidden"></div>
+      </div>
+      <div id="summary" class="summary-card hidden">
+        <div class="completion-mark"><svg class="icon"><use href="#i-star"/></svg></div>
+        <p class="eyebrow">Lekcja ukończona</p>
+        <h1>Dobra robota.</h1>
+        <p id="summaryMessage" class="muted">Dzisiejszy plan jest bliżej ukończenia.</p>
+        <div class="summary-score"><strong id="sumAccuracy">0%</strong><span>skuteczności</span></div>
+        <div class="summary-grid">
+          <div><span>Poprawne</span><strong id="sumCorrect">0</strong></div>
+          <div><span>Błędy</span><strong id="sumWrong">0</strong></div>
+          <div><span>Zdobyte XP</span><strong id="sumXp">0</strong></div>
+          <div><span>Passa</span><strong id="sumStreak">0 dni</strong></div>
+        </div>
+        <p id="nextReviewInfo" class="next-review">Następna powtórka jutro.</p>
+        <button class="primary big" data-nav="today">Wróć do ekranu Dzisiaj</button>
+      </div>
+    </section>
+
+    <section id="progressScreen" class="screen" data-title="Postępy">
+      <div class="page-heading"><p class="eyebrow">Twoje wyniki</p><h1>Postępy</h1></div>
+      <div class="xp-card"><span>Łącznie XP</span><strong id="statXp">0</strong><small id="statLevel">Poziom 1</small></div>
+      <div class="stats-primary"><div class="stat"><span>Passa</span><strong id="statStreak">0 dni</strong></div><div class="stat"><span>Skuteczność</span><strong id="statAcc">0%</strong></div></div>
+      <div class="stats-secondary"><div><span>Opanowane słówka</span><strong id="mastered">0</strong></div><div><span>W nauce</span><strong id="learning">0</strong></div><div><span>Do powtórki</span><strong id="weak">0</strong></div><div><span>Najlepsza seria</span><strong id="bestStreak">0</strong></div></div>
+      <div class="card"><h2>Postęp według trybu</h2><div id="modeStats" class="mode-stats"></div></div>
+      <div class="card"><h2>Aktywność z 14 dni</h2><div id="history14" class="history-grid"></div></div>
+      <div class="card"><h2>Najczęstsze błędy</h2><div id="mistakes" class="list"></div></div>
+    </section>
+
+    <section id="moreScreen" class="screen" data-title="Więcej">
+      <div class="page-heading"><p class="eyebrow">Pozostałe funkcje</p><h1>Więcej</h1></div>
+      <div class="menu-list">
+        <button data-nav="materials"><svg class="icon"><use href="#i-book"/></svg><span><strong>Materiały</strong><small>Przeglądaj słówka, zdania i dialogi.</small></span><svg class="icon chevron"><use href="#i-chevron"/></svg></button>
+        <button data-nav="settings"><svg class="icon"><use href="#i-settings"/></svg><span><strong>Ustawienia</strong><small>Dostosuj naukę, wygląd i przypomnienia.</small></span><svg class="icon chevron"><use href="#i-chevron"/></svg></button>
+        <button data-action="export"><svg class="icon"><use href="#i-download"/></svg><span><strong>Eksport</strong><small>Utwórz kopię postępu i ustawień.</small></span><svg class="icon chevron"><use href="#i-chevron"/></svg></button>
+        <button data-action="import"><svg class="icon"><use href="#i-upload"/></svg><span><strong>Import</strong><small>Przywróć dane z poprawnego pliku JSON.</small></span><svg class="icon chevron"><use href="#i-chevron"/></svg></button>
+        <button data-nav="help"><svg class="icon"><use href="#i-help"/></svg><span><strong>Pomoc</strong><small>Sprawdź, jak działa nauka i statystyki.</small></span><svg class="icon chevron"><use href="#i-chevron"/></svg></button>
+        <button data-nav="info"><svg class="icon"><use href="#i-info"/></svg><span><strong>Informacje</strong><small>Prywatność, mikrofon i wersja programu.</small></span><svg class="icon chevron"><use href="#i-chevron"/></svg></button>
+      </div>
+    </section>
+
+    <section id="materialsScreen" class="screen" data-title="Materiały">
+      <div class="page-heading"><button class="back-btn" data-nav="more">Wróć</button><p class="eyebrow">Baza nauki</p><h1>Materiały</h1></div>
+      <div class="card filters"><input id="searchInput" type="search" placeholder="Szukaj słowa, kategorii albo zdania"><select id="levelFilter"></select><select id="trackFilter"></select></div>
+      <div class="card"><div class="between"><h2>Lista materiałów</h2><span id="baseCount" class="badge">0</span></div><div id="baseList" class="list"></div></div>
+    </section>
+
+    <section id="settingsScreen" class="screen" data-title="Ustawienia">
+      <div class="page-heading"><button class="back-btn" data-nav="more">Wróć</button><p class="eyebrow">Dostosuj aplikację</p><h1>Ustawienia</h1></div>
+      <div class="settings-page">
+        <section class="card settings-section"><h2>Nauka</h2><div class="settings-grid">
+          <label class="setting-field"><span>Poziom</span><select id="defaultLevel"></select></label>
+          <label class="setting-field"><span>Ścieżka</span><select id="defaultTrack"></select></label>
+          <label class="setting-field"><span>Dzienny cel zadań</span><input id="dailyGoal" type="number" min="5" max="100"></label>
+          <label class="setting-field"><span>Liczba nowych słówek</span><input id="dailyNew" type="number" min="1" max="50"></label>
+          <label class="setting-field"><span>Liczba powtórek</span><input id="dailyReview" type="number" min="1" max="100"></label>
+        </div></section>
+
+        <section class="card settings-section"><h2>Powiadomienia</h2><div class="settings-grid">
+          <label class="switch-row"><span>Codzienne przypomnienie</span><input id="reminderEnabled" type="checkbox"></label>
+          <label class="setting-field"><span>Orientacyjna godzina</span><input id="reminderTime" type="time"></label>
+          <label class="switch-row"><span>Dźwięk powiadomienia</span><input id="notificationSound" type="checkbox"></label>
+        </div><p class="setting-note">Przeglądarka i system mogą opóźnić przypomnienie. Ta funkcja nie zastępuje budzika.</p></section>
+
+        <section class="card settings-section"><h2>Wygląd</h2><div class="settings-grid">
+          <label class="setting-field"><span>Motyw</span><select id="themeMode"><option value="system">Zgodny z telefonem</option><option value="light">Jasny</option><option value="dark">Ciemny</option></select></label>
+          <label class="setting-field"><span>Wielkość tekstu</span><select id="fontSize"><option value="small">Mała</option><option value="normal">Normalna</option><option value="large">Duża</option><option value="xlarge">Bardzo duża</option></select></label>
+          <label class="switch-row"><span>Subtelne animacje</span><input id="animationsEnabled" type="checkbox"></label>
+        </div></section>
+
+        <section class="card settings-section"><h2>Dźwięk i mowa</h2><div class="settings-grid">
+          <label class="switch-row"><span>Lektor</span><input id="voiceEnabled" type="checkbox"></label>
+          <label class="switch-row"><span>Automatyczne odtwarzanie</span><input id="autoSpeak" type="checkbox"></label>
+          <label class="switch-row"><span>Czytaj przykład zdania</span><input id="preferExample" type="checkbox"></label>
+          <label class="setting-field"><span>Akcent</span><select id="voiceLang"></select></label>
+          <label class="setting-field"><span>Głos</span><select id="voiceName"></select></label>
+          <label class="setting-field"><span>Prędkość</span><input id="voiceRate" type="number" min="0.5" max="1.4" step="0.05"></label>
+          <label class="setting-field"><span>Liczba powtórzeń</span><input id="voiceRepeat" type="number" min="1" max="4"></label>
+        </div><p class="setting-note">Rozpoznawanie mowy zamienia wypowiedź na tekst. Nie jest profesjonalną oceną wymowy ani akcentu.</p></section>
+
+        <section class="card settings-section"><h2>Tryb samochodowy</h2><div class="settings-grid">
+          <label class="setting-field"><span>Pauza po odpowiedzi</span><input id="carPause" type="number" min="1" max="8" step="1"></label>
+          <label class="switch-row"><span>Automatycznie przechodź dalej</span><input id="carAutoNext" type="checkbox"></label>
+        </div></section>
+
+        <section id="dataSettings" class="card settings-section wide"><h2>Dane</h2><div class="settings-actions">
+          <button id="exportBtn" class="secondary">Eksportuj dane</button><button id="importBtn" class="secondary">Importuj dane</button><button id="resetBtn" class="danger">Usuń cały postęp</button>
+        </div><textarea id="dataBox" placeholder="Tutaj pojawią się dane eksportu albo wklej dane do importu"></textarea><p id="dataStatus" class="setting-note"></p></section>
+
+        <section class="card settings-section wide"><h2>Zaawansowane</h2><div class="advanced-list">
+          <button id="refreshBtn" class="secondary">Odśwież pliki aplikacji</button>
+          <div><span>Wersja programu</span><strong>5.8.2</strong></div>
+          <div><span>Zapis danych</span><strong>Lokalnie w urządzeniu</strong></div>
+        </div><p class="setting-note">Odświeżenie plików aplikacji usuwa pamięć podręczną programu, ale nie usuwa postępu.</p></section>
+      </div>
+    </section>
+
+    <section id="helpScreen" class="screen" data-title="Pomoc">
+      <div class="page-heading"><button class="back-btn" data-nav="more">Wróć</button><p class="eyebrow">Zasady działania</p><h1>Jak działa nauka?</h1></div>
+      <div class="info-stack">
+        <article class="card"><h2>Nauka, powtórka i test</h2><p>Nauka wprowadza nowy materiał. Powtórka przywraca zadania zaplanowane przez system. Test miesza kilka typów ćwiczeń i sprawdza aktualną znajomość materiału.</p></article>
+        <article class="card"><h2>Opanowanie materiału</h2><p>Materiał jest uznawany za opanowany dopiero po poprawnych odpowiedziach w co najmniej pięciu różnych dniach i przy odpowiedniej skuteczności. Jedna dobra seria nie wystarcza, bo pamięć ludzka lubi udawać, że wszystko już umie.</p></article>
+        <article class="card"><h2>XP, passa i skuteczność</h2><p>XP pokazuje wykonaną pracę. Passa rośnie po nauce w kolejnych dniach kalendarzowych. Skuteczność to udział poprawnych odpowiedzi we wszystkich odpowiedziach.</p></article>
+        <article class="card"><h2>Błędy i warianty odpowiedzi</h2><p>Aplikacja toleruje drobne literówki, popularne skróty i zapis bez nieistotnej interpunkcji. Błędy znaczenia, przeczenia, czasu lub szyku są wskazywane osobno.</p></article>
+      </div>
+    </section>
+
+    <section id="infoScreen" class="screen" data-title="Informacje">
+      <div class="page-heading"><button class="back-btn" data-nav="more">Wróć</button><p class="eyebrow">Prywatność i technika</p><h1>Informacje</h1></div>
+      <div class="info-stack">
+        <article class="card"><h2>Dane użytkownika</h2><p>Postęp, ustawienia i historia sesji są zapisywane lokalnie w pamięci przeglądarki. Eksport tworzy kopię JSON, a import zastępuje bieżący stan dopiero po pełnej walidacji typów, wersji, identyfikatorów, historii i aktywnej sesji.</p></article>
+        <article class="card"><h2>Mikrofon</h2><p>Przeglądarka może przekazywać mowę do własnej usługi rozpoznawania. Aplikacja nie zapisuje nagrań dźwiękowych, zapisuje wyłącznie rozpoznany tekst i wynik zadania.</p></article>
+        <article class="card"><h2>Usuwanie danych</h2><p>Funkcja „Usuń cały postęp” usuwa postęp, statystyki, ustawienia, historię sesji oraz klucze pozostałe po starszych wersjach. Operacji nie można cofnąć bez wcześniejszego eksportu.</p></article>
+        <article class="card"><h2>Wersja</h2><p>Angielski Daily Trainer 5.8.2. Aplikacja działa jako PWA i może korzystać z zapisanych plików także bez internetu.</p></article>
+      </div>
+    </section>
+  </main>
+
+  <nav class="bottomnav" aria-label="Główna nawigacja">
+    <button class="nav" data-nav="today"><svg class="icon"><use href="#i-home"/></svg><span>Dzisiaj</span></button>
+    <button class="nav" data-nav="study"><svg class="icon"><use href="#i-book"/></svg><span>Nauka</span></button>
+    <button class="nav" data-nav="progress"><svg class="icon"><use href="#i-chart"/></svg><span>Postępy</span></button>
+    <button class="nav" data-nav="more"><svg class="icon"><use href="#i-menu"/></svg><span>Więcej</span></button>
+  </nav>
 </div>
-</section>
-</main>
-<nav class="bottomnav"><button class="nav" data-nav="today"><span>⌂</span>Dzisiaj</button><button class="nav" data-nav="learn"><span>▶</span>Nauka</button><button class="nav" data-nav="reviews"><span>↺</span>Powtórki</button><button class="nav" data-nav="progress"><span>◷</span>Postępy</button><button class="nav" data-nav="base"><span>▤</span>Baza</button><button class="nav" data-nav="settings"><span>⚙</span>Ustaw.</button></nav>
-</div>
-<script src="learning-core.js?v=5.7.4" defer></script>
-<script src="data.js?v=5.7.4" defer></script>
-<script src="dialogues.js?v=5.7.4" defer></script>
-<script src="script.js?v=5.7.4" defer></script>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<dialog id="confirmDialog" class="modal"><form method="dialog"><h2 id="confirmTitle">Potwierdź</h2><p id="confirmMessage"></p><div class="dialog-actions"><button value="cancel" class="secondary">Anuluj</button><button id="confirmOk" value="ok" class="danger">Potwierdź</button></div></form></dialog>
+<dialog id="carWarningDialog" class="modal"><form method="dialog"><h2>Bezpieczny tryb samochodowy</h2><p>Skonfiguruj tryb przed rozpoczęciem jazdy. Podczas prowadzenia pojazdu nie patrz na ekran i nie obsługuj telefonu ręcznie.</p><label class="switch-row"><span>Nie pokazuj ponownie</span><input id="carWarningDismiss" type="checkbox"></label><div class="dialog-actions"><button value="cancel" class="secondary">Anuluj</button><button value="ok" class="primary">Rozumiem, rozpocznij</button></div></form></dialog>
+<dialog id="onboardingDialog" class="onboarding-modal">
+  <form method="dialog">
+    <div class="onboarding-progress"><span id="onboardingBar"></span></div>
+    <section class="onboarding-step" data-step="1"><p class="eyebrow">Krok 1 z 5</p><h1>Witaj.</h1><p>Ta aplikacja pomoże Ci uczyć się angielskiego każdego dnia. Postęp jest przechowywany lokalnie na tym urządzeniu.</p></section>
+    <section class="onboarding-step hidden" data-step="2"><p class="eyebrow">Krok 2 z 5</p><h1>Wybierz poziom.</h1><label class="setting-field"><span>Poziom nauki</span><select id="onboardingLevel"></select></label></section>
+    <section class="onboarding-step hidden" data-step="3"><p class="eyebrow">Krok 3 z 5</p><h1>Wybierz tematykę.</h1><label class="setting-field"><span>Ścieżka nauki</span><select id="onboardingTrack"></select></label></section>
+    <section class="onboarding-step hidden" data-step="4"><p class="eyebrow">Krok 4 z 5</p><h1>Ustal dzienny cel.</h1><label class="setting-field"><span>Liczba zadań</span><input id="onboardingGoal" type="number" min="5" max="100" value="20"></label><p class="muted">Na początek wystarczy około 15–20 krótkich zadań.</p></section>
+    <section class="onboarding-step hidden" data-step="5"><p class="eyebrow">Krok 5 z 5</p><h1>Rozpocznij pierwszą lekcję.</h1><p>System będzie mieszał nowy materiał z powtórkami i pokaże postęp po każdym zadaniu.</p></section>
+    <div class="dialog-actions onboarding-actions"><button id="onboardingBack" type="button" class="secondary hidden">Wstecz</button><button id="onboardingNext" type="button" class="primary">Dalej</button></div>
+  </form>
+</dialog>
+
+<script src="learning-core.js?v=5.8.2" defer></script>
+<script src="data.js?v=5.8.2" defer></script>
+<script src="dialogues.js?v=5.8.2" defer></script>
+<script src="script.js?v=5.8.2" defer></script>
 </body>
 </html>

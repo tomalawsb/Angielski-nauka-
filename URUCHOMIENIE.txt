@@ -1,19 +1,4 @@
-URUCHOMIENIE ANGIELSKI DAILY TRAINER v5.7.4
+URUCHOMIENIE ANGIELSKI DAILY TRAINER v5.8.2
 
-1. Wgraj wszystkie pliki z paczki do jednego katalogu na serwerze HTTPS.
-2. Otwórz index.html w Chrome lub Edge.
-3. Zainstaluj aplikację z menu przeglądarki.
-4. Po pierwszym pełnym uruchomieniu aplikacja może działać offline.
-5. Dane postępu pozostają w pamięci przeglądarki. Aktualizacja zachowuje dotychczasowy klucz danych.
-
-Test lokalny na komputerze:
-- otwórz terminal w katalogu aplikacji,
-- uruchom: python -m http.server 8080
-- wejdź na: http://localhost:8080
-
-Testy automatyczne:
-- uruchom: node node-tests.js
-- oczekiwany wynik: wszystkie testy zaliczone.
-
-Aktualizacja GitHub:
-- uruchom plik AKTUALIZUJ_GITHUB.ps1; skrypt nie zadaje pytań i wysyła bieżącą wersję na gałąź main.
+Uruchom index.html przez lokalny serwer HTTP, aby Service Worker i funkcje PWA działały poprawnie.
+Do kontroli dołączono tests.html oraz node-tests.js.

@@ -180,6 +180,38 @@
     return issues;
   }
 
+
+  function grammarIssues(answerWords, expectedWords) {
+    const issues = [];
+    const auxiliaries = [
+      ['am','is','are','was','were'], ['do','does','did'], ['have','has','had'],
+      ['can','could'], ['will','would'], ['shall','should'], ['may','might'], ['must']
+    ];
+    for (const group of auxiliaries) {
+      const expected = group.find(word => expectedWords.includes(word));
+      const answer = group.find(word => answerWords.includes(word));
+      if (expected && answer && expected !== answer) {
+        issues.push({ code: 'grammar', message: `Nieprawidłowa forma gramatyczna: „${answer}” zamiast „${expected}”.` });
+        break;
+      }
+    }
+    const prepositions = new Set(['at','in','on','to','for','from','with','about','of','by','into','over','under','before','after','during','without','within','through']);
+    const expectedPreps = expectedWords.filter(word => prepositions.has(word));
+    const answerPreps = answerWords.filter(word => prepositions.has(word));
+    if (expectedPreps.length && answerPreps.join('|') !== expectedPreps.join('|')) {
+      issues.push({ code: 'preposition', message: `Sprawdź przyimek. Oczekiwano: ${expectedPreps.join(', ')}.` });
+    }
+    const commonStem = (a,b) => {
+      const strip = word => word.replace(/(ing|ed|es|s)$/,'');
+      const sa=strip(a),sb=strip(b);return sa.length>=3&&sb.length>=3&&(sa===sb||sa.startsWith(sb)||sb.startsWith(sa));
+    };
+    for (const expected of expectedWords) {
+      const answer = answerWords.find(word => word !== expected && commonStem(word, expected));
+      if (answer) { issues.push({ code: 'verb_form', message: `Sprawdź formę wyrazu: „${answer}” zamiast „${expected}”.` }); break; }
+    }
+    return issues;
+  }
+
   function answerScore(answer, expected) {
     const a = canonicalText(answer), e = canonicalText(expected);
     if (!a || !e) return { score: 0, status: 'wrong', label: 'Źle', issues: [{ code: 'empty', message: 'Brak odpowiedzi.' }], expected };
@@ -193,7 +225,7 @@
     const recall = matched / Math.max(ew.length, 1);
     const f1 = precision + recall ? 2 * precision * recall / (precision + recall) : 0;
     const order = sentence ? sequenceScore(aw, ew) : 1;
-    const issues = semanticIssues(aw, ew);
+    const issues = [...semanticIssues(aw, ew), ...grammarIssues(aw, ew)];
     const severe = issues.some(issue => issue.severe);
 
     const matchedExpected = new Set(alignment.pairs.map(pair => pair.ei));

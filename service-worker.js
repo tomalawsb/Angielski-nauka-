@@ -1,19 +1,19 @@
 'use strict';
-const CACHE_NAME='english-trainer-v5.7.4';
+const CACHE_NAME='english-trainer-v5.8.2';
 const APP_SHELL=[
-  './',
-  './index.html',
-  './learning-core.js',
-  './data.js',
-  './dialogues.js',
-  './script.js',
-  './manifest.json',
-  './icon-192.png',
-  './icon-512.png'
+  './','./index.html','./styles.css','./learning-core.js','./data.js','./dialogues.js','./script.js','./manifest.json','./icon-192.png','./icon-512.png'
 ];
 
+async function safeCachePut(cache,request,response){
+  try{await cache.put(request,response);}catch(error){console.warn('Nie udało się zapisać pliku w cache:',request.url||request,error);}
+}
+
 self.addEventListener('install',event=>{
-  event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.addAll(APP_SHELL)).then(()=>self.skipWaiting()));
+  event.waitUntil((async()=>{
+    const cache=await caches.open(CACHE_NAME);
+    await cache.addAll(APP_SHELL);
+    await self.skipWaiting();
+  })());
 });
 
 self.addEventListener('activate',event=>{
@@ -34,11 +34,10 @@ self.addEventListener('fetch',event=>{
     event.respondWith((async()=>{
       try{
         const response=await fetch(request);
-        const cache=await caches.open(CACHE_NAME);
-        cache.put('./index.html',response.clone());
+        if(response&&response.ok){const cache=await caches.open(CACHE_NAME);await safeCachePut(cache,'./index.html',response.clone());}
         return response;
-      }catch(_){
-        return (await caches.match(request))||(await caches.match('./index.html'));
+      }catch(error){
+        return (await caches.match(request,{ignoreSearch:true}))||(await caches.match('./index.html'))||new Response('Aplikacja jest niedostępna offline.',{status:503,statusText:'Offline'});
       }
     })());
     return;
@@ -46,28 +45,20 @@ self.addEventListener('fetch',event=>{
 
   event.respondWith((async()=>{
     const cached=await caches.match(request,{ignoreSearch:true});
-    const network=fetch(request).then(async response=>{
-      if(response&&response.ok){const cache=await caches.open(CACHE_NAME);cache.put(request,response.clone());}
+    const networkPromise=fetch(request).then(async response=>{
+      if(response&&response.ok){const cache=await caches.open(CACHE_NAME);await safeCachePut(cache,request,response.clone());}
       return response;
-    }).catch(()=>null);
-    return cached||(await network)||new Response('Offline',{status:503,statusText:'Offline'});
+    }).catch(error=>{console.warn('Błąd sieci:',request.url,error);return null;});
+    return cached||(await networkPromise)||new Response('Offline',{status:503,statusText:'Offline'});
   })());
-});
-
-self.addEventListener('periodicsync',event=>{
-  if(event.tag!=='daily-learning-reminder')return;
-  event.waitUntil(self.registration.showNotification('Czas na angielski',{
-    body:'Zrób krótką sesję lub sprawdź dzisiejsze powtórki.',
-    icon:'./icon-192.png',badge:'./icon-192.png',tag:'daily-learning-reminder'
-  }));
 });
 
 self.addEventListener('notificationclick',event=>{
   event.notification.close();
   event.waitUntil((async()=>{
-    const clientsList=await self.clients.matchAll({type:'window',includeUncontrolled:true});
-    const existing=clientsList.find(client=>'focus'in client);
+    const list=await self.clients.matchAll({type:'window',includeUncontrolled:true});
+    const existing=list.find(client=>'focus'in client);
     if(existing){await existing.focus();return;}
-    if(self.clients.openWindow)await self.clients.openWindow('./index.html?v=5.7.4');
+    if(self.clients.openWindow)await self.clients.openWindow('./index.html?v=5.8.2');
   })());
 });
