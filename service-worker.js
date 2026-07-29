@@ -1,5 +1,5 @@
 'use strict';
-const CACHE_NAME='english-trainer-v5.7.3';
+const CACHE_NAME='english-trainer-v5.7.4';
 const APP_SHELL=[
   './',
   './index.html',
@@ -68,6 +68,6 @@ self.addEventListener('notificationclick',event=>{
     const clientsList=await self.clients.matchAll({type:'window',includeUncontrolled:true});
     const existing=clientsList.find(client=>'focus'in client);
     if(existing){await existing.focus();return;}
-    if(self.clients.openWindow)await self.clients.openWindow('./index.html?v=5.7.3');
+    if(self.clients.openWindow)await self.clients.openWindow('./index.html?v=5.7.4');
   })());
 });

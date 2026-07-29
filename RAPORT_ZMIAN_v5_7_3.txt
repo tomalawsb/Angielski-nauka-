@@ -1,8 +1,0 @@
-ANGIELSKI DAILY TRAINER v5.7.3
-
-- Naprawiono niewidoczne znaki w filtrze trybu „Słówka”.
-- Krótkie zdania z zaimkami nie trafiają już do słówek.
-- Poprawiono kontrast przycisków w ciemnym motywie.
-- Usunięto zbędne opisy pod przyciskami trybów.
-- Skrócono informacje w ustawieniach.
-- Dodano AKTUALIZUJ_GITHUB.ps1 do automatycznej aktualizacji repozytorium.

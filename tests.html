@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Testy v5.7.3</title>
+  <title>Testy v5.7.4</title>
   <style>body{font-family:system-ui;padding:20px;background:#f8fafc}pre{background:#fff;border:1px solid #ddd;padding:16px;border-radius:12px;white-space:pre-wrap}</style>
 </head>
 <body>
-<h1>Testy v5.7.3</h1>
+<h1>Testy v5.7.4</h1>
 <pre id="out">Start...</pre>
-<iframe id="app" src="index.html?v=5.7.3" style="width:390px;height:700px;border:1px solid #ddd"></iframe>
+<iframe id="app" src="index.html?v=5.7.4" style="width:390px;height:700px;border:1px solid #ddd"></iframe>
 <script>
 const out=document.getElementById('out');
 const frame=document.getElementById('app');
@@ -51,9 +51,14 @@ frame.onload=()=>setTimeout(()=>{
       ['baza nie ma powtórzonych haseł',new Set(T.WORDS.map(word=>T.normalize(word.english+'|'+word.polish))).size===T.WORDS.length],
       ['ustawienia mają motyw',!!frame.contentDocument.getElementById('themeMode')],
       ['ustawienia mają wielkość czcionki',!!frame.contentDocument.getElementById('fontSize')],
+      ['tryb Słówka zawiera wyłącznie pojedyncze słowa',T.practiceQueue('vocab').every(task=>T.wordsOf(T.WORDS.find(word=>word.id===task.wordId).english).length===1)],
+      ['tryb Zdania zawiera wyłącznie pełne zdania',T.practiceQueue('sentences').every(task=>T.isSentenceItem(T.WORDS.find(word=>word.id===task.wordId)))],
+      ['Pisanie słówek nie zawiera zdań',T.practiceQueue('writing').every(task=>T.wordsOf(T.WORDS.find(word=>word.id===task.wordId).english).length===1)],
+      ['ustawienia są podzielone na sekcje',['Nauka','Wygląd','Dźwięk i mowa','Tryb samochodowy','Przypomnienia','Dane'].every(label=>[...frame.contentDocument.querySelectorAll('#settingsScreen h3')].some(node=>node.textContent===label))],
+      ['dolna nawigacja ma obsługę klawiatury',frame.contentDocument.documentElement.innerHTML.includes('body.keyboard-open .bottomnav')],
       ['krótkie zdania nie są słówkami',['I suggest','I recommend','I noticed','it depends','let me check','before we start'].every(english=>!T.isVocabularyItem({id:'test_'+english,english,polish:'test'}))],
       ['usunięto opisy pod trybami',!frame.contentDocument.body.textContent.includes('wybór tłumaczenia i krótkie odpowiedzi')],
-      ['wersja interfejsu to 5.7.3',frame.contentDocument.body.textContent.includes('v5.7.3')]
+      ['wersja interfejsu to 5.7.4',frame.contentDocument.body.textContent.includes('v5.7.4')]
     ];
     const failed=tests.filter(test=>!test[1]);
     out.textContent=tests.map(test=>(test[1]?'✅ ':'❌ ')+test[0]).join('\n')+`\n\nWynik: ${tests.length-failed.length}/${tests.length} OK`;

@@ -86,7 +86,7 @@ const same=T.advanceProgress(p,true,'2026-07-01');
 test('drugi sukces tego samego dnia nie zwiększa etapu',same.intervalIndex===p.intervalIndex);
 for(const day of ['2026-07-02','2026-07-05','2026-07-12','2026-07-26'])p=T.advanceProgress(p,true,day);
 test('opanowanie wymaga pięciu dni',p.status==='mastered'&&p.successDays.length===5);
-test('wersja interfejsu 5.7.3',html.includes('v5.7.3'));
+test('wersja interfejsu 5.7.4',html.includes('v5.7.4'));
 test('sztuczny przykład nie trafia do ćwiczeń zdań',T.sentenceEn(T.WORDS.find(w=>w.english==='person'))==='person');
 test('użyteczny dłuższy przykład pozostaje',T.sentenceEn(T.WORDS.find(w=>w.id==='praca_a1_0003_i_need_to_check_the_cable')).includes('before installation'));
 const carTasks=T.practiceQueue('car');
@@ -117,7 +117,7 @@ test('ustawienia zawierają przypomnienia',html.includes('id="reminderEnabled"')
 const manifest=JSON.parse(fs.readFileSync(path.join(root,'manifest.json'),'utf8'));
 test('PWA pozwala na obrót ekranu',manifest.orientation==='any');
 const serviceWorker=fs.readFileSync(path.join(root,'service-worker.js'),'utf8');
-test('Service Worker ma cache offline',serviceWorker.includes('english-trainer-v5.7.3')&&serviceWorker.includes('cache.addAll'));
+test('Service Worker ma cache offline',serviceWorker.includes('english-trainer-v5.7.4')&&serviceWorker.includes('cache.addAll'));
 test('Service Worker obsługuje przypomnienia okresowe',serviceWorker.includes('periodicsync'));
 
 
@@ -136,12 +136,24 @@ test('krótkie zdania nie są słówkami',[
   'I suggest','I recommend','I noticed','it depends','let me check','before we start'
 ].every(english=>!T.isVocabularyItem({id:'test_'+english,english,polish:'test'})));
 test('filtr słówek używa prawidłowych granic wyrazów',!fs.readFileSync(path.join(root,'script.js')).includes(Buffer.from([8])));
-test('ciemny motyw ma kontrast przycisków',html.includes('html[data-theme="dark"] .secondary')&&html.includes('color:#f8fafc')&&html.includes('html[data-theme="dark"] .danger'));
+test('ciemny motyw ma komplet zmiennych kolorów',html.includes('html[data-theme="dark"]')&&html.includes('--surface:#111827')&&html.includes('--text:#f8fafc')&&html.includes('--border:#334155'));
+
 test('usunięto zbędne opisy trybów',!html.includes('wybór tłumaczenia i krótkie odpowiedzi')&&!html.includes('tryby nauki'));
 
 test('ustawienia zawierają motyw i wielkość czcionki',html.includes('id="themeMode"')&&html.includes('id="fontSize"'));
 state.settings.themeMode='dark';state.settings.fontSize='large';T.applyAppearance();
 test('motyw i rozmiar czcionki są stosowane',elements.get('appRoot').dataset.theme==='dark'&&elements.get('appRoot').dataset.fontSize==='large');
+
+const strictVocab=T.practiceQueue('vocab');
+test('każde zadanie Słówka ma dokładnie jedno angielskie słowo',strictVocab.every(task=>T.wordsOf(T.WORDS.find(w=>w.id===task.wordId)?.english).length===1));
+const sentenceTasks=T.practiceQueue('sentences');
+test('każde zadanie Zdania ma pełne zdanie',sentenceTasks.length>0&&sentenceTasks.every(task=>T.isSentenceItem(T.WORDS.find(w=>w.id===task.wordId))));
+const writingTasks=T.practiceQueue('writing');
+test('Pisanie słówek nie pobiera zdań',writingTasks.length>0&&writingTasks.every(task=>T.wordsOf(T.WORDS.find(w=>w.id===task.wordId)?.english).length===1));
+test('ustawienia są podzielone na sekcje', ['Nauka','Wygląd','Dźwięk i mowa','Tryb samochodowy','Przypomnienia','Dane'].every(label=>html.includes('<h3>'+label+'</h3>')));
+test('dolna nawigacja chowa się przy klawiaturze',html.includes('body.keyboard-open .bottomnav')&&html.includes('body:has(input:focus,textarea:focus) .bottomnav')&&fs.readFileSync(path.join(root,'script.js'),'utf8').includes('setupKeyboardHandling'));
+test('etykieta Pisanie słówek jest jednoznaczna',html.includes('Pisanie słówek'));
+
 state.settings.defaultLevel='A1';state.settings.defaultTrack='all';
 
 const failed=tests.filter(([,ok])=>!ok);

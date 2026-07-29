@@ -1,6 +1,6 @@
 
 'use strict';
-const APP_VERSION='5.7.3';
+const APP_VERSION='5.7.4';
 const WORDS=window.TRAINER_WORDS||[];
 const DIALOGUE_SCENES=window.DIALOGUE_SCENES||{};
 const WORD_ALIASES=window.TRAINER_WORD_ALIASES||{};
@@ -98,11 +98,45 @@ function startReminderClock(){
 function levels(){return [...new Set(WORDS.map(w=>w.level).filter(Boolean))].sort((a,b)=>['A1','A2','B1','B2','C1','C2'].indexOf(a)-['A1','A2','B1','B2','C1','C2'].indexOf(b));}
 function tracks(){return [...new Set(WORDS.map(w=>w.track).filter(Boolean))].sort();}
 function fillSelect(id,opts){const el=$(id); if(el)el.innerHTML=opts.map(o=>`<option value="${esc(o[0])}">${esc(o[1])}</option>`).join('');}
-function boot(){state=loadState();applyAppearance();bind();setupFilters();setupVoices();syncSettings();renderAll();show('today');registerServiceWorker().then(()=>configureReminders(false));startReminderClock();}
+function boot(){state=loadState();applyAppearance();bind();setupKeyboardHandling();setupSystemThemeListener();setupFilters();setupVoices();syncSettings();renderAll();show('today');registerServiceWorker().then(()=>configureReminders(false));startReminderClock();}
+
+function setupSystemThemeListener(){
+  if(typeof matchMedia!=='function')return;
+  const media=matchMedia('(prefers-color-scheme: dark)');
+  const refresh=()=>{if(state?.settings?.themeMode==='system')applyAppearance();};
+  if(typeof media.addEventListener==='function')media.addEventListener('change',refresh);
+  else if(typeof media.addListener==='function')media.addListener(refresh);
+}
+function setupKeyboardHandling(){
+  const body=document.body;
+  if(!body)return;
+  const isTypingField=element=>!!element&&['INPUT','TEXTAREA'].includes(element.tagName)&&element.type!=='checkbox';
+  const activate=event=>{
+    if(!isTypingField(event.target))return;
+    body.classList.add('input-active');
+    setTimeout(()=>event.target?.scrollIntoView?.({block:'center',behavior:'smooth'}),180);
+  };
+  const deactivate=event=>{
+    if(!isTypingField(event.target))return;
+    setTimeout(()=>{if(!isTypingField(document.activeElement))body.classList.remove('input-active');},120);
+  };
+  document.addEventListener('focusin',activate);
+  document.addEventListener('focus',activate,true);
+  document.addEventListener('focusout',deactivate);
+  document.addEventListener('blur',deactivate,true);
+  if(window.visualViewport){
+    const update=()=>body.classList.toggle('keyboard-open',window.visualViewport.height<window.innerHeight-140);
+    window.visualViewport.addEventListener('resize',update);
+    window.visualViewport.addEventListener('scroll',update);
+    update();
+  }
+}
+
 function bind(){document.querySelectorAll('[data-nav]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.nav)));document.querySelectorAll('[data-practice]').forEach(b=>b.addEventListener('click',()=>startPractice(b.dataset.practice)));
 $('startBtn')?.addEventListener('click',startSmart);$('reviewBtn')?.addEventListener('click',startReviews);$('checkBtn')?.addEventListener('click',checkAnswer);$('micBtn')?.addEventListener('click',startSpeechAnswer);$('nextBtn')?.addEventListener('click',nextCard);$('dontKnowBtn')?.addEventListener('click',()=>mark(false,'Nie wiem'));$('speakBtn')?.addEventListener('click',speak);$('refreshBtn')?.addEventListener('click',hardRefresh);
 ['searchInput','levelFilter','trackFilter'].forEach(id=>$(id)?.addEventListener('input',renderBase));['levelFilter','trackFilter'].forEach(id=>$(id)?.addEventListener('change',renderBase));
 ['dailyNew','dailyReview','defaultLevel','defaultTrack','themeMode','fontSize','voiceEnabled','voiceLang','voiceName','voiceRate','voiceRepeat','autoSpeak','preferExample','carPause','carAutoNext','reminderTime'].forEach(id=>$(id)?.addEventListener('change',saveSettings));
+['themeMode','fontSize'].forEach(id=>$(id)?.addEventListener('input',saveSettings));
 $('reminderEnabled')?.addEventListener('change',async()=>{saveSettings();await configureReminders(true);});
 $('exportBtn')?.addEventListener('click',()=>{$('dataBox').value=JSON.stringify(state,null,2)});$('importBtn')?.addEventListener('click',importData);$('resetBtn')?.addEventListener('click',resetProgress);
 document.addEventListener('click',e=>{const cmd=e.target.closest('[data-car]'); if(cmd){handleCarCommand(cmd.dataset.car);return;} const c=e.target.closest('.choice'); if(!c||checked)return; document.querySelectorAll('.choice').forEach(x=>x.classList.remove('selected')); c.classList.add('selected'); selectedChoice=c.dataset.choice;});
@@ -123,7 +157,7 @@ function applyAppearance(){
     meta.content=dark?'#0f172a':'#2563eb';
   }
 }
-function show(name){if(name!=='learn'){stopCarRecognition();clearCarTimer();try{if('speechSynthesis'in window)speechSynthesis.cancel();}catch(_ ){}}document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.nav').forEach(n=>n.classList.toggle('active',n.dataset.nav===name));const s=$(name+'Screen');if(s){s.classList.add('active');$('title').textContent=s.dataset.title||'Angielski';} renderAll();}
+function show(name){if(name!=='learn'){document.body?.classList.remove('input-active','keyboard-open');stopCarRecognition();clearCarTimer();try{if('speechSynthesis'in window)speechSynthesis.cancel();}catch(_ ){}}document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.nav').forEach(n=>n.classList.toggle('active',n.dataset.nav===name));const s=$(name+'Screen');if(s){s.classList.add('active');$('title').textContent=s.dataset.title||'Angielski';} renderAll();}
 function prog(id){
   const targetId=WORD_ALIASES[id]||id;
   state.items[targetId]=migrateProgress(state.items[targetId]||{},todayKey());
@@ -155,12 +189,22 @@ function activeWords(){
   });
 }
 function isVocabularyItem(w){
-  if(!w||/^(praca_|scene_)/.test(String(w.id||'')))return false;
+  if(!w)return false;
   const text=String(w.english||'').trim();
-  const words=wordsOf(text);
-  if(!text||words.length<1||words.length>4||/[.!?]/.test(text))return false;
-  if(/\b(i|you|he|she|it|we|they|me|him|her|us|them)\b/i.test(text))return false;
-  return !/^(this|that|there|can|could|will|would|shall|should|do|does|did|is|are|am|was|were|have|has|had|let|please)\b/i.test(text);
+  return !!text&&wordsOf(text).length===1&&!/[.!?,;:]/.test(text);
+}
+function isSentenceItem(w){
+  if(!w)return false;
+  return wordsOf(sentenceEn(w)).length>=3;
+}
+function practiceBase(predicate,target){
+  const selected=[];const ids=new Set();
+  const add=(word,kind)=>{if(!word||ids.has(word.id)||!predicate(word))return;selected.push(task(word,kind));ids.add(word.id);};
+  due().filter(predicate).slice(0,state.settings.dailyReview).forEach(word=>add(word,'review'));
+  weak().filter(predicate).slice(0,5).forEach(word=>add(word,'weak'));
+  fresh().filter(predicate).slice(0,state.settings.dailyNew).forEach(word=>add(word,'new'));
+  for(const word of activeWords()){if(selected.length>=target)break;add(word,prog(word.id).seen?'review':'new');}
+  return selected.slice(0,target);
 }
 function hasQualityExample(w){
   const en=String(w.examples?.[0]?.en||'').trim();
@@ -173,20 +217,15 @@ function hasQualityExample(w){
 function sentenceEn(w){return hasQualityExample(w)?w.examples[0].en:w.english;}
 function sentencePl(w){return hasQualityExample(w)?w.examples[0].pl:w.polish;}
 function practiceQueue(kind){
+  const target=Math.max(6,state.settings.dailyNew+state.settings.dailyReview);
   let base=queue(false);
-  if(!base.length)base=activeWords().slice(0,state.settings.dailyNew+state.settings.dailyReview).map(w=>task(w,'new'));
-  if(kind==='vocab'){
-    const target=Math.max(6,state.settings.dailyNew+state.settings.dailyReview);
-    const selected=[];const ids=new Set();
-    for(const t of base){const w=WORDS.find(x=>x.id===t.wordId);if(w&&isVocabularyItem(w)&&!ids.has(w.id)){selected.push(t);ids.add(w.id);}}
-    for(const w of activeWords()){if(selected.length>=target)break;if(isVocabularyItem(w)&&!ids.has(w.id)){selected.push(task(w,prog(w.id).seen?'review':'new'));ids.add(w.id);}}
-    return selected.slice(0,target).map(t=>({...t,mode:t.kind==='new'?'word_choice':'word_write'}));
-  }
-  if(kind==='sentences')return base.filter(t=>sentenceEn(WORDS.find(w=>w.id===t.wordId)).includes(' ')).map(t=>({...t,mode:'sentence_translate'}));
-  if(kind==='writing')return base.map(t=>({...t,mode:'word_write'}));
+  if(!base.length)base=activeWords().slice(0,target).map(w=>task(w,'new'));
+  if(kind==='vocab')return practiceBase(isVocabularyItem,target).map(t=>({...t,mode:t.kind==='new'?'word_choice':'word_write'}));
+  if(kind==='sentences')return practiceBase(isSentenceItem,target).map(t=>({...t,mode:'sentence_translate'}));
+  if(kind==='writing')return practiceBase(isVocabularyItem,target).map(t=>({...t,mode:'word_write'}));
   if(kind==='listening')return base.map(t=>({...t,mode:'listening_write'}));
   if(kind==='lector')return base.map(t=>({...t,mode:'speaker_repeat'}));
-  if(kind==='speaking')return base.filter(t=>sentenceEn(WORDS.find(w=>w.id===t.wordId)).includes(' ')).map(t=>({...t,mode:'speaking'}));
+  if(kind==='speaking')return practiceBase(isSentenceItem,target).map(t=>({...t,mode:'speaking'}));
   if(kind==='car'){
     const carBase=activeWords().filter(w=>sentenceEn(w).includes(' '));
     const seen=new Set();
@@ -219,8 +258,19 @@ function practiceQueue(kind){
   if(kind==='test')return base.map((t,i)=>({...t,mode:['word_choice','word_write','sentence_translate','listening_write','speaking'][i%5]}));
   return base;
 }
-function startPractice(kind){const q=practiceQueue(kind); if(!q.length){alert('Brak zadań dla tego trybu przy obecnym poziomie/ścieżce.');return;} startSession(q,kind);}
-function startSmart(){const q=practiceQueue('test'); if(!q.length){alert('Brak zadań. Zmień poziom/ścieżkę albo zwiększ limit nowych słówek.');return;} startSession(q,'test');}
+function startPractice(kind){
+  const q=practiceQueue(kind);
+  if(!q.length){
+    const message=kind==='vocab'||kind==='writing'
+      ?'Brak pojedynczych słów dla wybranego poziomu i ścieżki.'
+      :kind==='sentences'||kind==='speaking'
+        ?'Brak pełnych zdań dla wybranego poziomu i ścieżki.'
+        :'Brak zadań dla wybranego poziomu i ścieżki.';
+    alert(message);return;
+  }
+  startSession(q,kind);
+}
+function startSmart(){const q=practiceQueue('test'); if(!q.length){alert('Brak zadań. Zmień poziom/ścieżkę albo zwiększ limit nowych zadań.');return;} startSession(q,'test');}
 function startReviews(){const q=queue(true); if(!q.length){alert('Nie masz zaległych powtórek.');return;} startSession(q,'reviews');}
 function startSession(q,practice='mixed'){session={queue:q,index:0,correct:0,wrong:0,xp:0,practice};checked=false;selectedChoice=null;$('emptyLesson').classList.add('hidden');$('summary').classList.add('hidden');$('lessonCard').classList.remove('hidden');show('learn');renderLesson();}
 function curTask(){return session?.queue?.[session.index]||null;} function curWord(){const t=curTask();return t?WORDS.find(w=>w.id===t.wordId):null;}
@@ -240,8 +290,8 @@ function acceptedAnswers(w,m){
 }
 function scoreTaskAnswer(answer,w,m){return bestAnswerScore(answer,acceptedAnswers(w,m));}
 function promptFor(w,m){
-  if(m==='word_choice'||m==='en_pl')return {label:m==='word_choice'?'Wybierz tłumaczenie':'Przetłumacz na polski',prompt:w.english,hint:'Wybierz lub wpisz polskie znaczenie.'};
-  if(m==='sentence_translate')return {label:'Przetłumacz całe zdanie na angielski',prompt:sentencePl(w),hint:'Liczy się znaczenie, kompletność i prawidłowy szyk.'};
+  if(m==='word_choice'||m==='en_pl')return {label:m==='word_choice'?'Wybierz znaczenie słowa':'Przetłumacz słowo na polski',prompt:w.english,hint:''};
+  if(m==='sentence_translate')return {label:'Przetłumacz zdanie na angielski',prompt:sentencePl(w),hint:''};
   if(m==='listening_write')return {label:'Posłuchaj i wpisz po angielsku',prompt:'Kliknij „Odsłuchaj” i wpisz to, co usłyszysz.',hint:'Ćwiczysz rozumienie ze słuchu i dokładny zapis.'};
   if(m==='speaker_repeat')return {label:'Z lektorem',prompt:sentencePl(w),hint:'Odsłuchaj, powtórz na głos i wpisz po angielsku.'};
   if(m==='speaking')return {label:'Rozpoznawanie odpowiedzi głosowej',prompt:sentencePl(w),hint:'Aplikacja sprawdza tekst rozpoznany przez przeglądarkę, nie jakość wymowy.'};
@@ -250,9 +300,9 @@ function promptFor(w,m){
     return {label:`${scene?.conversation||'Scenka'} • krok ${scene?.turn||1}/${scene?.total||1}`,prompt:scene?.promptPl||sentencePl(w),hint:`${scene?.role||'Rozmowa'} — ${scene?.context||'Odpowiedz naturalnym pełnym zdaniem po angielsku.'}`};
   }
   if(m==='car_voice')return {label:'Tryb samochodowy',prompt:sentencePl(w),hint:'Słuchaj i odpowiadaj bez pisania. Komendy podczas angielskiego nasłuchu: next, repeat, slower, stop.'};
-  return {label:'Przetłumacz na angielski',prompt:w.polish,hint:'Wpisz odpowiedź po angielsku.'};
+  return {label:'Przetłumacz słowo na angielski',prompt:w.polish,hint:''};
 }
-function renderLesson(){const t=curTask(),w=curWord(); if(!t||!w)return finish(); checked=false; selectedChoice=null;clearCarTimer();$('lessonCard').classList.toggle('car-active',t.mode==='car_voice');$('lessonMode').textContent=(t.kind==='new'?'nowe':t.kind==='weak'?'słabe':'powtórka')+' • '+modeLabel(t.mode);$('lessonProgress').textContent=`${session.index+1} / ${session.queue.length}`;$('bar').style.width=`${Math.round(session.index/session.queue.length*100)}%`;$('feedback').className='feedback hidden';$('feedback').textContent='';$('checkBtn').classList.remove('hidden');$('nextBtn').classList.add('hidden');$('dontKnowBtn').disabled=false;$('micBtn')?.classList.toggle('hidden',!['speaking'].includes(t.mode));$('micStatus')?.classList.add('hidden');lastSpeechText=''; const p=promptFor(w,t.mode);$('promptLabel').textContent=p.label;$('prompt').textContent=p.prompt;$('hint').textContent=`${w.level} • ${w.track} • ${w.category} — ${p.hint}`;$('answerArea').innerHTML=answerHtml(w,t.mode);if(t.mode==='car_voice'){setCarStatus('Przygotowanie...');setTimeout(()=>carAskCurrent(),350);return;}setTimeout(()=>document.querySelector('.answer')?.focus(),60);if(state.settings.voiceEnabled&&state.settings.autoSpeak&&['listening_write','speaker_repeat','speaking'].includes(t.mode))setTimeout(()=>speak(),250);}
+function renderLesson(){const t=curTask(),w=curWord(); if(!t||!w)return finish(); checked=false; selectedChoice=null;clearCarTimer();$('lessonCard').classList.toggle('car-active',t.mode==='car_voice');$('lessonMode').textContent=(t.kind==='new'?'nowe':t.kind==='weak'?'słabe':'powtórka')+' • '+modeLabel(t.mode);$('lessonProgress').textContent=`${session.index+1} / ${session.queue.length}`;$('bar').style.width=`${Math.round(session.index/session.queue.length*100)}%`;$('feedback').className='feedback hidden';$('feedback').textContent='';$('checkBtn').classList.remove('hidden');$('nextBtn').classList.add('hidden');$('dontKnowBtn').disabled=false;$('micBtn')?.classList.toggle('hidden',!['speaking'].includes(t.mode));$('micStatus')?.classList.add('hidden');lastSpeechText=''; const p=promptFor(w,t.mode);$('promptLabel').textContent=p.label;$('prompt').textContent=p.prompt;$('hint').textContent=[w.level,w.track,w.category,p.hint].filter(Boolean).join(' • ');$('answerArea').innerHTML=answerHtml(w,t.mode);if(t.mode==='car_voice'){setCarStatus('Przygotowanie...');setTimeout(()=>carAskCurrent(),350);return;}setTimeout(()=>{const answer=document.querySelector('.answer');if(answer){answer.focus();document.body?.classList.add('input-active');}},60);if(state.settings.voiceEnabled&&state.settings.autoSpeak&&['listening_write','speaker_repeat','speaking'].includes(t.mode))setTimeout(()=>speak(),250);}
 function answerHtml(w,m){if(m==='car_voice')return `<div class="car-panel"><div id="carStatus" class="car-status">Start trybu samochodowego</div><div class="car-prompt">${esc(sentencePl(w))}</div><input class="answer hidden" autocomplete="off"><div id="speechTranscript" class="transcript hidden"></div><div class="car-command-grid"><button class="car-command primary-car" data-car="listen">Mów teraz</button><button class="car-command" data-car="repeat">Powtórz</button><button class="car-command" data-car="skip">Dalej</button><button class="car-command" data-car="slower">Wolniej</button><button class="car-command stop-car" data-car="stop">Stop</button></div><div class="car-tip">Komendy podczas angielskiego nasłuchu: next, repeat, slower, stop, show answer. Po dwóch nieudanych próbach aplikacja poda poprawną odpowiedź i przejdzie dalej.</div></div>`; if(m==='speaking')return `<div class="micline"><input class="answer" autocomplete="off" placeholder="Tu pojawi się rozpoznana mowa — możesz poprawić ręcznie"></div><div id="speechTranscript" class="transcript hidden"></div>`; if(m==='word_choice'){const pool=activeWords().filter(x=>x.id!==w.id&&x.level===w.level&&isVocabularyItem(x));const ch=shuffle([w,...shuffle(pool).slice(0,3)]);return `<div class="choices">${ch.map(c=>`<button class="choice" data-choice="${esc(c.polish)}">${esc(c.polish)}</button>`).join('')}</div>`;} return `<input class="answer" autocomplete="off" placeholder="Wpisz odpowiedź">`;}
 function checkAnswer(){if(checked)return;const w=curWord(),t=curTask();if(!w||!t)return;const ans=t.mode==='word_choice'?(selectedChoice||''):(document.querySelector('.answer')?.value||'');if(!ans.trim()){alert('Najpierw wpisz albo wybierz odpowiedź.');return;}const result=scoreTaskAnswer(ans,w,t.mode);mark(result.status==='correct',ans,result);}
 function mark(ok,ans,result=null){
@@ -399,5 +449,5 @@ async function hardRefresh(){
 function importData(){try{state=migrate(JSON.parse($('dataBox').value));save();syncSettings();renderAll();alert('Import zakończony.')}catch(_ ){alert('Nieprawidłowe dane importu.')}}
 function resetProgress(){if(!confirm('Usunąć postępy?'))return;state=defState();save();syncSettings();renderAll();}
 function percent(a,b){return b?Math.round(a/b*100)+'%':'0%';}function clamp(v,min,max){return Math.min(max,Math.max(min,v));}function shuffle(a){return [...a].sort(()=>Math.random()-.5);}function esc(s){return String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
-window.__trainerTests={normalize,todayKey,isCloseEnough,answerScore,bestAnswerScore,migrateProgress,advanceProgress,migrate,isVoiceAllowed,acceptedAnswers,scoreTaskAnswer,wordsOf,dl,WORDS,WORD_ALIASES,practiceQueue,modeLabel,expected,handleVoiceCommand,matchesStudyFilters,isVocabularyItem,due,weak,activeWords,getState:()=>state,applyAppearance,DIALOGUE_SCENES,hasQualityExample,sentenceEn,uniqueTasks};
+window.__trainerTests={normalize,todayKey,isCloseEnough,answerScore,bestAnswerScore,migrateProgress,advanceProgress,migrate,isVoiceAllowed,acceptedAnswers,scoreTaskAnswer,wordsOf,dl,WORDS,WORD_ALIASES,practiceQueue,modeLabel,expected,handleVoiceCommand,matchesStudyFilters,isVocabularyItem,isSentenceItem,practiceBase,due,weak,activeWords,getState:()=>state,applyAppearance,DIALOGUE_SCENES,hasQualityExample,sentenceEn,uniqueTasks};
 document.addEventListener('DOMContentLoaded',()=>{try{boot();}catch(e){console.error(e);err(e.message||e);}});

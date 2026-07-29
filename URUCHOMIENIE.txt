@@ -1,4 +1,4 @@
-URUCHOMIENIE ANGIELSKI DAILY TRAINER v5.7.3
+URUCHOMIENIE ANGIELSKI DAILY TRAINER v5.7.4
 
 1. Wgraj wszystkie pliki z paczki do jednego katalogu na serwerze HTTPS.
 2. Otwórz index.html w Chrome lub Edge.
