@@ -1,0 +1,12 @@
+TEST NA TELEFONIE – ANGIELSKI DAILY TRAINER v5.8.5
+
+Po aktualizacji sprawdź:
+1. Poprzednie XP, passa, ustawienia i historia nadal są widoczne.
+2. Ekrany Dzisiaj, Nauka, Postępy i Więcej otwierają się bez błędu.
+3. Zwykła nauka i powtórki uruchamiają się jak wcześniej.
+4. Pisanie, słuchanie, mówienie, dialogi i samochód nie pokazują materiału, którego wcześniej nie poznano.
+5. Tryb samochodowy działa z wcześniej poznanymi zdaniami.
+6. Eksport danych tworzy zapis wersji 5.8.5, a ponowny import nie zgłasza błędu.
+7. Po wdrożeniu na serwer otwórz tests.html. Oczekiwany wynik zestawu przeglądarkowego: 39/39.
+
+W tej wersji nie ma jeszcze ekranu kursu. Dziesięć lekcji A1 istnieje wyłącznie jako bezpieczny szkielet danych w statusie draft. Interfejs kursu powstanie w Pakiecie 3.

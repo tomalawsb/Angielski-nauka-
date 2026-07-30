@@ -1,15 +1,31 @@
 'use strict';
-const VERSION='5.8.3';
-const CACHE_NAME='english-trainer-v5.8.3';
+const VERSION='5.8.6-p3';
+const CACHE_NAME='english-trainer-v5.8.6-p3';
 const APP_SHELL=[
-  './index.html?app=5.8.3',
-  './bootstrap-v5.8.3.js',
-  './styles-v5.8.3.css',
-  './learning-core-v5.8.3.js',
-  './data-v5.8.3.js',
-  './dialogues-v5.8.3.js',
-  './script-v5.8.3.js',
-  './manifest-v5.8.3.json',
+  './index.html?app=5.8.6-p3',
+  './js/bootstrap-v5.8.6.js',
+  './css/styles-v5.8.6.css',
+  './js/learning-core-v5.8.6.js',
+  './js/course-core-v5.8.6.js',
+  './data/materials-v5.8.6.js',
+  './data/dialogues-v5.8.6.js',
+  './data/course-catalog-v5.8.6.js',
+  './js/app-state-v5.8.6.js',
+  './js/storage-v5.8.6.js',
+  './js/pwa-services-v5.8.6.js',
+  './js/reminders-v5.8.6.js',
+  './js/settings-v5.8.6.js',
+  './js/navigation-v5.8.6.js',
+  './js/review-engine-v5.8.6.js',
+  './js/course-engine-v5.8.6.js',
+  './js/course-ui-v5.8.6.js',
+  './js/exercise-engine-v5.8.6.js',
+  './js/statistics-v5.8.6.js',
+  './js/speech-v5.8.6.js',
+  './js/car-mode-v5.8.6.js',
+  './js/data-io-v5.8.6.js',
+  './js/app-v5.8.6.js',
+  './manifest-v5.8.6.json',
   './icon-192.png',
   './icon-512.png'
 ];
@@ -59,7 +75,7 @@ self.addEventListener('fetch',event=>{
         await put(cache,event.request,response);
         return response;
       }catch(error){
-        if(isDocument)return (await cache.match('./index.html?app=5.8.3'))||(await caches.match(event.request));
+        if(isDocument)return (await cache.match('./index.html?app=5.8.6-p3'))||(await caches.match(event.request));
         return (await cache.match(event.request))||(await caches.match(event.request));
       }
     })());
@@ -84,6 +100,6 @@ self.addEventListener('notificationclick',event=>{
     const list=await self.clients.matchAll({type:'window',includeUncontrolled:true});
     const existing=list.find(client=>'focus' in client);
     if(existing){await existing.focus();return;}
-    if(self.clients.openWindow)await self.clients.openWindow('./index.html?app=5.8.3');
+    if(self.clients.openWindow)await self.clients.openWindow('./index.html?app=5.8.6-p3');
   })());
 });

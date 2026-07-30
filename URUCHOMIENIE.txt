@@ -1,7 +1,17 @@
-URUCHOMIENIE ANGIELSKI DAILY TRAINER v5.8.3
+URUCHOMIENIE ANGIELSKI DAILY TRAINER v5.8.6
 
 Aktualizacja GitHub w PowerShell:
 .\AKTUALIZUJ_GITHUB.ps1
 
 Gdy system blokuje skrypt:
 powershell.exe -ExecutionPolicy Bypass -File ".\AKTUALIZUJ_GITHUB.ps1"
+
+Testy automatyczne:
+node node-tests.js
+
+Oczekiwany wynik wersji 5.8.6:
+149/149
+
+Testy przeglądarkowe:
+uruchom lokalny serwer HTTP i otwórz tests.html.
+Nie otwieraj index.html bezpośrednio z dysku, ponieważ Service Worker wymaga HTTP lub HTTPS.

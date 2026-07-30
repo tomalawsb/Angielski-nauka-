@@ -1,0 +1,46 @@
+# Raport audytu – pakiet 1, wersja 5.8.4
+
+## Zakres
+Audyt obejmuje pełną bazę 456 materiałów, 40 scen dialogowych, system powtórek, ocenianie, XP, mowę, tryb samochodowy, import/eksport i strukturę PWA. Wersja 5.8.3 pozostała niezmieniona; wersja 5.8.4 porządkuje kod bez celowej zmiany zachowania.
+
+## Wynik ilościowy
+- Materiały: **456**
+- Aliasy identyfikatorów: **30**
+- Sceny dialogowe: **40** w **9** rozmowach
+- Poziomy: **A1: 95**, **A2: 208**, **B1: 105**, **B2: 48**
+- Ścieżki: Praca: 220, Ogólny: 94, Techniczne: 91, Dialogi: 40, Praktyczne: 11
+- Typy materiałów: zdanie: 275, rzeczownik: 117, zwrot: 22, czasownik: 18, przymiotnik: 16, przysłówek: 8
+
+## Wnioski
+1. Silnik ćwiczeń, powtórek, oceniania, dialogów i trybu samochodowego należy zachować.
+2. Wszystkie materiały wymagają późniejszego przypisania do modułów i lekcji. Nie wykonano tego w pakiecie 1, ponieważ model kursu powstaje w pakiecie 2.
+3. Baza jest silnie zawodowo-techniczna. To atut ścieżki specjalistycznej, lecz nie może zastępować rdzenia ogólnego kursu A1–B2.
+4. Automatyczne reguły oznaczyły **4** materiał(y) A1 jako potencjalnie zbyt złożone dla rdzenia A1 oraz **39** technicznych elementów A1 do pozostawienia w ścieżce specjalistycznej.
+5. **91** zdań nie ma dodatkowych wariantów odpowiedzi. Nie zawsze jest to błąd, ale warto je uzupełniać podczas budowania lekcji.
+6. Pełna ocena naturalności i poprawności każdego tłumaczenia wymaga końcowej kontroli nauczyciela/metodyka. Plik CSV nie udaje certyfikatu CEFR; wskazuje stan danych i miejsca wymagające uwagi.
+
+## Materiały A1 wymagające kontroli poziomu
+- `scene_a1_003` – **The internet works, but the speed is low.** → Internet działa, ale prędkość jest niska.
+- `scene_a1_007` – **The device must be connected to power.** → Urządzenie musi być podłączone do zasilania.
+- `scene_a1_011` – **The signal is better near the window.** → Sygnał jest lepszy przy oknie.
+- `scene_a1_019` – **The router is too far from the camera.** → Router jest za daleko od kamery.
+
+## Najczęstsze flagi techniczne
+- brak rejestru językowego: **180**
+- zdanie bez wariantów odpowiedzi: **91**
+- słownictwo specjalistyczne A1 – zostawić w ścieżce technicznej, nie w rdzeniu kursu: **39**
+- powtórzony angielski zapis – sprawdzić znaczenia: **12**
+- identyczny zapis EN/PL – sprawdzić zapożyczenie: **6**
+- prawdopodobnie zbyt złożone dla rdzenia A1: **4**
+- długie zdanie jak na przypisany poziom: **2**
+
+## Decyzje dla pakietu 1
+- **Zostawić:** obecne mechanizmy, dane, dialogi, testy, tryb samochodowy i zapis lokalny.
+- **Poprawić później:** metadane kursowe, warianty odpowiedzi, równowagę tematów i wybrane oznaczenia poziomu.
+- **Przenieść poziom:** po ręcznej kontroli przede wszystkim złożone zdania oznaczone jako A1.
+- **Przypisać do lekcji:** wszystkie 456 materiałów w pakiecie 2 i 4.
+- **Usunąć/zastąpić:** tylko po ręcznym potwierdzeniu duplikatu lub nienaturalnej treści. Audyt techniczny nie wykazał podstaw do masowego usuwania bazy.
+
+## Pliki audytu
+- `AUDYT_456_MATERIALOW_v5_8_4.csv` – pełna tabela 456 wpisów.
+- `RAPORT_AUDYTU_PAKIET_1_v5_8_4.md` – niniejsze podsumowanie.

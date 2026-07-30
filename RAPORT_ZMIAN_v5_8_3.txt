@@ -1,9 +1,0 @@
-ANGIELSKI DAILY TRAINER v5.8.3
-
-- Naprawiono mieszanie starego JavaScriptu z nowym HTML po aktualizacji PWA.
-- Pliki uruchomieniowe mają nazwy zawierające numer wersji.
-- Kod, CSS, manifest i dokument HTML są pobierane w strategii network-first.
-- Service Worker pomija pamięć HTTP podczas sprawdzania aktualizacji.
-- Po przejęciu kontroli przez nowy Service Worker aplikacja przeładowuje się jednokrotnie.
-- Zachowano postęp zapisany przez wersję 5.8.2.
-- Dodano zabezpieczenia przed zapisem textContent do nieistniejących elementów.

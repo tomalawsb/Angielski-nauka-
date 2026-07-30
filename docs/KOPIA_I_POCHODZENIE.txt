@@ -1,0 +1,10 @@
+KOPIA I POCHODZENIE
+
+Wersja źródłowa zachowana bez zmian: 5.8.3
+Pakiet 1: 5.8.4 – audyt i podział kodu na moduły
+Pakiet 2: 5.8.5 – model kursu, rozdzielenie rodzajów sesji i zaliczanie lekcji
+
+Wersja wynikowa: 5.8.5
+Data: 30 lipca 2026
+
+Zmiany 5.8.5 nie publikują jeszcze lekcji. Dziesięć lekcji pilotażowych A1 ma status draft i stanowi bezpieczny szkielet dla następnych pakietów.

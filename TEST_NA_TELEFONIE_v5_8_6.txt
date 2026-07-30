@@ -1,0 +1,9 @@
+SZYBKI TEST NA TELEFONIE – WERSJA 5.8.6
+
+1. Uruchom aplikację i sprawdź, czy na górze widzisz kartę kursu A1.
+2. Naciśnij „Zobacz plan kursu” i sprawdź listę 10 lekcji.
+3. Zmień poziom na A2 i wróć do A1.
+4. Otwórz zakładkę „Trening” i uruchom zwykłe ćwiczenie.
+5. Otwórz „Postępy” i sprawdź, czy postęp kursu jest nad kartą XP.
+6. Zamknij i ponownie uruchom aplikację, aby sprawdzić zapis wybranego poziomu.
+7. Sprawdź jasny i ciemny motyw oraz duży tekst.

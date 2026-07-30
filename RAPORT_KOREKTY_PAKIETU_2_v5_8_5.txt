@@ -1,0 +1,18 @@
+KOREKTA PAKIETU 2 – ANGIELSKI DAILY TRAINER v5.8.5
+Data: 30 lipca 2026
+
+POPRAWIONO
+1. Kurs nie pobiera zaległych materiałów spoza bieżącej lekcji.
+2. Kluczowe materiały mogą blokować zaliczenie lekcji do czasu osiągnięcia wymaganego wyniku.
+3. Otwarte zadanie końcowe wymaga obiektywnych kryteriów treści; przypadkowe słowa nie są zaliczane.
+4. Stan kursu zapisuje odblokowane moduły i migruje starszy stan kursu do schematu 2.
+5. Cache Service Workera otrzymał rewizję p2fix1, aby wymusić aktualizację plików PWA.
+
+WERYFIKACJA
+- testy automatyczne Node: 138/138,
+- składnia wszystkich plików JavaScript: poprawna,
+- wszystkie lokalne zasoby index.html istnieją,
+- dokument etapów zaktualizowany i sprawdzony po renderowaniu.
+
+WERDYKT
+Pakiet 2 po korekcie jest gotowy. Następny zakres: Pakiet 3 (Etap 4 + Etap 8).

@@ -1,0 +1,40 @@
+RAPORT PAKIETU 2 – ANGIELSKI DAILY TRAINER v5.8.5
+Data: 30 lipca 2026
+
+ZREALIZOWANE ETAPY
+- Etap 2. Utworzenie modelu kursu
+- Etap 3. Zmiana silnika doboru materiału
+- Etap 7. Mechanizm zaliczania lekcji
+
+WPROWADZONE ELEMENTY
+1. Model poziomów, modułów i lekcji z walidacją schematu.
+2. Katalog poziomów A1, A2, B1 i B2.
+3. Szkielet 10 lekcji pilotażowych A1 w statusie draft.
+4. Osobny stan kursu: odblokowane lekcje i moduły, wyniki, próby, ostatnia lekcja, ukończone moduły i poznane materiały.
+5. Migracja zapisu z wersji 5.8.4 oraz starszych obsługiwanych wersji.
+6. Rozdzielenie źródeł sesji: kurs, powtórka, trening dodatkowy i samochód.
+7. Zasada niewprowadzania niepoznanego materiału w pisaniu, słuchaniu, mówieniu, dialogach i samochodzie.
+8. Budowanie kolejki lekcji w kolejności: powtórka, wprowadzenie, rozpoznawanie, pisanie, słuchanie, mówienie, dialog i zadanie końcowe.
+9. Wyniki lekcji: mastered, completed, review_required oraz retry; zadania końcowe są oceniane według jawnych kryteriów treści.
+10. Odblokowywanie kolejnej lekcji i modułu, kontrola kluczowych materiałów oraz planowanie dodatkowych powtórek po błędach.
+11. Walidacja importu danych kursu, aktywnej sesji i historii lekcji.
+12. Rozszerzenie Service Workera o nowe pliki kursu.
+
+CELOWO NIEWPROWADZONE
+- Nowy ekran kursu i postępu. Powstanie w Pakiecie 3.
+- Przypisanie materiałów i publikacja lekcji. Powstanie w Pakiecie 4.
+
+WERYFIKACJA
+- testy Node: 138/138,
+- testy składni wszystkich plików JavaScript: zaliczone,
+- wszystkie 29 zasobów HTTP: dostępne,
+- brak brakujących odwołań z index.html i Service Workera,
+- baza 456 materiałów, 40 scen dialogowych, CSS i ikony: identyczne z 5.8.4,
+- żadna funkcja z 5.8.4 nie została usunięta,
+- dodano 34 funkcje związane z kursem.
+
+OGRANICZENIE ŚRODOWISKA
+Kontenerowy Chromium nie uruchamia nawet prostej strony testowej i zawiesza proces. Zestaw 39 testów przeglądarkowych został zaktualizowany, ale końcowy test należy uruchomić na telefonie lub zwykłym komputerze przez lokalny serwer HTTP.
+
+NASTĘPNY ZAKRES
+Pakiet 3: Etap 4 + Etap 8.

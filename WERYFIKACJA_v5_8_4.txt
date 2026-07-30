@@ -1,0 +1,19 @@
+WERYFIKACJA ANGIELSKI DAILY TRAINER v5.8.4
+
+- Test bazowy przed zmianami: 105/105.
+- Testy po podziale kodu: 111/111.
+- Składnia JavaScript: poprawna dla wszystkich plików.
+- Zasoby wskazane przez index.html: kompletne.
+- Kontrola HTTP lokalnych zasobów: 21/21 odpowiedzi poprawnych.
+- Migracja zapisu z klucza v583: obecna i sprawdzona testem.
+- Service Worker zawiera wszystkie moduły uruchomieniowe.
+- Pełny audyt CSV: 456 wierszy materiałów + nagłówek.
+
+NIEZMIENIONE BAJTOWO ZASOBY TREŚCIOWE
+- baza materiałów: TAK
+- dialogi: TAK
+- silnik oceniania: TAK
+- style: TAK
+
+OGRANICZENIE ŚRODOWISKA
+Próba pełnego uruchomienia w kontenerowym Chromium została zablokowana przez środowisko D-Bus/Chromium. Nie traktowano jej jako zaliczonego testu. Działanie logiki zweryfikowano w środowisku VM testów, kontrolą składni, kompletności zasobów i lokalnym serwerem HTTP. Końcowy test ręczny należy wykonać na telefonie po instalacji paczki.

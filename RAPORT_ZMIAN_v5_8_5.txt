@@ -1,0 +1,26 @@
+ANGIELSKI DAILY TRAINER v5.8.5 – RAPORT ZMIAN
+
+DODANO
+- js/course-core-v5.8.5.js
+- js/course-engine-v5.8.5.js
+- data/course-catalog-v5.8.5.js
+- stan course w danych użytkownika
+- migrację klucza localStorage z v5.8.4 do v5.8.5
+- źródło sesji: course, review, practice lub car
+- etapy i wyniki lekcji
+- walidację katalogu i danych postępu kursu
+- testy mechanizmu kursu, kluczowych materiałów, kryteriów zadań końcowych i zaliczania
+
+ZMIENIONO
+- pisanie, słuchanie, mówienie, dialogi i samochód nie pobierają świeżego materiału,
+- mieszany trening przedstawia świeży materiał przez wybór znaczenia,
+- zapis sesji obsługuje metadane lekcji i wyniki zadań,
+- Service Worker buforuje pliki modelu kursu,
+- wersję aplikacji podniesiono do 5.8.5.
+
+NIE ZMIENIONO
+- wyglądu aplikacji,
+- bazy 456 materiałów,
+- 40 scen dialogowych,
+- stylów i ikon,
+- dotychczasowych funkcji treningowych, XP, passy i powtórek.

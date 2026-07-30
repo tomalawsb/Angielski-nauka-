@@ -1,0 +1,30 @@
+STATUS ETAPÓW – 30 LIPCA 2026
+
+PAKIET 1: ZAKOŃCZONY
+- Etap 0. Kopia i dokładny audyt obecnej wersji: ZAKOŃCZONY
+- Etap 1. Uporządkowanie kodu: ZAKOŃCZONY
+
+PAKIET 2: ZAKOŃCZONY
+- Etap 2. Utworzenie modelu kursu: ZAKOŃCZONY
+- Etap 3. Zmiana silnika doboru materiału: ZAKOŃCZONY
+- Etap 7. Mechanizm zaliczania lekcji: ZAKOŃCZONY
+
+PAKIET 3: ZAKOŃCZONY
+- Etap 4. Przeprojektowanie ekranu głównego: ZAKOŃCZONY
+- Etap 8. System postępu kursu: ZAKOŃCZONY
+
+AKTUALNA WERSJA: 5.8.6
+TESTY AUTOMATYCZNE NODE: 149/149
+TESTY INTERFEJSU W SILNIKU CHROMIUM: 8/8
+
+WAŻNE:
+- Ekran główny prowadzi teraz do kursu, powtórek, treningu i postępu poziomu.
+- Tryby ćwiczeń przeniesiono do zakładki „Trening”.
+- Plan kursu pokazuje 10 lekcji A1 w statusie „W przygotowaniu”.
+- Postęp kursu i XP są liczone osobno.
+- Lekcje pozostają nieopublikowane do Pakietu 4, ponieważ nie mają jeszcze przypisanej pełnej treści.
+
+NASTĘPNY PAKIET: 4
+- Etap 5. Utworzenie pilotażowego modułu A1
+- Etap 6. Rozszerzenie bazy materiałów dla pilota
+- Dostosowanie trybu samochodowego do materiału poznanego w kursie

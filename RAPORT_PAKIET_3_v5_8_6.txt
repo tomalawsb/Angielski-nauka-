@@ -1,0 +1,34 @@
+RAPORT PAKIETU 3 – ANGIELSKI DAILY TRAINER v5.8.6
+Data: 30 lipca 2026
+
+ZREALIZOWANE ETAPY
+- Etap 4. Przeprojektowanie ekranu głównego
+- Etap 8. System postępu kursu
+
+WPROWADZONE ELEMENTY
+1. Główna karta „Kontynuuj kurs” z bieżącym poziomem, lekcją, celem i procentem postępu.
+2. Osobny ekran planu kursu z wyborem poziomu, modułami i listą lekcji.
+3. Czytelne oznaczenia lekcji: w przygotowaniu, zablokowana, dostępna, w trakcie, zaliczona, do powtórki i opanowana.
+4. Uproszczony ekran główny: kurs, powtórki, trening dodatkowy, postęp poziomu i dzienna aktywność.
+5. Przeniesienie wszystkich trybów ćwiczeń do zakładki „Trening”.
+6. Oddzielenie ukończenia kursu od aktywności XP.
+7. Statystyki kursu: lekcje, moduły, procent poziomu, poznany i opanowany materiał, gramatyka w nauce oraz obszary do powtórki.
+8. Lista umiejętności „Potrafię…” powiązana z celami lekcji.
+9. Statystyki trybu samochodowego: liczba sesji i skuteczność odpowiedzi.
+10. Migracja zapisu z wersji 5.8.5 do 5.8.6 bez utraty danych.
+11. Nowy moduł course-ui oraz aktualizacja PWA i Service Workera.
+
+CELOWO NIEWPROWADZONE
+- Publikacja lekcji A1 i przypisanie pełnej treści. To zakres Pakietu 4.
+- Automatyczne zestawy samochodowe z ukończonych lekcji. To zakres Pakietu 4.
+
+WERYFIKACJA
+- testy Node: 149/149,
+- testy interfejsu w Chromium: 8/8,
+- brak błędów JavaScript w uruchomionym interfejsie,
+- sprawdzone ekrany telefonu 412 × 915: Dzisiaj, Plan kursu i Postępy,
+- wszystkie lokalne zasoby istnieją i są buforowane przez Service Workera,
+- szkielet 10 lekcji A1 pozostaje bezpiecznie nieopublikowany.
+
+NASTĘPNY ZAKRES
+Pakiet 4: Etap 5 + Etap 6 + integracja trybu samochodowego z materiałem kursu.

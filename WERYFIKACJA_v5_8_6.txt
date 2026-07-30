@@ -1,0 +1,15 @@
+WERYFIKACJA ANGIELSKI DAILY TRAINER 5.8.6
+
+1. Testy Node: 149/149.
+2. Testy interfejsu Chromium: 8/8.
+3. Brak błędów JavaScript podczas renderowania ekranów.
+4. Sprawdzone widoki telefonu:
+   - ekran Dzisiaj,
+   - plan kursu,
+   - ekran Postępy.
+5. Sprawdzono zmianę poziomu kursu A1 → A2.
+6. Sprawdzono, że 10 lekcji A1 jest widoczne jako plan, ale pozostaje zablokowane do czasu publikacji.
+7. Sprawdzono oddzielne liczenie postępu kursu i XP.
+8. Sprawdzono migrację klucza zapisu z 5.8.5.
+
+Końcowo zalecany jest zwykły test instalacji PWA na telefonie użytkownika.

@@ -1,0 +1,31 @@
+WERYFIKACJA ANGIELSKI DAILY TRAINER v5.8.5
+Data: 30 lipca 2026
+
+1. TESTY AUTOMATYCZNE NODE
+Wynik: 138/138.
+
+2. SKŁADNIA
+Wszystkie pliki JavaScript, dane kursu i oba pliki Service Workera przeszły `node --check`.
+
+3. ZASOBY
+- index.html: brak brakujących plików i powtórzonych identyfikatorów HTML,
+- Service Worker: 27 wpisów zasobów, wszystkie istnieją,
+- lokalny serwer HTTP: 29/29 sprawdzonych adresów zwróciło HTTP 200.
+
+4. REGRESJA TREŚCI I WYGLĄDU
+Porównanie z 5.8.4:
+- materials: identyczne,
+- dialogues: identyczne,
+- CSS: identyczny,
+- ikony 192 i 512: identyczne,
+- funkcje z 5.8.4: 144/144 zachowane,
+- nowe funkcje kursu: 34.
+
+5. MIGRACJA
+Testy obejmują zachowanie XP, passy i poznanych materiałów przy migracji 5.8.4 → 5.8.5 oraz walidację importu stanu kursu.
+
+6. TESTY PRZEGLĄDARKOWE
+Zestaw rozszerzono do 39 kontroli. Kontenerowy Chromium zawiesza się także na prostej stronie `data:text/html`, dlatego nie jest użytecznym środowiskiem końcowej weryfikacji. Test należy uruchomić na telefonie lub zwykłym komputerze przez HTTP.
+
+WERDYKT
+Pakiet 2 po korekcie jest gotowy do testu urządzeniowego i stanowi podstawę Pakietu 3.

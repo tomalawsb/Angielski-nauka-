@@ -1,6 +1,6 @@
 'use strict';
 (() => {
-  const VERSION='5.8.3';
+  const VERSION='5.8.6';
   if(!('serviceWorker' in navigator)||!/^https?:$/.test(location.protocol))return;
   let reloading=false;
   navigator.serviceWorker.addEventListener('controllerchange',()=>{
@@ -11,7 +11,7 @@
     reloading=true;
     location.replace(location.pathname+'?app='+VERSION+'&refresh='+Date.now());
   });
-  navigator.serviceWorker.register('./service-worker-v5.8.3.js',{scope:'./',updateViaCache:'none'})
+  navigator.serviceWorker.register('./service-worker-v5.8.6.js',{scope:'./',updateViaCache:'none'})
     .then(async registration=>{
       try{await registration.update();}catch(_){}
       if(registration.waiting)registration.waiting.postMessage({type:'SKIP_WAITING'});

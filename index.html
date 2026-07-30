@@ -8,10 +8,10 @@
   <meta http-equiv="Expires" content="0">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; font-src 'self'; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self'">
   <meta id="themeColorMeta" name="theme-color" content="#2563eb">
-  <link rel="manifest" href="manifest-v5.8.3.json">
-  <link rel="apple-touch-icon" href="icon-192.png?v=5.8.3">
-  <link rel="stylesheet" href="styles-v5.8.3.css">
-  <script src="bootstrap-v5.8.3.js"></script>
+  <link rel="manifest" href="manifest-v5.8.6.json">
+  <link rel="apple-touch-icon" href="icon-192.png?v=5.8.6">
+  <link rel="stylesheet" href="css/styles-v5.8.6.css">
+  <script src="js/bootstrap-v5.8.6.js"></script>
   <title>Angielski Daily Trainer</title>
 </head>
 <body>
@@ -47,38 +47,71 @@
   <main class="content">
     <section id="todayScreen" class="screen" data-title="Dzisiaj">
       <div id="resumeCard" class="resume-card hidden">
-        <div><strong>Niedokończona lekcja</strong><span id="resumeInfo">Możesz wrócić do ostatniego zadania.</span></div>
+        <div><strong>Niedokończona sesja</strong><span id="resumeInfo">Możesz wrócić do ostatniego zadania.</span></div>
         <div class="row"><button id="resumeSessionBtn" class="secondary">Wznów</button><button id="discardSessionBtn" class="text-btn">Usuń</button></div>
       </div>
 
-      <section class="hero-card" aria-labelledby="headline">
-        <p class="eyebrow">Dzisiejsza nauka</p>
-        <h1 id="headline">Gotowy na krótką lekcję?</h1>
-        <p id="subline" class="muted">Program dobierze zadania do poziomu, zaległych powtórek i ustawionego celu.</p>
-        <button id="startBtn" class="primary primary-hero"><svg class="icon"><use href="#i-play"/></svg><span>Rozpocznij dzisiejszą naukę</span></button>
-        <div class="daily-goal">
-          <div class="between"><strong id="goalLabel">Dzisiejszy cel</strong><span id="goalText">0 z 20 zadań</span></div>
-          <div class="progress large"><span id="goalBar"></span></div>
+      <section class="course-home-card" aria-labelledby="courseHomeTitle">
+        <div class="course-home-top">
+          <div class="course-home-copy">
+            <p id="courseHomeEyebrow" class="eyebrow">A1 · Kurs</p>
+            <h1 id="courseHomeTitle">Ładowanie kursu…</h1>
+            <p id="courseHomeGoal" class="muted">Sprawdzam, gdzie zakończyła się ostatnia lekcja.</p>
+          </div>
+          <div class="course-percent" aria-label="Postęp kursu"><strong id="courseHomePercent">0%</strong><span>kursu</span></div>
+        </div>
+        <div class="course-home-progress">
+          <div class="between"><strong>Postęp poziomu</strong><span id="courseHomeProgressText">0 z 0 lekcji</span></div>
+          <div class="progress large"><span id="courseHomeBar"></span></div>
+        </div>
+        <div class="course-home-actions">
+          <button id="courseContinueBtn" class="primary primary-hero"><svg class="icon"><use href="#i-play"/></svg><span>Kontynuuj kurs</span></button>
+          <button class="secondary" data-nav="course">Zobacz plan kursu</button>
         </div>
       </section>
 
-      <section class="section-block">
-        <div class="section-heading"><div><p class="eyebrow">Dodatkowe opcje</p><h2>Pozostałe tryby</h2></div></div>
-        <div class="mode-grid compact">
-          <button class="mode-card" data-practice="vocab"><strong>Nauka słówek</strong><span>Pojedyncze słowa, znaczenia i powtórki.</span></button>
-          <button class="mode-card" data-practice="writing"><strong>Pisanie</strong><span>Przetłumacz słowo i wpisz odpowiedź.</span></button>
-          <button class="mode-card" data-practice="speaking"><strong>Mówienie</strong><span>Powiedz zdanie po angielsku. Mowa jest zamieniana na tekst.</span></button>
-          <button class="mode-card" data-practice="dialogues"><strong>Dialogi</strong><span>Ćwicz pełne rozmowy z klientem.</span></button>
-          <button class="mode-card" data-practice="test"><strong>Test</strong><span>Sprawdź materiał w kilku rodzajach zadań.</span></button>
-          <button class="mode-card" data-practice="car"><strong>Samochód</strong><span>Nauka głosowa bez konieczności patrzenia na ekran.</span></button>
-        </div>
+      <section class="today-grid" aria-label="Dzisiejszy plan">
+        <article class="today-action-card review-action">
+          <p class="eyebrow">Powtórki</p>
+          <strong id="homeReviewCount" class="today-action-number">0</strong>
+          <p id="homeReviewText" class="muted">Brak zaległego materiału.</p>
+          <button id="homeReviewBtn" class="secondary">Rozpocznij powtórki</button>
+        </article>
+        <article class="today-action-card">
+          <p class="eyebrow">Trening dodatkowy</p>
+          <strong id="homeTrainingKnownCount" class="today-action-number">0</strong>
+          <p class="muted">Ćwicz poznane słowa, zdania, dialogi albo tryb samochodowy.</p>
+          <button class="secondary" data-nav="study">Otwórz trening</button>
+        </article>
+        <article class="today-action-card level-action">
+          <div class="between"><p class="eyebrow">Postęp poziomu</p><strong id="homeLevelProgress">0%</strong></div>
+          <h2 id="homeLevelName">A1</h2>
+          <p id="homeLevelDetails" class="muted">0 ukończonych lekcji</p>
+          <div class="progress"><span id="homeLevelBar"></span></div>
+          <button class="text-btn" data-nav="progress">Zobacz szczegóły</button>
+        </article>
+        <article class="today-action-card daily-action">
+          <p class="eyebrow">Aktywność dzisiaj</p>
+          <div class="between"><strong id="goalLabel">Dzienny cel</strong><span id="goalText">0 z 20 zadań</span></div>
+          <div class="progress large"><span id="goalBar"></span></div>
+          <p class="muted">Dzienny cel mierzy aktywność. Ukończenie kursu jest liczone osobno.</p>
+        </article>
       </section>
     </section>
 
-    <section id="studyScreen" class="screen" data-title="Nauka">
-      <div class="page-heading"><p class="eyebrow">Wybierz sposób nauki</p><h1>Nauka</h1><p class="muted">Główna lekcja dobiera materiał automatycznie. Tutaj możesz świadomie wybrać konkretny rodzaj ćwiczenia.</p></div>
+    <section id="courseScreen" class="screen" data-title="Kurs">
+      <div class="page-heading"><button class="back-btn" data-nav="today">Wróć</button><p class="eyebrow">Ścieżka nauki</p><h1>Plan kursu</h1><p class="muted">Lekcje są odblokowywane kolejno. Trening dodatkowy nie zastępuje ukończenia kursu.</p></div>
+      <section class="course-plan-overview card">
+        <div class="course-plan-heading"><label class="setting-field"><span>Poziom kursu</span><select id="courseLevelSelect"></select></label><div class="course-plan-score"><strong id="coursePlanPercent">0%</strong><span id="coursePlanSummary">0 lekcji</span></div></div>
+        <div class="progress large"><span id="coursePlanBar"></span></div>
+      </section>
+      <div id="courseModuleList" class="course-module-list"></div>
+    </section>
+
+    <section id="studyScreen" class="screen" data-title="Trening">
+      <div class="page-heading"><p class="eyebrow">Ćwiczenia poza kursem</p><h1>Trening dodatkowy</h1><p class="muted">Wybierz konkretny rodzaj ćwiczenia. Trening utrwala materiał, ale nie zalicza nowych lekcji kursu.</p></div>
       <div class="mode-grid">
-        <button class="mode-card featured" data-action="smart"><strong>Rozpocznij naukę</strong><span>Mieszana lekcja dopasowana do dzisiejszego planu.</span></button>
+        <button class="mode-card featured" data-action="smart"><strong>Mieszany trening</strong><span>Automatycznie dobrane powtórki i bezpieczne wprowadzenie nowego materiału trenera.</span></button>
         <button class="mode-card" data-practice="vocab"><strong>Nauka słówek</strong><span>Wybieraj znaczenie i zapisuj pojedyncze słowa.</span></button>
         <button class="mode-card" data-practice="sentences"><strong>Zdania</strong><span>Przetłumacz pełne zdania w naturalnym kontekście.</span></button>
         <button class="mode-card" data-practice="writing"><strong>Pisanie</strong><span>Wpisuj odpowiedzi bez podpowiedzi.</span></button>
@@ -89,7 +122,7 @@
         <button class="mode-card" data-practice="test"><strong>Test</strong><span>Połącz wybór, pisanie, słuchanie i mówienie.</span></button>
         <button class="mode-card" data-practice="car"><strong>Samochód</strong><span>Pełna obsługa głosowa. Skonfiguruj tryb przed jazdą.</span></button>
       </div>
-      <div class="card"><div class="between"><div><p class="eyebrow">Dzisiejszy plan</p><h2>Materiał do wykonania</h2></div><span id="queueBadge" class="badge">0 zadań</span></div><div id="queueList" class="list"></div></div>
+      <div class="card"><div class="between"><div><p class="eyebrow">Plan trenera</p><h2>Materiał do wykonania</h2></div><span id="queueBadge" class="badge">0 zadań</span></div><div id="queueList" class="list"></div></div>
       <div class="card"><div class="between"><div><p class="eyebrow">Powtórki</p><h2>Wymagają powtórki</h2></div><button id="reviewBtn" class="secondary">Rozpocznij</button></div><div id="reviewsList" class="list"></div></div>
     </section>
 
@@ -141,7 +174,26 @@
     </section>
 
     <section id="progressScreen" class="screen" data-title="Postępy">
-      <div class="page-heading"><p class="eyebrow">Twoje wyniki</p><h1>Postępy</h1></div>
+      <div class="page-heading"><p class="eyebrow">Rzeczywisty postęp</p><h1>Postępy</h1><p class="muted">Ukończenie kursu i aktywność XP są liczone osobno. Dużo kliknięć nie zamienia się automatycznie w znajomość języka, niestety.</p></div>
+
+      <section class="course-progress-card">
+        <div class="course-progress-head"><div><p class="eyebrow">Kurs <span id="courseProgressLevel">A1</span></p><h2>Postęp poziomu</h2><p id="courseProgressDescription" class="muted">0 ukończonych lekcji</p></div><strong id="courseProgressPercent">0%</strong></div>
+        <div class="progress large"><span id="courseProgressBar"></span></div>
+        <div class="course-stats-grid">
+          <div><span>Ukończone lekcje</span><strong id="courseCompletedLessons">0</strong></div>
+          <div><span>Ukończone moduły</span><strong id="courseCompletedModules">0</strong></div>
+          <div><span>Poznany materiał</span><strong id="courseKnownMaterials">0</strong></div>
+          <div><span>Opanowany materiał</span><strong id="courseMasteredMaterials">0</strong></div>
+          <div><span>Gramatyka w nauce</span><strong id="courseGrammarLearning">0</strong></div>
+          <div><span>Obszary do powtórki</span><strong id="courseReviewAreas">0</strong></div>
+        </div>
+      </section>
+
+      <div class="card"><div class="between"><div><p class="eyebrow">Umiejętności</p><h2>Potrafię…</h2></div><button class="text-btn" data-nav="course">Plan kursu</button></div><div id="courseCanDoList" class="can-do-list"></div></div>
+
+      <div class="card"><div class="between"><div><p class="eyebrow">Tryb samochodowy</p><h2>Utrwalanie głosowe</h2></div></div><div class="car-course-stats"><div><span>Sesje</span><strong id="courseCarSessions">0</strong></div><div><span>Skuteczność odpowiedzi</span><strong id="courseCarAccuracy">0%</strong></div></div></div>
+
+      <div class="activity-heading"><p class="eyebrow">Aktywność</p><h2>XP i regularność</h2></div>
       <div class="xp-card"><span>Łącznie XP</span><strong id="statXp">0</strong><small id="statLevel">Poziom 1</small></div>
       <div class="stats-primary"><div class="stat"><span>Passa</span><strong id="statStreak">0 dni</strong></div><div class="stat"><span>Skuteczność</span><strong id="statAcc">0%</strong></div></div>
       <div class="stats-secondary"><div><span>Opanowane słówka</span><strong id="mastered">0</strong></div><div><span>W nauce</span><strong id="learning">0</strong></div><div><span>Do powtórki</span><strong id="weak">0</strong></div><div><span>Najlepsza seria</span><strong id="bestStreak">0</strong></div></div>
@@ -212,7 +264,7 @@
 
         <section class="card settings-section wide"><h2>Zaawansowane</h2><div class="advanced-list">
           <button id="refreshBtn" class="secondary">Odśwież pliki aplikacji</button>
-          <div><span>Wersja programu</span><strong>5.8.3</strong></div>
+          <div><span>Wersja programu</span><strong>5.8.6</strong></div>
           <div><span>Zapis danych</span><strong>Lokalnie w urządzeniu</strong></div>
         </div><p class="setting-note">Odświeżenie plików aplikacji usuwa pamięć podręczną programu, ale nie usuwa postępu.</p></section>
       </div>
@@ -234,14 +286,14 @@
         <article class="card"><h2>Dane użytkownika</h2><p>Postęp, ustawienia i historia sesji są zapisywane lokalnie w pamięci przeglądarki. Eksport tworzy kopię JSON, a import zastępuje bieżący stan dopiero po pełnej walidacji typów, wersji, identyfikatorów, historii i aktywnej sesji.</p></article>
         <article class="card"><h2>Mikrofon</h2><p>Przeglądarka może przekazywać mowę do własnej usługi rozpoznawania. Aplikacja nie zapisuje nagrań dźwiękowych, zapisuje wyłącznie rozpoznany tekst i wynik zadania.</p></article>
         <article class="card"><h2>Usuwanie danych</h2><p>Funkcja „Usuń cały postęp” usuwa postęp, statystyki, ustawienia, historię sesji oraz klucze pozostałe po starszych wersjach. Operacji nie można cofnąć bez wcześniejszego eksportu.</p></article>
-        <article class="card"><h2>Wersja</h2><p>Angielski Daily Trainer 5.8.3. Aplikacja działa jako PWA i może korzystać z zapisanych plików także bez internetu.</p></article>
+        <article class="card"><h2>Wersja</h2><p>Angielski Daily Trainer 5.8.6. Dodano ekran kursu, uproszczony ekran główny oraz oddzielne statystyki rzeczywistego postępu kursu i aktywności XP. Aplikacja działa jako PWA także bez internetu.</p></article>
       </div>
     </section>
   </main>
 
   <nav class="bottomnav" aria-label="Główna nawigacja">
     <button class="nav" data-nav="today"><svg class="icon"><use href="#i-home"/></svg><span>Dzisiaj</span></button>
-    <button class="nav" data-nav="study"><svg class="icon"><use href="#i-book"/></svg><span>Nauka</span></button>
+    <button class="nav" data-nav="study"><svg class="icon"><use href="#i-book"/></svg><span>Trening</span></button>
     <button class="nav" data-nav="progress"><svg class="icon"><use href="#i-chart"/></svg><span>Postępy</span></button>
     <button class="nav" data-nav="more"><svg class="icon"><use href="#i-menu"/></svg><span>Więcej</span></button>
   </nav>
@@ -257,14 +309,30 @@
     <section class="onboarding-step hidden" data-step="2"><p class="eyebrow">Krok 2 z 5</p><h1>Wybierz poziom.</h1><label class="setting-field"><span>Poziom nauki</span><select id="onboardingLevel"></select></label></section>
     <section class="onboarding-step hidden" data-step="3"><p class="eyebrow">Krok 3 z 5</p><h1>Wybierz tematykę.</h1><label class="setting-field"><span>Ścieżka nauki</span><select id="onboardingTrack"></select></label></section>
     <section class="onboarding-step hidden" data-step="4"><p class="eyebrow">Krok 4 z 5</p><h1>Ustal dzienny cel.</h1><label class="setting-field"><span>Liczba zadań</span><input id="onboardingGoal" type="number" min="5" max="100" value="20"></label><p class="muted">Na początek wystarczy około 15–20 krótkich zadań.</p></section>
-    <section class="onboarding-step hidden" data-step="5"><p class="eyebrow">Krok 5 z 5</p><h1>Rozpocznij pierwszą lekcję.</h1><p>System będzie mieszał nowy materiał z powtórkami i pokaże postęp po każdym zadaniu.</p></section>
+    <section class="onboarding-step hidden" data-step="5"><p class="eyebrow">Krok 5 z 5</p><h1>Wszystko gotowe.</h1><p>Na ekranie głównym zobaczysz kurs, powtórki, trening dodatkowy i rzeczywisty postęp poziomu.</p></section>
     <div class="dialog-actions onboarding-actions"><button id="onboardingBack" type="button" class="secondary hidden">Wstecz</button><button id="onboardingNext" type="button" class="primary">Dalej</button></div>
   </form>
 </dialog>
 
-<script src="learning-core-v5.8.3.js" defer></script>
-<script src="data-v5.8.3.js" defer></script>
-<script src="dialogues-v5.8.3.js" defer></script>
-<script src="script-v5.8.3.js" defer></script>
+<script src="js/learning-core-v5.8.6.js" defer></script>
+<script src="js/course-core-v5.8.6.js" defer></script>
+<script src="data/materials-v5.8.6.js" defer></script>
+<script src="data/dialogues-v5.8.6.js" defer></script>
+<script src="data/course-catalog-v5.8.6.js" defer></script>
+<script src="js/app-state-v5.8.6.js" defer></script>
+<script src="js/storage-v5.8.6.js" defer></script>
+<script src="js/pwa-services-v5.8.6.js" defer></script>
+<script src="js/reminders-v5.8.6.js" defer></script>
+<script src="js/settings-v5.8.6.js" defer></script>
+<script src="js/navigation-v5.8.6.js" defer></script>
+<script src="js/review-engine-v5.8.6.js" defer></script>
+<script src="js/course-engine-v5.8.6.js" defer></script>
+<script src="js/course-ui-v5.8.6.js" defer></script>
+<script src="js/exercise-engine-v5.8.6.js" defer></script>
+<script src="js/statistics-v5.8.6.js" defer></script>
+<script src="js/speech-v5.8.6.js" defer></script>
+<script src="js/car-mode-v5.8.6.js" defer></script>
+<script src="js/data-io-v5.8.6.js" defer></script>
+<script src="js/app-v5.8.6.js" defer></script>
 </body>
 </html>

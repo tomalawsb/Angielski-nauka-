@@ -1,0 +1,23 @@
+ANGIELSKI DAILY TRAINER v5.8.4 – RAPORT ZMIAN
+
+PAKIET 1: ETAP 0 + ETAP 1
+
+WYKONANO
+- Zachowano źródłową paczkę 5.8.3 bez modyfikacji.
+- Przeprowadzono audyt wszystkich 456 materiałów i 40 scen dialogowych.
+- Utworzono pełny plik CSV z oceną techniczną każdego materiału.
+- Rozdzielono główny plik aplikacji na 13 modułów odpowiedzialnych za stan, zapis, PWA, przypomnienia, ustawienia, nawigację, powtórki, ćwiczenia, statystyki, mowę, tryb samochodowy, import/eksport oraz uruchomienie.
+- Przeniesiono bazę, dialogi, style i testy do uporządkowanych katalogów.
+- Zachowano prosty sposób uruchamiania bez bundlera i zewnętrznych zależności.
+- Dodano migrację klucza localStorage z 5.8.3 do 5.8.4.
+- Zaktualizowano manifest, Service Workera, cache i wszystkie wersjonowane ścieżki.
+- Zachowano dotychczasowy wygląd i działanie ćwiczeń.
+
+NIE WYKONYWANO W PAKIECIE 1
+- Nie dodawano jeszcze modułów ani lekcji kursu.
+- Nie zmieniano kolejności materiału ani zasad zaliczania.
+- Nie rozszerzano bazy słów.
+- Nie zmieniano interfejsu głównego.
+
+NASTĘPNY KROK
+Pakiet 2: model danych kursu + nowy silnik doboru materiału + mechanizm zaliczania lekcji.
