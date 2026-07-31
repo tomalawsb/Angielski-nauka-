@@ -1,0 +1,23 @@
+KOREKTA 4 PAKIETU 7 – v6.5.0
+
+CEL
+Usunięcie możliwości zaliczania zadań końcowych A2 za pomocą poprawnych gramatycznie, lecz bezsensownych zdań zawierających słowa kluczowe.
+
+WPROWADZONE ZMIANY
+- wspólny silnik walidacji znaczeniowej dla 55 lekcji tematycznych A2,
+- osobny profil wymagań dla każdego polecenia,
+- sprawdzanie właściwych relacji, np. czynność i jej wykonawca, problem i reakcja, warunek i skutek, porównywane obiekty, prośba i rozwiązanie,
+- odrzucanie metajęzykowego wymieniania zwrotów,
+- odrzucanie odpowiedzi nie na temat,
+- odrzucanie powtarzania jednego zdania,
+- zachowanie walidacji po wznowieniu i imporcie przerwanej lekcji,
+- cache PWA 6.5.0-p7-fix4.
+
+TESTY
+- automatyczne: 593/593,
+- sześć przypadków dla każdej z 55 lekcji A2: 330/330,
+- UI: 42/42,
+- pełne A1: 27/27,
+- pełne A2: 27/27,
+- audyt A1: PASS,
+- audyt A2: PASS.

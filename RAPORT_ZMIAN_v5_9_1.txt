@@ -1,0 +1,9 @@
+ANGIELSKI DAILY TRAINER v5.9.1 – ZMIANY
+
+- poprawiono zapisywanie liczby zadań samochodowych,
+- dodano migrację postępu z 5.9.0,
+- poprawiono onboarding na małych ekranach i przy bardzo dużym tekście,
+- rozszerzono testy automatyczne do 186 przypadków,
+- dodano test pilotażowy Chromium obejmujący 42 kontrole,
+- sprawdzono przerwanie, wznowienie i pełne ukończenie lekcji,
+- zaktualizowano PWA, manifest, Service Workera i dokumentację.

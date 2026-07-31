@@ -1,0 +1,23 @@
+RAPORT PAKIETU 6 – ANGIELSKI DAILY TRAINER v6.0.0
+Data: 30 lipca 2026
+
+ZREALIZOWANY ZAKRES
+- Etap 11. Pełna ścieżka A1.
+- 12 modułów i 55 opublikowanych lekcji.
+- Baza została rozszerzona do 1100 unikalnych materiałów.
+- Moduły: podstawowe informacje, rodzina, dom, rutyna, czas, jedzenie, zakupy, miasto, podróż, zdrowie, praca i szkoła oraz końcowa powtórka.
+- Końcowa ocena obejmuje słownictwo, słuchanie, krótkie czytanie, dialog, pisanie i zadanie głosowe.
+- Tryb samochodowy korzysta z materiałów każdej ukończonej lekcji.
+- Migracja 5.9.1 → 6.0.0 odblokowuje pierwszy nowy moduł użytkownikom, którzy ukończyli moduł pilotażowy.
+
+KONTROLA JAKOŚCI
+- testy automatyczne: 200/200
+- test pilotażowy interfejsu: 42/42
+- test pełnego A1: 27/27
+- audyt zawartości: PASS
+- zasoby offline: 27/27
+- brak duplikatów identyfikatorów i treści EN/PL
+- obiektywne kryteria zadań końcowych
+
+NASTĘPNY PAKIET
+Pakiet 7: rozwój pełnego poziomu A2.

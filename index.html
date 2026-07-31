@@ -8,13 +8,15 @@
   <meta http-equiv="Expires" content="0">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; font-src 'self'; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self'">
   <meta id="themeColorMeta" name="theme-color" content="#2563eb">
-  <link rel="manifest" href="manifest-v5.8.6.json">
-  <link rel="apple-touch-icon" href="icon-192.png?v=5.8.6">
-  <link rel="stylesheet" href="css/styles-v5.8.6.css">
-  <script src="js/bootstrap-v5.8.6.js"></script>
+  <meta name="description" content="Lokalny kurs języka angielskiego A1–A2 z powtórkami, dialogami, mówieniem i bezpiecznym trybem samochodowym.">
+  <link rel="manifest" href="manifest-v6.6.0.json">
+  <link rel="apple-touch-icon" href="icon-192.png?v=6.6.0">
+  <link rel="stylesheet" href="css/styles-v6.6.0.css">
+  <script src="js/bootstrap-v6.6.0.js"></script>
   <title>Angielski Daily Trainer</title>
 </head>
 <body>
+<a class="skip-link" href="#mainContent">Przejdź do treści</a>
 <svg class="svg-sprite" aria-hidden="true">
   <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.8 12 3l9 7.8v9.7a.5.5 0 0 1-.5.5H15v-6H9v6H3.5a.5.5 0 0 1-.5-.5z"/></symbol>
   <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H11v17H6.5A2.5 2.5 0 0 0 4 21.5zm16 0A2.5 2.5 0 0 0 17.5 2H13v17h4.5a2.5 2.5 0 0 1 2.5 2.5z"/></symbol>
@@ -44,7 +46,7 @@
     </div>
   </header>
 
-  <main class="content">
+  <main id="mainContent" class="content" tabindex="-1">
     <section id="todayScreen" class="screen" data-title="Dzisiaj">
       <div id="resumeCard" class="resume-card hidden">
         <div><strong>Niedokończona sesja</strong><span id="resumeInfo">Możesz wrócić do ostatniego zadania.</span></div>
@@ -58,11 +60,11 @@
             <h1 id="courseHomeTitle">Ładowanie kursu…</h1>
             <p id="courseHomeGoal" class="muted">Sprawdzam, gdzie zakończyła się ostatnia lekcja.</p>
           </div>
-          <div class="course-percent" aria-label="Postęp kursu"><strong id="courseHomePercent">0%</strong><span>kursu</span></div>
+          <div class="course-percent" role="status" aria-live="polite" aria-label="Postęp kursu"><strong id="courseHomePercent">0%</strong><span>kursu</span></div>
         </div>
         <div class="course-home-progress">
           <div class="between"><strong>Postęp poziomu</strong><span id="courseHomeProgressText">0 z 0 lekcji</span></div>
-          <div class="progress large"><span id="courseHomeBar"></span></div>
+          <div class="progress large"><span id="courseHomeBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></span></div>
         </div>
         <div class="course-home-actions">
           <button id="courseContinueBtn" class="primary primary-hero"><svg class="icon"><use href="#i-play"/></svg><span>Kontynuuj kurs</span></button>
@@ -87,13 +89,13 @@
           <div class="between"><p class="eyebrow">Postęp poziomu</p><strong id="homeLevelProgress">0%</strong></div>
           <h2 id="homeLevelName">A1</h2>
           <p id="homeLevelDetails" class="muted">0 ukończonych lekcji</p>
-          <div class="progress"><span id="homeLevelBar"></span></div>
+          <div class="progress"><span id="homeLevelBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></span></div>
           <button class="text-btn" data-nav="progress">Zobacz szczegóły</button>
         </article>
         <article class="today-action-card daily-action">
           <p class="eyebrow">Aktywność dzisiaj</p>
           <div class="between"><strong id="goalLabel">Dzienny cel</strong><span id="goalText">0 z 20 zadań</span></div>
-          <div class="progress large"><span id="goalBar"></span></div>
+          <div class="progress large"><span id="goalBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></span></div>
           <p class="muted">Dzienny cel mierzy aktywność. Ukończenie kursu jest liczone osobno.</p>
         </article>
       </section>
@@ -103,7 +105,7 @@
       <div class="page-heading"><button class="back-btn" data-nav="today">Wróć</button><p class="eyebrow">Ścieżka nauki</p><h1>Plan kursu</h1><p class="muted">Lekcje są odblokowywane kolejno. Trening dodatkowy nie zastępuje ukończenia kursu.</p></div>
       <section class="course-plan-overview card">
         <div class="course-plan-heading"><label class="setting-field"><span>Poziom kursu</span><select id="courseLevelSelect"></select></label><div class="course-plan-score"><strong id="coursePlanPercent">0%</strong><span id="coursePlanSummary">0 lekcji</span></div></div>
-        <div class="progress large"><span id="coursePlanBar"></span></div>
+        <div class="progress large"><span id="coursePlanBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></span></div>
       </section>
       <div id="courseModuleList" class="course-module-list"></div>
     </section>
@@ -169,7 +171,7 @@
           <div><span>Passa</span><strong id="sumStreak">0 dni</strong></div>
         </div>
         <p id="nextReviewInfo" class="next-review">Następna powtórka jutro.</p>
-        <button class="primary big" data-nav="today">Wróć do ekranu Dzisiaj</button>
+        <button id="summaryCarBtn" class="secondary big hidden">Utrwal tę lekcję w samochodzie</button><button class="primary big" data-nav="today">Wróć do ekranu Dzisiaj</button>
       </div>
     </section>
 
@@ -178,7 +180,7 @@
 
       <section class="course-progress-card">
         <div class="course-progress-head"><div><p class="eyebrow">Kurs <span id="courseProgressLevel">A1</span></p><h2>Postęp poziomu</h2><p id="courseProgressDescription" class="muted">0 ukończonych lekcji</p></div><strong id="courseProgressPercent">0%</strong></div>
-        <div class="progress large"><span id="courseProgressBar"></span></div>
+        <div class="progress large"><span id="courseProgressBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></span></div>
         <div class="course-stats-grid">
           <div><span>Ukończone lekcje</span><strong id="courseCompletedLessons">0</strong></div>
           <div><span>Ukończone moduły</span><strong id="courseCompletedModules">0</strong></div>
@@ -216,7 +218,11 @@
 
     <section id="materialsScreen" class="screen" data-title="Materiały">
       <div class="page-heading"><button class="back-btn" data-nav="more">Wróć</button><p class="eyebrow">Baza nauki</p><h1>Materiały</h1></div>
-      <div class="card filters"><input id="searchInput" type="search" placeholder="Szukaj słowa, kategorii albo zdania"><select id="levelFilter"></select><select id="trackFilter"></select></div>
+      <div class="card filters" aria-label="Filtry materiałów">
+        <label class="visually-hidden" for="searchInput">Szukaj w materiałach</label><input id="searchInput" type="search" placeholder="Szukaj słowa, kategorii albo zdania" autocomplete="off">
+        <label class="visually-hidden" for="levelFilter">Poziom materiałów</label><select id="levelFilter" aria-label="Poziom materiałów"></select>
+        <label class="visually-hidden" for="trackFilter">Ścieżka materiałów</label><select id="trackFilter" aria-label="Ścieżka materiałów"></select>
+      </div>
       <div class="card"><div class="between"><h2>Lista materiałów</h2><span id="baseCount" class="badge">0</span></div><div id="baseList" class="list"></div></div>
     </section>
 
@@ -254,17 +260,25 @@
         </div><p class="setting-note">Rozpoznawanie mowy zamienia wypowiedź na tekst. Nie jest profesjonalną oceną wymowy ani akcentu.</p></section>
 
         <section class="card settings-section"><h2>Tryb samochodowy</h2><div class="settings-grid">
-          <label class="setting-field"><span>Pauza po odpowiedzi</span><input id="carPause" type="number" min="1" max="8" step="1"></label>
+          <label class="setting-field"><span>Liczba zadań w sesji</span><input id="carTaskCount" type="number" min="5" max="30" step="1"></label><label class="setting-field"><span>Pauza po odpowiedzi</span><input id="carPause" type="number" min="1" max="8" step="1"></label>
           <label class="switch-row"><span>Automatycznie przechodź dalej</span><input id="carAutoNext" type="checkbox"></label>
         </div></section>
 
-        <section id="dataSettings" class="card settings-section wide"><h2>Dane</h2><div class="settings-actions">
-          <button id="exportBtn" class="secondary">Eksportuj dane</button><button id="importBtn" class="secondary">Importuj dane</button><button id="resetBtn" class="danger">Usuń cały postęp</button>
-        </div><textarea id="dataBox" placeholder="Tutaj pojawią się dane eksportu albo wklej dane do importu"></textarea><p id="dataStatus" class="setting-note"></p></section>
+        <section id="dataSettings" class="card settings-section wide" aria-labelledby="dataSettingsTitle"><h2 id="dataSettingsTitle">Kopia i przywracanie danych</h2>
+        <p class="setting-note">Najbezpieczniej pobrać plik JSON. Kopia zawiera postęp, ustawienia i historię, ale nie zawiera nagrań głosu.</p>
+        <div class="settings-actions">
+          <button id="exportBtn" class="secondary">Pobierz kopię JSON</button><button id="chooseImportFileBtn" class="secondary">Wybierz plik JSON</button><button id="resetBtn" class="danger">Usuń cały postęp</button>
+        </div>
+        <input id="importFileInput" class="visually-hidden" type="file" accept="application/json,.json" aria-label="Wybierz plik kopii danych JSON">
+        <label for="dataBox">Podgląd kopii lub import z tekstu JSON</label>
+        <textarea id="dataBox" spellcheck="false" autocomplete="off" placeholder="Tutaj pojawi się kopia albo wklej dane do importu"></textarea>
+        <div class="row"><button id="prepareExportBtn" class="secondary">Pokaż kopię w polu</button><button id="importBtn" class="secondary">Importuj tekst z pola</button></div>
+        <p id="dataStatus" class="setting-note" role="status" aria-live="polite"></p></section>
 
         <section class="card settings-section wide"><h2>Zaawansowane</h2><div class="advanced-list">
           <button id="refreshBtn" class="secondary">Odśwież pliki aplikacji</button>
-          <div><span>Wersja programu</span><strong>5.8.6</strong></div>
+          <div><span>Wersja programu</span><strong>6.6.0</strong></div>
+          <div><span>Wersja treści kursu</span><strong>a1-a2-2026.07-r1</strong></div>
           <div><span>Zapis danych</span><strong>Lokalnie w urządzeniu</strong></div>
         </div><p class="setting-note">Odświeżenie plików aplikacji usuwa pamięć podręczną programu, ale nie usuwa postępu.</p></section>
       </div>
@@ -276,17 +290,21 @@
         <article class="card"><h2>Nauka, powtórka i test</h2><p>Nauka wprowadza nowy materiał. Powtórka przywraca zadania zaplanowane przez system. Test miesza kilka typów ćwiczeń i sprawdza aktualną znajomość materiału.</p></article>
         <article class="card"><h2>Opanowanie materiału</h2><p>Materiał jest uznawany za opanowany dopiero po poprawnych odpowiedziach w co najmniej pięciu różnych dniach i przy odpowiedniej skuteczności. Jedna dobra seria nie wystarcza, bo pamięć ludzka lubi udawać, że wszystko już umie.</p></article>
         <article class="card"><h2>XP, passa i skuteczność</h2><p>XP pokazuje wykonaną pracę. Passa rośnie po nauce w kolejnych dniach kalendarzowych. Skuteczność to udział poprawnych odpowiedzi we wszystkich odpowiedziach.</p></article>
-        <article class="card"><h2>Błędy i warianty odpowiedzi</h2><p>Aplikacja toleruje drobne literówki, popularne skróty i zapis bez nieistotnej interpunkcji. Błędy znaczenia, przeczenia, czasu lub szyku są wskazywane osobno.</p></article>
+        <article class="card"><h2>Błędy i warianty odpowiedzi</h2><p>Aplikacja toleruje drobne literówki, popularne skróty i zapis bez nieistotnej interpunkcji. Błędy znaczenia, przeczenia, czasu lub szyku są wskazywane osobno. Podstawowe brytyjskie i amerykańskie warianty pisowni, na przykład <i>colour/color</i> i <i>travelled/traveled</i>, są akceptowane.</p></article>
+        <article class="card"><h2>Tworzenie kopii</h2><p>Otwórz „Więcej”, potem „Ustawienia” i sekcję „Kopia i przywracanie danych”. Pobierz plik JSON i przechowuj go poza pamięcią przeglądarki. Przywracanie najpierw sprawdza wersję, strukturę i identyfikatory danych.</p></article>
+        <article class="card"><h2>Tryb samochodowy</h2><p>Skonfiguruj sesję przed jazdą. W czasie prowadzenia nie dotykaj telefonu i nie patrz na ekran. Działanie mowy w tle lub przy zablokowanym ekranie zależy od Androida, przeglądarki i ustawień oszczędzania energii. Najpierw wykonaj próbę na postoju.</p></article>
       </div>
     </section>
 
     <section id="infoScreen" class="screen" data-title="Informacje">
       <div class="page-heading"><button class="back-btn" data-nav="more">Wróć</button><p class="eyebrow">Prywatność i technika</p><h1>Informacje</h1></div>
       <div class="info-stack">
-        <article class="card"><h2>Dane użytkownika</h2><p>Postęp, ustawienia i historia sesji są zapisywane lokalnie w pamięci przeglądarki. Eksport tworzy kopię JSON, a import zastępuje bieżący stan dopiero po pełnej walidacji typów, wersji, identyfikatorów, historii i aktywnej sesji.</p></article>
-        <article class="card"><h2>Mikrofon</h2><p>Przeglądarka może przekazywać mowę do własnej usługi rozpoznawania. Aplikacja nie zapisuje nagrań dźwiękowych, zapisuje wyłącznie rozpoznany tekst i wynik zadania.</p></article>
-        <article class="card"><h2>Usuwanie danych</h2><p>Funkcja „Usuń cały postęp” usuwa postęp, statystyki, ustawienia, historię sesji oraz klucze pozostałe po starszych wersjach. Operacji nie można cofnąć bez wcześniejszego eksportu.</p></article>
-        <article class="card"><h2>Wersja</h2><p>Angielski Daily Trainer 5.8.6. Dodano ekran kursu, uproszczony ekran główny oraz oddzielne statystyki rzeczywistego postępu kursu i aktywności XP. Aplikacja działa jako PWA także bez internetu.</p></article>
+        <article class="card"><h2>Polityka prywatności</h2><p>Aplikacja nie wymaga konta, nie zawiera reklam ani analityki i nie wysyła postępu na serwer autora. Postęp, ustawienia i historia sesji są zapisywane lokalnie w pamięci tej przeglądarki. Dane mogą jednak zostać usunięte przez system, przeglądarkę albo czyszczenie pamięci, dlatego warto regularnie pobierać kopię JSON.</p></article>
+        <article class="card"><h2>Mikrofon i rozpoznawanie mowy</h2><p>Mikrofon jest uruchamiany dopiero po wybraniu ćwiczenia głosowego i udzieleniu zgody przeglądarce. Aplikacja nie zapisuje plików dźwiękowych. Przeglądarka lub system może przesłać dźwięk do własnej usługi rozpoznawania mowy, zgodnie z polityką dostawcy urządzenia lub przeglądarki. Rozpoznany tekst i wynik zadania mogą zostać zapisane lokalnie.</p></article>
+        <article class="card"><h2>Działanie bez internetu</h2><p>Treść kursu, postęp i większość ćwiczeń działają po wcześniejszym zainstalowaniu PWA także bez internetu. Rozpoznawanie mowy, niektóre głosy lektora i powiadomienia mogą wymagać usług systemowych albo połączenia z internetem.</p></article>
+        <article class="card"><h2>Kopia, przenoszenie i usuwanie danych</h2><p>Eksport tworzy plik JSON z wersją programu i wersją treści kursu. Import zastępuje bieżący stan dopiero po walidacji. Funkcja „Usuń cały postęp” usuwa zapis aplikacji oraz rozpoznane starsze klucze lokalne. Operacji nie można cofnąć bez wcześniejszej kopii.</p></article>
+        <article class="card"><h2>Bezpieczny tryb samochodowy</h2><p>Tryb służy wyłącznie do utrwalania poznanego materiału. Konfigurację wykonaj przed ruszeniem. Kierowca nie może obsługiwać telefonu ani czytać ekranu. System może przerwać mowę po zablokowaniu ekranu, przejściu aplikacji do tła, utracie mikrofonu lub włączeniu oszczędzania energii.</p></article>
+        <article class="card"><h2>Wersja i zakres</h2><p>Angielski Daily Trainer 6.6.0 zawiera kursy A1 i A2: 24 moduły, 115 lekcji, 1713 materiałów i 145 scen dialogowych. Wersja treści: <b>a1-a2-2026.07-r1</b>. Automatyczne audyty nie zastępują niezależnej oceny nauczyciela lub metodyka.</p></article>
       </div>
     </section>
   </main>
@@ -300,11 +318,11 @@
 </div>
 
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
-<dialog id="confirmDialog" class="modal"><form method="dialog"><h2 id="confirmTitle">Potwierdź</h2><p id="confirmMessage"></p><div class="dialog-actions"><button value="cancel" class="secondary">Anuluj</button><button id="confirmOk" value="ok" class="danger">Potwierdź</button></div></form></dialog>
-<dialog id="carWarningDialog" class="modal"><form method="dialog"><h2>Bezpieczny tryb samochodowy</h2><p>Skonfiguruj tryb przed rozpoczęciem jazdy. Podczas prowadzenia pojazdu nie patrz na ekran i nie obsługuj telefonu ręcznie.</p><label class="switch-row"><span>Nie pokazuj ponownie</span><input id="carWarningDismiss" type="checkbox"></label><div class="dialog-actions"><button value="cancel" class="secondary">Anuluj</button><button value="ok" class="primary">Rozumiem, rozpocznij</button></div></form></dialog>
-<dialog id="onboardingDialog" class="onboarding-modal">
+<dialog id="confirmDialog" class="modal" aria-labelledby="confirmTitle" aria-describedby="confirmMessage"><form method="dialog"><h2 id="confirmTitle" tabindex="-1">Potwierdź</h2><p id="confirmMessage"></p><div class="dialog-actions"><button value="cancel" class="secondary">Anuluj</button><button id="confirmOk" value="ok" class="danger">Potwierdź</button></div></form></dialog>
+<dialog id="carWarningDialog" class="modal" aria-labelledby="carWarningTitle"><form method="dialog"><h2 id="carWarningTitle" tabindex="-1">Bezpieczny tryb samochodowy</h2><p>Skonfiguruj sesję i sprawdź głos przed rozpoczęciem jazdy. Podczas prowadzenia nie patrz na ekran i nie obsługuj telefonu. Android lub przeglądarka może zatrzymać mowę w tle albo po zablokowaniu ekranu.</p><label class="switch-row"><span>Nie pokazuj ponownie</span><input id="carWarningDismiss" type="checkbox"></label><div class="dialog-actions"><button value="cancel" class="secondary">Anuluj</button><button value="ok" class="primary">Rozumiem, rozpocznij</button></div></form></dialog>
+<dialog id="onboardingDialog" class="onboarding-modal" aria-label="Pierwsze uruchomienie aplikacji">
   <form method="dialog">
-    <div class="onboarding-progress"><span id="onboardingBar"></span></div>
+    <div class="onboarding-progress"><span id="onboardingBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></span></div>
     <section class="onboarding-step" data-step="1"><p class="eyebrow">Krok 1 z 5</p><h1>Witaj.</h1><p>Ta aplikacja pomoże Ci uczyć się angielskiego każdego dnia. Postęp jest przechowywany lokalnie na tym urządzeniu.</p></section>
     <section class="onboarding-step hidden" data-step="2"><p class="eyebrow">Krok 2 z 5</p><h1>Wybierz poziom.</h1><label class="setting-field"><span>Poziom nauki</span><select id="onboardingLevel"></select></label></section>
     <section class="onboarding-step hidden" data-step="3"><p class="eyebrow">Krok 3 z 5</p><h1>Wybierz tematykę.</h1><label class="setting-field"><span>Ścieżka nauki</span><select id="onboardingTrack"></select></label></section>
@@ -314,25 +332,29 @@
   </form>
 </dialog>
 
-<script src="js/learning-core-v5.8.6.js" defer></script>
-<script src="js/course-core-v5.8.6.js" defer></script>
-<script src="data/materials-v5.8.6.js" defer></script>
-<script src="data/dialogues-v5.8.6.js" defer></script>
-<script src="data/course-catalog-v5.8.6.js" defer></script>
-<script src="js/app-state-v5.8.6.js" defer></script>
-<script src="js/storage-v5.8.6.js" defer></script>
-<script src="js/pwa-services-v5.8.6.js" defer></script>
-<script src="js/reminders-v5.8.6.js" defer></script>
-<script src="js/settings-v5.8.6.js" defer></script>
-<script src="js/navigation-v5.8.6.js" defer></script>
-<script src="js/review-engine-v5.8.6.js" defer></script>
-<script src="js/course-engine-v5.8.6.js" defer></script>
-<script src="js/course-ui-v5.8.6.js" defer></script>
-<script src="js/exercise-engine-v5.8.6.js" defer></script>
-<script src="js/statistics-v5.8.6.js" defer></script>
-<script src="js/speech-v5.8.6.js" defer></script>
-<script src="js/car-mode-v5.8.6.js" defer></script>
-<script src="js/data-io-v5.8.6.js" defer></script>
-<script src="js/app-v5.8.6.js" defer></script>
+<script src="js/learning-core-v6.6.0.js" defer></script>
+<script src="js/course-core-v6.6.0.js" defer></script>
+<script src="data/materials-v6.6.0.js" defer></script>
+<script src="data/dialogues-v6.6.0.js" defer></script>
+<script src="data/course-a1-module1-v6.6.0.js" defer></script>
+<script src="data/course-a1-full-expansion-v6.6.0.js" defer></script>
+<script src="data/course-a2-full-v6.6.0.js" defer></script>
+<script src="data/content-quality-v6.6.0.js" defer></script>
+<script src="data/course-catalog-v6.6.0.js" defer></script>
+<script src="js/app-state-v6.6.0.js" defer></script>
+<script src="js/storage-v6.6.0.js" defer></script>
+<script src="js/pwa-services-v6.6.0.js" defer></script>
+<script src="js/reminders-v6.6.0.js" defer></script>
+<script src="js/settings-v6.6.0.js" defer></script>
+<script src="js/navigation-v6.6.0.js" defer></script>
+<script src="js/review-engine-v6.6.0.js" defer></script>
+<script src="js/course-engine-v6.6.0.js" defer></script>
+<script src="js/course-ui-v6.6.0.js" defer></script>
+<script src="js/exercise-engine-v6.6.0.js" defer></script>
+<script src="js/statistics-v6.6.0.js" defer></script>
+<script src="js/speech-v6.6.0.js" defer></script>
+<script src="js/car-mode-v6.6.0.js" defer></script>
+<script src="js/data-io-v6.6.0.js" defer></script>
+<script src="js/app-v6.6.0.js" defer></script>
 </body>
 </html>

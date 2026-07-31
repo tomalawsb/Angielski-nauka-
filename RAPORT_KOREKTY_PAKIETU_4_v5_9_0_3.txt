@@ -1,0 +1,8 @@
+KOREKTA PAKIETU 4 - v5.9.0 fix3
+
+Poprawiono Service Workera:
+- ujednolicono adres wejściowy aplikacji w stałej APP_ENTRY,
+- fallback offline korzysta z aktualnego wpisu cache,
+- kliknięcie powiadomienia otwiera aktualny adres aplikacji,
+- cache podniesiono do 5.9.0-p4-fix3,
+- dodano test regresji chroniący przed ponownym pozostawieniem starego adresu.

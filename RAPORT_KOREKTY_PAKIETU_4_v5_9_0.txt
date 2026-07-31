@@ -1,0 +1,18 @@
+RAPORT KOREKTY PAKIETU 4 – ANGIELSKI DAILY TRAINER v5.9.0
+Data: 30 lipca 2026
+
+POPRAWIONY PROBLEM
+Zadania końcowe lekcji 2, 8, 9 i 10 mogły uznać zwrot „I am...” opisujący samopoczucie lub wiek za przedstawienie się.
+
+WPROWADZONE ZMIANY
+- dodano kontrolę znaczeniową „self_name”,
+- odpowiedź musi faktycznie zawierać przedstawienie się, np. „My name is Anna” albo samodzielne zdanie „I am Tom”,
+- zachowano obsługę dowolnych imion użytkowników,
+- rozszerzono walidację zapisanej aktywnej sesji,
+- dodano sześć testów regresji dla lekcji 2, 8, 9 i 10.
+
+WERYFIKACJA
+- testy Node: 169/169,
+- poprawne przykłady z kursu nadal są akceptowane,
+- błędne odpowiedzi bez imienia nie zaliczają zadania końcowego,
+- wersja aplikacji pozostaje 5.9.0.

@@ -1,4 +1,4 @@
-RAPORT PAKIETU 3 – ANGIELSKI DAILY TRAINER v5.8.6
+RAPORT PAKIETU 3 – ANGIELSKI DAILY TRAINER v5.9.0
 Data: 30 lipca 2026
 
 ZREALIZOWANE ETAPY
@@ -15,7 +15,7 @@ WPROWADZONE ELEMENTY
 7. Statystyki kursu: lekcje, moduły, procent poziomu, poznany i opanowany materiał, gramatyka w nauce oraz obszary do powtórki.
 8. Lista umiejętności „Potrafię…” powiązana z celami lekcji.
 9. Statystyki trybu samochodowego: liczba sesji i skuteczność odpowiedzi.
-10. Migracja zapisu z wersji 5.8.5 do 5.8.6 bez utraty danych.
+10. Migracja zapisu z wersji 5.8.5 do 5.9.0 bez utraty danych.
 11. Nowy moduł course-ui oraz aktualizacja PWA i Service Workera.
 
 CELOWO NIEWPROWADZONE

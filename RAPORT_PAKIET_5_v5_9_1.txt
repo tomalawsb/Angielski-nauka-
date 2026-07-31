@@ -1,0 +1,30 @@
+RAPORT PAKIETU 5 – ANGIELSKI DAILY TRAINER v5.9.1
+Data: 30 lipca 2026
+
+ZREALIZOWANY ZAKRES
+- Etap 9. Rozszerzone testy techniczne.
+- Część Etapu 10. Przygotowanie i symulowany pilotaż użytkowy.
+
+WYKRYTE I POPRAWIONE PROBLEMY
+1. Pole „Liczba zadań w sesji” trybu samochodowego nie miało podłączonego zdarzenia zapisu.
+2. Onboarding przy rozdzielczości 320 × 568 i bardzo dużym tekście mógł ukrywać dolne przyciski.
+3. Dodano nowy klucz zapisu i migrację danych z wersji 5.9.0 do 5.9.1.
+4. Zmieniono cache Service Workera na 5.9.1-p5.
+
+ROZSZERZONE TESTY
+- Node: 186/186.
+- Chromium: 42/42.
+- Pięć rozmiarów ekranu, w tym 320 × 568 i tablet.
+- Normalny, duży i bardzo duży tekst.
+- Pełne pięć kroków onboardingu.
+- Zapis ustawienia samochodowego do stanu i localStorage.
+- Przerwanie i wznowienie lekcji z zachowaniem miejsca.
+- Pełne ukończenie pierwszej lekcji z wynikiem 100%.
+- Odblokowanie drugiej lekcji.
+- Kontrola wszystkich zasobów PWA i składni JavaScript.
+
+OGRANICZENIE
+Rzeczywiste testy mikrofonu, syntezy mowy, instalacji PWA, działania po wygaszeniu ekranu i ergonomii na konkretnych telefonach muszą zostać wykonane fizycznie przez użytkowników.
+
+NASTĘPNY ZAKRES
+Pakiet 6: Etap 11 – rozbudowa pełnego A1 partiami.

@@ -1,0 +1,17 @@
+TEST NA TELEFONIE – ANGIELSKI DAILY TRAINER v5.9.0
+
+1. Usuń lub zamknij poprzednią wersję aplikacji.
+2. Uruchom wersję 5.9.0 i sprawdź zachowanie dotychczasowego XP, passy i ustawień.
+3. Otwórz „Plan kursu” i uruchom pierwszą lekcję A1.
+4. Przejdź wprowadzenie, gramatykę, wybór, pisanie, słuchanie, mówienie i zadanie końcowe.
+5. Sprawdź zapis rozpoczętej lekcji po zamknięciu i ponownym uruchomieniu aplikacji.
+6. Zaliczyć lekcję wynikiem co najmniej 70% i sprawdzić odblokowanie kolejnej.
+7. Uruchom z podsumowania zestaw samochodowy.
+8. Na postoju sprawdź komendy: „powtórz”, „dalej”, „nie wiem”, „zakończ”.
+9. Sprawdź ustawienie liczby zadań samochodowych od 5 do 30.
+10. Wyłącz internet i sprawdź wcześniej otwartą aplikację oraz dostępne lokalnie funkcje mowy.
+11. Sprawdź jasny i ciemny motyw, mały oraz duży tekst.
+12. Zgłoś każdy ekran, na którym treść jest ucięta, przycisk zasłonięty albo polecenie niejasne.
+
+BEZPIECZEŃSTWO
+Tryb samochodowy konfiguruje się i testuje na postoju. Kierowca nie powinien dotykać telefonu podczas jazdy.

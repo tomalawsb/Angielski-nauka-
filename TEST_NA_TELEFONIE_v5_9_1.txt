@@ -1,0 +1,10 @@
+TEST NA TELEFONIE – ANGIELSKI DAILY TRAINER v5.9.1
+
+1. Zaktualizuj aplikację z wersji 5.9.0 i sprawdź XP, passę, ustawienia oraz postęp kursu.
+2. Zmień liczbę zadań samochodowych, zamknij ustawienia i otwórz je ponownie.
+3. Ustaw „Bardzo duża” wielkość tekstu i przejdź cały onboarding na małym ekranie.
+4. Uruchom pierwszą lekcję, przerwij po kilku zadaniach i wznów ją.
+5. Ukończ lekcję i sprawdź odblokowanie lekcji 2.
+6. Sprawdź mikrofon, lektora i tryb samochodowy na postoju.
+7. Wyłącz internet i uruchom wcześniej otwartą aplikację.
+8. Zgłoś każdy ucięty tekst, zasłonięty przycisk lub niejasne polecenie.

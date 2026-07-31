@@ -1,0 +1,9 @@
+TEST NA TELEFONIE — WERSJA 6.5.0
+
+1. Zainstaluj lub odśwież PWA.
+2. Sprawdź wybór poziomu A1/A2 na ekranie Kurs.
+3. Uruchom pierwszą lekcję A2 i wykonaj kilka zadań.
+4. Zamknij aplikację, uruchom ponownie i sprawdź wznowienie lekcji.
+5. Sprawdź mikrofon, lektora i tryb samochodowy na postoju.
+6. Wyłącz internet i sprawdź uruchomienie aplikacji oraz poznany materiał.
+7. Sprawdź, czy dotychczasowy postęp A1 pozostał zachowany.

@@ -1,0 +1,20 @@
+RAPORT DRUGIEJ KOREKTY PAKIETU 4 – ANGIELSKI DAILY TRAINER v5.9.0
+Data: 30 lipca 2026
+
+POPRAWIONY PROBLEM
+Walidacja własnego imienia akceptowała rzeczowniki i nazwy urządzeń, np. „I am computer” oraz „My name is router”.
+
+WPROWADZONE ZMIANY
+- dodano dynamiczną blokadę słów pochodzących z bazy kursu,
+- dodano blokadę ról, urządzeń, osób i typowych określeń, które nie są imionami,
+- forma „I am ...” wymaga rozpoznawalnego imienia albo zapisu wyglądającego jak nazwa własna,
+- forma „My name is ...” nadal obsługuje nietypowe imiona, ale odrzuca słowa z bazy i listy niedozwolonej,
+- zachowano popularne imiona pokrywające się ze zwykłymi słowami, np. Mark i Rose,
+- zmieniono identyfikator cache Service Workera, aby urządzenia pobrały poprawiony kod,
+- dodano testy regresji dla nazw urządzeń, ról, imion polskich i nietypowych.
+
+WERYFIKACJA
+- testy Node: 177/177,
+- „I am computer” i „My name is router” nie zaliczają zadania,
+- „I am Tomasz”, „My name is Tomasz” i „My name is Borysław” są akceptowane,
+- wersja aplikacji pozostaje 5.9.0.

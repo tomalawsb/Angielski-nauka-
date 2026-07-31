@@ -1,0 +1,7 @@
+KOREKTA PAKIETU 6 – FIX 2
+
+Poprawiono:
+- liczenie dwóch różnych osób w zadaniu końcowym lekcji 2.3; zawód lub druga rola tej samej osoby nie zwiększa licznika,
+- rozpoznawanie naturalnych wariantów „check my email”, „check my emails”, „read my email” i „read my emails”,
+- cache Service Workera podniesiono do 6.0.0-p6-fix2,
+- dodano testy regresji obu przypadków.

@@ -1,0 +1,14 @@
+ANGIELSKI DAILY TRAINER – ZMIANY W WERSJI 5.9.0
+
+- Opublikowano pierwszy moduł kursu A1 z 10 lekcjami.
+- Dodano 150 nowych materiałów kursowych.
+- Rozszerzono bazę z 456 do 606 unikalnych materiałów.
+- Dodano grupowe wprowadzenia nowego materiału i krótkie objaśnienia gramatyczne.
+- Dodano lekcyjne zadania wyboru, pisania, słuchania, mówienia i dialogi.
+- Dodano mierzalne zadania końcowe dla każdej lekcji.
+- Ograniczono podpowiedzi wyboru do materiału bieżącej lekcji.
+- Tryb samochodowy korzysta z treści ukończonej lekcji i materiału wcześniej poznanego.
+- Dodano ustawienie 5–30 zadań w sesji samochodowej.
+- Dodano przycisk utrwalania lekcji w samochodzie po zaliczeniu.
+- Uzupełniono walidację katalogu kursu i testy regresji.
+- Zaktualizowano zasoby PWA i cache do wersji 5.9.0.

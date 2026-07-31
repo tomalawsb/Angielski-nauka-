@@ -1,0 +1,6 @@
+KOREKTA PAKIETU 7 — WERSJA 6.5.0
+
+- dodano 55 rzeczywistych scen dialogowych A2, po pięć kroków w każdym module tematycznym,
+- uzupełniono przykłady użycia we wszystkich 613 materiałach A2,
+- wzmocniono ocenianie zadań końcowych: liczone są pełne, znaczące zdania, a nie listy przypadkowych słów,
+- dodano testy regresji i zaktualizowano cache PWA.

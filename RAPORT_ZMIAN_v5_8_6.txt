@@ -1,4 +1,4 @@
-ANGIELSKI DAILY TRAINER 5.8.6 – NAJWAŻNIEJSZE ZMIANY
+ANGIELSKI DAILY TRAINER 5.9.0 – NAJWAŻNIEJSZE ZMIANY
 
 - nowy ekran główny skoncentrowany na kontynuowaniu kursu,
 - osobny plan kursu z poziomami, modułami i lekcjami,
@@ -7,5 +7,5 @@ ANGIELSKI DAILY TRAINER 5.8.6 – NAJWAŻNIEJSZE ZMIANY
 - XP i aktywność oddzielone od ukończenia poziomu,
 - lista umiejętności „Potrafię…”,
 - statystyki sesji samochodowych,
-- migracja danych 5.8.5 → 5.8.6,
+- migracja danych 5.8.5 → 5.9.0,
 - 149/149 testów automatycznych.

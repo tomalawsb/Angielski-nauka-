@@ -1,17 +1,24 @@
-URUCHOMIENIE ANGIELSKI DAILY TRAINER v5.8.6
+URUCHOMIENIE ANGIELSKI DAILY TRAINER v6.6.0
+Wersja treści: a1-a2-2026.07-r1
+
+Najprościej uruchomić katalog przez lokalny serwer HTTP, na przykład:
+python -m http.server 8000
+Następnie otworzyć:
+http://localhost:8000/index.html
+
+Nie otwieraj index.html bezpośrednio z dysku, ponieważ Service Worker wymaga HTTP lub HTTPS.
+
+TESTY:
+node node-tests.js                         -> 612/612
+python tests/ui-pilot-smoke.py            -> 42/42
+python tests/ui-full-a1-smoke.py           -> 27/27
+python tests/ui-full-a2-smoke.py           -> 27/27
+python tests/ui-final-qa-smoke.py          -> 15/15
+node tests/full-a1-audit.js                -> PASS
+node tests/full-a2-audit.js                -> PASS
+node tests/final-quality-audit.js          -> PASS
+
+Testy przeglądarkowe: otwórz tests.html przez HTTP.
 
 Aktualizacja GitHub w PowerShell:
 .\AKTUALIZUJ_GITHUB.ps1
-
-Gdy system blokuje skrypt:
-powershell.exe -ExecutionPolicy Bypass -File ".\AKTUALIZUJ_GITHUB.ps1"
-
-Testy automatyczne:
-node node-tests.js
-
-Oczekiwany wynik wersji 5.8.6:
-149/149
-
-Testy przeglądarkowe:
-uruchom lokalny serwer HTTP i otwórz tests.html.
-Nie otwieraj index.html bezpośrednio z dysku, ponieważ Service Worker wymaga HTTP lub HTTPS.

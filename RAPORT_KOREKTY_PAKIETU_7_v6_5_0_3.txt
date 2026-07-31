@@ -1,0 +1,19 @@
+KOREKTA 3 PAKIETU 7 – ANGIELSKI DAILY TRAINER 6.5.0
+
+Wprowadzono:
+- dodatkową walidację relacji znaczeniowych w 12 podatnych zadaniach końcowych A2,
+- sprawdzanie, czy słowa kluczowe pełnią właściwą funkcję w zdaniu, np. czasownik opisuje czynność, usterka dotyczy urządzenia, a prośba ma formę pytania,
+- osobne kryteria dla opowiadania o przeszłości, problemu i rozwiązania, have been / has gone, usterek, biletów, wskazówek, opóźnień, objawów, ubrań, zamówień i Past Continuous,
+- zachowanie kontroli po imporcie przerwanej lekcji,
+- cache PWA 6.5.0-p7-fix3.
+
+Testy:
+- 260/260 testów automatycznych,
+- 42/42 testów interfejsu,
+- 27/27 testów pełnego A1,
+- 27/27 testów pełnego A2,
+- audyt A1: PASS,
+- audyt A2: PASS,
+- składnia JavaScript: PASS.
+
+Kontrola negatywna obejmuje wszystkie 55 tematycznych lekcji A2 oraz 12 wcześniej podatnych przypadków.

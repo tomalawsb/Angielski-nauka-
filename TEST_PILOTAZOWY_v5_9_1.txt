@@ -1,0 +1,22 @@
+TEST PILOTAŻOWY – ANGIELSKI DAILY TRAINER v5.9.1
+
+Każda osoba testująca powinna wykonać:
+1. Pierwsze uruchomienie i onboarding.
+2. Pierwszą lekcję A1 od początku do końca.
+3. Przerwanie lekcji w połowie, zamknięcie aplikacji i wznowienie.
+4. Zadanie słuchania, pisania, mówienia i dialog.
+5. Zadanie końcowe i sprawdzenie odblokowania lekcji 2.
+6. Sesję samochodową na postoju.
+7. Zmianę motywu i wielkości tekstu.
+8. Uruchomienie bez internetu po wcześniejszym otwarciu aplikacji.
+
+Należy zapisać:
+- model telefonu i przeglądarkę,
+- miejsca niejasne lub zbyt trudne,
+- ucięty tekst albo zasłonięte przyciski,
+- problemy z mikrofonem i lektorem,
+- czas ukończenia lekcji,
+- czy użytkownik po lekcji potrafi samodzielnie się przywitać i pożegnać.
+
+BEZPIECZEŃSTWO
+Tryb samochodowy testować na postoju. Kierowca nie obsługuje telefonu podczas jazdy.

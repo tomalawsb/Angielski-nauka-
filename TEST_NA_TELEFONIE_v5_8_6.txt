@@ -1,4 +1,4 @@
-SZYBKI TEST NA TELEFONIE – WERSJA 5.8.6
+SZYBKI TEST NA TELEFONIE – WERSJA 5.9.0
 
 1. Uruchom aplikację i sprawdź, czy na górze widzisz kartę kursu A1.
 2. Naciśnij „Zobacz plan kursu” i sprawdź listę 10 lekcji.

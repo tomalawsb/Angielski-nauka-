@@ -1,0 +1,26 @@
+WERYFIKACJA ANGIELSKI DAILY TRAINER v5.9.1
+
+WYNIKI
+- Node: 186/186.
+- Chromium: 42/42.
+- JavaScript: wszystkie pliki przechodzą kontrolę składni.
+- PWA: wszystkie zasoby Service Workera istnieją.
+- Service Worker: cache english-trainer-v5.9.1-p5.
+- Migracja: zachowuje dane 5.9.0, w tym XP, passę, ustawienia i postęp kursu.
+- Kurs: pierwsza lekcja przechodzi pełny test i odblokowuje lekcję 2.
+- Wznowienie: zachowuje dokładne miejsce przerwanej lekcji.
+
+URZĄDZENIA SYMULOWANE W CHROMIUM
+- 320 × 568, bardzo duży tekst,
+- 360 × 640,
+- 390 × 844, duży tekst,
+- 768 × 1024,
+- 1366 × 768.
+
+DO SPRAWDZENIA FIZYCZNIE
+- instalacja i aktualizacja PWA,
+- mikrofon oraz rozpoznawanie mowy,
+- synteza mowy urządzenia,
+- tryb offline po wcześniejszym uruchomieniu,
+- zachowanie po wygaszeniu ekranu,
+- tryb samochodowy wyłącznie na postoju.

@@ -1,0 +1,20 @@
+KOREKTA PAKIETU 6 – v6.0.0 fix2
+Data: 30 lipca 2026
+
+Poprawiono ocenianie zadań końcowych w 9 lekcjach A1:
+- program sprawdza wymaganą liczbę zdań,
+- program sprawdza przedstawienie co najmniej dwóch osób,
+- program sprawdza co najmniej trzy różne czynności zawodowe,
+- wypowiedzi głosowe bez interpunkcji nadal są oceniane na podstawie rozpoznanych zdań,
+- przypadkowe słowa „help”, „work” i „have” nie zaliczają zadania o obowiązkach w pracy.
+
+Dodatkowo:
+- poprawiono import niedokończonej lekcji zawierającej zadanie końcowe,
+- cache Service Workera podniesiono do 6.0.0-p6-fix2,
+- dodano testy regresji dla wszystkich 9 lekcji.
+
+Wyniki:
+- testy automatyczne: 218/218,
+- test pełnego A1 UI: 27/27,
+- test pilotażowy UI: 42/42,
+- audyt pełnego A1: PASS.

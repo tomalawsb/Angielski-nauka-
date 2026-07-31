@@ -1,0 +1,10 @@
+TEST NA TELEFONIE – v6.0.0
+
+1. Zainstaluj lub odśwież PWA.
+2. Sprawdź plan kursu: 12 modułów i 55 lekcji.
+3. Ukończ ostatnią lekcję modułu 1 i potwierdź odblokowanie modułu 2.
+4. Uruchom po jednej lekcji z modułów 2, 6, 9 i 11.
+5. Sprawdź słuchanie, mówienie i dialog.
+6. Po ukończeniu lekcji uruchom sesję samochodową na postoju.
+7. Wyłącz internet i uruchom aplikację ponownie.
+8. Sprawdź moduł 12 oraz końcowe zadanie głosowe.

@@ -1,0 +1,18 @@
+ANGIELSKI DAILY TRAINER 6.5.0 — ZMIANY PAKIETU 7
+
+- Dodano pełny poziom A2: 12 modułów i 60 lekcji.
+- Dodano 613 materiałów A2; baza zawiera łącznie 1713 materiałów.
+- Łączna liczba lekcji A1–A2: 115.
+- Dodano końcową ocenę A2: słownictwo, gramatyka, słuchanie, czytanie, dialog, pisanie i mówienie.
+- Pierwsza lekcja A2 jest dostępna niezależnie od ukończenia A1.
+- Zachowano migrację postępu z wersji 6.0.0.
+- Tryb samochodowy A2 korzysta wyłącznie z poznanych pełnych zdań.
+- Zaktualizowano zasoby PWA i cache offline do 6.5.0-p7.
+
+KOREKTA 4 PAKIETU 7
+- Zastąpiono punktowe poprawki wspólnym silnikiem oceny znaczeniowej.
+- Dodano profile dla wszystkich 55 tematycznych lekcji A2.
+- Walidator sprawdza relacje gramatyczne i treściowe właściwe dla polecenia, a nie samą obecność słów kluczowych.
+- Dodano odrzucanie metajęzykowych odpowiedzi typu „I can say…” oraz wielokrotnego powtarzania jednego zdania.
+- Dodano 330 testów semantycznych: po sześć dla każdej lekcji tematycznej A2.
+- Cache offline zaktualizowano do 6.5.0-p7-fix4.

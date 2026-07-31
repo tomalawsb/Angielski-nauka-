@@ -1,0 +1,18 @@
+WERYFIKACJA ANGIELSKI DAILY TRAINER 6.5.0 – PAKIET 7, KOREKTA 4
+
+- testy automatyczne: 593/593
+- test pilotażowy interfejsu: 42/42
+- test pełnego A1: 27/27
+- test pełnego A2: 27/27
+- audyt A1: PASS
+- audyt A2: PASS
+- składnia JavaScript: PASS
+- wszystkie 55 tematycznych zadań końcowych A2 ma własny profil znaczeniowy
+- każda lekcja A2 przechodzi sześć prób: wzorzec, naturalne rozszerzenie, sałatka słów, tekst nie na temat, zbyt krótka odpowiedź i powtarzanie jednego zdania
+- metajęzykowe używanie słów kluczowych nie jest zaliczane jako odpowiedź na polecenie
+- powtarzanie tego samego zdania nie pozwala osiągnąć wymaganej liczby zdań
+- brak duplikatów identyfikatorów i par EN/PL
+- 12 modułów i 60 lekcji A2
+- 613 materiałów A2, 1713 materiałów łącznie
+- migracja 6.0.0 → 6.5.0: PASS
+- cache PWA: 6.5.0-p7-fix4

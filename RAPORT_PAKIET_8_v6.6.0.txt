@@ -1,0 +1,24 @@
+ANGIELSKI DAILY TRAINER — PAKIET 8
+Wersja programu: 6.6.0
+Wersja treści: a1-a2-2026.07-r1
+Status: FINALNA STABILNA A1–A2
+
+WYKONANO:
+- końcowy audyt struktury A1 i A2,
+- kompletne i unikalne przykłady dla 1713 materiałów,
+- obsługę podstawowych wariantów en-GB/en-US,
+- wersjonowanie treści i migrację z 6.5.0,
+- pobieranie i wczytywanie kopii JSON,
+- politykę prywatności i informację o mikrofonie,
+- poprawki dostępności i ograniczenia animacji,
+- ścisłą instalację kompletnego cache PWA,
+- końcowe testy regresji.
+
+WYNIKI:
+Node 612/612
+UI 42/42
+A1 UI 27/27
+A2 UI 27/27
+Final UI QA 15/15
+Audyty A1/A2/końcowy PASS
+JavaScript 32/32

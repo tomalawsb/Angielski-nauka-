@@ -1,0 +1,24 @@
+WERYFIKACJA ANGIELSKI DAILY TRAINER v6.0.0 – KOREKTA PAKIETU 6
+Data: 30 lipca 2026
+
+WYNIKI
+- testy automatyczne Node: 218/218
+- test pilotażowy interfejsu Chromium: 42/42
+- test pełnego A1 na czterech rozmiarach ekranu: 27/27
+- audyt pełnego A1: PASS
+- składnia wszystkich plików JavaScript: PASS
+- manifest, wersje plików i cache: spójne z 6.0.0
+- cache Service Workera: 6.0.0-p6-fix2
+
+ZAWARTOŚĆ
+- 12 opublikowanych modułów A1
+- 55 opublikowanych lekcji A1
+- 1100 unikalnych materiałów w bazie
+- 657 materiałów wykorzystanych bezpośrednio przez kurs A1
+- brak duplikatów identyfikatorów oraz par angielski/polski
+- brak materiałów spoza A1 w lekcjach A1
+- poprawna walidacja liczby zdań, osób i czynności w 9 zadaniach końcowych
+- materiały trybu samochodowego spełniają kryteria bezpieczeństwa kursu
+
+WYNIK KOŃCOWY
+Korekta Pakietu 6 została wdrożona i przeszła pełne testy automatyczne oraz interfejsowe.

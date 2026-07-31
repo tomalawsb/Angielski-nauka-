@@ -1,0 +1,20 @@
+TEST URZĄDZENIA — ANGIELSKI DAILY TRAINER 6.6.0
+
+W AUTOMATYCZNYM CHROMIUM SPRAWDZONO:
+- szerokości 320, 360, 390, 768 i 1366 px,
+- brak poziomego przepełnienia,
+- onboarding i nawigację,
+- przerwanie i wznowienie lekcji,
+- pełne ścieżki A1 i A2,
+- eksport/import danych,
+- podstawowe elementy dostępności.
+
+DO RĘCZNEGO SPRAWDZENIA NA TELEFONIE:
+- pozwolenie na mikrofon i rozpoznawanie mowy,
+- głosy lektora online i offline,
+- działanie po zablokowaniu ekranu,
+- działanie w tle i przy oszczędzaniu baterii,
+- instalacja i aktualizacja PWA,
+- powiadomienia systemowe.
+
+Testy symulowane nie są przedstawiane jako test wykonany na konkretnym modelu telefonu.

@@ -1,0 +1,10 @@
+KOREKTA 2 PAKIETU 7 – ANIELSKI DAILY TRAINER 6.5.0
+
+Wprowadzono:
+- rozpoznawanie pełnych zdań zawierających wymagane elementy treści,
+- wymóg rozłożenia kryteriów A2 na co najmniej dwa różne zdania,
+- blokadę odpowiedzi będących skupioną listą słów kluczowych,
+- zachowanie nowego kryterium podczas importu przerwanej lekcji,
+- cache PWA 6.5.0-p7-fix2.
+
+Testy obejmują wszystkie 55 tematycznych lekcji A2.

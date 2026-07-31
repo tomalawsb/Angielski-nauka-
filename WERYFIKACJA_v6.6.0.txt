@@ -1,0 +1,22 @@
+WERYFIKACJA ANGIELSKI DAILY TRAINER 6.6.0
+
+1. node node-tests.js
+   Wynik oczekiwany: 612/612
+2. python tests/ui-pilot-smoke.py
+   Wynik oczekiwany: 42/42
+3. python tests/ui-full-a1-smoke.py
+   Wynik oczekiwany: 27/27
+4. python tests/ui-full-a2-smoke.py
+   Wynik oczekiwany: 27/27
+5. python tests/ui-final-qa-smoke.py
+   Wynik oczekiwany: 15/15
+6. node tests/full-a1-audit.js
+   Wynik oczekiwany: PASS
+7. node tests/full-a2-audit.js
+   Wynik oczekiwany: PASS
+8. node tests/final-quality-audit.js
+   Wynik oczekiwany: 0 błędów
+9. Otwórz tests.html przez lokalny serwer HTTP.
+   Zestaw przeglądarkowy: 30 testów.
+
+Kontrola na fizycznym telefonie pozostaje wymagana dla mikrofonu, pracy w tle, blokady ekranu i powiadomień.

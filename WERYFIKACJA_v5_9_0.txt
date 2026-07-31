@@ -1,0 +1,30 @@
+WERYFIKACJA ANGIELSKI DAILY TRAINER v5.9.0
+
+WYNIKI
+- Node: 177/177 testów zaliczonych.
+- Chromium: 9/9 kontroli interfejsu zaliczonych.
+- Start pierwszej lekcji: zaliczony.
+- Składnia JavaScript: poprawna dla wszystkich plików.
+- Materiały: 606 unikalnych wpisów.
+- Nowa zawartość: 90 słów i zwrotów, 50 zdań, 10 scen dialogowych.
+- Lekcje: 10 opublikowanych lekcji A1.
+- Service Worker: zawiera pełny zestaw zasobów wersji 5.9.0.
+- Migracja: zachowuje dane ze starszych wersji.
+
+SPRAWDZONE PRZYPADKI KRYTYCZNE
+- niepoznany materiał nie trafia do pisania, mówienia ani trybu samochodowego,
+- zadania końcowe nie zaliczają przypadkowych słów,
+- zadania końcowe lekcji 2, 8, 9 i 10 wymagają faktycznego podania imienia,
+- rzeczowniki i nazwy urządzeń nie są uznawane za imiona,
+- materiał wyboru pochodzi z bieżącej lekcji,
+- kolejność wprowadzenia poprzedza aktywne użycie,
+- sesja samochodowa jest dostępna po zaliczeniu lekcji,
+- postęp kursu i XP pozostają rozdzielone.
+
+DO SPRAWDZENIA NA TELEFONIE
+- instalacja i aktualizacja PWA,
+- mikrofon i rozpoznawanie mowy,
+- synteza mowy wybranego urządzenia,
+- działanie offline po wcześniejszym uruchomieniu,
+- zachowanie aplikacji po wygaszeniu ekranu,
+- ergonomia sesji samochodowej na postoju.

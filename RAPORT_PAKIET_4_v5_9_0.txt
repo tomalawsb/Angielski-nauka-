@@ -1,0 +1,34 @@
+RAPORT PAKIETU 4 – ANGIELSKI DAILY TRAINER v5.9.0
+Data: 30 lipca 2026
+
+ZREALIZOWANE ETAPY
+- Etap 5. Utworzenie pilotażowego modułu A1
+- Etap 6. Rozszerzenie bazy materiałów dla pilota
+- Integracja trybu samochodowego z materiałem poznanym w kursie
+
+WPROWADZONE ELEMENTY
+1. Pierwszy opublikowany moduł A1 „Ja i podstawowe informacje”.
+2. Dziesięć pełnych lekcji: powitania, imię, kraj, miejsce zamieszkania, wiek, rodzina, pytania, dialog, powtórka i test praktyczny.
+3. Cele „Potrafię…”, wprowadzenia, krótkie objaśnienia gramatyczne, zadania wyboru, pisania, słuchania, mówienia, dialogi i zadania końcowe.
+4. Dodano 150 nowych materiałów: 90 słów i zwrotów, 50 pełnych zdań oraz 10 scen dialogowych.
+5. Baza zawiera obecnie 606 unikalnych materiałów.
+6. Każda lekcja ma przypisany zestaw utrwalający do trybu samochodowego.
+7. Sesja samochodowa korzysta wyłącznie z materiału poznanego po zaliczeniu lekcji.
+8. Dodano wybór liczby zadań samochodowych od 5 do 30.
+9. Zadania końcowe mają kryteria treści, nie zaliczają przypadkowych wypowiedzi i wymagają rzeczywistego podania imienia w lekcjach 2, 8, 9 i 10.
+10. Zaktualizowano wersję PWA, manifest, Service Workera, migrację danych i dokumentację projektu.
+
+WERYFIKACJA
+- testy automatyczne Node: 169/169,
+- kontrola interfejsu w Chromium: 9/9,
+- poprawne uruchomienie pierwszej lekcji w silniku Chromium,
+- brak błędów JavaScript podczas testu interfejsu,
+- wszystkie pliki JavaScript przechodzą kontrolę składni,
+- wszystkie lokalne zasoby PWA istnieją i są ujęte w Service Workerze,
+- świeżo zbudowana paczka ZIP została ponownie rozpakowana i sprawdzona.
+
+OGRANICZENIE ŚRODOWISKA TESTOWEGO
+Bezpośrednie wejście Chromium na lokalny adres HTTP jest blokowane przez politykę środowiska. Interfejs oraz uruchomienie lekcji sprawdzono w tym samym silniku po bezpiecznym osadzeniu lokalnych zasobów. Końcowy test instalacji PWA należy wykonać na telefonie.
+
+NASTĘPNY ZAKRES
+Pakiet 5: Etap 9 + część Etapu 10, czyli rozszerzone testy techniczne i pilotaż użytkowy.
