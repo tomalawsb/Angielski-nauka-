@@ -1,0 +1,27 @@
+ANGIELSKI DAILY TRAINER — KOREKTA PAKIETU 8
+Wersja programu: 6.6.0
+Wersja treści: a1-a2-2026.07-r1
+Cache PWA: 6.6.0-p8-topic-fix1
+
+PROBLEM:
+Trening dodatkowy mógł nadal korzystać ze starej kolejki oraz mieszać materiały techniczne i zawodowe mimo wybrania innej tematyki. Domyślna opcja „Wszystkie” obejmowała całą starszą bazę, przez co techniczne słownictwo pojawiało się zbyt często.
+
+POPRAWIONO:
+- domyślną tematyką jest teraz „Materiał bieżącego kursu A1/A2”,
+- filtr kursowy obejmuje tylko materiały z odblokowanych, rozpoczętych lub poznanych lekcji,
+- „Ogólny”, „Praktyczne”, „Dialogi”, „Praca” i „Techniczne” są ścisłymi filtrami,
+- „Wszystkie materiały dodatkowe” wyraźnie informują, że zawierają także technikę i pracę,
+- zmiana poziomu lub tematyki usuwa starą kolejkę treningu dodatkowego i buduje nową,
+- wznowienie niezgodnej starej kolejki jest blokowane,
+- migracja starszego ustawienia „Wszystkie” przełącza użytkownika na materiał bieżącego kursu,
+- rozpoczęta lekcja głównego kursu nie jest usuwana przez zmianę tematyki treningu,
+- ustawienia są dostępne bezpośrednio na ekranie Trening,
+- nazwa „Ścieżka” została zastąpiona czytelnym określeniem „Tematyka treningu dodatkowego”,
+- dodano objaśnienie działania filtrów w Pomocy.
+
+WERYFIKACJA:
+- testy automatyczne: 630/630,
+- testy interfejsu, A1, A2 i końcowego QA: PASS,
+- audyty pełnego A1, pełnego A2 i jakości końcowej: PASS,
+- składnia JavaScript: PASS,
+- komplet zasobów offline: PASS.

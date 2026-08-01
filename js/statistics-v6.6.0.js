@@ -16,7 +16,7 @@ function renderToday(){
   if($('homeReviewCount'))$('homeReviewCount').textContent=dueCount;
   if($('homeReviewText'))$('homeReviewText').textContent=dueCount?`Masz ${dueCount} ${dueCount===1?'materiał':'materiały'} zaplanowane do powtórki.`:'Brak zaległego materiału. Możesz przejść do kursu albo treningu.';
   if($('homeReviewBtn'))$('homeReviewBtn').disabled=dueCount===0;
-  if($('homeTrainingKnownCount'))$('homeTrainingKnownCount').textContent=courseKnownMaterialIds().length;
+  if($('homeTrainingKnownCount'))$('homeTrainingKnownCount').textContent=activeWords().filter(word=>prog(word.id).seen>0).length;
   const resume=$('resumeCard');if(resume){const saved=state.activeSession,valid=saved&&Array.isArray(saved.queue)&&saved.index<=saved.queue.length;resume.classList.toggle('hidden',!valid);if(valid&&$('resumeInfo')){const prefix=saved.source==='course'&&saved.lessonTitle?`${saved.lessonTitle} · `:'';$('resumeInfo').textContent=saved.index===saved.queue.length?`${prefix}sesja ukończona • poprawne: ${saved.correct||0}. Otwórz podsumowanie.`:`${prefix}zadanie ${saved.index+1} z ${saved.queue.length} • poprawne: ${saved.correct||0}.`;}}
 }
 function item(word,taskData){if(!word)return'';return `<div class="item"><div><strong>${esc(word.english)}</strong><div class="muted">${esc(word.polish)}</div><div class="minirow"><span class="mini">${esc(word.level)}</span><span class="mini">${esc(word.track)}</span><span class="mini amber">${esc(taskData.kind==='weak'?'do powtórki':taskData.kind==='new'?'nowe':'powtórka')}</span></div></div><span class="badge">${prog(word.id).mastery}%</span></div>`;}

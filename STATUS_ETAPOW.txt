@@ -2,7 +2,8 @@ ZAKOŃCZONE: Pakiety 1–8 oraz etapy 0–13.
 AKTUALNA WERSJA: 6.6.0.
 WERSJA TREŚCI: a1-a2-2026.07-r1.
 GOTOWE POZIOMY: pełne A1 i A2.
-STATUS: finalna stabilna wersja A1–A2.
+STATUS: finalna stabilna wersja A1–A2 po korekcie doboru tematyki treningu.
 
 PAKIET 8: końcowy audyt, wersjonowanie treści, dostępność, prywatność, kopie JSON, warianty en-GB/en-US i stabilizacja PWA.
+KOREKTA: rzeczywiste filtrowanie tematyki treningu, migracja starych ustawień i usuwanie niezgodnych kolejek.
 NASTĘPNY ROZWÓJ: poziom B1 w głównej wersji 7.0.0.

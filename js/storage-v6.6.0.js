@@ -23,7 +23,7 @@ function defState(){
     contentVersion:CONTENT_VERSION,
     createdAt:new Date().toISOString(),
     settings:{
-      dailyGoal:20,dailyNew:7,dailyReview:18,defaultLevel:'A1',defaultTrack:'all',
+      dailyGoal:20,dailyNew:7,dailyReview:18,defaultLevel:'A1',defaultTrack:TRAINING_TOPIC_COURSE,trainingTopicVersion:TRAINING_TOPIC_VERSION,
       themeMode:'system',fontSize:'normal',animationsEnabled:true,
       voiceEnabled:true,voiceLang:'en-US',voiceName:'',voiceRate:.9,voiceRepeat:1,autoSpeak:false,preferExample:true,
       carTaskCount:12,carPause:3,carAutoNext:true,carWarningDismissed:false,
@@ -53,9 +53,17 @@ function migrate(source){
   for(const [id,progress] of Object.entries(items))if((progress?.seen||0)>0&&WORDS.some(word=>word.id===id))introduced.add(id);
   course.introducedMaterialIds=[...introduced];
   const migrateSessionEntry=entry=>entry&&typeof entry==='object'?{source:entry.source||((entry.practice==='reviews')?'review':(entry.practice==='car'?'car':'practice')),...entry}:entry;
+  const sourceSettings=source.settings&&typeof source.settings==='object'?source.settings:{};
+  const migratedSettings={...freshState.settings,...sourceSettings};
+  if(Number(sourceSettings.trainingTopicVersion||0)<TRAINING_TOPIC_VERSION){
+    const oldTopic=sourceSettings.defaultTrack;
+    if(!oldTopic||oldTopic==='all'||/^Kurs\s+A[12]$/i.test(String(oldTopic)))migratedSettings.defaultTrack=TRAINING_TOPIC_COURSE;
+    migratedSettings.trainingTopicVersion=TRAINING_TOPIC_VERSION;
+  }
+  if(![TRAINING_TOPIC_COURSE,'all',...tracks()].includes(migratedSettings.defaultTrack))migratedSettings.defaultTrack=TRAINING_TOPIC_COURSE;
   return {
     ...freshState,...source,version:APP_VERSION,contentVersion:CONTENT_VERSION,
-    settings:{...freshState.settings,...(source.settings||{})},
+    settings:migratedSettings,
     user:{...freshState.user,...(source.user||{})},
     items,days:source.days||source.daily||{},mistakes:source.mistakes||{},modeStats:source.modeStats||{},course,
     sessions:Array.isArray(source.sessions)?source.sessions.slice(0,100).map(migrateSessionEntry):[],
@@ -95,13 +103,13 @@ function validateImportedState(rawText){
   assertObject(parsed.settings,'settings');assertObject(parsed.user,'user');assertObject(parsed.items??parsed.wordProgress,'items');assertObject(parsed.days??parsed.daily,'days');assertObject(parsed.mistakes,'mistakes');assertObject(parsed.modeStats,'modeStats');assertObject(parsed.course,'course');
   const defaults=defState(),settings=parsed.settings||{},user=parsed.user||{},items=parsed.items||parsed.wordProgress||{},days=parsed.days||parsed.daily||{};
   assertKnown(settings,new Set(Object.keys(defaults.settings)),'settings');assertKnown(user,new Set(Object.keys(defaults.user)),'user');
-  for(const [field,min,max,int] of [['dailyGoal',5,100,true],['dailyNew',1,50,true],['dailyReview',1,100,true],['voiceRate',.5,1.4,false],['voiceRepeat',1,4,true],['carPause',1,8,true],['carTaskCount',5,30,true]])number(settings[field],min,max,field,int);
+  for(const [field,min,max,int] of [['dailyGoal',5,100,true],['dailyNew',1,50,true],['dailyReview',1,100,true],['trainingTopicVersion',1,10,true],['voiceRate',.5,1.4,false],['voiceRepeat',1,4,true],['carPause',1,8,true],['carTaskCount',5,30,true]])number(settings[field],min,max,field,int);
   for(const field of ['animationsEnabled','voiceEnabled','autoSpeak','preferExample','carAutoNext','carWarningDismissed','reminderEnabled','notificationSound','onboardingComplete'])bool(settings[field],field);
   for(const field of ['voiceLang','voiceName'])string(settings[field],field,120);
   if(settings.reminderTime!==undefined&&(typeof settings.reminderTime!=='string'||!/^([01]\d|2[0-3]):[0-5]\d$/.test(settings.reminderTime)))throw new Error('Nieprawidłowa godzina przypomnienia.');
   if(settings.reminderLastDay!==undefined&&settings.reminderLastDay!==null&&!isValidDateKey(settings.reminderLastDay))throw new Error('Nieprawidłowa data ostatniego przypomnienia.');
   if(settings.defaultLevel!==undefined&&!['all',...levels()].includes(settings.defaultLevel))throw new Error('Nieznany poziom nauki.');
-  if(settings.defaultTrack!==undefined&&!['all',...tracks()].includes(settings.defaultTrack))throw new Error('Nieznana ścieżka nauki.');
+  if(settings.defaultTrack!==undefined&&![TRAINING_TOPIC_COURSE,'all',...tracks()].includes(settings.defaultTrack))throw new Error('Nieznana tematyka treningu.');
   if(settings.themeMode!==undefined&&!['system','light','dark'].includes(settings.themeMode))throw new Error('Nieznany motyw.');
   if(settings.fontSize!==undefined&&!['small','normal','large','xlarge'].includes(settings.fontSize))throw new Error('Nieznany rozmiar tekstu.');
   for(const [field,min,max] of [['xp',0,100000000],['level',1,100000],['streakDays',0,100000],['totalCorrect',0,100000000],['totalWrong',0,100000000],['bestAnswerStreak',0,1000000],['currentAnswerStreak',0,1000000]])number(user[field],min,max,'user.'+field);

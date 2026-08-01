@@ -1,22 +1,27 @@
 WERYFIKACJA ANGIELSKI DAILY TRAINER 6.6.0
+Korekta doboru tematyki: 6.6.0-p8-topic-fix1
 
 1. node node-tests.js
-   Wynik oczekiwany: 612/612
+   Wynik oczekiwany: 630/630
 2. python tests/ui-pilot-smoke.py
-   Wynik oczekiwany: 42/42
+   Wynik oczekiwany: PASS
 3. python tests/ui-full-a1-smoke.py
-   Wynik oczekiwany: 27/27
+   Wynik oczekiwany: PASS
 4. python tests/ui-full-a2-smoke.py
-   Wynik oczekiwany: 27/27
+   Wynik oczekiwany: PASS
 5. python tests/ui-final-qa-smoke.py
-   Wynik oczekiwany: 15/15
+   Wynik oczekiwany: PASS
 6. node tests/full-a1-audit.js
    Wynik oczekiwany: PASS
 7. node tests/full-a2-audit.js
    Wynik oczekiwany: PASS
 8. node tests/final-quality-audit.js
    Wynik oczekiwany: 0 błędów
-9. Otwórz tests.html przez lokalny serwer HTTP.
-   Zestaw przeglądarkowy: 30 testów.
+9. Sprawdź zmianę tematyki treningu:
+   - „Materiał bieżącego kursu” nie może pobierać starej technicznej bazy,
+   - „Ogólny” i „Techniczne” muszą działać jako filtry ścisłe,
+   - zmiana tematyki ma usunąć niezgodną kolejkę treningową,
+   - rozpoczęta lekcja kursu ma pozostać zachowana.
+10. Otwórz tests.html przez lokalny serwer HTTP.
 
 Kontrola na fizycznym telefonie pozostaje wymagana dla mikrofonu, pracy w tle, blokady ekranu i powiadomień.

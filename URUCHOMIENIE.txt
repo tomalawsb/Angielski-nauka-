@@ -1,5 +1,6 @@
 URUCHOMIENIE ANGIELSKI DAILY TRAINER v6.6.0
 Wersja treści: a1-a2-2026.07-r1
+Korekta doboru tematyki: 6.6.0-p8-topic-fix1
 
 Najprościej uruchomić katalog przez lokalny serwer HTTP, na przykład:
 python -m http.server 8000
@@ -9,11 +10,11 @@ http://localhost:8000/index.html
 Nie otwieraj index.html bezpośrednio z dysku, ponieważ Service Worker wymaga HTTP lub HTTPS.
 
 TESTY:
-node node-tests.js                         -> 612/612
-python tests/ui-pilot-smoke.py            -> 42/42
-python tests/ui-full-a1-smoke.py           -> 27/27
-python tests/ui-full-a2-smoke.py           -> 27/27
-python tests/ui-final-qa-smoke.py          -> 15/15
+node node-tests.js                         -> 630/630
+python tests/ui-pilot-smoke.py            -> PASS
+python tests/ui-full-a1-smoke.py           -> PASS
+python tests/ui-full-a2-smoke.py           -> PASS
+python tests/ui-final-qa-smoke.py          -> PASS
 node tests/full-a1-audit.js                -> PASS
 node tests/full-a2-audit.js                -> PASS
 node tests/final-quality-audit.js          -> PASS

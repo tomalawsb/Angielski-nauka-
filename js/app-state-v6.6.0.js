@@ -1,6 +1,8 @@
 'use strict';
 
 const APP_VERSION='6.6.0';
+const TRAINING_TOPIC_COURSE='course';
+const TRAINING_TOPIC_VERSION=1;
 const WORDS=window.TRAINER_WORDS||[];
 const DIALOGUE_SCENES=window.DIALOGUE_SCENES||{};
 const WORD_ALIASES=window.TRAINER_WORD_ALIASES||{};

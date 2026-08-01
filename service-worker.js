@@ -1,6 +1,6 @@
 'use strict';
-const VERSION='6.6.0-p8-final';
-const CACHE_NAME='english-trainer-v6.6.0-p8-final';
+const VERSION='6.6.0-p8-topic-fix1';
+const CACHE_NAME='english-trainer-v6.6.0-p8-topic-fix1';
 const APP_ENTRY='./index.html?app='+VERSION;
 const APP_SHELL=[
   APP_ENTRY,

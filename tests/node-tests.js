@@ -93,6 +93,7 @@ test('alternatywa dialogowa jest akceptowana',T.bestAnswerScore('Could we move t
 test('tryb dialogowy nie wprowadza niepoznanego materiału',T.practiceQueue('dialogues').length===0);
 test('tryb samochodowy nie wprowadza niepoznanego materiału',T.practiceQueue('car').length===0);
 const initialState=T.getState();
+initialState.settings.defaultTrack='all';initialState.settings.trainingTopicVersion=1;
 const seedLearned=word=>{if(!word)return;initialState.items[word.id]={seen:1,correct:1,wrong:0,streak:1,mastery:20,nextReview:'2099-01-01',lastAnswer:'2026-07-01',lastSuccessDay:'2026-07-01',successDays:['2026-07-01'],status:'review',intervalIndex:1,lapses:0};if(!initialState.course.introducedMaterialIds.includes(word.id))initialState.course.introducedMaterialIds.push(word.id);};
 T.WORDS.filter(word=>word.level==='A1'&&T.DIALOGUE_SCENES[word.id]&&!word.id.startsWith('course_')).forEach(seedLearned);
 T.WORDS.filter(word=>word.level==='A1'&&T.isSentenceItem(word)).slice(0,40).forEach(seedLearned);
@@ -423,7 +424,7 @@ test('zmiana liczby zadań samochodowych faktycznie aktualizuje stan',T.getState
 T.getState().settings.carTaskCount=oldCarTaskCount;
 test('okna dialogowe mieszczą się na małych ekranach dzięki przewijaniu',css591.includes('max-height:calc(100dvh - 20px)')&&css591.includes('overflow-y:auto')&&css591.includes('overscroll-behavior:contain'));
 test('przyciski onboardingu pozostają dostępne przy bardzo dużym tekście',css591.includes('.onboarding-actions{position:sticky'));
-test('Service Worker Pakietu 6 ma nowy, spójny cache',serviceWorker.includes("VERSION='6.6.0-p8-final'")&&serviceWorker.includes("CACHE_NAME='english-trainer-v6.6.0-p8-final'")&&serviceWorker.includes("APP_ENTRY='./index.html?app='+VERSION"));
+test('Service Worker Pakietu 6 ma nowy, spójny cache',serviceWorker.includes("VERSION='6.6.0-p8-topic-fix1'")&&serviceWorker.includes("CACHE_NAME='english-trainer-v6.6.0-p8-topic-fix1'")&&serviceWorker.includes("APP_ENTRY='./index.html?app='+VERSION"));
 test('manifest i wszystkie zasoby uruchomieniowe wskazują wersję 6.6.0',html.includes('manifest-v6.6.0.json')&&html.includes('styles-v6.6.0.css')&&runtimeFiles.every(file=>file.includes('v6.6.0')));
 
 
@@ -442,7 +443,7 @@ test('przykładowe zadania końcowe pełnego A1 przechodzą ocenę',fullA1Lesson
 test('losowa odpowiedź nie zalicza nowych zadań końcowych',fullA1Lessons.filter(lesson=>lesson.moduleId!=='a1-m01').every(lesson=>T.scoreTaskAnswer('random router table dog',null,'course_final',T.buildCourseLessonQueue(lesson.id).at(-1)).status!=='correct'));
 test('końcowy moduł obejmuje słownictwo, słuchanie, czytanie, dialog, pisanie i mówienie',(()=>{const m=a1Level.modules.find(module=>module.id==='a1-m12');const joined=m.lessons.map(l=>l.title+' '+l.goal+' '+l.stages.join(' ')).join(' ').toLowerCase();return joined.includes('słownict')&&joined.includes('słuch')&&joined.includes('czyt')&&joined.includes('dialog')&&joined.includes('pis')&&(joined.includes('mów')||joined.includes('speaking'));})());
 test('migracja ukończonego modułu 1 odblokowuje pierwszy moduł 2',(()=>{const old=T.CourseCore.defaultCourseState({...T.COURSE_CATALOG,levels:T.COURSE_CATALOG.levels.map(level=>level.id==='A1'?{...level,modules:[level.modules[0]]}:level)});for(const lesson of a1Level.modules[0].lessons){old.lessons[lesson.id].status='completed';old.unlockedLessonIds.push(lesson.id);}const migrated=T.CourseCore.migrateCourseState(old,T.COURSE_CATALOG,T.WORDS.map(w=>w.id));return migrated.unlockedLessonIds.includes('a1-m02-l01')&&migrated.unlockedModuleIds.includes('a1-m02');})());
-test('Service Worker buforuje rozszerzenie pełnego A1',serviceWorker.includes("'./data/course-a1-full-expansion-v6.6.0.js'")&&serviceWorker.includes("VERSION='6.6.0-p8-final'"));
+test('Service Worker buforuje rozszerzenie pełnego A1',serviceWorker.includes("'./data/course-a1-full-expansion-v6.6.0.js'")&&serviceWorker.includes("VERSION='6.6.0-p8-topic-fix1'"));
 test('manifest opisuje pełny kurs A1',manifest.version==='6.6.0'&&manifest.description.includes('115 lekcjami'));
 
 
@@ -471,12 +472,12 @@ test('jedno zdanie nie zalicza lekcji 4.4',T.scoreTaskAnswer('Every day in the m
 test('przypadkowe słowa help, work i have nie udają trzech czynności zawodowych',T.scoreTaskAnswer('I need help because the shower does not work and I have a fever.',null,'course_final',finalTaskFor('a1-m11-l02')).status!=='correct');
 test('jedno zdanie nie zalicza powtórki słownictwa A1',T.scoreTaskAnswer('My flat is near work and every day in the morning I eat bread and drink coffee.',null,'course_final',finalTaskFor('a1-m12-l01')).status!=='correct');
 test('jedno zdanie nie zalicza wypowiedzi o wyjeździe',T.scoreTaskAnswer('I go to Krakow by train and stay in a hotel where I would like dinner and local food.',null,'course_final',finalTaskFor('a1-m12-l04')).status!=='correct');
-test('Service Worker korekty Pakietu 6 ma świeży spójny cache',serviceWorker.includes("VERSION='6.6.0-p8-final'")&&serviceWorker.includes("CACHE_NAME='english-trainer-v6.6.0-p8-final'")&&serviceWorker.includes("APP_ENTRY='./index.html?app='+VERSION"));
+test('Service Worker korekty Pakietu 6 ma świeży spójny cache',serviceWorker.includes("VERSION='6.6.0-p8-topic-fix1'")&&serviceWorker.includes("CACHE_NAME='english-trainer-v6.6.0-p8-topic-fix1'")&&serviceWorker.includes("APP_ENTRY='./index.html?app='+VERSION"));
 test('import zachowuje nowe kryteria w niedokończonej lekcji',(()=>{const payload=JSON.parse(JSON.stringify(T.getState()));payload.activeSession={queue:[finalTaskFor('a1-m11-l02')],index:0,correct:0,wrong:0,xp:0,practice:'course',source:'course',startedAt:'2026-07-30T12:00:00Z',lessonId:'a1-m11-l02',moduleId:'a1-m11',lessonTitle:'Podstawowe zadania w pracy',lessonGoal:'Potrafię opisać podstawowe obowiązki.',taskResults:[],stageProgress:{},finalTaskCompleted:false};try{const imported=T.validateImportedState(JSON.stringify(payload));return imported.activeSession.queue[0].minimumActions===3&&imported.activeSession.queue[0].actionGroups.length>=3;}catch(_){return false;}})());
 test('jedna osoba opisana jako matka i nauczyciel nie udaje dwóch osób',T.scoreTaskAnswer('This is my mother Anna. She is a teacher.',null,'course_final',finalTaskFor('a1-m02-l03')).status!=='correct');
 test('dwie różne osoby nadal zaliczają zadanie przedstawiania',T.scoreTaskAnswer('This is my friend Anna. Her brother is our neighbour.',null,'course_final',finalTaskFor('a1-m02-l03')).status==='correct');
 test('czynność check my email jest liczona poprawnie',T.scoreTaskAnswer('I start work at eight. I check my email. I help customers.',null,'course_final',finalTaskFor('a1-m11-l02')).status==='correct');
-test('katalog i Service Worker mają oznaczenie wersji finalnej Pakietu 8',T.COURSE_CATALOG.catalogVersion==='2026.07-a1-a2-stable-p8'&&serviceWorker.includes("VERSION='6.6.0-p8-final'"));
+test('katalog i Service Worker mają oznaczenie wersji finalnej Pakietu 8',T.COURSE_CATALOG.catalogVersion==='2026.07-a1-a2-stable-p8'&&serviceWorker.includes("VERSION='6.6.0-p8-topic-fix1'"));
 
 
 // Pakiet 7: pełny poziom A2.
@@ -493,7 +494,7 @@ test('przypadkowa odpowiedź nie zalicza zadań końcowych A2',fullA2Lessons.eve
 test('pierwsza lekcja A2 jest dostępna niezależnie od ukończenia A1',T.CourseCore.defaultCourseState(T.COURSE_CATALOG).unlockedLessonIds.includes('a2-m01-l01'));
 test('ukończenie ostatniej lekcji A1 nadal odblokowuje A2',(()=>{const state=T.CourseCore.defaultCourseState(T.COURSE_CATALOG);const last='a1-m12-l05';state.lessons[last].status='completed';state.unlockedLessonIds.push(last);const migrated=T.CourseCore.migrateCourseState(state,T.COURSE_CATALOG,T.WORDS.map(w=>w.id));return migrated.unlockedLessonIds.includes('a2-m01-l01');})());
 test('tryb samochodowy A2 używa wyłącznie pełnych zdań',fullA2Lessons.every(lesson=>(lesson.carMaterialIds||[]).every(id=>{const w=T.WORDS.find(item=>item.id===id);return w&&w.level==='A2'&&w.carModeEligible!==false&&String(w.english).trim().split(/\s+/).length>=2;})));
-test('Service Worker buforuje pełny A2',serviceWorker.includes("'./data/course-a2-full-v6.6.0.js'")&&serviceWorker.includes("VERSION='6.6.0-p8-final'"));
+test('Service Worker buforuje pełny A2',serviceWorker.includes("'./data/course-a2-full-v6.6.0.js'")&&serviceWorker.includes("VERSION='6.6.0-p8-topic-fix1'"));
 test('manifest opisuje kompletne A1 i A2',manifest.version==='6.6.0'&&manifest.description.includes('A1 i A2')&&manifest.description.includes('115 lekcjami'));
 test('migracja 6.0.0 zachowuje postęp A1 i dodaje A2',(()=>{const old={...T.getState(),version:'6.0.0'};const migrated=T.migrate(old);return migrated.version==='6.6.0'&&migrated.course.lessons['a1-m01-l01']&&migrated.course.lessons['a2-m01-l01'];})());
 
@@ -506,7 +507,7 @@ test('A2 zawiera 55 nowych scen dialogowych',Object.keys(T.DIALOGUE_SCENES).filt
 test('każdy własny materiał A2 ma przykład użycia',ownA2.every(word=>Array.isArray(word.examples)&&word.examples.length>0&&String(word.examples[0].en||'').trim().length>=3));
 test('sałatka słów kluczowych nie zalicza tematycznych zadań A2',thematicA2.every(lesson=>{const task=T.buildCourseLessonQueue(lesson.id).at(-1);const salad=(task.requiredKeywords||[]).map(group=>group[0]).join(' ')+'. Cat dog table router. Coffee weather phone internet.';return T.scoreTaskAnswer(salad,null,'course_final',task).status!=='correct';}));
 test('konkretny bezsens z pierwszej lekcji A2 jest odrzucany',T.scoreTaskAnswer('Last weekend visited watched cooked. Cat dog table router. Coffee weather phone internet.',null,'course_final',T.buildCourseLessonQueue('a2-m01-l01').at(-1)).status!=='correct');
-test('katalog A1-A2 i Service Worker są z wersji finalnej',T.COURSE_CATALOG.catalogVersion==='2026.07-a1-a2-stable-p8'&&serviceWorker.includes("VERSION='6.6.0-p8-final'")&&serviceWorker.includes("CACHE_NAME='english-trainer-v6.6.0-p8-final'"));
+test('katalog A1-A2 i Service Worker są z wersji finalnej',T.COURSE_CATALOG.catalogVersion==='2026.07-a1-a2-stable-p8'&&serviceWorker.includes("VERSION='6.6.0-p8-topic-fix1'")&&serviceWorker.includes("CACHE_NAME='english-trainer-v6.6.0-p8-topic-fix1'"));
 
 
 // Korekta 2 Pakietu 7: słowa kluczowe muszą tworzyć treść w kilku zdaniach.
@@ -514,7 +515,7 @@ test('zadania A2 wymagają rozłożenia treści na co najmniej dwa zdania',thema
 test('skupiona sałatka słów nie zalicza żadnej tematycznej lekcji A2',thematicA2.every(lesson=>{const task=T.buildCourseLessonQueue(lesson.id).at(-1),salad=(task.requiredKeywords||[]).map(group=>group[0]).join(' ')+'. I am happy. It is good. We like it. This is useful. Because and but then.';return T.scoreTaskAnswer(salad,null,'course_final',task).status!=='correct';}));
 test('sałatka z pierwszej lekcji A2 nadal jest odrzucana po korekcie 2',T.scoreTaskAnswer('Last weekend visited watched cooked stayed because and but then. I am happy. It is good.',null,'course_final',T.buildCourseLessonQueue('a2-m01-l01').at(-1)).status!=='correct');
 test('import przerwanej lekcji zachowuje wymóg rozłożenia treści',(()=>{const payload=JSON.parse(JSON.stringify(T.getState())),task=T.buildCourseLessonQueue('a2-m01-l01').at(-1);payload.activeSession={queue:[task],index:0,correct:0,wrong:0,xp:0,practice:'course',source:'course',startedAt:'2026-07-30T20:00:00Z',lessonId:'a2-m01-l01',moduleId:'a2-m01',lessonTitle:'Co robiłeś w weekend?',lessonGoal:'Potrafię opowiedzieć o minionym weekendzie.',taskResults:[],stageProgress:{},finalTaskCompleted:false};try{return T.validateImportedState(JSON.stringify(payload)).activeSession.queue[0].minimumKeywordSentences===2;}catch(_){return false;}})());
-test('wersja finalna zachowuje poprawki 2 Pakietu 7',T.COURSE_CATALOG.catalogVersion==='2026.07-a1-a2-stable-p8'&&serviceWorker.includes("VERSION='6.6.0-p8-final'")&&serviceWorker.includes("CACHE_NAME='english-trainer-v6.6.0-p8-final'"));
+test('wersja finalna zachowuje poprawki 2 Pakietu 7',T.COURSE_CATALOG.catalogVersion==='2026.07-a1-a2-stable-p8'&&serviceWorker.includes("VERSION='6.6.0-p8-topic-fix1'")&&serviceWorker.includes("CACHE_NAME='english-trainer-v6.6.0-p8-topic-fix1'"));
 
 
 
@@ -538,7 +539,7 @@ for(const [id,bad] of semanticA2Cases)test(`semantyczna sałatka jest odrzucana 
 test('naturalne alternatywne odpowiedzi nadal zaliczają 12 poprawionych lekcji',semanticA2Cases.every(([id,,good])=>T.scoreTaskAnswer(good,null,'course_final',T.buildCourseLessonQueue(id).at(-1)).status==='correct'));
 test('wzmocniona sałatka nie zalicza żadnej z 55 lekcji tematycznych A2',thematicA2.every(lesson=>{const task=T.buildCourseLessonQueue(lesson.id).at(-1),words=(task.requiredKeywords||[]).map(group=>group[0]),half=Math.ceil(words.length/2),bad=`I like ${words.slice(0,half).join(' and ')} because it is useful. We use ${words.slice(half).join(' and ')||words[0]} because it is good.`;return T.scoreTaskAnswer(bad,null,'course_final',task).status!=='correct';}));
 test('import przerwanej lekcji zachowuje korektę semantyczną',(()=>{const payload=JSON.parse(JSON.stringify(T.getState())),task=T.buildCourseLessonQueue('a2-m01-l01').at(-1),bad=semanticA2Cases[0][1];payload.activeSession={queue:[task],index:0,correct:0,wrong:0,xp:0,practice:'course',source:'course',startedAt:'2026-07-31T06:00:00Z',lessonId:'a2-m01-l01',moduleId:'a2-m01',lessonTitle:'Co robiłeś w weekend?',lessonGoal:'Potrafię opowiedzieć o minionym weekendzie.',taskResults:[],stageProgress:{},finalTaskCompleted:false};try{const imported=T.validateImportedState(JSON.stringify(payload));return T.scoreTaskAnswer(bad,null,'course_final',imported.activeSession.queue[0]).status!=='correct';}catch(_){return false;}})());
-test('wersja finalna zachowuje poprawki 3 Pakietu 7',T.COURSE_CATALOG.catalogVersion==='2026.07-a1-a2-stable-p8'&&serviceWorker.includes("VERSION='6.6.0-p8-final'")&&serviceWorker.includes("CACHE_NAME='english-trainer-v6.6.0-p8-final'"));
+test('wersja finalna zachowuje poprawki 3 Pakietu 7',T.COURSE_CATALOG.catalogVersion==='2026.07-a1-a2-stable-p8'&&serviceWorker.includes("VERSION='6.6.0-p8-topic-fix1'")&&serviceWorker.includes("CACHE_NAME='english-trainer-v6.6.0-p8-topic-fix1'"));
 
 
 
@@ -570,7 +571,7 @@ for(const lesson of thematicA2){
   test(`${lesson.id}: powtarzanie jednego zdania jest odrzucane`,T.scoreTaskAnswer(repeated,null,'course_final',task).status!=='correct');
 }
 test('import przerwanej lekcji zachowuje pełny walidator 55 lekcji A2',(()=>{const payload=JSON.parse(JSON.stringify(T.getState())),task=T.buildCourseLessonQueue('a2-m10-l01').at(-1),bad='I can say first because this exercise helps me practise English. We can write next because the lesson is useful. The teacher can read then in class. They can repeat finally every day.';payload.activeSession={queue:[task],index:0,correct:0,wrong:0,xp:0,practice:'course',source:'course',startedAt:'2026-07-31T09:30:00Z',lessonId:'a2-m10-l01',moduleId:'a2-m10',lessonTitle:'Prosty przepis',lessonGoal:'Potrafię podać prosty przepis.',taskResults:[],stageProgress:{},finalTaskCompleted:false};try{const imported=T.validateImportedState(JSON.stringify(payload));return T.scoreTaskAnswer(bad,null,'course_final',imported.activeSession.queue[0]).status!=='correct';}catch(_){return false;}})());
-test('wersja finalna zachowuje walidator 55 lekcji A2',T.COURSE_CATALOG.catalogVersion==='2026.07-a1-a2-stable-p8'&&serviceWorker.includes("VERSION='6.6.0-p8-final'")&&serviceWorker.includes("CACHE_NAME='english-trainer-v6.6.0-p8-final'"));
+test('wersja finalna zachowuje walidator 55 lekcji A2',T.COURSE_CATALOG.catalogVersion==='2026.07-a1-a2-stable-p8'&&serviceWorker.includes("VERSION='6.6.0-p8-topic-fix1'")&&serviceWorker.includes("CACHE_NAME='english-trainer-v6.6.0-p8-topic-fix1'"));
 
 
 
@@ -598,6 +599,67 @@ test('ograniczenie animacji respektuje ustawienie systemowe',css.includes('@medi
 const shellMatch=serviceWorker.match(/const APP_SHELL=\[([\s\S]*?)\];/),shellEntries=shellMatch?[...shellMatch[1].matchAll(/(?:APP_ENTRY|'([^']+)')/g)].length:0;
 test('Service Worker ma ścisły kompletny cache 30 zasobów',shellEntries===30&&serviceWorker.includes('await Promise.all(APP_SHELL.map')&&serviceWorker.includes('await caches.delete(CACHE_NAME);throw error'));
 test('manifest ma język, identyfikator i kategorię edukacyjną',manifest.id==='./'&&manifest.lang==='pl'&&manifest.categories?.includes('education')&&manifest.content_version===T.CONTENT_VERSION);
+
+
+
+// Korekta Pakietu 8: rzeczywista tematyka treningu i brak przecieku materiałów technicznych.
+test('trening ma własne selektory poziomu i tematyki',html.includes('id="trainingLevel"')&&html.includes('id="trainingTopic"')&&html.includes('Tematyka treningu dodatkowego'));
+test('interfejs nie nazywa tematyki treningu ścieżką',!html.includes('<span>Ścieżka</span><select id="defaultTrack"')&&!html.includes('aria-label="Ścieżka materiałów"'));
+const topicOptions=T.trainingTopicOptions();
+test('domyślna tematyka wskazuje materiał bieżącego kursu',topicOptions[0]?.[0]==='course'&&/zalecane/i.test(topicOptions[0]?.[1]||''));
+test('opcja wszystkich materiałów ostrzega o technice',topicOptions.some(([value,label])=>value==='all'&&/techniczne/i.test(label)));
+test('migracja starego ustawienia Wszystkie przechodzi na kurs',(()=>{const migrated=T.migrate({version:'6.6.0',settings:{defaultLevel:'A1',defaultTrack:'all'}});return migrated.settings.defaultTrack==='course'&&migrated.settings.trainingTopicVersion===1;})());
+test('migracja zachowuje świadomy wybór techniczny',T.migrate({version:'6.6.0',settings:{defaultLevel:'A1',defaultTrack:'Techniczne'}}).settings.defaultTrack==='Techniczne');
+
+const topicStateTarget=T.getState(),topicStateBackup=JSON.parse(JSON.stringify(topicStateTarget));
+const restoreTopicState=()=>{for(const key of Object.keys(topicStateTarget))delete topicStateTarget[key];Object.assign(topicStateTarget,JSON.parse(JSON.stringify(topicStateBackup)));};
+const resetTopicState=(level,topic)=>{
+  topicStateTarget.settings={...topicStateBackup.settings,defaultLevel:level,defaultTrack:topic,trainingTopicVersion:1,dailyGoal:20,dailyNew:20,dailyReview:50};
+  topicStateTarget.items={};topicStateTarget.recentWordIds=[];topicStateTarget.activeSession=null;
+  topicStateTarget.course=T.CourseCore.defaultCourseState(T.COURSE_CATALOG);
+};
+resetTopicState('A1','course');
+const currentCourseIds=T.courseTopicMaterialIds('A1'),courseTopicQueue=T.practiceQueue('test');
+test('tematyka kursowa tworzy niepustą kolejkę',courseTopicQueue.length>0);
+test('tematyka kursowa nie wpuszcza starej bazy technicznej ani zawodowej',courseTopicQueue.every(item=>currentCourseIds.has(item.wordId)&&!['Techniczne','Praca'].includes(T.WORDS.find(word=>word.id===item.wordId)?.track)));
+const lateA1=T.CourseCore.flattenLessons(T.COURSE_CATALOG).find(lesson=>lesson.id==='a1-m12-l05');
+const lateA1Id=lateA1?[...T.courseTopicMaterialIds('A1')].find(()=>false):null;
+test('tematyka kursowa nie pobiera materiału z zablokowanej końcowej lekcji',(()=>{const lateIds=lateA1?[...(lateA1.materialIds||[]),...Object.values(lateA1.stageMaterialIds||{}).flat()]:[];return lateIds.length>0&&lateIds.every(id=>!currentCourseIds.has(id));})());
+
+resetTopicState('A1','Ogólny');
+const generalWords=T.activeWords(),generalQueue=T.practiceQueue('test');
+test('wybór Ogólny daje wyłącznie materiał ogólny',generalWords.length>0&&generalWords.every(word=>word.track==='Ogólny')&&generalQueue.every(item=>T.WORDS.find(word=>word.id===item.wordId)?.track==='Ogólny'));
+resetTopicState('A1','Techniczne');
+const technicalWords=T.activeWords(),technicalQueue=T.practiceQueue('test');
+test('materiał techniczny pojawia się dopiero po wyborze Techniczne',technicalWords.length>0&&technicalWords.every(word=>word.track==='Techniczne')&&technicalQueue.every(item=>T.WORDS.find(word=>word.id===item.wordId)?.track==='Techniczne'));
+
+resetTopicState('A1','Ogólny');
+const dueGeneral=T.WORDS.find(word=>word.level==='A1'&&word.track==='Ogólny'),dueTechnical=T.WORDS.find(word=>word.level==='A1'&&word.track==='Techniczne');
+const dueProgress={seen:3,correct:1,wrong:2,streak:0,mastery:15,nextReview:'2020-01-01',lastAnswer:'2020-01-01',lastSuccessDay:null,successDays:[],status:'weak',intervalIndex:0,lapses:1};
+topicStateTarget.items[dueGeneral.id]={...dueProgress};topicStateTarget.items[dueTechnical.id]={...dueProgress};
+test('powtórki respektują tematykę i odcinają stare techniczne błędy',T.due().some(word=>word.id===dueGeneral.id)&&!T.due().some(word=>word.id===dueTechnical.id));
+
+resetTopicState('A1','Techniczne');
+T.startSession([{wordId:dueTechnical.id,kind:'review',mode:'word_write'}],'writing',{source:'practice'});
+const changedPractice=T.applyTrainingFilters('A1','Ogólny');
+test('zmiana tematyki usuwa zapisaną i bieżącą sesję treningową',changedPractice.changed&&changedPractice.cleared&&T.getState().activeSession===null&&T.getSession()===null);
+
+resetTopicState('A1','course');
+const firstCourseWord=T.WORDS.find(word=>T.courseTopicMaterialIds('A1').has(word.id));
+T.startSession([{wordId:firstCourseWord.id,kind:'new',mode:'word_choice'}],'course',{source:'course',lessonId:'a1-m01-l01'});
+const courseFilterChange=T.applyTrainingFilters('A1','Techniczne');
+test('zmiana tematyki nie usuwa głównej lekcji kursu',courseFilterChange.changed&&!courseFilterChange.cleared&&T.getState().activeSession?.source==='course'&&T.getSession()?.source==='course');
+
+resetTopicState('A1','course');
+topicStateTarget.activeSession={queue:[{wordId:dueTechnical.id,kind:'review',mode:'word_write'}],index:0,correct:0,wrong:0,xp:0,practice:'writing',source:'practice',startedAt:'2026-07-31T10:00:00Z'};
+test('stara techniczna sesja jest wykrywana jako niezgodna z tematyką kursową',T.practiceSessionMatchesFilters(topicStateTarget.activeSession)===false);
+test('uruchomienie może automatycznie usunąć niezgodną starą sesję',T.discardIncompatiblePracticeSession({persist:false})===true&&topicStateTarget.activeSession===null);
+
+resetTopicState('A1','all');
+test('technika pozostaje dostępna po świadomym wyborze wszystkich materiałów',T.activeWords().some(word=>word.track==='Techniczne'));
+restoreTopicState();
+
+test('Service Worker korekty tematyki ma świeży cache',serviceWorker.includes("VERSION='6.6.0-p8-topic-fix1'")&&serviceWorker.includes("CACHE_NAME='english-trainer-v6.6.0-p8-topic-fix1'"));
 
 const failed=tests.filter(([,ok])=>!ok);
 console.log(tests.map(([name,ok])=>(ok?'PASS ':'FAIL ')+name).join('\n'));

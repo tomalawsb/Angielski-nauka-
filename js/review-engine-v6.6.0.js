@@ -3,11 +3,51 @@
 /**
  * Angielski Daily Trainer 6.6.0
  * Dobór materiału, kolejki nauki i powtórek.
- * Rozszerzone o rozdzielenie kursu, powtórek, treningu i trybu samochodowego.
+ * Korekta Pakietu 8: tematyka treningu jest filtrem rzeczywistym, a nie ozdobą ustawień.
  */
 
+let courseTopicCache={signature:'',ids:new Set()};
 function prog(id){const targetId=WORD_ALIASES[id]||id;state.items[targetId]=migrateProgress(state.items[targetId]||{},todayKey());return state.items[targetId];}
-function matchesStudyFilters(word){return !!word&&(state.settings.defaultLevel==='all'||word.level===state.settings.defaultLevel)&&(state.settings.defaultTrack==='all'||word.track===state.settings.defaultTrack);}
+function lessonTrainingMaterialIds(lesson){
+  const ids=new Set([...(lesson?.materialIds||[]),...(lesson?.reviewMaterialIds||[]),...(lesson?.carMaterialIds||[])]);
+  for(const group of Object.values(lesson?.stageMaterialIds||{}))for(const id of group||[])ids.add(id);
+  return ids;
+}
+function publishedCourseLevels(){return (COURSE_CATALOG.levels||[]).filter(level=>level.status==='published'&&(level.modules||[]).some(module=>(module.lessons||[]).some(lesson=>lesson.status==='published')));}
+function courseTopicMaterialIds(level=state?.settings?.defaultLevel||'A1'){
+  const course=state?.course||{},selectedLevels=level==='all'?publishedCourseLevels().map(item=>item.id):[level];
+  const unlocked=[...(course.unlockedLessonIds||[])],introduced=[...(course.introducedMaterialIds||[])];
+  const signature=[level,course.currentLessonId||'',course.lastLessonId||'',unlocked.join(','),introduced.join(',')].join('|');
+  if(courseTopicCache.signature===signature)return courseTopicCache.ids;
+  const lessons=CourseCore.flattenLessons(COURSE_CATALOG).filter(lesson=>lesson.status==='published'&&selectedLevels.includes(lesson.level));
+  const allIds=new Set();for(const lesson of lessons)for(const id of lessonTrainingMaterialIds(lesson))allIds.add(id);
+  const eligibleLessonIds=new Set(unlocked);
+  if(course.currentLessonId)eligibleLessonIds.add(course.currentLessonId);if(course.lastLessonId)eligibleLessonIds.add(course.lastLessonId);
+  const ids=new Set();
+  for(const lesson of lessons)if(eligibleLessonIds.has(lesson.id))for(const id of lessonTrainingMaterialIds(lesson))ids.add(id);
+  for(const id of introduced)if(allIds.has(id))ids.add(id);
+  if(!ids.size){
+    for(const levelId of selectedLevels){const first=lessons.find(lesson=>lesson.level===levelId);if(first)for(const id of lessonTrainingMaterialIds(first))ids.add(id);}
+  }
+  courseTopicCache={signature,ids};return ids;
+}
+function matchesStudyFilters(word){
+  if(!word)return false;
+  const selectedLevel=state.settings.defaultLevel||'all',topic=state.settings.defaultTrack||TRAINING_TOPIC_COURSE;
+  if(topic===TRAINING_TOPIC_COURSE)return (selectedLevel==='all'||word.level===selectedLevel)&&courseTopicMaterialIds(selectedLevel).has(word.id);
+  if(selectedLevel!=='all'&&word.level!==selectedLevel)return false;
+  return topic==='all'||word.track===topic;
+}
+function practiceSessionMatchesFilters(saved=state?.activeSession){
+  if(!saved||saved.source==='course')return true;
+  if(!Array.isArray(saved.queue)||!saved.queue.length)return false;
+  return saved.queue.every(taskItem=>!taskItem.wordId||matchesStudyFilters(WORDS.find(word=>word.id===taskItem.wordId)));
+}
+function discardIncompatiblePracticeSession({persist=false}={}){
+  if(!state?.activeSession||state.activeSession.source==='course'||practiceSessionMatchesFilters(state.activeSession))return false;
+  state.activeSession=null;if(session&&session.source!=='course')session=null;
+  if(persist)save({silent:true});return true;
+}
 function due(){const today=todayKey();return WORDS.filter(word=>{if(!matchesStudyFilters(word))return false;const progress=prog(word.id);return progress.nextReview&&progress.nextReview<=today;});}
 function weak(){return WORDS.filter(word=>matchesStudyFilters(word)&&prog(word.id).status==='weak').sort((a,b)=>prog(b.id).wrong-prog(a.id).wrong);}
 function fresh(){return WORDS.filter(word=>matchesStudyFilters(word)&&prog(word.id).seen===0);}
